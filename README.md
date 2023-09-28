@@ -4,6 +4,8 @@
 
 ### Problem Domain
 
+.
+
 ### Our Application
 
 The primary focus of our application, which is also the part we will be using an API for,
@@ -40,6 +42,7 @@ it. We *will* still include some sort of non-combat gameplay, of course, but it 
 akin to a text-based adventure, depending on what we have time for.
 
 ## API Usage: The Deck of Cards API
+
 ### Documentation Link
 https://www.deckofcardsapi.com/
 ### Using the API
@@ -48,3 +51,5 @@ https://www.deckofcardsapi.com/
 ### Java Code Output
 
 ## Technical Problems
+
+.
