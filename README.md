@@ -4,7 +4,8 @@
 
 ### Problem Domain
 
-.
+The problem domain of our project is about combat system, card drawing API, text based adventure video game. Our project will be mainly focusing on connecting to an API that shuffles or draws cards, and use that as helper method to create our own combat  game. 
+Our combat game is a card-based, turn-based combat game that combines the elements of card games and traditional RPG mechanics with stories. It involves players drawing cards, attacking and defending. The players need to make the best decision to beat the enemy. A level system will also be included, and as players level up, the enemies will become more difficult to defeat. But the complexity of our final product may be reduced due to the limit in time and possible technical difficulties.
 
 ### Our Application
 
