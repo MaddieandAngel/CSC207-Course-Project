@@ -53,4 +53,11 @@ https://www.deckofcardsapi.com/
 
 ## Technical Problems
 
-.
+One of the main challenges of this project is creating an attractive user interface for 
+our game because no one on our team has much experience in UI design or in creating games. Since there 
+is a week in the course dedicated to UI and architecture, so we hope to learn more about 
+it in our lectures and tutorials.
+
+We are also wary of how much we can add to our game within the deadline. There are many features we would like to implement.
+For example, we would like the player to choose how they traverse the map and have the option to defend themselves in battle. We
+will only implement these features if we have enough time.
