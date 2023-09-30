@@ -50,6 +50,7 @@ https://www.deckofcardsapi.com/
 <img width="953" alt="image" src="https://github.com/MaddieandAngel/CSC207-Course-Project/assets/113216817/35a09c84-febc-4aea-95f8-8e21b0917e6f">
 
 ### Java Code Output
+<img width="881" alt="image" src="https://github.com/MaddieandAngel/CSC207-Course-Project/assets/113216817/1dc9ebf1-c871-4a57-8a09-d1da23c0e706">
 
 ## Technical Problems
 
