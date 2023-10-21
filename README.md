@@ -114,10 +114,10 @@ boolean hasEnemy
 boolean hasItem  
 boolean hasStairs  
 boolean searched  
-Pair<int> forward  
-Pair<int> left  
-Pair<int> right  
-Pair<int> backward  
+Pair(int generics) forward  
+Pair(int generics) left  
+Pair(int generics) right  
+Pair(int generics) backward  
 
 ### Floor
 
@@ -125,8 +125,8 @@ Attributes:
 int length  
 int width  
 Room[][] map  
-Pair<int> playerLocation  
-Pair<int> stairsLocation  
+Pair(int generics) playerLocation  
+Pair(int generics) stairsLocation  
 
 Methods:  
 getDirections  
