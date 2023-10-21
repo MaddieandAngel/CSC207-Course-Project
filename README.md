@@ -62,3 +62,90 @@ it in our lectures and tutorials.
 We are also wary of how much we can add to our game within the deadline. There are many features we would like to implement.
 For example, we would like the player to choose how they traverse the map and have the option to defend themselves in battle. We
 will only implement these features if we have enough time.
+
+## Possible Entities for Domain
+
+# Interface or Abstract Class - Character
+
+Attributes:
+int currentHealth
+Card[] hande
+int level
+
+Methods:
+attack
+draw
+defend
+selectAction
+
+# Player implements/extends Character
+
+Additional Attributes:
+int maxHealth
+int experiencePoints
+(undecided type, possible list of items) inventory
+
+Additional Methods:
+flee
+levelUp
+selectCombatAction
+selectOverworldAction
+moveRooms
+searchRooms
+nextFloor
+
+# Enemy implements/extends Character
+
+Additional Attributes:
+String name
+(undecided type, maybe char) preferredSuit
+int[] preferredValues
+
+# Card Deck (from API)
+
+Attributes:
+int numberOfCards
+boolean jokersIncluded
+
+# Room
+
+Attributes:
+boolean hasEnemy
+boolean hasItem
+boolean hasStairs
+boolean searched
+Pair<int> forward
+Pair<int> left
+Pair<int> right
+Pair<int> backward
+
+# Floor
+
+Attributes:
+int length
+int width
+Room[][] map
+Pair<int> playerLocation
+Pair<int> stairsLocation
+
+Methods:
+getDirections
+
+# GameState
+
+Attributes:
+boolean inBattle
+int floorLevel
+Player player
+Enemy enemy
+Floor floor
+
+Methods:
+generateBattle
+generateFloor
+
+# Interface Item
+
+Attributes:
+String name
+boolean canUseOutOfBattle
