@@ -65,87 +65,87 @@ will only implement these features if we have enough time.
 
 ## Possible Entities for Domain
 
-# Interface or Abstract Class - Character
+### Interface or Abstract Class - Character
 
-Attributes:
-int currentHealth
-Card[] hande
-int level
+Attributes:  
+int currentHealth  
+Card[] hande  
+int level  
 
-Methods:
-attack
-draw
-defend
-selectAction
+Methods:  
+attack  
+draw  
+defend  
+selectAction  
 
-# Player implements/extends Character
+### Player implements/extends Character
 
-Additional Attributes:
-int maxHealth
-int experiencePoints
-(undecided type, possible list of items) inventory
+Additional Attributes:  
+int maxHealth  
+int experiencePoints  
+(undecided type, possible list of items) inventory  
 
-Additional Methods:
-flee
-levelUp
-selectCombatAction
-selectOverworldAction
-moveRooms
-searchRooms
-nextFloor
+Additional Methods:  
+flee  
+levelUp  
+selectCombatAction  
+selectOverworldAction  
+moveRooms  
+searchRooms  
+nextFloor  
 
-# Enemy implements/extends Character
+### Enemy implements/extends Character
 
-Additional Attributes:
-String name
-(undecided type, maybe char) preferredSuit
-int[] preferredValues
+Additional Attributes:  
+String name  
+(undecided type, maybe char) preferredSuit  
+int[] preferredValues  
 
-# Card Deck (from API)
+### Card Deck (from API)
 
-Attributes:
-int numberOfCards
-boolean jokersIncluded
+Attributes:  
+int numberOfCards  
+boolean jokersIncluded  
 
-# Room
+### Room
 
-Attributes:
-boolean hasEnemy
-boolean hasItem
-boolean hasStairs
-boolean searched
-Pair<int> forward
-Pair<int> left
-Pair<int> right
-Pair<int> backward
+Attributes:  
+boolean hasEnemy  
+boolean hasItem  
+boolean hasStairs  
+boolean searched  
+Pair<int> forward  
+Pair<int> left  
+Pair<int> right  
+Pair<int> backward  
 
-# Floor
+### Floor
 
-Attributes:
-int length
-int width
-Room[][] map
-Pair<int> playerLocation
-Pair<int> stairsLocation
+Attributes:  
+int length  
+int width  
+Room[][] map  
+Pair<int> playerLocation  
+Pair<int> stairsLocation  
 
-Methods:
-getDirections
+Methods:  
+getDirections  
 
-# GameState
+### GameState
 
-Attributes:
-boolean inBattle
-int floorLevel
-Player player
-Enemy enemy
-Floor floor
+Attributes:  
+boolean inBattle  
+int floorLevel  
+Player player  
+Enemy enemy  
+Floor floor  
 
-Methods:
-generateBattle
-generateFloor
+Methods:  
+generateBattle  
+generateFloor  
 
-# Interface Item
+### Interface Item
 
-Attributes:
-String name
-boolean canUseOutOfBattle
+Attributes:  
+String name  
+boolean canUseOutOfBattle  
