@@ -1,4 +1,4 @@
-package src.view;
+package view.in_battle;
 
 public class SelectCardToRemoveView {
 }
