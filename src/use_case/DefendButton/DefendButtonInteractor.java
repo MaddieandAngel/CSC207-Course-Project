@@ -1,4 +1,4 @@
-package use_case;
+package use_case.DefendButton;
 
 public class DefendButtonInteractor implements  DefendButtonInputBoundary{
     final DefendButtonOutputBoundary defendPresenter;
