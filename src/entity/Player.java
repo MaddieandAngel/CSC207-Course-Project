@@ -10,6 +10,7 @@ public class Player implements Character{
     private int level;
     private int experiencePoints;
     private ArrayList<Item> inventory;
+    private int maxCardHold;
 
     Player(){
         //Creates new player at level 1
@@ -17,6 +18,7 @@ public class Player implements Character{
         maxHealth = 15;
         currentHealth = 15;
         experiencePoints = 0;
+        maxCardHold = 5;
     }
 
     public int getLevel(){
