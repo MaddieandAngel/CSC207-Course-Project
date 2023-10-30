@@ -3,6 +3,6 @@ package entity;
 public interface Character {
 
     int getLevel();
-    int getHealth();
+    int getCurrentHealth();
     void setHealth(int health);
 }

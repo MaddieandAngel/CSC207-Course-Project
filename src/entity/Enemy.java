@@ -28,7 +28,7 @@ public class Enemy implements Character{
     }
 
     @Override
-    public int getHealth() {
+    public int getCurrentHealth() {
         return currentHealth;
     }
 

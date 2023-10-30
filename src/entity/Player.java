@@ -24,8 +24,12 @@ public class Player implements Character{
     }
 
     @Override
-    public int getHealth() {
+    public int getCurrentHealth() {
         return currentHealth;
+    }
+
+    public int getMaxHealth(){
+        return maxHealth;
     }
 
     @Override
