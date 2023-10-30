@@ -27,7 +27,7 @@ public class Player implements Character{
     }
 
     @Override
-    public void setHealth() {
-
+    public void setHealth(int health) {
+        currentHealth = health;
     }
 }

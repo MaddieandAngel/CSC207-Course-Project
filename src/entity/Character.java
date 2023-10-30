@@ -3,5 +3,5 @@ package entity;
 public interface Character {
 
     int getHealth();
-    void setHealth();
+    void setHealth(int health);
 }
