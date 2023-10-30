@@ -20,7 +20,6 @@ public class Player implements Character{
         experiencePoints = 0;
         maxCardHold = 5;
     }
-
     public int getLevel(){
         return level;
     }
@@ -44,5 +43,12 @@ public class Player implements Character{
         maxHealth = level * 15;
         currentHealth = maxHealth;
         experiencePoints = 0;
+    }
+    public void setMaxCardHold(int cardHold){
+        maxCardHold = cardHold;
+    }
+
+    public int getMaxCardHold(){
+        return maxCardHold;
     }
 }
