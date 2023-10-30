@@ -72,7 +72,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_atk) {
                         if (e_atk.getSource().equals(attack)) {
-                            // TODO: Implement this once the AttackButtonController is written
+                            attackButtonController.execute();
                         }
                     }
                 }
@@ -108,7 +108,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_defend) {
                         if (e_defend.getSource().equals(defend)) {
-                            // TODO: Implement this once the DefendButtonController is written
+                            defendButtonController.execute();
                         }
                     }
                 }
