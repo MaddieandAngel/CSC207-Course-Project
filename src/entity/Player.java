@@ -11,15 +11,17 @@ public class Player implements Character{
     private int experiencePoints;
     private ArrayList<Item> inventory;
 
-    Player(int currentHealth, int maxHealth, int level, int experiencePoints, ArrayList<Item> inventory){
-        this.currentHealth = currentHealth;
-        this.maxHealth = maxHealth;
-        this.level = level;
-        this.experiencePoints = experiencePoints;
-        this.inventory = inventory;
+    Player(){
+        //Creates new player at level 1
+        level = 1;
+        maxHealth = 15;
+        currentHealth = 15;
+        experiencePoints = 0;
     }
 
-
+    public int getLevel(){
+        return level;
+    }
 
     @Override
     public int getHealth() {
@@ -29,5 +31,12 @@ public class Player implements Character{
     @Override
     public void setHealth(int health) {
         currentHealth = health;
+    }
+
+    public void levelUp() {
+        level++;
+        maxHealth = level * 15;
+        currentHealth = maxHealth;
+        experiencePoints = 0;
     }
 }
