@@ -44,6 +44,15 @@ public class Player implements Character{
         currentHealth = maxHealth;
         experiencePoints = 0;
     }
+
+    public int getExperiencePoints() {
+        return experiencePoints;
+    }
+
+    public void setExperiencePoints(int exp){
+        experiencePoints = exp;
+    }
+
     public void setMaxCardHold(int cardHold){
         maxCardHold = cardHold;
     }
