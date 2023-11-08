@@ -61,7 +61,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e_n) {
                         if (e_n.getSource().equals(north)){
-                            //
+                            movementButtonController.execute("N");
                         }
                     }
                 }
@@ -73,7 +73,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e_e) {
                         if (e_e.getSource().equals(east)){
-                            //
+                            movementButtonController.execute("E");
                         }
                     }
                 }
@@ -85,7 +85,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e_s) {
                         if (e_s.getSource().equals(south)){
-                            //
+                            movementButtonController.execute("S");
                         }
                     }
                 }
@@ -97,7 +97,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e_w) {
                         if (e_w.getSource().equals(west)){
-                            //
+                            movementButtonController.execute("W");
                         }
                     }
                 }
