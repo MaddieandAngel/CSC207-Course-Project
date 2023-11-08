@@ -1,19 +1,25 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CurrentFloor implements Floor{
 
-    private int length;
-    private int width;
-    private ArrayList<Room> map;
+    private final int columns;
+    private final int rows;
+    private final ArrayList<Room> map;
     private int currentRoom;
 
-    public CurrentFloor(int length, int width){
-        this.length = length;
-        this.width = width;
+    public CurrentFloor(int num_columns, int num_rows){
+        this.columns = num_columns;
+        this.rows = num_rows;
 
-        map = new ArrayList<Room>(length * width);
+        MapBuilder mapBuilder = new MapBuilder(columns, rows);
+
+        map = mapBuilder.buildAll();
+
+        Random randomizer = new Random();
+        currentRoom = randomizer.nextInt(0, columns * rows);
     }
 
     public int getCurrentRoom(){
@@ -21,7 +27,7 @@ public class CurrentFloor implements Floor{
     }
 
     public void setCurrentRoom(int newIndex){
-        if (0 <= newIndex && newIndex < (length * width)){
+        if (0 <= newIndex && newIndex < (columns * rows)){
             currentRoom = newIndex;
         }
         else {
@@ -30,45 +36,31 @@ public class CurrentFloor implements Floor{
     }
 
     public boolean checkForEnemy(){
-        return map.get(currentRoom).hasEnemy;
+        return map.get(currentRoom).isHasEnemy();
     }
 
     public boolean checkForItem(){
-        return map.get(currentRoom).hasItem;
+        return map.get(currentRoom).isHasItem();
     }
 
     public boolean checkForStairs(){
-        return map.get(currentRoom).hasStairs;
+        return map.get(currentRoom).isHasStairs();
     }
 
     public String getDirections(){
         String directions = "";
-        if (map.get(currentRoom).hasNorth){
+        if (map.get(currentRoom).isHasNorth()){
             directions += "N";
         }
-        if (map.get(currentRoom).hasEast){
+        if (map.get(currentRoom).isHasEast()){
             directions += "E";
         }
-        if (map.get(currentRoom).hasSouth){
+        if (map.get(currentRoom).isHasSouth()){
             directions += "S";
         }
-        if (map.get(currentRoom).hasWest){
+        if (map.get(currentRoom).isHasWest()){
             directions += "W";
         }
         return directions;
-    }
-
-    private class Room{
-
-        boolean hasNorth;
-        boolean hasEast;
-        boolean hasSouth;
-        boolean hasWest;
-        boolean hasStairs;
-        boolean hasEnemy;
-        boolean hasItem;
-
-        Room(){
-        }
     }
 }
