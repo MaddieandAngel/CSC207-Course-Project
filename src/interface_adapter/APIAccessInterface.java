@@ -14,7 +14,7 @@ public interface APIAccessInterface {
 
     public void CardPlayed(String deckID, String pileName, String cardCode) throws IOException, RuntimeException;
 
-    public void AddToPile(String pileName, String card);
+    public void AddToPile(String deckID, String pileName, String cardCode) throws IOException, RuntimeException;
 
     public void MoveDiscardPileToDeck(Deck deck);
 

@@ -19,8 +19,6 @@ public class APIAccess implements APIAccessInterface {
         // ** currently does not include joker option **
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder().url("https://www.deckofcardsapi.com/api/deck/new/").build();
 
         try {
@@ -67,8 +65,6 @@ public class APIAccess implements APIAccessInterface {
         // Make a call to the API and shuffle the deck, given by the deckID parameter
         String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/shuffle/?remaining=true";
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder().url(url).build();
 
         try {
@@ -114,8 +110,6 @@ public class APIAccess implements APIAccessInterface {
         String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/draw/?count=1";
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder().url(url).build();
 
         try {
@@ -136,7 +130,7 @@ public class APIAccess implements APIAccessInterface {
 
                 // Adding the drawn card to the corresponding pile/hand
                 String cardCode = newString[2].split(":")[2].replace("\"", "");
-                AddToPile(pileName, cardCode);
+                AddToPile(deck.getDeckID(), pileName, cardCode);
 
                 // Update the value of remaining cards
                 int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1]);
@@ -162,8 +156,6 @@ public class APIAccess implements APIAccessInterface {
         String url = "https://www.deckofcardsapi.com/api/deck/" + deckID + "/pile/" + pileName + "/draw/?cards=" + cardCode;
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder().url(url).build();
 
         try {
@@ -181,7 +173,7 @@ public class APIAccess implements APIAccessInterface {
                 if (!successful) {
                     throw new RuntimeException("Provided card not in pile");
                 }
-                AddToPile("discard", cardCode);
+                AddToPile(deckID,"discard", cardCode);
             }
         } catch (IOException e) {
             throw new IOException(e);
@@ -192,7 +184,36 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void AddToPile(String pileName, String card) {
+    public void AddToPile(String deckID, String pileName, String cardCode) throws IOException, RuntimeException{
+        // Will add the provided card and add it to the specified pile
+        // cardCode follows the cardCode convention in the API
+
+        // Make call to API, adding the specified card to the requested pile
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deckID + "/pile/" + pileName + "/add/?cards=" + cardCode;
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder().url(url).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            ResponseBody responseBody = response.body();
+
+            // Converting responseBody into a String;
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
+
+                // Check if successful
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                if (!successful) {
+                    throw new RuntimeException("Card not successfully moved to " + pileName + " pile");
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Card not successfully added to " + pileName + " pile");
+        }
 
     }
 
