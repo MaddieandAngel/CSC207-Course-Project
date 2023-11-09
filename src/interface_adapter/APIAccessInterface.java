@@ -8,7 +8,7 @@ public interface APIAccessInterface {
 
     public Deck NewDeck(boolean jokers) throws IOException;
 
-    public void Shuffle(String deckID);
+    public void Shuffle(Deck deck) throws IOException, RuntimeException;
 
     public void DrawCard(String deckID, String pileName);
 

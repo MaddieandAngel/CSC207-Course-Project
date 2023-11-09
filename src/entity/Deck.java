@@ -2,13 +2,13 @@ package entity;
 
 public class Deck {
 
-    boolean shuffled;
+    private boolean shuffled;
 
     private String deckID;
 
-    int remainingCards;
+    private int remainingCards;
 
-    boolean jokers;
+    private boolean jokers;
 
     public Deck(boolean shuffled, String deckID, int remainingCards, boolean jokers) {
         this.shuffled = shuffled;
@@ -19,5 +19,17 @@ public class Deck {
 
     public String getDeckID() {
         return this.deckID;
+    }
+
+    public void setShuffled(boolean shuffled) {
+        this.shuffled = shuffled;
+    }
+
+    public int getRemainingCards() {
+        return this.remainingCards;
+    }
+
+    public void setRemainingCards(int remainingCards) {
+        this.remainingCards = remainingCards;
     }
 }
