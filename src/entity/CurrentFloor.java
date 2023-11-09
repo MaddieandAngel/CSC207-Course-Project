@@ -16,7 +16,8 @@ public class CurrentFloor implements Floor{
 
         MapBuilder mapBuilder = new MapBuilder(columns, rows);
 
-        map = mapBuilder.buildAll();
+        map = mapBuilder.buildMapLayout();
+        mapBuilder.assignAll(map);
 
         Random randomizer = new Random();
         currentRoom = randomizer.nextInt(0, columns * rows);
