@@ -9,6 +9,7 @@ public class Room {
     private boolean hasStairs;
     private boolean hasEnemy;
     private boolean hasItem;
+    private boolean hasBeenSearched;
 
     Room(){
         // Sets everything to false by default
@@ -19,6 +20,7 @@ public class Room {
         hasStairs = false;
         hasEnemy = false;
         hasItem = false;
+        hasBeenSearched = false;
     }
 
     public boolean isHasNorth(){return hasNorth;}
@@ -28,15 +30,16 @@ public class Room {
     public boolean isHasStairs(){return hasStairs;}
     public boolean isHasEnemy(){return hasEnemy;}
     public boolean isHasItem(){return hasItem;}
+    public boolean isHasBeenSearched() {
+        return hasBeenSearched;
+    }
     public void setHasNorth(boolean hasNorth){
         this.hasNorth = hasNorth;
     }
     public void setHasEast(boolean hasEast){
         this.hasEast = hasEast;
     }
-    public void setHasSouth(boolean hasSouth){
-        this.hasSouth = hasSouth;
-    }
+    public void setHasSouth(boolean hasSouth){this.hasSouth = hasSouth;}
     public void setHasWest(boolean hasWest){
         this.hasWest = hasWest;
     }
@@ -48,5 +51,8 @@ public class Room {
     }
     public void setHasItem(boolean hasItem){
         this.hasItem = hasItem;
+    }
+    public void setHasBeenSearched(boolean hasBeenSearched) {
+        this.hasBeenSearched = hasBeenSearched;
     }
 }

@@ -53,8 +53,6 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
 
-        // TODO: add checks to hide buttons if they should not be pressed
-
         north.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -123,6 +121,10 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        north.setVisible(exploreViewModel.getState().isNorthVisible());
+        east.setVisible(exploreViewModel.getState().isEastVisible());
+        south.setVisible(exploreViewModel.getState().isSouthVisible());
+        west.setVisible(exploreViewModel.getState().isWestVisible());
+        search.setVisible(exploreViewModel.getState().isSearchVisible());
     }
 }

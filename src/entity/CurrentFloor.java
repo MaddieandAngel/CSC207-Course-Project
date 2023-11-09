@@ -23,6 +23,10 @@ public class CurrentFloor implements Floor{
         currentRoom = randomizer.nextInt(0, columns * rows);
     }
 
+    public int getColumns(){
+        return columns;
+    }
+
     public int getCurrentRoom(){
         return currentRoom;
     }

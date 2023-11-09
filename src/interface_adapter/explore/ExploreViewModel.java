@@ -24,6 +24,10 @@ public class ExploreViewModel extends ViewModel {
         this.state = state;
     }
 
+    public ExploreState getState(){
+        return state;
+    }
+
     //
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
