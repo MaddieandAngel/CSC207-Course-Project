@@ -12,11 +12,13 @@ public interface APIAccessInterface {
 
     public void DrawCard(Deck deck, String pileName) throws IOException, RuntimeException;
 
-    public void CardPlayed(String deckID, String pileName, String cardCode);
+    public void CardPlayed(String deckID, String pileName, String cardCode) throws IOException, RuntimeException;
 
     public void AddToPile(String pileName, String card);
 
     public void MoveDiscardPileToDeck(Deck deck);
+
+    public String[] GetCardsInPile(Deck deck, String pileName);
 
     public String GetCardImage(String deckID, String pileName, String cardCode);
 

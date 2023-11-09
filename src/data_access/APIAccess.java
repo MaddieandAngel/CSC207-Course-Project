@@ -155,7 +155,39 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void CardPlayed(String deckID, String pileName, String cardCode) {
+    public void CardPlayed(String deckID, String pileName, String cardCode) throws IOException, RuntimeException{
+        // Will remove the card that was played from the provided pile/hand and will add it to the discard pile
+
+        // Make call to the API and draw the specified card from the provided pile
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deckID + "/pile/" + pileName + "/draw/?cards=" + cardCode;
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder().url(url).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            ResponseBody responseBody = response.body();
+
+            // Converting responseBody into a String
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
+
+                // Check if successful
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                if (!successful) {
+                    throw new RuntimeException("Provided card not in pile");
+                }
+                AddToPile("discard", cardCode);
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -167,6 +199,11 @@ public class APIAccess implements APIAccessInterface {
     @Override
     public void MoveDiscardPileToDeck(Deck deck) {
 
+    }
+
+    @Override
+    public String[] GetCardsInPile(Deck deck, String pileName) {
+        return new String[0];
     }
 
     @Override
