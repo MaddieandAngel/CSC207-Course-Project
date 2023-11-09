@@ -40,7 +40,7 @@ public class APIAccess implements APIAccessInterface {
 
                     // Accessing values for new deck
                     boolean shuffled = false;
-                    String deckID = newString[1].split(":")[1].trim();
+                    String deckID = newString[1].split(":")[1].trim().replace("\"", "");
                     int remainingCards = Integer.parseInt(newString[2].split(":")[1].trim().replace("}", ""));
 
 
@@ -105,12 +105,67 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void DrawCard(String deckID, String pileName) {
+    public void DrawCard(Deck deck, String pileName) throws IOException, RuntimeException{
+        // Will draw a card from the deck and add it to the intended pile, using the AddToPile method.
+        // If there are zero cards left in the deck, the cards from the discard pile will be returned to the deck and will be shuffled
+
+        // Make a call to the API and draw a card from the deck
+
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/draw/?count=1";
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder().url(url).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            ResponseBody responseBody = response.body();
+
+            // Converting responseBody into a string
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
+
+                // Check if successful
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                if (!successful) {
+                    throw new RuntimeException("Card not drawn");
+                }
+
+                // Adding the drawn card to the corresponding pile/hand
+                String cardCode = newString[2].split(":")[2].replace("\"", "");
+                AddToPile(pileName, cardCode);
+
+                // Update the value of remaining cards
+                int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1]);
+                deck.setRemainingCards(updatedRemainingCards);
+                if (deck.getRemainingCards() == 0) {
+                    MoveDiscardPileToDeck(deck);
+                    Shuffle(deck);
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Card not drawn");
+        }
+
+    }
+
+    @Override
+    public void CardPlayed(String deckID, String pileName, String cardCode) {
 
     }
 
     @Override
     public void AddToPile(String pileName, String card) {
+
+    }
+
+    @Override
+    public void MoveDiscardPileToDeck(Deck deck) {
 
     }
 

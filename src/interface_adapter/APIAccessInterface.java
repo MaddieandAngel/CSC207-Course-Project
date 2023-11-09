@@ -10,9 +10,13 @@ public interface APIAccessInterface {
 
     public void Shuffle(Deck deck) throws IOException, RuntimeException;
 
-    public void DrawCard(String deckID, String pileName);
+    public void DrawCard(Deck deck, String pileName) throws IOException, RuntimeException;
+
+    public void CardPlayed(String deckID, String pileName, String cardCode);
 
     public void AddToPile(String pileName, String card);
+
+    public void MoveDiscardPileToDeck(Deck deck);
 
     public String GetCardImage(String deckID, String pileName, String cardCode);
 
