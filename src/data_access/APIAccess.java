@@ -218,7 +218,46 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void MoveDiscardPileToDeck(Deck deck) {
+    public void MoveDiscardPileToDeck(Deck deck) throws IOException, RuntimeException{
+        // Will move the cards from the discard pile and return them to the main deck
+
+        // Call API and move cards from discard pile to the main deck of cards
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/discard/return/";
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder().url(url).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            ResponseBody responseBody = response.body();
+
+            // Convert responseBody into a String
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
+
+                // Check if successful
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                if (!successful) {
+                    throw new RuntimeException("Discard pile was not moved back to deck");
+                }
+
+                // Update the number of remaining cards in the deck
+                int updatedRemainingCards = Integer.parseInt(newString[3].split(":")[1]);
+                deck.setRemainingCards(updatedRemainingCards);
+
+                // Update shuffled value for the deck (is no longer shuffled)
+                deck.setShuffled(false);
+            } else {
+                // else runs when responseBody is null, indicating the discard pile was not moved to the deck, so will
+                // throw a RuntimeException
+                throw new RuntimeException("Discard pile was not moved back to deck");
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
