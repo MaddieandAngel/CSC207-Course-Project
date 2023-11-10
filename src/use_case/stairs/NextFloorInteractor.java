@@ -7,12 +7,12 @@ import java.util.Random;
 public class NextFloorInteractor implements NextFloorInputBoundary {
 
     final StairsDataAccessInterface stairsDataAccessObject;
-    final NextFloorOutputBoundary stairsPresenter;
+    final NextFloorOutputBoundary nextFloorPresenter;
 
     public NextFloorInteractor(StairsDataAccessInterface stairsDataAccessObject,
                                NextFloorOutputBoundary nextFloorOutputBoundary){
         this.stairsDataAccessObject = stairsDataAccessObject;
-        this.stairsPresenter = nextFloorOutputBoundary;
+        this.nextFloorPresenter = nextFloorOutputBoundary;
     }
     @Override
     public void execute() {
@@ -22,6 +22,6 @@ public class NextFloorInteractor implements NextFloorInputBoundary {
         String directions = stairsDataAccessObject.MoveToNextFloor(columns, rows);
         NextFloorOutputData nextFloorOutputData = new NextFloorOutputData(directions);
 
-        stairsPresenter.prepareStartingRoomView(nextFloorOutputData);
+        nextFloorPresenter.prepareStartingRoomView(nextFloorOutputData);
     }
 }

@@ -6,12 +6,12 @@ import interface_adapter.explore.ExploreViewModel;
 import use_case.stairs.NextFloorOutputBoundary;
 import use_case.stairs.NextFloorOutputData;
 
-public class StairsPresenter implements NextFloorOutputBoundary {
+public class NextFloorPresenter implements NextFloorOutputBoundary {
     private final ExploreViewModel exploreViewModel;
 
     private ViewManagerModel viewManagerModel;
 
-    public StairsPresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel){
+    public NextFloorPresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel){
         this.viewManagerModel = viewManagerModel;
         this.exploreViewModel = exploreViewModel;
     }
