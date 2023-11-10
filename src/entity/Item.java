@@ -3,6 +3,7 @@ package entity;
 public interface Item {
     //TODO: implement
 
-    void healingPotion(Player player);
+    void heal(Player player);
+    String usage();
 
 }
