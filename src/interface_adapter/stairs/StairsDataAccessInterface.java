@@ -4,5 +4,5 @@ import entity.Floor;
 
 public interface StairsDataAccessInterface {
 
-    Floor MoveToNextFloor();
+    String MoveToNextFloor(int columns, int rows);
 }

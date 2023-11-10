@@ -3,8 +3,9 @@ package data_access;
 import entity.Floor;
 import entity.FloorFactory;
 import interface_adapter.explore.ExploreDataAccessInterface;
+import interface_adapter.stairs.StairsDataAccessInterface;
 
-public class ExploreDataAccessObject implements ExploreDataAccessInterface {
+public class ExploreDataAccessObject implements ExploreDataAccessInterface, StairsDataAccessInterface {
 
     private int floorLevel;
     private Floor currentFloor;
@@ -51,11 +52,14 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface {
         return currentFloor.checkForItem();
     }
 
+    @Override
     public String getDirections(){
         return currentFloor.getDirections();
     }
 
-//    public Floor newFloor(){
-//        return floorFactory.create();
-//    }
+    @Override
+    public String MoveToNextFloor(int columns, int rows){
+        currentFloor = floorFactory.create(columns, rows);
+        return getDirections();
+    }
 }
