@@ -31,6 +31,8 @@ public class ExploreState {
         return SearchVisible;
     }
 
+    public int getFloorLevel(){ return floorLevel; }
+
     public void setNorthVisible(boolean northVisible) {
         NorthVisible = northVisible;
     }
@@ -45,5 +47,9 @@ public class ExploreState {
     }
     public void setSearchVisible(boolean searchVisible) {
         SearchVisible = searchVisible;
+    }
+
+    public void setFloorLevel(int floorLevel){
+        this.floorLevel = floorLevel;
     }
 }

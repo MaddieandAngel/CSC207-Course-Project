@@ -6,8 +6,8 @@ import entity.Item;
 public class MovementOutputData {
 
     private String directions;
-    private Character enemy = null;
-    private Item item = null;
+    private Character enemy = null; //Maybe should be a string with the enemy name instead
+    private Item item = null; //Maybe should be a string with the item name instead
 
     public MovementOutputData(String directions){
         this.directions = directions;

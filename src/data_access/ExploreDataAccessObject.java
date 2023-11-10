@@ -60,6 +60,7 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
     @Override
     public String MoveToNextFloor(int columns, int rows){
         currentFloor = floorFactory.create(columns, rows);
+        floorLevel++;
         return getDirections();
     }
 }
