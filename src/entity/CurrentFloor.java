@@ -1,14 +1,13 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class CurrentFloor implements Floor{
 
     private final int columns;
     private final int rows;
-    private final ArrayList<Room> map;
-    private int currentRoom;
+    private ArrayList<Room> map;
+    private int currentRoom = -1;
 
     public CurrentFloor(int num_columns, int num_rows){
         this.columns = num_columns;
@@ -16,11 +15,10 @@ public class CurrentFloor implements Floor{
 
         MapBuilder mapBuilder = new MapBuilder(columns, rows);
 
-        map = mapBuilder.buildMapLayout();
-        mapBuilder.assignAll(map);
-
-        Random randomizer = new Random();
-        currentRoom = randomizer.nextInt(0, columns * rows);
+        while (currentRoom == -1) { //Generates random floors until one with at least two viable rooms is created
+            map = mapBuilder.buildMapLayout();
+            currentRoom = mapBuilder.assignAll(map);
+        }
     }
 
     public int getColumns(){

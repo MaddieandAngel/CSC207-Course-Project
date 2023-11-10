@@ -18,8 +18,8 @@ public class NextFloorInteractor implements NextFloorInputBoundary {
     @Override
     public void execute() {
         Random randomizer = new Random();
-        int columns = randomizer.nextInt(3,7);
-        int rows = randomizer.nextInt(3, 7);
+        int columns = randomizer.nextInt(4,7);
+        int rows = randomizer.nextInt(4, 7);
         String directions = stairsDataAccessObject.MoveToNextFloor(columns, rows);
     }
 }
