@@ -5,5 +5,6 @@ public interface Item {
 
     void heal(Player player);
     String usage();
+    String getName();
 
 }

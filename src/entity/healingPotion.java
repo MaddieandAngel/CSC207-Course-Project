@@ -2,11 +2,12 @@ package entity;
 
 
 public class healingPotion implements Item{
-    private final String itemName = "HealingPotion";
+    private final String itemName;
     private final double percentage;
 
     public healingPotion(Integer potionLevel, double percentage) {
         this.percentage = percentage;
+        this.itemName = "HealingPotion";
     }
 
     @Override
@@ -18,5 +19,9 @@ public class healingPotion implements Item{
     @Override
     public String usage(){
         return "This potion heals " + percentage + " of your max HP.";
+    }
+    @Override
+    public  String getName(){
+        return this.itemName;
     }
 }
