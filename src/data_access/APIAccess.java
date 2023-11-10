@@ -14,7 +14,7 @@ import java.io.IOException;
 public class APIAccess implements APIAccessInterface {
 
     @Override
-    public Deck NewDeck(boolean jokers) throws IOException {
+    public Deck NewDeck(boolean jokers) throws IOException, RuntimeException{
         // Make a call to the API and create a new deck
         // ** currently does not include joker option **
 
@@ -50,14 +50,15 @@ public class APIAccess implements APIAccessInterface {
 
                     // return the new, shuffled deck
                     return newDeck;
+                } else {
+                    // means responseBody is null, so a new deck was not created, will therefore throw a RuntimeException
+                    throw new RuntimeException("New deck not created");
                 }
         }  catch (RuntimeException e) {
-            throw new RuntimeException("New deck was not successfully made");
+            throw new RuntimeException("New deck not created");
         } catch (IOException e) {
             throw new IOException(e);
         }
-        // Will also return null if deck is not successfully created
-        return null;
     }
 
     @Override
@@ -123,17 +124,17 @@ public class APIAccess implements APIAccessInterface {
                 String[] newString = responseBodyString.split(",");
 
                 // Check if successful
-                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
                 if (!successful) {
                     throw new RuntimeException("Card not drawn");
                 }
 
                 // Adding the drawn card to the corresponding pile/hand
-                String cardCode = newString[2].split(":")[2].replace("\"", "");
+                String cardCode = newString[2].split(":")[2].replace("\"", "").trim();
                 AddToPile(deck.getDeckID(), pileName, cardCode);
 
                 // Update the value of remaining cards
-                int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1]);
+                int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1].replace("}", "").trim());
                 deck.setRemainingCards(updatedRemainingCards);
                 if (deck.getRemainingCards() == 0) {
                     MoveDiscardPileToDeck(deck);
@@ -169,7 +170,7 @@ public class APIAccess implements APIAccessInterface {
                 String[] newString = responseBodyString.split(",");
 
                 // Check if successful
-                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
                 if (!successful) {
                     throw new RuntimeException("Provided card not in pile");
                 }
@@ -204,7 +205,7 @@ public class APIAccess implements APIAccessInterface {
                 String[] newString = responseBodyString.split(",");
 
                 // Check if successful
-                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
                 if (!successful) {
                     throw new RuntimeException("Card not successfully moved to " + pileName + " pile");
                 }
@@ -237,7 +238,7 @@ public class APIAccess implements APIAccessInterface {
                 String[] newString = responseBodyString.split(",");
 
                 // Check if successful
-                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1]);
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
                 if (!successful) {
                     throw new RuntimeException("Discard pile was not moved back to deck");
                 }
@@ -262,8 +263,55 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public String[] GetCardsInPile(Deck deck, String pileName) {
-        return new String[0];
+    public String[] GetCardsInPile(Deck deck, String pileName) throws IOException, RuntimeException{
+        // Will return a list of the card codes for all the cards in the requested pile. If the pile is empty, will return null
+
+        // Make a call to the API to get a list of the cards in the requested pile
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/" + pileName + "/list/";
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder().url(url).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            ResponseBody responseBody = response.body();
+
+            // Converting responseBody into a String
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
+
+                // Check if successful
+                boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
+                if (!successful) {
+                    throw new RuntimeException();
+                }
+
+                String[] temp1 = responseBodyString.split("\"" + pileName + "\": ");
+                String[] temp2 = temp1[1].split("\"code\": ");
+                String resultString = "";
+                for (int i = 1; i < temp2.length; i++) {
+                    if (i == temp2.length - 1) {
+                        resultString = resultString + temp2[i].split(",")[0].replace("\"", "").trim();
+                    } else {
+                        resultString = resultString + temp2[i].split(",")[0].replace("\"", "").trim() + ",";
+                    }
+                }
+                if (resultString.length() == 0) {
+                    return null;
+                } else {
+                    return resultString.split(",");
+                }
+            } else {
+                // means responseBody is null, so getting the list of cards failed, so a RuntimeException will be thrown
+                throw new RuntimeException("Failed to get list of cards");
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Failed to get list of cards");
+        }
+
     }
 
     @Override

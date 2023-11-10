@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface APIAccessInterface {
 
-    public Deck NewDeck(boolean jokers) throws IOException;
+    public Deck NewDeck(boolean jokers) throws IOException, RuntimeException;
 
     public void Shuffle(Deck deck) throws IOException, RuntimeException;
 
@@ -18,7 +18,7 @@ public interface APIAccessInterface {
 
     public void MoveDiscardPileToDeck(Deck deck) throws IOException, RuntimeException;
 
-    public String[] GetCardsInPile(Deck deck, String pileName);
+    public String[] GetCardsInPile(Deck deck, String pileName) throws IOException, RuntimeException;
 
     public String GetCardImage(String deckID, String pileName, String cardCode);
 
