@@ -107,7 +107,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e_search) {
                         if (e_search.getSource().equals(search)){
-                            // TODO: Implement this once the SearchButtonController is written
+                            searchButtonController.execute();
                         }
                     }
                 }

@@ -40,6 +40,7 @@ public class MovementInteractor implements MovementInputBoundary {
         }
         else if (exploreDataAccessObject.checkForEnemy()){
             //TODO: Generate enemy for output data
+            //TODO: Use API to give enemy cards?
             movementPresenter.prepareTurnSelectView(movementOutputData);
         }
         else if (exploreDataAccessObject.checkForItem()){
