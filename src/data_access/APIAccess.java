@@ -10,16 +10,16 @@ import entity.Deck;
 import interface_adapter.APIAccessInterface;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class APIAccess implements APIAccessInterface {
 
     @Override
-    public Deck NewDeck(boolean jokers) throws IOException, RuntimeException{
+    public Deck NewDeck() throws IOException, RuntimeException{
         // Make a call to the API and create a new deck
-        // ** currently does not include joker option **
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        Request request = new Request.Builder().url("https://www.deckofcardsapi.com/api/deck/new/").build();
+        Request request = new Request.Builder().url("https://www.deckofcardsapi.com/api/deck/new/?jokers_enabled=true").get().build();
 
         try {
             Response response = client.newCall(request).execute();
@@ -43,7 +43,7 @@ public class APIAccess implements APIAccessInterface {
 
 
                     // Creating new Deck
-                    Deck newDeck = new Deck(shuffled, deckID, remainingCards, jokers);
+                    Deck newDeck = new Deck(shuffled, deckID, remainingCards);
 
                     // Shuffle new deck
                     Shuffle(newDeck);
@@ -315,17 +315,45 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public String GetCardImage(String deckID, String pileName, String cardCode) {
-        return null;
+    public String GetCardImage(String cardCode) {
+        // Will return the link to the png image of the card
+        return "https://www.deckofcardsapi.com/static/img/" + cardCode + ".png";
     }
 
     @Override
-    public String GetCardValue(String deckID, String pileName, String cardCode) {
-        return null;
+    public int GetCardValue(String cardCode) {
+        // Will return the value of the card as a string
+
+        char cardValue = cardCode.charAt(0);
+        // Available values in a card code are 2, 3, 4, 5, 6, 7, 8, 9, 0, A, J, Q, and K.
+        // For jokers, a random value between 0 and 15 inclusive will be returned
+        if (cardValue == '0') {
+            return 10;
+        } else if (cardValue == 'A') {
+            return 1;
+        } else if (cardValue == 'J') {
+            return 11;
+        } else if (cardValue == 'Q') {
+            return 12;
+        } else if (cardValue == 'K') {
+            return 13;
+        } else if (cardValue == 'X') {
+            // Generate a random int between 0 (inclusive) and 16 (exclusive, so 15 inclusive) for jokers
+            Random random = new Random();
+            return random.nextInt(16);
+        } else {
+            return Integer.parseInt(String.valueOf(cardValue));
+        }
     }
 
     @Override
-    public String GetCardSuit(String deckID, String pileName, String cardCode) {
-        return null;
+    public char GetCardSuit(String cardCode) {
+        // Will return the suit of the card as a char
+
+        if (cardCode.charAt(0) == 'X') {
+            return 'J';
+        } else {
+            return cardCode.charAt(1);
+        }
     }
 }

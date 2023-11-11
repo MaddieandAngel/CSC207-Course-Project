@@ -8,13 +8,11 @@ public class Deck {
 
     private int remainingCards;
 
-    private boolean jokers;
 
-    public Deck(boolean shuffled, String deckID, int remainingCards, boolean jokers) {
+    public Deck(boolean shuffled, String deckID, int remainingCards) {
         this.shuffled = shuffled;
         this.deckID = deckID;
         this.remainingCards = remainingCards;
-        this.jokers = jokers;
     }
 
     public String getDeckID() {
