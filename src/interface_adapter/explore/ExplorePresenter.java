@@ -33,8 +33,6 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareStairsView(MovementOutputData movementOutputData) {
-        setButtonVisibility(movementOutputData); // For the future, if on stairs view "no" is pressed
-
         viewManagerModel.setActiveView(stairsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
