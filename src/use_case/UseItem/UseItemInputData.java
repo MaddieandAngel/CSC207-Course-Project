@@ -1,12 +1,11 @@
 package use_case.UseItem;
+import entity.BagAndItems.Item;
 
-public class UseItemInputData implements UseItemInputBoundary{
-    final UseItemOutputBoundary useItemPresenter;
-    public UseItemInputData(UseItemOutputBoundary useItemPresenter){
-        this.useItemPresenter = useItemPresenter;
-    }
-    @Override
-    public void execute(){
+public class UseItemInputData{
+    final Item item;
+    public UseItemInputData(Item item){
+        this.item = item;
 
     }
+    Item getItem(){return item;}
 }
