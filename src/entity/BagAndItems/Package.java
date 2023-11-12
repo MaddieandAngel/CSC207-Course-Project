@@ -13,9 +13,11 @@ public class Package implements Bag {
         this.MaxItems = 5;
         this.level = 0;
     }
+    @Override
     public boolean isFull(){
         return Items.size() >= MaxItems;
     }
+    @Override
     public boolean addItem(Item newItem){
         if (isFull()){
             return false;
@@ -23,15 +25,18 @@ public class Package implements Bag {
         Items.add(newItem);
         return true;
     }
+    @Override
     public void levelUpBag(){
         level = level + 1;
         MaxItems = MaxItems + 2;
     }
+    @Override
     public boolean useItem(Item item, Player player){
         item.heal(player);
         Items.remove(item);
         return true;
     }
+    @Override
     public boolean dropItem(Item item, Player player){
         Items.remove(item);
         return true;
