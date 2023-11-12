@@ -1,5 +1,7 @@
-package entity;
+package entity.BagAndItems;
 
+
+import entity.Player;
 
 public class healingPotion implements Item{
     private final String itemName;

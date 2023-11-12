@@ -1,5 +1,7 @@
 package entity;
 
+import entity.BagAndItems.Item;
+
 import java.util.ArrayList;
 
 public class Player implements Character{

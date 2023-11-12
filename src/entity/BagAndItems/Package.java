@@ -1,8 +1,10 @@
-package entity;
+package entity.BagAndItems;
+
+import entity.Player;
 
 import java.util.ArrayList;
 
-public class Package implements Bag{
+public class Package implements Bag {
     private final ArrayList<Item> Items;
     private int MaxItems;
     private int level;
