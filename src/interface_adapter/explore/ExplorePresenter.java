@@ -39,8 +39,6 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareTurnSelectView(MovementOutputData movementOutputData) {
-        setButtonVisibility(movementOutputData); // For the future, after the battle
-
         //TODO: More here probably
 
         viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
@@ -49,12 +47,11 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareItemCollectionView(MovementOutputData movementOutputData) {
-        setButtonVisibility(movementOutputData); //For the future, after the item is collected
-
         //TODO: Everything related to moving to the item collection view
     }
 
     private void setButtonVisibility(MovementOutputData movementOutputData){
+        //Move this to another file? Multiple presenters need this and IntelliJ is screaming at me
         ExploreState exploreState = exploreViewModel.getState();
 
         exploreState.setNorthVisible(movementOutputData.getDirections().contains("N"));
