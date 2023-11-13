@@ -4,5 +4,5 @@ import entity.BagAndItems.Bag;
 import entity.Player;
 
 public interface UseItemDataAccessInterface {
-    void useItem(Item item, Bag bag, Player player);
+    boolean useItem(int potionType, Player player);
 }

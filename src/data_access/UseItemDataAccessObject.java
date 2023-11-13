@@ -14,7 +14,8 @@ public class UseItemDataAccessObject implements UseItemDataAccessInterface{
 //        this.player = player;
 //    }
     @Override
-    public void useItem(Item item, Bag bag, Player player) {
-        bag.useItem(item, player);
+    public boolean useItem(int potionType,Player player) {
+        boolean success = player.getBag().useItem(potionType, player);
+        return success;
     }
 }

@@ -11,8 +11,12 @@ public class UseItemInteractor implements UseItemInputBoundary{
 
     @Override
     public void execute(UseItemInputData useItemInputData) {
-        userItemDataAccessObject.useItem(useItemInputData.item, useItemInputData.bag, useItemInputData.player);
-        useItemPresenter.prepareSuccessView();
+        boolean success = userItemDataAccessObject.useItem(useItemInputData.potionType, useItemInputData.player);
+        if (success){
+            useItemPresenter.prepareSuccessView();
+        }
+        useItemPresenter.prepareFailView();
+
 
     }
 }

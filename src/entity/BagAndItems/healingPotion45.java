@@ -1,15 +1,14 @@
 package entity.BagAndItems;
 
-
 import entity.Player;
 
-public class healingPotion implements Item{
+public class healingPotion45 implements Item{
     private final String itemName;
     private final double percentage;
 
-    public healingPotion(Integer potionLevel, double percentage) {
-        this.percentage = percentage;
-        this.itemName = "HealingPotion";
+    public healingPotion45() {
+        this.percentage = 0.45;
+        this.itemName = "HealingPotion(45%)";
     }
 
     @Override
@@ -20,7 +19,7 @@ public class healingPotion implements Item{
     }
     @Override
     public String usage(){
-        return "This potion heals " + percentage + " of your max HP.";
+        return "This potion heals 45% of your maxHealth.";
     }
     @Override
     public  String getName(){

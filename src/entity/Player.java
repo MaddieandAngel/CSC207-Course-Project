@@ -4,6 +4,9 @@ import entity.BagAndItems.Item;
 
 import java.util.ArrayList;
 
+import entity.BagAndItems.Bag;
+import entity.BagAndItems.Package;
+
 public class Player implements Character{
 
     private int currentHealth;
@@ -13,6 +16,7 @@ public class Player implements Character{
     private int experiencePoints;
     private ArrayList<Item> inventory;
     private int maxCardHold;
+    private Bag bag;
 
     Player(){
         //Creates new player at level 1
@@ -21,6 +25,7 @@ public class Player implements Character{
         currentHealth = 15;
         experiencePoints = 0;
         maxCardHold = 5;
+        bag = new Package();
     }
     public int getLevel(){
         return level;
@@ -45,6 +50,10 @@ public class Player implements Character{
         maxHealth = level * 15;
         currentHealth = maxHealth;
         experiencePoints = 0;
+    }
+
+    public Bag getBag(){
+        return bag;
     }
 
     public int getExperiencePoints() {
