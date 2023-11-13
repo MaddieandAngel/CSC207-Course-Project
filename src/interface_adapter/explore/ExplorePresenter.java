@@ -41,6 +41,8 @@ public class ExplorePresenter implements MovementOutputBoundary {
     public void prepareTurnSelectView(MovementOutputData movementOutputData) {
         setButtonVisibility(movementOutputData); // For the future, after the battle
 
+        //TODO: More here probably
+
         viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

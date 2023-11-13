@@ -2,25 +2,58 @@ package entity;
 
 public class Enemy implements Character{
 
-    //TODO: add suit and value preferences
     private String name;
     private int currentHealth;
     private int level;
+    private char suitPreference;
+    private int minCardValue;
+    private int maxCardValue;
+    private String image;
+    //private ArrayList<Card> hand;
 
-    //private Card[] hand;
-
-    Enemy(int id, int level){
+    public Enemy(int id, int level){
         this.level = level;
         currentHealth = level * 15;
 
-        if (id == 0){
-            name = "";
+        if (id == 0){ //Clubs mage
+            name = "Clubs Mage";
+            suitPreference = 'C';
+            minCardValue = 0;
+            maxCardValue = 15;
         }
-        else if (id == 1){
-            name = "";
+        else if (id == 1){ //Spades mage
+            name = "Spades Mage";
+            suitPreference = 'S';
+            minCardValue = 0;
+            maxCardValue = 15;
         }
-        //TODO: do more for this. or delete it later and turn Enemy into an abstract class. we'll see
-
+        else if (id == 2){ //Hearts mage
+            name = "Hearts Mage";
+            suitPreference = 'H';
+            minCardValue = 0;
+            maxCardValue = 15;
+        }
+        else if (id == 3){ //Diamonds mage
+            name = "Diamonds Mage";
+            suitPreference = 'D';
+            minCardValue = 0;
+            maxCardValue = 15;
+        }
+        else if (id == 4){ //Lesser omni mage
+            name = "Lesser Omni Mage";
+            suitPreference = '\0';
+            minCardValue = 1;
+            maxCardValue = 7;
+        }
+        else if (id == 5){ //Greater omni mage
+            name = "Greater Omni Mage";
+            suitPreference = '\0';
+            minCardValue = 7;
+            maxCardValue = 15;
+        }
+        else {
+            throw new IndexOutOfBoundsException("No enemy exists with the given id");
+        }
     }
 
     public int getLevel(){
@@ -39,5 +72,14 @@ public class Enemy implements Character{
 
     public String getName(){
         return name;
+    }
+    public char getPreferredSuit(){
+        return suitPreference;
+    }
+    public int getMinimumPreferredValue(){
+        return minCardValue;
+    }
+    public int getMaximumPreferredValue(){
+        return maxCardValue;
     }
 }
