@@ -16,7 +16,7 @@ public class ExploreViewModel extends ViewModel {
 
     private ExploreState state = new ExploreState();
 
-    public ExploreViewModel(String viewName) {
+    public ExploreViewModel() {
         super("explore");
     }
 

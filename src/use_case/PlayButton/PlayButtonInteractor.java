@@ -1,14 +1,20 @@
 package use_case.PlayButton;
 
-public class PlayButtonInteractor implements PlayButtonInputBoundary{
-    final PlayButtonInputBoundary playPresenter;
+import view.ExploreView;
 
-    public PlayButtonInteractor(PlayButtonInputBoundary playPresenter){
+public class PlayButtonInteractor implements PlayButtonInputBoundary{
+    final PlayButtonOutputBoundary playPresenter;
+    final ExploreView exploreView;
+
+    public PlayButtonInteractor(PlayButtonOutputBoundary playPresenter, ExploreView exploreView){
         this.playPresenter = playPresenter;
+        this.exploreView = exploreView;
     }
 
     @Override
     public void execute() {
-        playPresenter.prepareFailView();
+        // TODO: Call ExploreView
+
+        playPresenter.prepareSuccessView();
     }
 }

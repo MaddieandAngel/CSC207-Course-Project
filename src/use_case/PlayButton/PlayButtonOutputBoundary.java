@@ -1,6 +1,6 @@
 package use_case.PlayButton;
 
 public interface PlayButtonOutputBoundary {
-    void PreparePlaySuccessView();
-    void PreparePlayFailView();
+    void prepareSuccessView();
+    void prepareFailView(String error);
 }
