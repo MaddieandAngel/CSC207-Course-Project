@@ -1,12 +1,12 @@
-package interface_adapter.UseItems;
+package interface_adapter.DropItems;
 
+import interface_adapter.UseItems.UseItemState;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class UseItemsViewModel extends ViewModel {
-
+public class DropItemsViewModel extends ViewModel {
     public static final String USE_HEAL10 = "Use HealPotion(10%)";
     public static final String USE_HEAL20 = "Use HealPotion(20%)";
     public static final String USE_HEAL45 = "Use HealPotion(45%)";
@@ -16,13 +16,13 @@ public class UseItemsViewModel extends ViewModel {
     public static final String DROP_REVIVE = "Drop RevivePotion";
 
     public static final String TITLE_LABEL = "Your Bag";
-    private UseItemState state = new UseItemState();
-    public UseItemsViewModel(){
-        super("useitem");
+    private DropItemState state = new DropItemState();
+    public DropItemsViewModel(){
+        super("dropitem");
     }
 
-    public void setState(UseItemState useItemState){
-        this.state = useItemState;
+    public void setState(DropItemState dropItemState){
+        this.state = dropItemState;
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -36,7 +36,7 @@ public class UseItemsViewModel extends ViewModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
-    public UseItemState getState(){
+    public DropItemState getState(){
         return state;
     }
 }

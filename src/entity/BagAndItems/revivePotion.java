@@ -4,7 +4,7 @@ import entity.Player;
 
 public class revivePotion implements Item{
     private final String potionName;
-    revivePotion(){
+    public revivePotion(){
         this.potionName = "RevivePotion";
     }
 

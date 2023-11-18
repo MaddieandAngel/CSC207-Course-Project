@@ -15,7 +15,8 @@ public class UseItemInteractor implements UseItemInputBoundary{
         if (success){
             useItemPresenter.prepareSuccessView();
         }
-        useItemPresenter.prepareFailView();
+        else{
+        useItemPresenter.prepareFailView();}
 
 
     }

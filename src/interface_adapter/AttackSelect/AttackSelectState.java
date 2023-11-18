@@ -8,6 +8,8 @@ public class AttackSelectState {
 
     private int playerMaxHealth;
 
+    private String hand;
+
     AttackSelectState(String hand, int playerHealth, int playerMaxHealth) {
         this.hand = hand;
         this.playerHealth = playerHealth;

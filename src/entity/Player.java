@@ -18,7 +18,7 @@ public class Player implements Character{
     private int maxCardHold;
     private Bag bag;
 
-    Player(){
+    public Player(){
         //Creates new player at level 1
         level = 1;
         maxHealth = 15;

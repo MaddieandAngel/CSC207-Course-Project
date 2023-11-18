@@ -6,6 +6,8 @@ import entity.Player;
 import use_case.UseItem.UseItemInputBoundary;
 import use_case.UseItem.UseItemInputData;
 
+import java.util.Objects;
+
 public class UseItemsController {
     final UseItemInputBoundary useItemInteractor;
 
@@ -15,6 +17,6 @@ public class UseItemsController {
 
     public void execute(Player player, int num){
         UseItemInputData useItemInputData = new UseItemInputData(player, num);
-        useItemInteractor.execute(useItemInputData);
+        useItemInteractor.execute(useItemInputData);}
+
     }
-}

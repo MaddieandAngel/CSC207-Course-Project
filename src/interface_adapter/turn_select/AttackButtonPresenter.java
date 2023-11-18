@@ -1,6 +1,6 @@
 package interface_adapter.turn_select;
 
-import interface_adapter.AttackSelectViewModel;
+import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.AttackButton.AttackButtonOutputBoundary;
 
