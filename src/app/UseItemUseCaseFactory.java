@@ -26,7 +26,7 @@ public class UseItemUseCaseFactory {
     public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, Player player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject){
         UseItemsController useItemsController = createUseItemsUseCase(viewManagerModel, useItemsViewModel, useItemDataAccessObject);
         DropItemsController dropItemsController = createDropItemsUseCase(viewManagerModel, dropItemsViewModel, dropItemDataAccessObject);
-        return new PackageView(useItemsViewModel, useItemsController, dropItemsController, player);
+        return new PackageView(useItemsViewModel, useItemsController, dropItemsController, player, dropItemsViewModel);
 
     }
     public static UseItemsController createUseItemsUseCase(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, UseItemDataAccessObject useItemDataAccessObject){

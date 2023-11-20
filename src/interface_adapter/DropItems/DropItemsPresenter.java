@@ -26,7 +26,6 @@ public class DropItemsPresenter implements DropItemOutputBoundary {
         dropItemsViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView(dropItemsViewModel.getViewName());
-        System.out.println(dropItemsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
     @Override

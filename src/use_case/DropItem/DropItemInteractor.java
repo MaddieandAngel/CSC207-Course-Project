@@ -18,6 +18,8 @@ public class DropItemInteractor implements DropItemInputBoundary{
         boolean success = dropItemDataAccessObject.dropItem(dropItemInputData.potionType, dropItemInputData.player);
         if (success){
             dropItemPresenter.prepareSuccessView();
+            System.out.println("drop:"+Integer.toString(dropItemInputData.player.getCurrentHealth()));
+
         }
         else{
             dropItemPresenter.prepareFailView();}

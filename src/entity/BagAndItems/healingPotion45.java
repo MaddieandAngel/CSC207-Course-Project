@@ -13,9 +13,10 @@ public class healingPotion45 implements Item{
 
     @Override
     public void heal(Player player) {
-        int currentHealth = player.getMaxHealth();
-        int addHealth = (int) Math.round(currentHealth * percentage);
-        player.setHealth(currentHealth + addHealth);
+        int currentHealth = player.getCurrentHealth();
+        int addHealth = (int) Math.floor(player.getMaxHealth() * percentage);
+        int set_health = currentHealth + addHealth;
+        player.setHealth(set_health);
     }
     @Override
     public String usage(){

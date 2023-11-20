@@ -7,9 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class DropItemsViewModel extends ViewModel {
-    public static final String USE_HEAL10 = "Use HealPotion(10%)";
-    public static final String USE_HEAL20 = "Use HealPotion(20%)";
-    public static final String USE_HEAL45 = "Use HealPotion(45%)";
+
     public static final String DROP_HEAL10 = "Drop HealPotion(10%)";
     public static final String DROP_HEAL20 = "Drop HealPotion(20%)";
     public static final String DROP_HEAL45 = "Drop HealPotion(45%)";
@@ -18,7 +16,7 @@ public class DropItemsViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Your Bag";
     private DropItemState state = new DropItemState();
     public DropItemsViewModel(){
-        super("dropitem");
+        super("Package");
     }
 
     public void setState(DropItemState dropItemState){

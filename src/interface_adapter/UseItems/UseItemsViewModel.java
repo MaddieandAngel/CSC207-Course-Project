@@ -18,7 +18,7 @@ public class UseItemsViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Your Bag";
     private UseItemState state = new UseItemState();
     public UseItemsViewModel(){
-        super("useitem");
+        super("Package");
     }
 
     public void setState(UseItemState useItemState){
