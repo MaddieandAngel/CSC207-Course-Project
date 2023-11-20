@@ -38,4 +38,6 @@ public class TurnSelectViewModel extends ViewModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
+
+    public TurnSelectState getState(){return state;}
 }
