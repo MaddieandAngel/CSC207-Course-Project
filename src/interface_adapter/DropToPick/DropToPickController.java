@@ -1,6 +1,5 @@
 package interface_adapter.DropToPick;
 
-import entity.Player;
 import use_case.DropToPick.DropToPickInputBoundary;
 
 public class DropToPickController {

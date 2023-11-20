@@ -1,8 +1,6 @@
 package interface_adapter.PickUpItem;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
-import interface_adapter.UseItems.UseItemState;
 
 public class PickUpItemState {
     private Player player;

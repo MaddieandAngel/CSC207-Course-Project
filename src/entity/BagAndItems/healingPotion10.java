@@ -1,8 +1,6 @@
 package entity.BagAndItems;
 
 
-import entity.Player;
-
 public class healingPotion10 implements Item{
     private final String itemName;
     private final double percentage;

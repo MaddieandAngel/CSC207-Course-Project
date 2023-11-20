@@ -1,6 +1,5 @@
 package interface_adapter.DropToPickPackage;
 
-import entity.Player;
 import use_case.DropToPickPackage.DropToPickPackageInputBoundary;
 import use_case.DropToPickPackage.DropToPickPackageInputData;
 

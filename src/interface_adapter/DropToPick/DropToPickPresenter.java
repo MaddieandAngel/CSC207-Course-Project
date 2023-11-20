@@ -1,11 +1,6 @@
 package interface_adapter.DropToPick;
 
-import entity.Player;
-import interface_adapter.DropItems.DropItemState;
-import interface_adapter.DropItems.DropItemsViewModel;
-import interface_adapter.DropToPickPackage.DropToPickPackageState;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
-import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.DropToPick.DropToPickOutputBoundary;

@@ -1,7 +1,6 @@
 package use_case.DropToPickPackage;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
 
 public class DropToPickPackageInputData {
     final Player player;

@@ -1,8 +1,6 @@
 package interface_adapter.DropToPickPackage;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
-import interface_adapter.DropItems.DropItemState;
 
 public class DropToPickPackageState {
     private Player player;

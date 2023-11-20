@@ -1,7 +1,5 @@
 package entity.BagAndItems;
 
-import entity.Player;
-
 public interface Bag {
     public boolean addItem(Item newItem);
     public boolean isFull();

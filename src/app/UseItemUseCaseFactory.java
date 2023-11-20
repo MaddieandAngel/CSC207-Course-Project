@@ -2,7 +2,6 @@ package app;
 
 import data_access.DropItemDataAccessObject;
 import data_access.UseItemDataAccessObject;
-import entity.Player;
 import interface_adapter.DropItems.DropItemsController;
 import interface_adapter.DropItems.DropItemsPresenter;
 import interface_adapter.DropItems.DropItemsViewModel;
@@ -17,9 +16,6 @@ import use_case.UseItem.UseItemInputBoundary;
 import use_case.UseItem.UseItemInteractor;
 import use_case.UseItem.UseItemOutputBoundary;
 import view.PackageView;
-
-import javax.swing.*;
-import java.io.IOException;
 
 public class UseItemUseCaseFactory {
     private UseItemUseCaseFactory(){}

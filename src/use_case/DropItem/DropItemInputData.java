@@ -1,7 +1,6 @@
 package use_case.DropItem;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
 
 public class DropItemInputData {
     final Player player;

@@ -1,6 +1,5 @@
 package interface_adapter.DropItems;
 
-import entity.Player;
 import use_case.DropItem.DropItemInputBoundary;
 import use_case.DropItem.DropItemInputData;
 

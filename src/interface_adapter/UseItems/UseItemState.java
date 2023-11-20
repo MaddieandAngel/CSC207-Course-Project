@@ -1,7 +1,6 @@
 package interface_adapter.UseItems;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
 
 public class UseItemState {
     private Player player;

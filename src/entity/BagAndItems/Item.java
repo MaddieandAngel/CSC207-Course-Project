@@ -1,7 +1,5 @@
 package entity.BagAndItems;
 
-import entity.Player;
-
 public interface Item {
     //TODO: implement
 

@@ -1,7 +1,6 @@
 package interface_adapter.DropItems;
 
 import entity.BagAndItems.Bag;
-import entity.Player;
 
 public class DropItemState {
     private Player player;

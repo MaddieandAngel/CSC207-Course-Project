@@ -1,10 +1,6 @@
 package entity.BagAndItems;
 
-import entity.Player;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Package implements Bag {
     private final ArrayList<Item> heal10;

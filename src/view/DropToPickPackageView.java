@@ -1,12 +1,7 @@
 package view;
 
-import entity.Player;
-import interface_adapter.DropItems.DropItemsController;
-import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageController;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
-import interface_adapter.UseItems.UseItemsController;
-import interface_adapter.UseItems.UseItemsViewModel;
 
 import javax.swing.*;
 import java.awt.*;

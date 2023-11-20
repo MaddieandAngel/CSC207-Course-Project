@@ -1,9 +1,6 @@
 package data_access;
-import entity.BagAndItems.Bag;
-import entity.BagAndItems.BagFactory;
-import entity.BagAndItems.Item;
 import use_case.UseItem.UseItemDataAccessInterface;
-import entity.Player;
+
 public class UseItemDataAccessObject implements UseItemDataAccessInterface{
 //    private Item item;
 //    private Bag bag;

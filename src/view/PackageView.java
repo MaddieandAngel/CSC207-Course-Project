@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import entity.Player;
 import interface_adapter.DropItems.DropItemsController;
-import interface_adapter.UseItems.UseItemState;
 import interface_adapter.UseItems.UseItemsController;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;

@@ -1,6 +1,5 @@
 package app;
 
-import entity.Player;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageController;
 import interface_adapter.DropToPickPackage.DropToPickPackagePresenter;

@@ -1,7 +1,5 @@
 package use_case.DropToPick;
 
-import entity.Player;
-
 public class DropToPickInteractor implements DropToPickInputBoundary{
     final DropToPickOutputBoundary dropToPickPresenter;
 

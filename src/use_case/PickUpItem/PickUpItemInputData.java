@@ -2,7 +2,6 @@ package use_case.PickUpItem;
 
 import entity.BagAndItems.Bag;
 import entity.BagAndItems.Item;
-import entity.Player;
 
 public class PickUpItemInputData {
     final Player player;

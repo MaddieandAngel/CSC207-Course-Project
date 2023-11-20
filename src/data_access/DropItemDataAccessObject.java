@@ -1,6 +1,5 @@
 package data_access;
 
-import entity.Player;
 import use_case.DropItem.DropItemDataAccessInterface;
 
 public class DropItemDataAccessObject implements DropItemDataAccessInterface {
