@@ -29,9 +29,9 @@ public class DefendButtonPresenter implements DefendButtonOutputBoundary {
     }
 
     @Override
-    public void prepareDefendFailView(String error) {
+    public void prepareDefendFailView() {
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
-        turnSelectState.getClearError(error);
+        turnSelectState.getClearError();
         turnSelectViewModel.firePropertyChanged();
     }
 }
