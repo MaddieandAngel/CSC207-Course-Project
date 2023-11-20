@@ -10,6 +10,5 @@ public interface Player {
     int getExperiencePoints();
     void setExperiencePoints(int exp);
     int getMaxCardHold();
-    void setMaxCardHold(int cardHold);
 
 }

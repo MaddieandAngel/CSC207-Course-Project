@@ -1,16 +1,26 @@
 package use_case.movement;
 
+import entity.Enemy;
+import entity.EnemyFactory;
 import interface_adapter.explore.ExploreDataAccessInterface;
+import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+
+import java.util.Random;
 
 public class MovementInteractor implements MovementInputBoundary {
 
     final ExploreDataAccessInterface exploreDataAccessObject;
+    final GenerateEnemyDataAccessInterface inBattleDataAccessObject;
     final MovementOutputBoundary movementPresenter;
+    final EnemyFactory enemyFactory;
 
     public MovementInteractor(ExploreDataAccessInterface exploreDataAccessObject,
-                              MovementOutputBoundary movementOutputBoundary){
+                              GenerateEnemyDataAccessInterface inBattleDataAccessObject,
+                              MovementOutputBoundary movementOutputBoundary, EnemyFactory enemyFactory){
         this.exploreDataAccessObject = exploreDataAccessObject;
+        this.inBattleDataAccessObject = inBattleDataAccessObject;
         this.movementPresenter = movementOutputBoundary;
+        this.enemyFactory = enemyFactory;
     }
 
     @Override
@@ -39,8 +49,16 @@ public class MovementInteractor implements MovementInputBoundary {
             movementPresenter.prepareStairsView(movementOutputData);
         }
         else if (exploreDataAccessObject.checkForEnemy()){
-            //TODO: Generate enemy for output data
-            //TODO: Use API to give enemy cards?
+            // Generates a random enemy:
+            Random randomizer = new Random();
+            int floorLevel = exploreDataAccessObject.getFloorLevel();
+            Enemy enemy = enemyFactory.create(randomizer.nextInt(0, 6),
+                    randomizer.nextInt(floorLevel / 5, (floorLevel / 5) + 3));
+            inBattleDataAccessObject.setEnemy(enemy);
+            inBattleDataAccessObject.generateInitialEnemyHand();
+
+            //TODO: Create output data with enemy's name and level
+
             movementPresenter.prepareTurnSelectView(movementOutputData);
         }
         else if (exploreDataAccessObject.checkForItem()){

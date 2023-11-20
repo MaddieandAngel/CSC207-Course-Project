@@ -63,4 +63,7 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
         floorLevel++;
         return getDirections();
     }
+    public int getFloorLevel(){
+        return floorLevel;
+    }
 }

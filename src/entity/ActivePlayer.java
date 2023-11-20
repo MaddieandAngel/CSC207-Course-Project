@@ -10,7 +10,6 @@ public class ActivePlayer implements Player{
     private int level;
     private int experiencePoints;
     private ArrayList<Item> inventory;
-    private int maxCardHold;
 
     ActivePlayer(){
         //Creates new player at level 1
@@ -18,7 +17,6 @@ public class ActivePlayer implements Player{
         maxHealth = 15;
         currentHealth = 15;
         experiencePoints = 0;
-        maxCardHold = 5;
     }
     public int getLevel(){
         return level;
@@ -53,11 +51,8 @@ public class ActivePlayer implements Player{
         experiencePoints = exp;
     }
 
-    public void setMaxCardHold(int cardHold){
-        maxCardHold = cardHold;
-    }
-
     public int getMaxCardHold(){
-        return maxCardHold;
+        // TODO: Delete later
+        return 5;
     }
 }
