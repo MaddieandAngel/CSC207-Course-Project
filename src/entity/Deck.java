@@ -19,6 +19,10 @@ public class Deck {
         return this.deckID;
     }
 
+    public boolean isShuffled() {
+        return this.shuffled;
+    }
+
     public void setShuffled(boolean shuffled) {
         this.shuffled = shuffled;
     }
