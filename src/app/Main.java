@@ -51,7 +51,6 @@ public class Main {
         on.getBag().addItem(new revivePotion());
         on.getBag().addItem(new revivePotion());
         on.getBag().addItem(new revivePotion());
-        on.getBag().addItem(new revivePotion());
         on.setHealth(on.getMaxHealth()/2);
 
 
@@ -76,8 +75,8 @@ public class Main {
 //
         PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, on, useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject);
         views.add(packageView, packageView.viewName);
-//        viewManagerModel.setActiveView(packageView.viewName);
-//        viewManagerModel.firePropertyChanged();
+        viewManagerModel.setActiveView(packageView.viewName);
+        viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);

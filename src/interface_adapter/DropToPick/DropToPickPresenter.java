@@ -23,12 +23,6 @@ public class DropToPickPresenter implements DropToPickOutputBoundary {
 
     @Override
     public void prepareSuccessView(Player player) {
-        PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
-        DropToPickPackageState dropToPickPackageState = dropToPickPackageViewModel.getState();
-        dropToPickPackageState.setBag(pickUpItemState.getBag());
-        dropToPickPackageViewModel.setState(dropToPickPackageState);
-        dropToPickPackageViewModel.firePropertyChanged();
-
         viewManagerModel.setActiveView(dropToPickPackageViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

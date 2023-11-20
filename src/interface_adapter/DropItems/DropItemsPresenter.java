@@ -19,11 +19,6 @@ public class DropItemsPresenter implements DropItemOutputBoundary {
     @Override
     public void prepareSuccessView() {
         JOptionPane.showMessageDialog(null, "successfully droped the item");
-        //back to package view(maybe).
-        DropItemState dropItemState = dropItemsViewModel.getState();
-        dropItemState.setBag(dropItemState.getBag());
-        dropItemsViewModel.setState(dropItemState);
-        dropItemsViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView(dropItemsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

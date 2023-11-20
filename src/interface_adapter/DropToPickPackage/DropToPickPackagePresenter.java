@@ -1,6 +1,7 @@
 package interface_adapter.DropToPickPackage;
 
 import interface_adapter.DropToPick.DropToPickViewModel;
+import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.DropToPickPackage.DropToPickPackageOutputBoundary;
@@ -24,9 +25,6 @@ public class DropToPickPackagePresenter implements DropToPickPackageOutputBounda
     public void prepareSuccessView() {
         JOptionPane.showMessageDialog(null, "successfully droped the item");
         //back to package view(maybe).
-        DropToPickPackageState dropToPickPackageState = dropToPickPackageViewModel.getState();
-        dropToPickPackageState.setBag(dropToPickPackageState.getBag());
-        dropToPickPackageViewModel.setState(dropToPickPackageState);
         viewManagerModel.setActiveView(dropToPickPackageViewModel.getViewName());
         dropToPickViewModel.firePropertyChanged();
     }
