@@ -1,6 +1,7 @@
 package interface_adapter.explore;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import use_case.movement.MovementOutputBoundary;
@@ -27,7 +28,9 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareEmptyRoomView(MovementOutputData movementOutputData) {
-        setButtonVisibility(movementOutputData);
+        ExploreState exploreState = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+        exploreViewModel.firePropertyChanged();
         //No need to change active view
     }
 
@@ -39,7 +42,10 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareTurnSelectView(MovementOutputData movementOutputData) {
-        //TODO: More here probably
+        //TODO: More here
+        TurnSelectState turnSelectState = turnSelectViewModel.getState();
+
+        //TODO: Update textbox text for TurnSelectView with the enemy's name and level (ie "Level [EnemyLevel] [EnemyName] appeared!")
 
         viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
@@ -50,16 +56,4 @@ public class ExplorePresenter implements MovementOutputBoundary {
         //TODO: Everything related to moving to the item collection view
     }
 
-    private void setButtonVisibility(MovementOutputData movementOutputData){
-        //Move this to another file? Multiple presenters need this and IntelliJ is screaming at me
-        ExploreState exploreState = exploreViewModel.getState();
-
-        exploreState.setNorthVisible(movementOutputData.getDirections().contains("N"));
-        exploreState.setEastVisible(movementOutputData.getDirections().contains("E"));
-        exploreState.setSouthVisible(movementOutputData.getDirections().contains("S"));
-        exploreState.setWestVisible(movementOutputData.getDirections().contains("W"));
-
-        exploreViewModel.setState(exploreState);
-        exploreViewModel.firePropertyChanged();
-    }
 }

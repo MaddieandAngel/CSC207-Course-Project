@@ -24,6 +24,9 @@ public class TurnSelectViewModel extends ViewModel {
     public void setState(TurnSelectState state) {
         this.state = state;
     }
+    public TurnSelectState getState() {
+        return state;
+    }
 
     // Copied the below from week5ca:
 

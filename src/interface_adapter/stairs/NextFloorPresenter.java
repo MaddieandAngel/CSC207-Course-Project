@@ -21,6 +21,7 @@ public class NextFloorPresenter implements NextFloorOutputBoundary {
 
         exploreState.setFloorLevel(exploreState.getFloorLevel() + 1);
 
+        // TODO: change NextFloorOutputData to MovementOutputData so ExploreButtonVisibility can be called
         exploreState.setNorthVisible(nextFloorOutputData.getDirections().contains("N"));
         exploreState.setEastVisible(nextFloorOutputData.getDirections().contains("E"));
         exploreState.setSouthVisible(nextFloorOutputData.getDirections().contains("S"));

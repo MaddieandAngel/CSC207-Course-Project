@@ -20,6 +20,7 @@ public class StayOnFloorPresenter implements StayOnFloorOutputBoundary {
     public void prepareEmptyRoomView(StayOnFloorOutputData stayOnFloorOutputData) {
         ExploreState exploreState = exploreViewModel.getState();
 
+        // TODO: change StayOnFloorOutputData to MovementOutputData so ExploreButtonVisibility can be called
         exploreState.setNorthVisible(stayOnFloorOutputData.getDirections().contains("N"));
         exploreState.setEastVisible(stayOnFloorOutputData.getDirections().contains("E"));
         exploreState.setSouthVisible(stayOnFloorOutputData.getDirections().contains("S"));

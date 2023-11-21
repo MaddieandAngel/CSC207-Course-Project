@@ -1,25 +1,39 @@
 package use_case.movement;
 
-import entity.Character;
-import entity.Item;
-
 public class MovementOutputData {
 
-    private String directions;
-    private Character enemy = null; //Maybe should be a string with the enemy name instead
-    private Item item = null; //Maybe should be a string with the item name instead
+    private final String directions;
+    private String enemyName;
+    private int enemyLevel;
+    private String itemName;
 
     public MovementOutputData(String directions){
         this.directions = directions;
+        enemyName = "";
+        enemyLevel = -1;
+        itemName = "";
     }
 
     public String getDirections() {
         return directions;
     }
-    public Character getEnemy() {
-        return enemy;
+    public String getEnemyName() {
+        return enemyName;
     }
-    public Item getItem() {
-        return item;
+    public int getEnemyLevel() {
+        return enemyLevel;
+    }
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setEnemyName(String enemyName) {
+        this.enemyName = enemyName;
+    }
+    public void setEnemyLevel(int enemyLevel) {
+        this.enemyLevel = enemyLevel;
+    }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

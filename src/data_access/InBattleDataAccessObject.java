@@ -18,7 +18,13 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     }
 
     @Override
-    public void generateInitialEnemyHand() {
-        //TODO
+    public Enemy getEnemy() {
+        return enemy;
     }
+
+    @Override
+    public Deck getDeck() {
+        return deck;
+    }
+
 }
