@@ -137,7 +137,7 @@ public class APIAccess implements APIAccessInterface {
                 int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1].replace("}", "").trim());
                 deck.setRemainingCards(updatedRemainingCards);
                 if (deck.getRemainingCards() == 0) {
-                    MoveDiscardPileToDeck(deck);
+                    MovePileToDeck(deck, "discard");
                     Shuffle(deck);
                 }
             }
@@ -219,11 +219,12 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void MoveDiscardPileToDeck(Deck deck) throws IOException, RuntimeException{
-        // Will move the cards from the discard pile and return them to the main deck
+    public void MovePileToDeck(Deck deck, String pileName) throws IOException, RuntimeException{
+        // Will move the cards from the specified pile return them to the main deck then shuffle the main deck
+        // Will assume the pile name provided is an already created pile in the deck
 
-        // Call API and move cards from discard pile to the main deck of cards
-        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/discard/return/";
+        // Call API and move cards from desired pile to the main deck of cards
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/" + pileName + "/return/";
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder().url(url).build();
@@ -240,24 +241,25 @@ public class APIAccess implements APIAccessInterface {
                 // Check if successful
                 boolean successful = Boolean.parseBoolean(newString[0].split(":")[1].trim());
                 if (!successful) {
-                    throw new RuntimeException("Discard pile was not moved back to deck");
+                    throw new RuntimeException("Pile was not moved back to deck");
                 }
 
                 // Update the number of remaining cards in the deck
                 int updatedRemainingCards = Integer.parseInt(newString[3].split(":")[1]);
                 deck.setRemainingCards(updatedRemainingCards);
 
-                // Update shuffled value for the deck (is no longer shuffled)
-                deck.setShuffled(false);
+                deck.setShuffled(false); // Since the deck is no longer shuffled
+                // Shuffle the main deck
+                Shuffle(deck);
             } else {
-                // else runs when responseBody is null, indicating the discard pile was not moved to the deck, so will
+                // else runs when responseBody is null, indicating the pile was not moved to the deck, so will
                 // throw a RuntimeException
-                throw new RuntimeException("Discard pile was not moved back to deck");
+                throw new RuntimeException("Pile was not moved back to deck");
             }
         } catch (IOException e) {
             throw new IOException(e);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Pile was not moved back to deck");
         }
 
     }

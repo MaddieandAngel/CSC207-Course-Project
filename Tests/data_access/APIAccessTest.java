@@ -157,15 +157,15 @@ class APIAccessTest {
     }
 
     @Test
-    void moveDiscardPileToDeck() {
-        // Only used by other methods. Assuming all other methods are correct, the correct values should always be provided
+    void movePileToDeck() {
+        // Assume the provided deck and pile name are correct. Assume all other methods are correct
         try {
             api.DrawCard(testDeck, "discard");
             int currentRemainingCards = testDeck.getRemainingCards();
-            api.MoveDiscardPileToDeck(testDeck);
+            api.MovePileToDeck(testDeck, "discard");
             assert !testDeck.isShuffled() && testDeck.getRemainingCards() == currentRemainingCards + 1;
         } catch (IOException e) {
-            fail("IOEception not expected");
+            fail("IOException not expected");
         }
 
     }
