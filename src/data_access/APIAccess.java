@@ -245,7 +245,7 @@ public class APIAccess implements APIAccessInterface {
                 }
 
                 // Update the number of remaining cards in the deck
-                int updatedRemainingCards = Integer.parseInt(newString[3].split(":")[1]);
+                int updatedRemainingCards = Integer.parseInt(newString[2].split(":")[1].trim());
                 deck.setRemainingCards(updatedRemainingCards);
 
                 deck.setShuffled(false); // Since the deck is no longer shuffled
