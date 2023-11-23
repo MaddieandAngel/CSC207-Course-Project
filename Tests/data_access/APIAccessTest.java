@@ -157,7 +157,7 @@ class APIAccessTest {
     }
 
     @Test
-    void movePileToDeck() {
+    void movePileToDeckSuccessful() {
         // Assume the provided deck and pile name are correct. Assume all other methods are correct
         try {
             api.DrawCard(testDeck, "discard");
@@ -168,6 +168,31 @@ class APIAccessTest {
             fail("IOException not expected");
         }
 
+    }
+
+    @Test
+    void MovePileToDeckInvalidPileName() {
+        try {
+            api.DrawCard(testDeck, "test1");
+            int currentRemainingCards = testDeck.getRemainingCards();
+            api.MovePileToDeck(testDeck, "fail");
+            fail("IOException expected");
+        } catch (IOException e) {
+            assert true;
+        }
+    }
+
+    @Test
+    void MovePileToDeckInvalidDeck() {
+        Deck newDeck = new Deck(true, "249fjn092??", 54);
+        try {
+            api.DrawCard(testDeck, "discard");
+            int currentRemainingCards = testDeck.getRemainingCards();
+            api.MovePileToDeck(newDeck, "discard");
+            fail("IOException expected");
+        } catch (IOException e) {
+            assert true;
+        }
     }
 
     @Test
