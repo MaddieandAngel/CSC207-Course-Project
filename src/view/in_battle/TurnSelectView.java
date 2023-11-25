@@ -1,5 +1,6 @@
 package view.in_battle;
 
+import entity.ActivePlayer;
 import interface_adapter.turn_select.AttackButtonController;
 import interface_adapter.turn_select.DrawButtonController;
 import interface_adapter.turn_select.ItemsButtonController;
@@ -29,6 +30,8 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final DefendButtonController defendButtonController;
     private final FleeButtonController fleeButtonController;
 
+    private final ActivePlayer player;
+
     private final JButton attack;
     private final JButton draw;
     private final JButton items;
@@ -37,13 +40,14 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
-                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel){
+                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, ActivePlayer player){
         this.attackButtonController = atk_control;
         this.drawButtonController = draw_control;
         this.itemsButtonController = item_control;
         this.defendButtonController = defend_control;
         this.fleeButtonController = flee_control;
         this.turnSelectViewModel = turnSelectViewModel;
+        this.player = player;
         turnSelectViewModel.addPropertyChangeListener(this);
 
         JPanel textbox = new JPanel();
@@ -72,7 +76,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_atk) {
                         if (e_atk.getSource().equals(attack)) {
-                            attackButtonController.execute();
+                            attackButtonController.execute(player);
                         }
                     }
                 }

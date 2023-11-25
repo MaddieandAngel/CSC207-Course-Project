@@ -17,6 +17,8 @@ public class AttackSelectViewModel extends ViewModel {
         this.state = state;
     }
 
+    public AttackSelectState getState() {return this.state;}
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
 

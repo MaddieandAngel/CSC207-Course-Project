@@ -6,7 +6,8 @@ public class ActivePlayer implements Player{
 
     private int currentHealth;
     private int maxHealth;
-    //private Card[] hand;
+
+    private String[] hand;
     private int level;
     private int experiencePoints;
     private ArrayList<Item> inventory;
@@ -60,4 +61,8 @@ public class ActivePlayer implements Player{
     public int getMaxCardHold(){
         return maxCardHold;
     }
+
+    public String[] getHand() { return this.hand;}
+
+    public void setHand(String[] newHand) { this.hand = newHand;}
 }

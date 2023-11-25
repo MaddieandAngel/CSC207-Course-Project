@@ -1,5 +1,7 @@
 package use_case.AttackButton;
 
+import entity.ActivePlayer;
+
 public class AttackButtonInteractor implements AttackButtonInputBoundary{
 
     final AttackButtonOutputBoundary attackButtonPresenter;
@@ -9,8 +11,10 @@ public class AttackButtonInteractor implements AttackButtonInputBoundary{
     }
 
     @Override
-    public void execute() {
+    public void execute(AttackButtonInputData attackButtonInputData) {
+        ActivePlayer player = attackButtonInputData.getActivePlayer();
+        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(player.getCurrentHealth(), player.getMaxHealth(), player.getHand())
 
-        attackButtonPresenter.prepareSuccessView();
+        attackButtonPresenter.prepareSuccessView(attackButtonOutputData);
     }
 }
