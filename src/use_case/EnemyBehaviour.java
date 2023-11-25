@@ -85,12 +85,12 @@ public class EnemyBehaviour {
             }
             else{
                 // new card is not what the enemy wants. Return it to the deck and try again
-                // TODO: need an APIAccess method that moves a card from a pile directly back to the deck
+                apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
             }
             attempts++;
         }
         // Removes the new card from the temporary pile, so that it can be added to the enemy's actual hand
-        // TODO: need an APIAccess method that moves a card from a pile directly back to the deck
+        apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
         apiAccess.AddToPile(deck.getDeckID(), "enemyHand", newCard);
     }
 
