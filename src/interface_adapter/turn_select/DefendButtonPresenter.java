@@ -1,5 +1,7 @@
 package interface_adapter.turn_select;
 
+import interface_adapter.BattleResult.BattleResultState;
+import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.DefendButton.DefendButtonOutputBoundary;
 import view.in_battle.BattleResultView;
@@ -31,7 +33,7 @@ public class DefendButtonPresenter implements DefendButtonOutputBoundary {
     @Override
     public void prepareDefendFailView() {
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
-        turnSelectState.getClearError();
+//        turnSelectState.get;
         turnSelectViewModel.firePropertyChanged();
     }
 }
