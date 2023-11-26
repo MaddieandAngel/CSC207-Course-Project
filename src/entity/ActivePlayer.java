@@ -1,5 +1,7 @@
 package entity;
 
+import entity.BagAndItems.Bag;
+
 import java.util.ArrayList;
 
 public class ActivePlayer implements Player{
@@ -10,7 +12,7 @@ public class ActivePlayer implements Player{
     private String[] hand;
     private int level;
     private int experiencePoints;
-    private ArrayList<Item> inventory;
+    private Bag inventory;
     private int maxCardHold;
 
     ActivePlayer(){
@@ -65,4 +67,6 @@ public class ActivePlayer implements Player{
     public String[] getHand() { return this.hand;}
 
     public void setHand(String[] newHand) { this.hand = newHand;}
+
+    public Bag getInventory() { return this.inventory;}
 }

@@ -13,7 +13,7 @@ public class AttackButtonInteractor implements AttackButtonInputBoundary{
     @Override
     public void execute(AttackButtonInputData attackButtonInputData) {
         ActivePlayer player = attackButtonInputData.getActivePlayer();
-        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(player.getCurrentHealth(), player.getMaxHealth(), player.getHand())
+        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(player.getCurrentHealth(), player.getMaxHealth(), player.getHand());
 
         attackButtonPresenter.prepareSuccessView(attackButtonOutputData);
     }

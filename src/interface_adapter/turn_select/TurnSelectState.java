@@ -1,13 +1,15 @@
 package interface_adapter.turn_select;
 
+import entity.BagAndItems.Bag;
+
 public class TurnSelectState {
 
     private int playerHealth = 15; // Integer() instead??
     // ^ Also we can change that initial value later if needed
     private int playerLevel = 1; // Integer() instead??
     // ^ Also not sure if these values should be in a different state
-    private String playerHand = ""; //May need to change this depending on how the API works
-    private String playerInventory = ""; //For other items, if we implement them
+    private String[] playerHand = new String[5]; //May need to change this depending on how the API works
+    private Bag playerInventory; //For other items, if we implement them
 
     /*
     I know a value for the player's current health should be stored in here, since we'll be displaying
@@ -34,6 +36,10 @@ public class TurnSelectState {
     public void setPlayerLevel(int level){
         this.playerLevel = level;
     }
+
+    public void setPlayerHand(String[] hand) { this.playerHand = hand;}
+
+    public void setPlayerInventory(Bag inventory) {this.playerInventory = inventory;}
 
     //We can add getter and setter methods for the hand and inventory later, if it turns out we need them.
 }

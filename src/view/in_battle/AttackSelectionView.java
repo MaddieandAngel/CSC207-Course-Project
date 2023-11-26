@@ -1,6 +1,8 @@
 package view.in_battle;
 
+import entity.ActivePlayer;
 import interface_adapter.APIAccessInterface;
+import interface_adapter.AttackSelect.AttackSelectState;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.AttackSelect.BackButtonController;
 import interface_adapter.AttackSelect.CardButtonController;
@@ -9,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class AttackSelectionView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -23,6 +26,8 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     private final APIAccessInterface api;
 
+    private final ActivePlayer player;
+
     private final JButton card1;
 
     private final JButton card2;
@@ -35,11 +40,13 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     private final JButton back;
 
-    public AttackSelectionView(AttackSelectViewModel attackSelectViewModel, CardButtonController cardButtonController, BackButtonController backButtonController, APIAccessInterface api) {
+    public AttackSelectionView(AttackSelectViewModel attackSelectViewModel, CardButtonController cardButtonController,
+                               BackButtonController backButtonController, APIAccessInterface api, ActivePlayer player) {
         this.attackSelectViewModel = attackSelectViewModel;
         this.backButtonController = backButtonController;
         this.cardButtonController = cardButtonController;
         this.api = api;
+        this.player = player;
         attackSelectViewModel.addPropertyChangeListener(this);
 
         String[] playerHand = attackSelectViewModel.getState().getHand();
@@ -165,7 +172,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            // TODO: implement
+                            backButtonController.execute(player);
                         }
                     }
                 }
@@ -173,4 +180,14 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent e) {
+        AttackSelectState state = (AttackSelectState) e.getNewValue();
+        // don't think anything needs to be implemented here
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Don't think anything needs to be implemented here
+    }
 }

@@ -4,7 +4,6 @@ import entity.ActivePlayer;
 import use_case.AttackButton.AttackButtonInputBoundary;
 import use_case.AttackButton.AttackButtonInputData;
 
-// TODO: To be implemented
 public class AttackButtonController {
 
     final AttackButtonInputBoundary attackButtonInteractor;

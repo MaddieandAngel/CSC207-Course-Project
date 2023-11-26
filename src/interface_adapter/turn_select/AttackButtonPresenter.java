@@ -19,7 +19,6 @@ public class AttackButtonPresenter implements AttackButtonOutputBoundary {
 
     @Override
     public void prepareSuccessView(AttackButtonOutputData attackButtonOutputData) {
-        attackSelectViewModel.firePropertyChanged();
 
         AttackSelectState attackSelectState = this.attackSelectViewModel.getState();
         attackSelectState.setPlayerHealth(attackButtonOutputData.getCurrentHealth());
