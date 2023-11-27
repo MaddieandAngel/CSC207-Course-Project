@@ -15,9 +15,11 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
     }
 
     public void execute(){
-
-        //TODO: create an EnemyActions class then call to get enemy's action
+        //TODO: Need to finish implementing
+        // create an EnemyActions class then call to get enemy's action
         // activePlayer.setHealth();
-        defendPresenter.prepareDefendSuccessView();
+
+        //Send player's health and enemy's health to the presenter
+        defendPresenter.prepareDefendSuccessView( playerHealth, enemyHealth);
     }
 }

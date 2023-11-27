@@ -8,32 +8,28 @@ import view.in_battle.BattleResultView;
 
 public class DefendButtonPresenter implements DefendButtonOutputBoundary {
     private final BattleResultViewModel battleResultViewModel;
-    private final TurnSelectViewModel turnSelectViewModel;
     private final ViewManagerModel viewManagerModel;
-    public DefendButtonPresenter(BattleResultViewModel battleResultViewModel, TurnSelectViewModel turnSelectViewModel, ViewManagerModel viewManagerModel){
-        this.turnSelectViewModel = turnSelectViewModel;
+    public DefendButtonPresenter(BattleResultViewModel battleResultViewModel, ViewManagerModel viewManagerModel){
         this.battleResultViewModel = battleResultViewModel;
         this.viewManagerModel = viewManagerModel;
     }
     @Override
-    public void prepareDefendSuccessView() {
+    public void prepareDefendSuccessView(int playerHealth, int enemyHealth) {
         BattleResultState battleResultState = battleResultViewModel.getState();
-        TurnSelectState turnSelectState = turnSelectViewModel.getState();
+
+        if (playerHealth == 0){
+            battleResultState.setPlayerHasNoHealth(true);
+        }
+        if (enemyHealth == 0){
+            battleResultState.setEnemyHasNoHealth(true);
+        }
+
         this.battleResultViewModel.setState(battleResultState);
-        this.turnSelectViewModel.setState(turnSelectState);
 
         battleResultViewModel.firePropertyChanged();
-        turnSelectViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
+        viewManagerModel.setActiveView(battleResultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 
-    }
-
-    @Override
-    public void prepareDefendFailView() {
-        TurnSelectState turnSelectState = turnSelectViewModel.getState();
-//        turnSelectState.get;
-        turnSelectViewModel.firePropertyChanged();
     }
 }
