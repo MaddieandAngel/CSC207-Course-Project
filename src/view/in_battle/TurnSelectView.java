@@ -1,5 +1,7 @@
 package view.in_battle;
 
+import entity.Enemy;
+import interface_adapter.APIAccessInterface;
 import interface_adapter.turn_select.AttackButtonController;
 import interface_adapter.turn_select.DrawButtonController;
 import interface_adapter.turn_select.ItemsButtonController;
@@ -29,6 +31,10 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final DefendButtonController defendButtonController;
     private final FleeButtonController fleeButtonController;
 
+    private final APIAccessInterface api;
+
+    private Enemy enemy;
+
     private final JButton attack;
     private final JButton draw;
     private final JButton items;
@@ -37,13 +43,15 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
-                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel){
+                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, APIAccessInterface api, Enemy enemy){
         this.attackButtonController = atk_control;
         this.drawButtonController = draw_control;
         this.itemsButtonController = item_control;
         this.defendButtonController = defend_control;
         this.fleeButtonController = flee_control;
         this.turnSelectViewModel = turnSelectViewModel;
+        this.api = api;
+        this.enemy = enemy;
         turnSelectViewModel.addPropertyChangeListener(this);
 
         JPanel textbox = new JPanel();
@@ -84,7 +92,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_draw) {
                         if (e_draw.getSource().equals(draw)) {
-                            // TODO: Implement this once the DrawButtonController is written
+                            drawButtonController.execute(api, enemy);
                         }
                     }
                 }
