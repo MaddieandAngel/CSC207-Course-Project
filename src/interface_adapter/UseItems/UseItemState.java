@@ -1,9 +1,10 @@
 package interface_adapter.UseItems;
 
+import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 
 public class UseItemState {
-    private Player player;
+    private ActivePlayer player;
     private Bag bag;
 
     public UseItemState(UseItemState useItemState){
@@ -12,13 +13,13 @@ public class UseItemState {
     }
     public UseItemState(){}
 
-    public Player getPlayer() {
+    public ActivePlayer getPlayer() {
         return player;
     }
     public Bag getBag(){
         return bag;
     }
-    public void setPlayer(Player player){
+    public void setPlayer(ActivePlayer player){
         this.player = player;
     }
     public void setBag(Bag bag){

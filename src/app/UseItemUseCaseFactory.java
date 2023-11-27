@@ -2,6 +2,7 @@ package app;
 
 import data_access.DropItemDataAccessObject;
 import data_access.UseItemDataAccessObject;
+import entity.ActivePlayer;
 import interface_adapter.DropItems.DropItemsController;
 import interface_adapter.DropItems.DropItemsPresenter;
 import interface_adapter.DropItems.DropItemsViewModel;
@@ -19,7 +20,7 @@ import view.PackageView;
 
 public class UseItemUseCaseFactory {
     private UseItemUseCaseFactory(){}
-    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, Player player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject){
+    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, ActivePlayer player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject){
         UseItemsController useItemsController = createUseItemsUseCase(viewManagerModel, useItemsViewModel, useItemDataAccessObject);
         DropItemsController dropItemsController = createDropItemsUseCase(viewManagerModel, dropItemsViewModel, dropItemDataAccessObject);
         return new PackageView(useItemsViewModel, useItemsController, dropItemsController, player, dropItemsViewModel);

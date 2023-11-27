@@ -1,5 +1,7 @@
 package entity.BagAndItems;
 
+import entity.ActivePlayer;
+
 import java.util.ArrayList;
 
 public class Package implements Bag {
@@ -47,7 +49,7 @@ public class Package implements Bag {
         MaxItems = MaxItems + 2;
     }
     @Override
-    public boolean useItem(int ItemType, Player player){
+    public boolean useItem(int ItemType, ActivePlayer player){
         if (ItemType == 10){
             if (heal10.isEmpty()){
                 return false;

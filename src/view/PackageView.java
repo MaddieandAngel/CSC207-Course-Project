@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import entity.ActivePlayer;
 import interface_adapter.DropItems.DropItemsController;
 import interface_adapter.UseItems.UseItemsController;
 import interface_adapter.UseItems.UseItemsViewModel;
@@ -30,9 +31,9 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
 
     private final UseItemsController useItemsController;
     private final DropItemsController dropItemsController;
-    private final Player player;
+    private final ActivePlayer player;
 
-    public PackageView(UseItemsViewModel useItemsViewModel, UseItemsController useItemsController_, DropItemsController dropItemsController_, Player player, DropItemsViewModel dropItemsViewModel) {
+    public PackageView(UseItemsViewModel useItemsViewModel, UseItemsController useItemsController_, DropItemsController dropItemsController_, ActivePlayer player, DropItemsViewModel dropItemsViewModel) {
 
         this.useItemsController = useItemsController_;
         this.dropItemsController = dropItemsController_;

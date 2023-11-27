@@ -1,5 +1,7 @@
 package entity.BagAndItems;
 
+import entity.ActivePlayer;
+
 public class revivePotion implements Item{
     private final String potionName;
     public revivePotion(){
@@ -7,7 +9,7 @@ public class revivePotion implements Item{
     }
 
     @Override
-    public void heal(Player player) {
+    public void heal(ActivePlayer player) {
         player.setHealth(player.getMaxHealth());
     }
     @Override

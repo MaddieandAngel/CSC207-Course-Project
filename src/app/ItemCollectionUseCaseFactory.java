@@ -1,5 +1,6 @@
 package app;
 
+import entity.ActivePlayer;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.DropToPick.DropToPickPresenter;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
@@ -18,7 +19,7 @@ import view.PickItemView;
 
 public class ItemCollectionUseCaseFactory {
     private ItemCollectionUseCaseFactory(){}
-    public static PickItemView create(ViewManagerModel viewManagerModel, Player player, PickUpItemViewModel pickUpItemViewModel, PickUpItemDataAccessInterface pickUpItemDataAccessObject,  DropToPickPackageViewModel dropToPickPackageViewModel){
+    public static PickItemView create(ViewManagerModel viewManagerModel, ActivePlayer player, PickUpItemViewModel pickUpItemViewModel, PickUpItemDataAccessInterface pickUpItemDataAccessObject, DropToPickPackageViewModel dropToPickPackageViewModel){
         PickUpItemController pickUpItemController = createPickUpItemsUseCase(viewManagerModel, pickUpItemViewModel, pickUpItemDataAccessObject);
         DropToPickController dropToPickController = createDropToPickUseCase(viewManagerModel, dropToPickPackageViewModel, pickUpItemViewModel);
         return new PickItemView(pickUpItemViewModel, pickUpItemController, dropToPickController, player);

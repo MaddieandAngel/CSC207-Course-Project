@@ -1,9 +1,10 @@
 package interface_adapter.DropToPickPackage;
 
+import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 
 public class DropToPickPackageState {
-    private Player player;
+    private ActivePlayer player;
     private Bag bag;
 
     public DropToPickPackageState(DropToPickPackageState dropToPickPackageState){
@@ -12,13 +13,13 @@ public class DropToPickPackageState {
     }
     public DropToPickPackageState(){}
 
-    public Player getPlayer() {
+    public ActivePlayer getPlayer() {
         return player;
     }
     public Bag getBag(){
         return bag;
     }
-    public void setPlayer(Player player){
+    public void setPlayer(ActivePlayer player){
         this.player = player;
     }
     public void setBag(Bag bag){
