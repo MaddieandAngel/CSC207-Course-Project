@@ -29,10 +29,10 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
 
     private JLabel playerStats;
 
-    public ExploreView(MovementButtonController move_control, SearchButtonController search_control,
+    public ExploreView(MovementButtonController moveControl, SearchButtonController searchControl,
                        ExploreViewModel exploreViewModel){
-        this.movementButtonController = move_control;
-        this.searchButtonController = search_control;
+        this.movementButtonController = moveControl;
+        this.searchButtonController = searchControl;
         this.exploreViewModel = exploreViewModel;
         exploreViewModel.addPropertyChangeListener(this);
 

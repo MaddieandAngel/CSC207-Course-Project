@@ -60,7 +60,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         return new EnemyBehaviourOutputData("attack", cardValue, cardSuit);
     }
 
-    public void enemyDraw() throws IOException {
+    private void enemyDraw() throws IOException {
         // This one is public because it's called when an enemy is generated
         boolean successfulDraw = false;
         int attempts = 0;
@@ -86,8 +86,17 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             }
             attempts++;
         }
-        // Removes the new card from the temporary pile, so that it can be added to the enemy's actual hand
-        apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
+        // Adds the new card to the enemy's actual hand
         apiAccess.AddToPile(deck.getDeckID(), "enemyHand", newCard);
+        //apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
+        // ^ The above code has been commented out since I don't think it's necessary anymore? The possibleEnemyHandAddition pile
+        // only ever has one card in it, which was just moved into a new pile, so it should be empty
+    }
+
+    public void enemyDrawInitialHand() throws IOException {
+        //Draws five cards
+        for (int i = 0; i < 5; i++) {
+            enemyDraw();
+        }
     }
 }

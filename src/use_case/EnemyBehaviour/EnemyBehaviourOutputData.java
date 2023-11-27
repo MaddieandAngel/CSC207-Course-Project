@@ -5,27 +5,33 @@ public class EnemyBehaviourOutputData {
     private final String action;
     private final int cardValue;
     private final char cardSuit;
-    private final char suitWeakness;
+    private final char suitEnemyIsWeakTo;
+    private final char suitEnemyBeats;
 
     public EnemyBehaviourOutputData(String action, int cardValue, char cardSuit){
         this.action = action;
         this.cardValue = cardValue;
         this.cardSuit = cardSuit;
 
-        if (cardValue == 'S'){ //Spades beats Hearts
-            suitWeakness = 'H';
+        if (cardSuit == 'S'){ //Spades beats Hearts and is beaten by Diamonds
+            suitEnemyBeats = 'H';
+            suitEnemyIsWeakTo = 'D';
         }
-        else if (cardValue == 'H') { //Hearts beats Clubs
-            suitWeakness = 'C';
+        else if (cardSuit == 'H') { //Hearts beats Clubs and is beaten by Spades
+            suitEnemyBeats = 'C';
+            suitEnemyIsWeakTo = 'S';
         }
-        else if (cardValue == 'C') { //Clubs beats Diamonds
-            suitWeakness = 'D';
+        else if (cardSuit == 'C') { //Clubs beats Diamonds and is beaten by Hearts
+            suitEnemyBeats = 'D';
+            suitEnemyIsWeakTo = 'H';
         }
-        else if (cardValue == 'D') { //Diamonds beats Spades
-            suitWeakness = 'S';
+        else if (cardSuit == 'D') { //Diamonds beats Spades and is beaten by Clubs
+            suitEnemyBeats = 'S';
+            suitEnemyIsWeakTo = 'C';
         }
-        else { //Joker's weakness is ' '
-            suitWeakness = ' ';
+        else { //Joker is always neutral
+            suitEnemyBeats = '\0';
+            suitEnemyIsWeakTo = '\0';
         }
     }
 
@@ -35,8 +41,11 @@ public class EnemyBehaviourOutputData {
     public char getCardSuit() {
         return cardSuit;
     }
-    public char getSuitWeakness() {
-        return suitWeakness;
+    public char getSuitEnemyIsWeakTo() {
+        return suitEnemyIsWeakTo;
+    }
+    public char getSuitEnemyBeats() {
+        return suitEnemyBeats;
     }
     public int getCardValue() {
         return cardValue;

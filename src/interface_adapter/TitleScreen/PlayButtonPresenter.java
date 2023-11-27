@@ -21,7 +21,7 @@ public class PlayButtonPresenter implements PlayButtonOutputBoundary {
     @Override
     public void prepareSuccessView(MovementOutputData movementOutputData){
         ExploreState exploreState = exploreViewModel.getState();
-        ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData);
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
 
         exploreViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(exploreViewModel.getViewName());
