@@ -43,10 +43,16 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareTurnSelectView(EnemyOutputData enemyOutputData) {
-        //TODO: More here
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
 
-        //TODO: Update textbox text for TurnSelectView with the enemy's name and level (ie "Level [EnemyLevel] [EnemyName] appeared!")
+        //Updates player output information, if it has changed:
+        //TODO
+
+        //Updates enemy output information:
+        turnSelectState.setEnemyName(enemyOutputData.getEnemyName());
+        turnSelectState.setEnemyLevel(enemyOutputData.getEnemyLevel());
+
+        turnSelectViewModel.setState(turnSelectState);
 
         viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

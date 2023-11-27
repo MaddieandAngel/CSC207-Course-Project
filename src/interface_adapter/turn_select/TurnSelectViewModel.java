@@ -13,8 +13,6 @@ public class TurnSelectViewModel extends ViewModel {
     public static final String DEFEND_BUTTON_LABEL = "Defend";
     public static final String FLEE_BUTTON_LABEL = "Flee";
 
-    public String textbox_text = "";
-
     private TurnSelectState state = new TurnSelectState();
 
     public TurnSelectViewModel(String viewName) {
