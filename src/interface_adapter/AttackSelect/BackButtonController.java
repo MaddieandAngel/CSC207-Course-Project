@@ -1,6 +1,6 @@
 package interface_adapter.AttackSelect;
 
-import entity.ActivePlayer;
+import entity.Player;
 import use_case.AttackButton.BackButton.BackButtonInputBoundary;
 import use_case.AttackButton.BackButton.BackButtonInputData;
 
@@ -12,7 +12,7 @@ public class BackButtonController {
         this.backButtonInteractor = backButtonInteractor;
     }
 
-    public void execute(ActivePlayer player) {
+    public void execute(Player player) {
         BackButtonInputData backButtonInputData = new BackButtonInputData(player);
         backButtonInteractor.execute(backButtonInputData);
     }

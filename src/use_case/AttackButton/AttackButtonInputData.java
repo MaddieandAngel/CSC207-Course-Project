@@ -1,15 +1,15 @@
 package use_case.AttackButton;
 
-import entity.ActivePlayer;
+import entity.Player;
 
 public class AttackButtonInputData {
 
-    private ActivePlayer player;
+    private Player player;
 
-    public AttackButtonInputData(ActivePlayer player) {
+    public AttackButtonInputData(Player player) {
         this.player = player;
     }
 
-    public ActivePlayer getActivePlayer() {return this.player;}
+    public Player getCurrentPlayer() {return this.player;}
 
 }

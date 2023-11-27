@@ -1,12 +1,12 @@
 package use_case.AttackButton.BackButton;
 
-import entity.ActivePlayer;
+import entity.Player;
 
 public class BackButtonInputData {
 
-    ActivePlayer player;
+    Player player;
 
-    public BackButtonInputData(ActivePlayer player) {
+    public BackButtonInputData(Player player) {
         this.player = player;
     }
 }

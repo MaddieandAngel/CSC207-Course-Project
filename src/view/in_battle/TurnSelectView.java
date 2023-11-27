@@ -1,6 +1,6 @@
 package view.in_battle;
 
-import entity.ActivePlayer;
+import entity.Player;
 import interface_adapter.turn_select.AttackButtonController;
 import interface_adapter.turn_select.DrawButtonController;
 import interface_adapter.turn_select.ItemsButtonController;
@@ -30,7 +30,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final DefendButtonController defendButtonController;
     private final FleeButtonController fleeButtonController;
 
-    private final ActivePlayer player;
+    private final Player player;
 
     private final JButton attack;
     private final JButton draw;
@@ -40,7 +40,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
-                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, ActivePlayer player){
+                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, Player player){
         this.attackButtonController = atk_control;
         this.drawButtonController = draw_control;
         this.itemsButtonController = item_control;

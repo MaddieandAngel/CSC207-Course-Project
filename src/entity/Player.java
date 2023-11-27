@@ -1,5 +1,7 @@
 package entity;
 
+import entity.BagAndItems.Bag;
+
 public interface Player {
 
     int getLevel();
@@ -11,5 +13,7 @@ public interface Player {
     void setExperiencePoints(int exp);
     int getMaxCardHold();
     void setMaxCardHold(int cardHold);
+    String[] getHand();
+    Bag getInventory();
 
 }
