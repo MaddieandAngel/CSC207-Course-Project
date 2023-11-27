@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.DeckInterface;
 import okhttp3.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,7 +16,7 @@ import java.util.Random;
 public class APIAccess implements APIAccessInterface {
 
     @Override
-    public Deck NewDeck() throws IOException, RuntimeException{
+    public DeckInterface NewDeck() throws IOException, RuntimeException{
         // Make a call to the API and create a new deck
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -62,7 +63,7 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void Shuffle(Deck deck) throws IOException, RuntimeException{
+    public void Shuffle(DeckInterface deck) throws IOException, RuntimeException{
         // Make a call to the API and shuffle the deck, given by the deckID parameter
         String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/shuffle/?remaining=true";
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -102,7 +103,7 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void DrawCard(Deck deck, String pileName) throws IOException, RuntimeException{
+    public void DrawCard(DeckInterface deck, String pileName) throws IOException, RuntimeException{
         // Will draw a card from the deck and add it to the intended pile, using the AddToPile method.
         // If there are zero cards left in the deck, the cards from the discard pile will be returned to the deck and will be shuffled
 
@@ -219,7 +220,7 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public void MovePileToDeck(Deck deck, String pileName) throws IOException, RuntimeException{
+    public void MovePileToDeck(DeckInterface deck, String pileName) throws IOException, RuntimeException{
         // Will move the cards from the specified pile return them to the main deck then shuffle the main deck
         // Will assume the pile name provided is an already created pile in the deck
 
@@ -265,7 +266,7 @@ public class APIAccess implements APIAccessInterface {
     }
 
     @Override
-    public String[] GetCardsInPile(Deck deck, String pileName) throws IOException, RuntimeException{
+    public String[] GetCardsInPile(DeckInterface deck, String pileName) throws IOException, RuntimeException{
         // Will return a list of the card codes for all the cards in the requested pile. If the pile is empty, will return null
 
         // Make a call to the API to get a list of the cards in the requested pile

@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.Deck;
+import entity.DeckInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class APIAccessTest {
 
     private APIAccess api;
 
-    private Deck testDeck;
+    private DeckInterface testDeck;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -45,7 +46,7 @@ class APIAccessTest {
     @Test
     void shuffleFails() {
         // will have an incorrect deckID
-        Deck failDeck = new Deck(true, "4uf9823r08rb???", 54);
+        DeckInterface failDeck = new Deck(true, "4uf9823r08rb???", 54);
         try {
             api.Shuffle(failDeck);
             // Expected to fail. "?" shouldn't be in the deckID
