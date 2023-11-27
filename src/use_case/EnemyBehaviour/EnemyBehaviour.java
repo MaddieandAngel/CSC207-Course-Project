@@ -1,4 +1,4 @@
-package use_case;
+package use_case.EnemyBehaviour;
 
 import entity.Deck;
 import entity.Enemy;
@@ -7,11 +7,8 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 
-public class EnemyBehaviour {
+public class EnemyBehaviour implements EnemyBehaviourInterface{
 
-    private String action;
-    private int cardValue = -1;
-    private char cardSuit = '\0';
     private final APIAccessInterface apiAccess;
     private final Random randomizer;
     private final Deck deck;
@@ -22,10 +19,9 @@ public class EnemyBehaviour {
         this.deck = deck;
         this.enemy = enemy;
         randomizer = new Random();
-        performRandomAction();
     }
 
-    public void performRandomAction() throws IOException {
+    public EnemyBehaviourOutputData performRandomAction() throws IOException {
         // Random number generator. 0 = attack, 1 = defend, 2 = draw. That way we can just lower the origin or bound
         // if the enemy cannot attack or draw
 
@@ -41,26 +37,27 @@ public class EnemyBehaviour {
         }
 
         if (actionID == 0){
-            action = "attack";
-            enemyAttack();
+            return enemyAttack();
         }
         else if (actionID == 1){
-            action = "defend";
+            return new EnemyBehaviourOutputData("defend", -1, ' ');
         }
         else { // actionID == 2
-            action = "draw";
             enemyDraw();
+            return new EnemyBehaviourOutputData("draw", -1, ' ');
         }
     }
 
-    private void enemyAttack() throws IOException {
+    private EnemyBehaviourOutputData enemyAttack() throws IOException {
         //Sets cardValue and cardSuit
         String[] enemyHand = apiAccess.GetCardsInPile(deck, "enemyHand");
         // This method should only be called when enemyHand has at least one card in it
         int cardUsed = randomizer.nextInt(0, enemyHand.length);
-        cardValue = apiAccess.GetCardValue(enemyHand[cardUsed]);
-        cardSuit = apiAccess.GetCardSuit(enemyHand[cardUsed]);
+        int cardValue = apiAccess.GetCardValue(enemyHand[cardUsed]);
+        char cardSuit = apiAccess.GetCardSuit(enemyHand[cardUsed]);
         apiAccess.CardPlayed(deck.getDeckID(), "enemyHand", enemyHand[cardUsed]);
+
+        return new EnemyBehaviourOutputData("attack", cardValue, cardSuit);
     }
 
     public void enemyDraw() throws IOException {
@@ -92,15 +89,5 @@ public class EnemyBehaviour {
         // Removes the new card from the temporary pile, so that it can be added to the enemy's actual hand
         apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
         apiAccess.AddToPile(deck.getDeckID(), "enemyHand", newCard);
-    }
-
-    public String getAction() {
-        return action;
-    }
-    public int getCardValue() {
-        return cardValue;
-    }
-    public char getCardSuit() {
-        return cardSuit;
     }
 }

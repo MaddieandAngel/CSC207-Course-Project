@@ -5,7 +5,7 @@ import entity.EnemyFactory;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.explore.ExploreDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
-import use_case.EnemyBehaviour;
+import use_case.EnemyBehaviour.EnemyBehaviour;
 
 import java.io.IOException;
 import java.util.Random;
@@ -58,6 +58,7 @@ public class MovementInteractor implements MovementInputBoundary {
             try {
                 EnemyBehaviour enemyHandGenerator = new EnemyBehaviour(apiAccessObject, inBattleDataAccessObject.getDeck(),
                         inBattleDataAccessObject.getEnemy());
+                //Note: creates an instance of an EnemyBehaviour instead of its interface. Might be a problem?
 
                 for (int i = 0; i < 5; i++) {
                     enemyHandGenerator.enemyDraw();
