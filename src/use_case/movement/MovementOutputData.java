@@ -1,7 +1,6 @@
 package use_case.movement;
 
 import entity.Character;
-import entity.Item;
 
 public class MovementOutputData {
 
