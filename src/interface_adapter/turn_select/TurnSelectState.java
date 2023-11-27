@@ -8,6 +8,7 @@ public class TurnSelectState {
     // ^ Also not sure if these values should be in a different state
     private String playerHand = ""; //May need to change this depending on how the API works
     private String playerInventory = ""; //For other items, if we implement them
+    private String drawError = null; // Becomes the pop-up message for when a player tries to draw a card when their hand is full
 
     /*
     I know a value for the player's current health should be stored in here, since we'll be displaying
@@ -34,6 +35,8 @@ public class TurnSelectState {
     public void setPlayerLevel(int level){
         this.playerLevel = level;
     }
+
+    public void setDrawError(String error) {this.drawError = error;}
 
     //We can add getter and setter methods for the hand and inventory later, if it turns out we need them.
 }
