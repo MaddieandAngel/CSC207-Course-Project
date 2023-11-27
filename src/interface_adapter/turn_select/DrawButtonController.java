@@ -13,8 +13,8 @@ public class DrawButtonController {
         this.drawButtonInteractor = drawButtonInteractor;
     }
 
-    public void execute(APIAccessInterface api, Enemy enemy) {
-        DrawButtonInputData drawButtonInputData = new DrawButtonInputData();
+    public void execute(APIAccessInterface api, Enemy enemy, DeckInterface deck) {
+        DrawButtonInputData drawButtonInputData = new DrawButtonInputData(api, enemy, deck);
         drawButtonInteractor.execute(drawButtonInputData);
     }
 }
