@@ -14,7 +14,7 @@ public class ExplorePresenter implements MovementOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
     private final StairsViewModel stairsViewModel;
-    private final PickUpItemViewModel itemCollectViewModel; //TODO: Make sure this is actually the right view model
+    private final PickUpItemViewModel itemCollectViewModel;
 
     private ViewManagerModel viewManagerModel;
 

@@ -3,13 +3,16 @@ package app;
 import data_access.APIAccess;
 import data_access.ExploreDataAccessObject;
 import data_access.InBattleDataAccessObject;
+import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
+import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import view.ExploreView;
+import view.TitleScreenView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -44,20 +47,24 @@ public class Main {
         TurnSelectViewModel turnSelectViewModel = new TurnSelectViewModel();
         StairsViewModel stairsViewModel = new StairsViewModel();
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
+        TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
 
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject();
+        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory());
 
         //Create the Views using their UseCaseFactories
+        TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
+                exploreViewModel, inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
+        views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
                 pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);
         views.add(exploreView, exploreView.viewName);
 
 
-        viewManagerModel.setActiveView(exploreView.viewName); //TODO: Change this to title screen view later
+        viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
