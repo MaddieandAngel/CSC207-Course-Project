@@ -17,7 +17,6 @@ public class TitleScreenView extends JPanel implements ActionListener, PropertyC
     private final PlayButtonController playButtonController;
     private final JButton play;
     private final JButton instructions;
-//    private final JButton quit;
 
     public TitleScreenView(TitleScreenViewModel titleScreenViewModel, PlayButtonController playButtonController){
         this.titleScreenViewModel = titleScreenViewModel;
@@ -33,8 +32,6 @@ public class TitleScreenView extends JPanel implements ActionListener, PropertyC
         buttons.add(play);
         instructions = new JButton(TitleScreenViewModel.INSTRUCTIONS_BUTTON_LABEL);
         buttons.add(instructions);
-//        quit = new JButton(TitleScreenViewModel.PLAY_BUTTON_LABEL);
-//        buttons.add(play);
 
         play.addActionListener(
                 new ActionListener() {
@@ -54,7 +51,7 @@ public class TitleScreenView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(instructions)){
-                            JOptionPane.showMessageDialog(null, "Put Instructions Here!!!");
+                            JOptionPane.showMessageDialog(null, "Put Instructions Here!");
                         }
                     }
                 }
