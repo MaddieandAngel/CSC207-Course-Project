@@ -1,10 +1,11 @@
 package interface_adapter.stairs;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreButtonVisibility;
 import interface_adapter.explore.ExploreState;
 import interface_adapter.explore.ExploreViewModel;
+import use_case.movement.MovementOutputData;
 import use_case.stairs.NextFloorOutputBoundary;
-import use_case.stairs.NextFloorOutputData;
 
 public class NextFloorPresenter implements NextFloorOutputBoundary {
     private final ExploreViewModel exploreViewModel;
@@ -16,16 +17,12 @@ public class NextFloorPresenter implements NextFloorOutputBoundary {
         this.exploreViewModel = exploreViewModel;
     }
 
-    public void prepareStartingRoomView(NextFloorOutputData nextFloorOutputData){
+    public void prepareStartingRoomView(MovementOutputData movementOutputData){
         ExploreState exploreState = exploreViewModel.getState();
 
         exploreState.setFloorLevel(exploreState.getFloorLevel() + 1);
 
-        // TODO: change NextFloorOutputData to MovementOutputData so ExploreButtonVisibility can be called
-        exploreState.setNorthVisible(nextFloorOutputData.getDirections().contains("N"));
-        exploreState.setEastVisible(nextFloorOutputData.getDirections().contains("E"));
-        exploreState.setSouthVisible(nextFloorOutputData.getDirections().contains("S"));
-        exploreState.setWestVisible(nextFloorOutputData.getDirections().contains("W"));
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
 
         exploreViewModel.setState(exploreState);
         exploreViewModel.firePropertyChanged();

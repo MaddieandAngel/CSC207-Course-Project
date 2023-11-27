@@ -67,10 +67,7 @@ public class MovementInteractor implements MovementInputBoundary {
                 throw new RuntimeException(e);
             }
 
-            movementOutputData.setEnemyName(enemy.getName());
-            movementOutputData.setEnemyLevel(enemy.getLevel());
-
-            movementPresenter.prepareTurnSelectView(movementOutputData);
+            movementPresenter.prepareTurnSelectView(new EnemyOutputData(enemy.getName(), enemy.getLevel()));
         }
         else if (exploreDataAccessObject.checkForItem()){
             //TODO: Generate item for output data

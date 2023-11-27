@@ -1,10 +1,11 @@
 package interface_adapter.stairs;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreButtonVisibility;
 import interface_adapter.explore.ExploreState;
 import interface_adapter.explore.ExploreViewModel;
+import use_case.movement.MovementOutputData;
 import use_case.stairs.StayOnFloorOutputBoundary;
-import use_case.stairs.StayOnFloorOutputData;
 
 public class StayOnFloorPresenter implements StayOnFloorOutputBoundary {
 
@@ -17,14 +18,10 @@ public class StayOnFloorPresenter implements StayOnFloorOutputBoundary {
     }
 
     @Override
-    public void prepareEmptyRoomView(StayOnFloorOutputData stayOnFloorOutputData) {
+    public void prepareEmptyRoomView(MovementOutputData movementOutputData) {
         ExploreState exploreState = exploreViewModel.getState();
 
-        // TODO: change StayOnFloorOutputData to MovementOutputData so ExploreButtonVisibility can be called
-        exploreState.setNorthVisible(stayOnFloorOutputData.getDirections().contains("N"));
-        exploreState.setEastVisible(stayOnFloorOutputData.getDirections().contains("E"));
-        exploreState.setSouthVisible(stayOnFloorOutputData.getDirections().contains("S"));
-        exploreState.setWestVisible(stayOnFloorOutputData.getDirections().contains("W"));
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
 
         exploreViewModel.setState(exploreState);
         exploreViewModel.firePropertyChanged();

@@ -4,6 +4,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import interface_adapter.stairs.StairsViewModel;
+import use_case.movement.EnemyOutputData;
 import use_case.movement.MovementOutputBoundary;
 import use_case.movement.MovementOutputData;
 
@@ -41,7 +42,7 @@ public class ExplorePresenter implements MovementOutputBoundary {
     }
 
     @Override
-    public void prepareTurnSelectView(MovementOutputData movementOutputData) {
+    public void prepareTurnSelectView(EnemyOutputData enemyOutputData) {
         //TODO: More here
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
 
