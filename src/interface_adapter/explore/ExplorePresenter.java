@@ -1,5 +1,6 @@
 package interface_adapter.explore;
 
+import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
@@ -13,13 +14,13 @@ public class ExplorePresenter implements MovementOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
     private final StairsViewModel stairsViewModel;
-    private final ItemCollectViewModel itemCollectViewModel;
+    private final PickUpItemViewModel itemCollectViewModel; //TODO: Make sure this is actually the right view model
 
     private ViewManagerModel viewManagerModel;
 
     public ExplorePresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel,
                             TurnSelectViewModel turnSelectViewModel, StairsViewModel stairsViewModel,
-                            ItemCollectViewModel itemCollectViewModel){
+                            PickUpItemViewModel itemCollectViewModel){
         this.viewManagerModel = viewManagerModel;
         this.exploreViewModel = exploreViewModel;
         this.turnSelectViewModel = turnSelectViewModel;

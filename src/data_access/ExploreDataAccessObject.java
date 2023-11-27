@@ -7,13 +7,11 @@ import interface_adapter.stairs.StairsDataAccessInterface;
 
 public class ExploreDataAccessObject implements ExploreDataAccessInterface, StairsDataAccessInterface {
 
-    private int floorLevel;
+    private int floorLevel = 0;
     private Floor currentFloor;
-    private FloorFactory floorFactory;
+    private final FloorFactory floorFactory;
 
-    public ExploreDataAccessObject(int floorLevel, Floor floor, FloorFactory floorFactory){
-        this.floorLevel = floorLevel;
-        currentFloor = floor;
+    public ExploreDataAccessObject(FloorFactory floorFactory){
         this.floorFactory = floorFactory;
     }
 

@@ -15,7 +15,7 @@ public class TurnSelectViewModel extends ViewModel {
 
     private TurnSelectState state = new TurnSelectState();
 
-    public TurnSelectViewModel(String viewName) {
+    public TurnSelectViewModel() {
         super("turn select");
     }
 

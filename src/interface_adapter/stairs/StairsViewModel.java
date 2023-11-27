@@ -11,7 +11,7 @@ public class StairsViewModel extends ViewModel {
     public final String STAY_FLOOR_LABEL = "No";
     public String textbox_text = "You've found the stairs! Continue to the next floor?";
 
-    public StairsViewModel(String viewName){
+    public StairsViewModel(){
         super("found_stairs");
     }
 
