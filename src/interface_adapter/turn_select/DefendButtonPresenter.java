@@ -18,10 +18,12 @@ public class DefendButtonPresenter implements DefendButtonOutputBoundary {
         BattleResultState battleResultState = battleResultViewModel.getState();
 
         if (playerHealth == 0){
-            battleResultState.setPlayerHasNoHealth(true);
+            battleResultState.setWinner("player");
+            battleResultState.setContinueBattle(false);
         }
-        if (enemyHealth == 0){
-            battleResultState.setEnemyHasNoHealth(true);
+        if(enemyHealth == 0){
+            battleResultState.setWinner("enemy");
+            battleResultState.setContinueBattle(false);
         }
 
         this.battleResultViewModel.setState(battleResultState);

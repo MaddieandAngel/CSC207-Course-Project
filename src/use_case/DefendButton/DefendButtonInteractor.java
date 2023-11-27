@@ -20,6 +20,6 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
         // activePlayer.setHealth();
 
         //Send player's health and enemy's health to the presenter
-        defendPresenter.prepareDefendSuccessView( playerHealth, enemyHealth);
+        defendPresenter.prepareDefendSuccessView(playerHealth, enemyHealth);
     }
 }
