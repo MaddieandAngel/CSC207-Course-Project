@@ -1,12 +1,29 @@
 package interface_adapter.BattleResult;
 
 public class BattleResultState {
-    private String battleResult = "";
-    private String battleResultError = null;
-    public BattleResultState(BattleResultState copy){
-        battleResult = copy.battleResult;
-        battleResultError = copy.battleResultError;
+    //TODO: I was unsure what to put here. Open to modification.
+    private boolean playerHasNoHealth;
+    private boolean enemyHasNoHealth;
+    public BattleResultState(BattleResultState copy, boolean playerHasNoHealth, boolean enemyHasNoHealth){
+        this.playerHasNoHealth = playerHasNoHealth;
+
+        this.enemyHasNoHealth = enemyHasNoHealth;
     }
     public BattleResultState(){}
 
+    public boolean getPlayerHasNoHealth() {
+        return playerHasNoHealth;
+    }
+
+    public boolean getEnemyHasNoHealth() {
+        return enemyHasNoHealth;
+    }
+
+    public void setPlayerHasNoHealth(boolean playerHasNoHealth){
+        this.playerHasNoHealth = playerHasNoHealth;
+    }
+
+    public void setEnemyHasNoHealth(boolean enemyHasNoHealth){
+        this.enemyHasNoHealth = enemyHasNoHealth;
+    }
 }
