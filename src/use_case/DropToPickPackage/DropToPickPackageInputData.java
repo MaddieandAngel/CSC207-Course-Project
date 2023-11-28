@@ -1,11 +1,12 @@
 package use_case.DropToPickPackage;
 
+import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 
 public class DropToPickPackageInputData {
-    final Player player;
+    final ActivePlayer player;
     final int potionType;
-    public DropToPickPackageInputData(Player player, int num){
+    public DropToPickPackageInputData(ActivePlayer player, int num){
         this.player = player;
         this.potionType = num;
     }

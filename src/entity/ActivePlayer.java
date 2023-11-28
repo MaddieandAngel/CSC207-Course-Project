@@ -1,15 +1,19 @@
 package entity;
 
+import entity.BagAndItems.Bag;
+import entity.BagAndItems.Package;
+
 import java.util.ArrayList;
 
 public class ActivePlayer implements Player{
 
     private int currentHealth;
     private int maxHealth;
-    //private Card[] hand;
     private int level;
     private int experiencePoints;
     private ArrayList<Item> inventory;
+    private int maxCardHold; //Note: unneeded?
+    private Bag bag;
 
     ActivePlayer(){
         //Creates new player at level 1
@@ -17,6 +21,8 @@ public class ActivePlayer implements Player{
         maxHealth = 15;
         currentHealth = 15;
         experiencePoints = 0;
+        maxCardHold = 5;
+        bag = new Package();
     }
     public int getLevel(){
         return level;
@@ -52,7 +58,17 @@ public class ActivePlayer implements Player{
     }
 
     public int getMaxCardHold(){
-        // TODO: Delete later
-        return 5;
+        //Note: unneeded?
+        return maxCardHold;
+    }
+  
+    public void setMaxCardHold(int cardHold){
+        //Note: unneeded?
+        maxCardHold = cardHold;
+    }
+
+    @Override
+    public Bag getBag() {
+        return bag;
     }
 }
