@@ -35,6 +35,9 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final JButton defend;
     private final JButton flee;
 
+    private JLabel textboxText;
+    private JLabel playerStats; //Holds the player's level, health, AND max health
+
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
                           FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel){
@@ -46,9 +49,20 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         this.turnSelectViewModel = turnSelectViewModel;
         turnSelectViewModel.addPropertyChangeListener(this);
 
+        //Text for the textbox at the bottom of the screen:
         JPanel textbox = new JPanel();
-        textbox.add(new JLabel(turnSelectViewModel.textbox_text));
+        textboxText = new JLabel("A level " + turnSelectViewModel.getState().getEnemyLevel() + " " +
+                turnSelectViewModel.getState().getEnemyName() + " has appeared!");
+        textbox.add(textboxText);
 
+        //Text for the player's level and health:
+        JPanel playerStatsPanel = new JPanel();
+        playerStats = new JLabel("Level: " + turnSelectViewModel.getState().getPlayerLevel() + "\nHealth: " +
+                turnSelectViewModel.getState().getPlayerHealth() + "/" +
+                turnSelectViewModel.getState().getPlayerMaxHealth());
+        playerStatsPanel.add(playerStats);
+
+        //Buttons for the player's possible actions:
         JPanel buttons = new JPanel();
         attack = new JButton(TurnSelectViewModel.ATTACK_BUTTON_LABEL);
         buttons.add(attack);
@@ -65,6 +79,12 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
+
+        textbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textbox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+
+        playerStatsPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        playerStatsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 
         attack.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -126,8 +146,6 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                 }
         );
 
-        // TODO: Add UI for the player's health and level in the top right corner
-
     }
     public void actionPerformed(ActionEvent e) {
         // Does anything even need to be added here? SignUpView just uses it for the unimplemented cancel button
@@ -135,7 +153,10 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        TurnSelectState state = (TurnSelectState) evt.getNewValue();
-        //TODO: Implement this
+        TurnSelectState state = turnSelectViewModel.getState();
+        textboxText.setText("A level " + state.getEnemyLevel() + " " + state.getEnemyName() + " has appeared!");
+        // ^ Unnecessary? Not sure
+        playerStats.setText("Level: " + state.getPlayerLevel() + "\nHealth: " + state.getPlayerHealth() + "/" +
+                state.getPlayerMaxHealth());
     }
 }

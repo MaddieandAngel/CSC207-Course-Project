@@ -1,8 +1,11 @@
 package interface_adapter.explore;
 
+import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import interface_adapter.stairs.StairsViewModel;
+import use_case.movement.EnemyOutputData;
 import use_case.movement.MovementOutputBoundary;
 import use_case.movement.MovementOutputData;
 
@@ -11,13 +14,13 @@ public class ExplorePresenter implements MovementOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
     private final StairsViewModel stairsViewModel;
-    private final ItemCollectViewModel itemCollectViewModel;
+    private final PickUpItemViewModel itemCollectViewModel;
 
     private ViewManagerModel viewManagerModel;
 
     public ExplorePresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel,
                             TurnSelectViewModel turnSelectViewModel, StairsViewModel stairsViewModel,
-                            ItemCollectViewModel itemCollectViewModel){
+                            PickUpItemViewModel itemCollectViewModel){
         this.viewManagerModel = viewManagerModel;
         this.exploreViewModel = exploreViewModel;
         this.turnSelectViewModel = turnSelectViewModel;
@@ -27,7 +30,9 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareEmptyRoomView(MovementOutputData movementOutputData) {
-        setButtonVisibility(movementOutputData);
+        ExploreState exploreState = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+        exploreViewModel.firePropertyChanged();
         //No need to change active view
     }
 
@@ -38,8 +43,17 @@ public class ExplorePresenter implements MovementOutputBoundary {
     }
 
     @Override
-    public void prepareTurnSelectView(MovementOutputData movementOutputData) {
-        //TODO: More here probably
+    public void prepareTurnSelectView(EnemyOutputData enemyOutputData) {
+        TurnSelectState turnSelectState = turnSelectViewModel.getState();
+
+        //Updates player output information, if it has changed:
+        //TODO
+
+        //Updates enemy output information:
+        turnSelectState.setEnemyName(enemyOutputData.getEnemyName());
+        turnSelectState.setEnemyLevel(enemyOutputData.getEnemyLevel());
+
+        turnSelectViewModel.setState(turnSelectState);
 
         viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
@@ -50,16 +64,4 @@ public class ExplorePresenter implements MovementOutputBoundary {
         //TODO: Everything related to moving to the item collection view
     }
 
-    private void setButtonVisibility(MovementOutputData movementOutputData){
-        //Move this to another file? Multiple presenters need this and IntelliJ is screaming at me
-        ExploreState exploreState = exploreViewModel.getState();
-
-        exploreState.setNorthVisible(movementOutputData.getDirections().contains("N"));
-        exploreState.setEastVisible(movementOutputData.getDirections().contains("E"));
-        exploreState.setSouthVisible(movementOutputData.getDirections().contains("S"));
-        exploreState.setWestVisible(movementOutputData.getDirections().contains("W"));
-
-        exploreViewModel.setState(exploreState);
-        exploreViewModel.firePropertyChanged();
-    }
 }

@@ -1,5 +1,6 @@
 package data_access;
 
+import interface_adapter.TitleScreen.CreateDeckDataAccessInterface;
 import okhttp3.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -12,7 +13,7 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 
-public class APIAccess implements APIAccessInterface {
+public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterface {
 
     @Override
     public Deck NewDeck() throws IOException, RuntimeException{

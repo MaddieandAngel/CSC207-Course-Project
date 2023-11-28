@@ -10,4 +10,5 @@ public interface ExploreDataAccessInterface {
     boolean checkForEnemy();
     boolean checkForItem();
     String getDirections();
+    int getFloorLevel();
 }

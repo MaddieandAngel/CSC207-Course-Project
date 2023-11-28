@@ -12,7 +12,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class TitleScreenView extends JPanel implements ActionListener, PropertyChangeListener{
-    private final String viewName = "title screen";
+    public String viewName = "title screen";
     private  final TitleScreenViewModel titleScreenViewModel;
     private final PlayButtonController playButtonController;
     private final JButton play;
