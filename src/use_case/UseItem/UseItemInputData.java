@@ -1,11 +1,12 @@
 package use_case.UseItem;
+import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 
 public class UseItemInputData{
 
-    final Player player;
+    final ActivePlayer player;
     final int potionType;
-    public UseItemInputData(Player player, int num){
+    public UseItemInputData(ActivePlayer player, int num){
         this.player = player;
         this.potionType = num;
     }

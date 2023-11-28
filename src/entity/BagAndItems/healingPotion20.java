@@ -1,5 +1,7 @@
 package entity.BagAndItems;
 
+import entity.ActivePlayer;
+
 public class healingPotion20 implements Item{
     private final String itemName;
     private final double percentage;
@@ -10,7 +12,7 @@ public class healingPotion20 implements Item{
     }
 
     @Override
-    public void heal(Player player) {
+    public void heal(ActivePlayer player) {
         int currentHealth = player.getCurrentHealth();
         int addHealth = (int) Math.floor(player.getMaxHealth() * percentage);
         int set_health = currentHealth + addHealth;

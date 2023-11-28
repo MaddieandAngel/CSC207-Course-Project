@@ -1,5 +1,7 @@
 package use_case.DropToPick;
 
+import entity.ActivePlayer;
+
 public class DropToPickInteractor implements DropToPickInputBoundary{
     final DropToPickOutputBoundary dropToPickPresenter;
 
@@ -7,7 +9,7 @@ public class DropToPickInteractor implements DropToPickInputBoundary{
         this.dropToPickPresenter = dropToPickPresenter;
     }
     @Override
-    public void execute(Player player){
+    public void execute(ActivePlayer player){
         dropToPickPresenter.prepareSuccessView(player);
     }
 }

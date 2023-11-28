@@ -1,5 +1,6 @@
 package app;
 
+import entity.ActivePlayer;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageController;
 import interface_adapter.DropToPickPackage.DropToPickPackagePresenter;
@@ -20,7 +21,7 @@ public class DropToPickPackageUseCaseFactory {
                                                DropToPickViewModel dropToPickViewModel,
                                                PickUpItemViewModel pickUpItemViewModel,
                                                DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject,
-                                               Player player){
+                                               ActivePlayer player){
         DropToPickPackageController dropToPickPackageController = createDropToPickPackageController(viewManagerModel,dropToPickPackageViewModel,dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject);
         return new DropToPickPackageView(dropToPickPackageController, player, dropToPickPackageViewModel);
 
