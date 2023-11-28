@@ -5,6 +5,7 @@ import data_access.ExploreDataAccessObject;
 import data_access.InBattleDataAccessObject;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.ViewManagerModel;
@@ -14,6 +15,7 @@ import interface_adapter.turn_select.TurnSelectViewModel;
 import view.ExploreView;
 import view.TitleScreenView;
 import view.ViewManager;
+import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,6 +50,7 @@ public class Main {
         StairsViewModel stairsViewModel = new StairsViewModel();
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
         TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
+        AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
 
 
         //Create the Data Access Objects
@@ -62,12 +65,16 @@ public class Main {
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
                 pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);
         views.add(exploreView, exploreView.viewName);
+        //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
+//        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
+//        views.add(turnSelectView, turnSelectView.viewName);
 
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
 
-        application.pack();
+        //application.pack();
+        application.setSize(800,500);
         application.setVisible(true);
     }
 }
