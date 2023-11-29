@@ -13,7 +13,6 @@ public interface Player {
     void setExperiencePoints(int exp);
     int getMaxCardHold();
     void setMaxCardHold(int cardHold);
-    String[] getHand();
-    Bag getInventory();
+    Bag getBag();
 
 }

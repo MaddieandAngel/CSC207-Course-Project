@@ -6,7 +6,7 @@ public class AttackButtonInteractor implements AttackButtonInputBoundary{
 
     final AttackButtonOutputBoundary attackButtonPresenter;
 
-    AttackButtonInteractor(AttackButtonOutputBoundary attackButtonPresenter) {
+    public AttackButtonInteractor(AttackButtonOutputBoundary attackButtonPresenter) {
         this.attackButtonPresenter = attackButtonPresenter;
     }
 

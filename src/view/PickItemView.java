@@ -1,5 +1,6 @@
 package view;
 
+import entity.ActivePlayer;
 import entity.BagAndItems.*;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.PickUpItem.PickUpItemController;
@@ -19,7 +20,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final PickUpItemViewModel pickUpItemViewModel;
     private final PickUpItemController pickUpItemController;
     private final DropToPickController dropToPickController;
-    private final Player player;
+    private final ActivePlayer player;
     private final JButton PickUpItem;
     private final JButton DropAnItem;
     private final JButton Drop;
@@ -28,7 +29,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final JLabel ItemInfo;
     private final JLabel Notice;
 
-    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, Player player) {
+    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, ActivePlayer player) {
         this.pickUpItemViewModel = pickUpItemViewModel;
         this.pickUpItemController = pickUpItemController;
         this.dropToPickController = dropToPickController;

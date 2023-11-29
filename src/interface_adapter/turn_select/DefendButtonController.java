@@ -2,7 +2,6 @@ package interface_adapter.turn_select;
 
 import use_case.DefendButton.DefendButtonInputBoundary;
 
-// TODO: To be implemented
 public class DefendButtonController {
     final DefendButtonInputBoundary defendButtonInteractor;
 
