@@ -11,9 +11,9 @@ public class ActivePlayer implements Player{
     private int maxHealth;
     private int level;
     private int experiencePoints;
-    private ArrayList<Item> inventory;
     private int maxCardHold; //Note: unneeded?
     private Bag bag;
+    private String[] hand;
 
     ActivePlayer(){
         //Creates new player at level 1
@@ -23,6 +23,7 @@ public class ActivePlayer implements Player{
         experiencePoints = 0;
         maxCardHold = 5;
         bag = new Package();
+        hand = new String[5];
     }
     public int getLevel(){
         return level;
@@ -71,4 +72,10 @@ public class ActivePlayer implements Player{
     public Bag getBag() {
         return bag;
     }
+
+    @Override
+    public String[] getHand() { return this.hand;}
+
+    @Override
+    public void setHand(String[] hand) { this.hand = hand;}
 }

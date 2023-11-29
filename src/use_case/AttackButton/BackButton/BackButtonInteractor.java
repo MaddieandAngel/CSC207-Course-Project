@@ -12,7 +12,7 @@ public class BackButtonInteractor implements BackButtonInputBoundary{
     public void execute(BackButtonInputData backButtonInputData) {
         // Will always go back to TurnSelectView
         BackButtonOutputData backButtonOutputData = new BackButtonOutputData(backButtonInputData.player.getCurrentHealth(),backButtonInputData.player.getHand(),
-                backButtonInputData.player.getLevel(), backButtonInputData.player.getInventory());
+                backButtonInputData.player.getLevel(), backButtonInputData.player.getBag());
         backButtonPresenter.prepareSuccessView(backButtonOutputData);
     }
 }

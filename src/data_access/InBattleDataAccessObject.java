@@ -4,17 +4,29 @@ import entity.Deck;
 import entity.Enemy;
 import entity.Player;
 import entity.PlayerFactory;
+import interface_adapter.APIAccessInterface;
 import interface_adapter.TitleScreen.SaveDeckDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
+import use_case.EnemyBehaviour.EnemyBehaviour;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface {
+import java.io.IOException;
+
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
     private Deck deck;
 
-    public InBattleDataAccessObject(PlayerFactory playerFactory){
+    private EnemyBehaviourInterface enemyBehaviour;
+
+    private APIAccessInterface api;
+
+    public InBattleDataAccessObject(PlayerFactory playerFactory, APIAccessInterface api, EnemyBehaviourInterface enemyBehaviour){
         this.player = playerFactory.create();
+        this.api = api;
+        this.enemyBehaviour = enemyBehaviour;
     }
 
     public void setEnemy(Enemy enemy){
@@ -38,4 +50,8 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
+
+    public void setEnemyBehaviourInterface(EnemyBehaviourInterface enemyBehaviour) { this.enemyBehaviour = enemyBehaviour;}
+
+    public EnemyBehaviourInterface getEnemyBehaviour() { return this.enemyBehaviour;}
 }

@@ -9,7 +9,7 @@ public class AttackSelectViewModel extends ViewModel {
 
     private AttackSelectState state;
 
-    public AttackSelectViewModel(String viewName) {
+    public AttackSelectViewModel() {
         super("Attack Select");
     }
 

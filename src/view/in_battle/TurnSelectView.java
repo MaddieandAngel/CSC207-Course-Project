@@ -108,7 +108,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_draw) {
                         if (e_draw.getSource().equals(draw)) {
-                            // TODO: Implement this once the DrawButtonController is written
+                            drawButtonController.execute();
                         }
                     }
                 }

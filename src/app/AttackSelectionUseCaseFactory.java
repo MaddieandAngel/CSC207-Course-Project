@@ -9,6 +9,7 @@ import interface_adapter.turn_select.TurnSelectViewModel;
 import use_case.AttackButton.BackButton.BackButtonInputBoundary;
 import use_case.AttackButton.BackButton.BackButtonInteractor;
 import use_case.AttackButton.BackButton.BackButtonOutputBoundary;
+import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonInputBoundary;
 import use_case.AttackButton.CardButton.CardButtonInteractor;
 import use_case.AttackButton.CardButton.CardButtonOutputBoundary;
@@ -21,17 +22,17 @@ public class AttackSelectionUseCaseFactory {
 
     public static AttackSelectionView create(ViewManagerModel viewManagerModel, AttackSelectViewModel attackSelectViewModel,
                                              BattleResultView battleResultView, TurnSelectViewModel turnSelectViewModel,
-                                             APIAccessInterface api, Player player, Enemy currentEnemy) {
-        CardButtonController cardButtonController = createUserCardButtonUseCase(battleResultView, viewManagerModel);
+                                             APIAccessInterface api, CardButtonDataAccessInterface cardButtonDataAccessInterface) {
+        CardButtonController cardButtonController = createUserCardButtonUseCase(battleResultView, viewManagerModel, cardButtonDataAccessInterface);
         BackButtonController backButtonController = createUserBackButtonUseCase(turnSelectViewModel, viewManagerModel);
 
-        return new AttackSelectionView(attackSelectViewModel, cardButtonController, backButtonController, api, player, currentEnemy);
+        return new AttackSelectionView(attackSelectViewModel, cardButtonController, backButtonController, api);
     }
 
-    private static CardButtonController createUserCardButtonUseCase(BattleResultView battleResultView, ViewManagerModel viewManagerModel) {
+    private static CardButtonController createUserCardButtonUseCase(BattleResultView battleResultView, ViewManagerModel viewManagerModel, CardButtonDataAccessInterface cardButtonDataAccessInterface) {
         CardButtonOutputBoundary cardButtonOutputBoundary = new CardButtonPresenter(battleResultView, viewManagerModel);
 
-        CardButtonInputBoundary cardButtonInteractor = new CardButtonInteractor(cardButtonOutputBoundary);
+        CardButtonInputBoundary cardButtonInteractor = new CardButtonInteractor(cardButtonOutputBoundary, cardButtonDataAccessInterface);
 
         return new CardButtonController(cardButtonInteractor);
     }
