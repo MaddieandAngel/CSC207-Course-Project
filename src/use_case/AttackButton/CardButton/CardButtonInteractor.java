@@ -4,8 +4,11 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
 
     final CardButtonOutputBoundary cardButtonPresenter;
 
-    public CardButtonInteractor(CardButtonOutputBoundary cardButtonPresenter) {
+    final CardButtonDataAccessInterface cardButtonDataAccessObject;
+
+    public CardButtonInteractor(CardButtonOutputBoundary cardButtonPresenter, CardButtonDataAccessInterface cardButtonDataAccessObject) {
         this.cardButtonPresenter = cardButtonPresenter;
+        this.cardButtonDataAccessObject = cardButtonDataAccessObject;
     }
 
     @Override
@@ -17,7 +20,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         if (enemyAction.equals("attack")) {
             int enemyCardValue = enemyMove.getCardValue();
             // Damage done to player will be calculated (card value * player level)
-            int damageToPlayer = cardButtonInputData.getEnemyLevel() * enemyCardValue;
+            int damageToPlayer = cardButtonInputData.getPlayerLevel() * enemyCardValue;
         } else {
             // Damage is not done to player
             int damageToPlayer = 0;
