@@ -197,7 +197,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            backButtonController.execute(player);
+                            backButtonController.execute();
                         }
                     }
                 }

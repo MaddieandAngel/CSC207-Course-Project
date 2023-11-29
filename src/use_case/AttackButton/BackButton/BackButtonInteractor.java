@@ -4,15 +4,19 @@ public class BackButtonInteractor implements BackButtonInputBoundary{
 
     final BackButtonOutputBoundary backButtonPresenter;
 
-    public BackButtonInteractor(BackButtonOutputBoundary backButtonPresenter) {
+    final BackButtonDataAccessInterface backButtonDataAccessObject;
+
+    public BackButtonInteractor(BackButtonOutputBoundary backButtonPresenter, BackButtonDataAccessInterface backButtonDataAccessObject) {
         this.backButtonPresenter = backButtonPresenter;
+        this.backButtonDataAccessObject = backButtonDataAccessObject;
     }
 
     @Override
-    public void execute(BackButtonInputData backButtonInputData) {
+    public void execute() {
         // Will always go back to TurnSelectView
-        BackButtonOutputData backButtonOutputData = new BackButtonOutputData(backButtonInputData.player.getCurrentHealth(),backButtonInputData.player.getHand(),
-                backButtonInputData.player.getLevel(), backButtonInputData.player.getBag());
+        BackButtonOutputData backButtonOutputData = new BackButtonOutputData(backButtonDataAccessObject.getPlayer().getCurrentHealth(),
+                backButtonDataAccessObject.getPlayer().getMaxHealth(),
+                backButtonDataAccessObject.getPlayer().getLevel());
         backButtonPresenter.prepareSuccessView(backButtonOutputData);
     }
 }

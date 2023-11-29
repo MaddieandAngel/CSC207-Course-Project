@@ -7,13 +7,14 @@ import entity.PlayerFactory;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.TitleScreen.SaveDeckDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+import use_case.AttackButton.BackButton.BackButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
 import java.io.IOException;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;

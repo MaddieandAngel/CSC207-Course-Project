@@ -6,24 +6,25 @@ public class BackButtonOutputData {
 
     private int currentHealth;
 
-    private String[] hand;
+    private int maxHealth;
 
     private int playerLevel;
 
-    private Bag inventory;
-
-    public BackButtonOutputData(int currentHealth, String[] hand, int playerLevel, Bag inventory) {
+    public BackButtonOutputData(int currentHealth, int maxHealth, int playerLevel) {
         this.currentHealth = currentHealth;
-        this.hand = hand;
         this.playerLevel = playerLevel;
-        this.inventory = inventory;
+        this.maxHealth = maxHealth;
     }
 
-    public int getCurrentHealth() { return this.currentHealth;}
+    public int getCurrentHealth() {
+        return this.currentHealth;
+    }
 
-    public int getPlayerLevel() { return this.playerLevel;}
+    public int getPlayerLevel() {
+        return this.playerLevel;
+    }
 
-    public String[] getHand() { return this.hand;}
-
-    public Bag getInventory() { return this.inventory;}
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
 }
