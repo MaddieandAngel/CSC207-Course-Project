@@ -1,6 +1,7 @@
 package use_case.stairs;
 
 import interface_adapter.stairs.StairsDataAccessInterface;
+import use_case.movement.MovementOutputData;
 
 import java.util.Random;
 
@@ -20,8 +21,8 @@ public class NextFloorInteractor implements NextFloorInputBoundary {
         int columns = randomizer.nextInt(4,7);
         int rows = randomizer.nextInt(4, 7);
         String directions = stairsDataAccessObject.MoveToNextFloor(columns, rows);
-        NextFloorOutputData nextFloorOutputData = new NextFloorOutputData(directions);
+        MovementOutputData movementOutputData = new MovementOutputData(directions);
 
-        nextFloorPresenter.prepareStartingRoomView(nextFloorOutputData);
+        nextFloorPresenter.prepareStartingRoomView(movementOutputData);
     }
 }

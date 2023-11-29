@@ -1,8 +1,11 @@
 package interface_adapter.TitleScreen;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreButtonVisibility;
+import interface_adapter.explore.ExploreState;
 import interface_adapter.explore.ExploreViewModel;
 import use_case.PlayButton.PlayButtonOutputBoundary;
+import use_case.movement.MovementOutputData;
 
 public class PlayButtonPresenter implements PlayButtonOutputBoundary {
     private final TitleScreenViewModel titleScreenViewModel;
@@ -16,8 +19,11 @@ public class PlayButtonPresenter implements PlayButtonOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(){
-        titleScreenViewModel.firePropertyChanged();
+    public void prepareSuccessView(MovementOutputData movementOutputData){
+        ExploreState exploreState = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+
+        exploreViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(exploreViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

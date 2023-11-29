@@ -2,23 +2,28 @@ package interface_adapter.PickUpItem;
 
 import interface_adapter.DropItems.DropItemState;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreViewModel;
 import use_case.PickUpItem.PickUpItemOutputBoundary;
+import view.ExploreView;
 
 import javax.swing.*;
 
 public class PickUpItemPresenter implements PickUpItemOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final PickUpItemViewModel pickUpItemViewModel;
+    private final ExploreViewModel exploreViewModel;
 
-    public PickUpItemPresenter(ViewManagerModel viewManagerModel, PickUpItemViewModel pickUpItemViewModel) {
+    public PickUpItemPresenter(ViewManagerModel viewManagerModel, PickUpItemViewModel pickUpItemViewModel, ExploreViewModel exploreViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.pickUpItemViewModel = pickUpItemViewModel;
+        this.exploreViewModel = exploreViewModel;
     }
 
     @Override
     public void prepareSuccessView() {
         JOptionPane.showMessageDialog(null, "Successfully picked the item");
-        // back to explore view
+        viewManagerModel.setActiveView(exploreViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 
     }
 

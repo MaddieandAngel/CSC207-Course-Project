@@ -26,15 +26,25 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
     private final JButton south;
     private final JButton west;
     private final JButton search;
-    public ExploreView(MovementButtonController move_control, SearchButtonController search_control,
+
+    private JLabel playerStats;
+
+    public ExploreView(MovementButtonController moveControl, SearchButtonController searchControl,
                        ExploreViewModel exploreViewModel){
-        this.movementButtonController = move_control;
-        this.searchButtonController = search_control;
+        this.movementButtonController = moveControl;
+        this.searchButtonController = searchControl;
         this.exploreViewModel = exploreViewModel;
         exploreViewModel.addPropertyChangeListener(this);
 
         JPanel textbox = new JPanel();
         textbox.add(new JLabel(exploreViewModel.textbox_text));
+
+        JPanel playerStatsPanel = new JPanel();
+        playerStats = new JLabel("Level: " + exploreViewModel.getState().getPlayerLevel() + "\nHealth: " +
+                exploreViewModel.getState().getPlayerCurrentHealth() + "/" +
+                exploreViewModel.getState().getPlayerMaxHealth() + "\nFloor Level: " +
+                exploreViewModel.getState().getFloorLevel());
+        playerStatsPanel.add(playerStats);
 
         JPanel buttons = new JPanel();
         north = new JButton(exploreViewModel.NORTH_MOVE_LABEL);
@@ -52,6 +62,12 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
+
+        textbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textbox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+
+        playerStatsPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        playerStatsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 
         north.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

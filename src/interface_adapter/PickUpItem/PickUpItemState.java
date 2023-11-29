@@ -1,9 +1,10 @@
 package interface_adapter.PickUpItem;
 
+import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 
 public class PickUpItemState {
-    private Player player;
+    private ActivePlayer player;
     private Bag bag;
 
     public PickUpItemState(PickUpItemState pickUpItemState){
@@ -12,13 +13,13 @@ public class PickUpItemState {
     }
     public PickUpItemState(){}
 
-    public Player getPlayer() {
+    public ActivePlayer getPlayer() {
         return player;
     }
     public Bag getBag(){
         return bag;
     }
-    public void setPlayer(Player player){
+    public void setPlayer(ActivePlayer player){
         this.player = player;
     }
     public void setBag(Bag bag){

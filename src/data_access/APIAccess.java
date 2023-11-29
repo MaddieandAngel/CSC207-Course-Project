@@ -1,5 +1,6 @@
 package data_access;
 
+import interface_adapter.TitleScreen.CreateDeckDataAccessInterface;
 import okhttp3.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -12,7 +13,7 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 
-public class APIAccess implements APIAccessInterface {
+public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterface {
 
     @Override
     public Deck NewDeck() throws IOException, RuntimeException{
@@ -31,29 +32,29 @@ public class APIAccess implements APIAccessInterface {
                 throw new RuntimeException("New deck was not successfully made");
             }
 
-                // Converting responseBody into a String
-                if (responseBody != null) {
-                    String responseBodyString = responseBody.string();
-                    String[] newString = responseBodyString.split(",");
+            // Converting responseBody into a String
+            if (responseBody != null) {
+                String responseBodyString = responseBody.string();
+                String[] newString = responseBodyString.split(",");
 
-                    // Accessing values for new deck
-                    boolean shuffled = false;
-                    String deckID = newString[1].split(":")[1].trim().replace("\"", "");
-                    int remainingCards = Integer.parseInt(newString[2].split(":")[1].trim().replace("}", ""));
+                // Accessing values for new deck
+                boolean shuffled = false;
+                String deckID = newString[1].split(":")[1].trim().replace("\"", "");
+                int remainingCards = Integer.parseInt(newString[2].split(":")[1].trim().replace("}", ""));
 
 
-                    // Creating new Deck
-                    Deck newDeck = new Deck(shuffled, deckID, remainingCards);
+                // Creating new Deck
+                Deck newDeck = new Deck(shuffled, deckID, remainingCards);
 
-                    // Shuffle new deck
-                    Shuffle(newDeck);
+                // Shuffle new deck
+                Shuffle(newDeck);
 
-                    // return the new, shuffled deck
-                    return newDeck;
-                } else {
-                    // means responseBody is null, so a new deck was not created, will therefore throw a RuntimeException
-                    throw new RuntimeException("New deck not created");
-                }
+                // return the new, shuffled deck
+                return newDeck;
+            } else {
+                // means responseBody is null, so a new deck was not created, will therefore throw a RuntimeException
+                throw new RuntimeException("New deck not created");
+            }
         }  catch (RuntimeException e) {
             throw new RuntimeException("New deck not created");
         } catch (IOException e) {

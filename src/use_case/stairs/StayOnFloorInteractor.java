@@ -1,6 +1,7 @@
 package use_case.stairs;
 
 import interface_adapter.explore.ExploreDataAccessInterface;
+import use_case.movement.MovementOutputData;
 
 public class StayOnFloorInteractor implements StayOnFloorInputBoundary{
 
@@ -15,8 +16,8 @@ public class StayOnFloorInteractor implements StayOnFloorInputBoundary{
     @Override
     public void execute() {
         String directions = exploreDataAccessObject.getDirections();
-        StayOnFloorOutputData stayOnFloorOutputData = new StayOnFloorOutputData(directions);
+        MovementOutputData movementOutputData = new MovementOutputData(directions);
 
-        stayOnFloorPresenter.prepareEmptyRoomView(stayOnFloorOutputData);
+        stayOnFloorPresenter.prepareEmptyRoomView(movementOutputData);
     }
 }

@@ -67,7 +67,7 @@ public class MapBuilder {
         map.get(startIndex).setHasEast(randomizer.nextBoolean());
         map.get(startIndex).setHasSouth(randomizer.nextBoolean());
 
-        for (int c = startIndex + 1; c < columns - 1; c++){
+        for (int c = startIndex + 1; c < startIndex + columns - 1; c++){
             map.add(new Room());
             map.get(c).setHasNorth(map.get(c - columns).isHasSouth());
             map.get(c).setHasWest(map.get(c - 1).isHasEast());
@@ -89,7 +89,7 @@ public class MapBuilder {
         map.get(startIndex).setHasNorth(map.get(startIndex - columns).isHasSouth());
         map.get(startIndex).setHasEast(randomizer.nextBoolean());
 
-        for (int c = startIndex + 1; c < columns - 1; c++){
+        for (int c = startIndex + 1; c < startIndex + columns - 1; c++){
             map.add(new Room());
             map.get(c).setHasNorth(map.get(c - columns).isHasSouth());
             map.get(c).setHasWest(map.get(c - 1).isHasEast());
