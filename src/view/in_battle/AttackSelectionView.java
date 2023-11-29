@@ -1,8 +1,5 @@
 package view.in_battle;
 
-import entity.DeckInterface;
-import entity.Enemy;
-import entity.Player;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.AttackSelect.AttackSelectState;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
@@ -113,7 +110,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card1)) {
                             try {
-                                api.CardPlayed(deck.getDeckID(), "player", playerHand[0]);
+                                api.CardPlayed("player", playerHand[0]);
                                 cardButtonController.execute(api.GetCardValue(playerHand[0]), api.GetCardSuit(playerHand[0]));
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -130,7 +127,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card2)) {
                             try {
-                                api.CardPlayed(deck.getDeckID(), "player", playerHand[1]);
+                                api.CardPlayed("player", playerHand[1]);
                                 cardButtonController.execute(api.GetCardValue(playerHand[1]), api.GetCardSuit(playerHand[1]));
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -147,7 +144,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card3)) {
                             try {
-                                api.CardPlayed(deck.getDeckID(), "player", playerHand[2]);
+                                api.CardPlayed("player", playerHand[2]);
                                 cardButtonController.execute(api.GetCardValue(playerHand[2]), api.GetCardSuit(playerHand[2]));
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -164,7 +161,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card4)) {
                             try {
-                                api.CardPlayed(deck.getDeckID(), "player", playerHand[3]);
+                                api.CardPlayed("player", playerHand[3]);
                                 cardButtonController.execute(api.GetCardValue(playerHand[3]), api.GetCardSuit(playerHand[3]));
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -181,7 +178,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card5)) {
                             try {
-                                api.CardPlayed(deck.getDeckID(), "player", playerHand[4]);
+                                api.CardPlayed("player", playerHand[4]);
                                 cardButtonController.execute(api.GetCardValue(playerHand[4]), api.GetCardSuit(playerHand[4]));
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
