@@ -29,4 +29,20 @@ public class CardButtonOutputData {
         this.playerMaxHealth = playerMaxHealth;
         this.playerLevel = playerLevel;
     }
+
+    public int getPlayerCurrentHealth() { return this.updatedPlayerHealth;}
+
+    public int getPlayerMaxHealth() { return this.playerMaxHealth;}
+
+    public int getPlayerLevel() { return this.playerLevel;}
+
+    public int getEnemyHealth() { return this.updatedEnemyHealth;}
+
+    public String getEnemyAction() {return this.enemyAction;}
+
+    public boolean getRevivePotionUsed() { return this.revivePotionUsed;}
+
+    public int getDamageToPlayer() { return this.damageToPlayer;}
+
+    public int getDamageToEnemy() { return this.damageToEnemy;}
 }
