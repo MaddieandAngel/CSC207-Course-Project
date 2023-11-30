@@ -9,12 +9,9 @@ public class DrawButtonInputData {
 
     private Enemy enemy;
 
-    private DeckInterface deck;
-
-    public DrawButtonInputData(APIAccessInterface api, Enemy enemy, DeckInterface deck) {
+    public DrawButtonInputData(APIAccessInterface api, Enemy enemy) {
         this.api = api;
         this.enemy = enemy;
-        this.deck = deck;
     }
 
     public APIAccessInterface getAPI() { return this.api;}
@@ -22,6 +19,4 @@ public class DrawButtonInputData {
     public int getEnemyHealth() { return this.enemy.getCurrentHealth();}
 
     public int getEnemyLevel() { return this.enemy.getLevel();}
-
-    public DeckInterface getDeck() { return this.deck;}
 }

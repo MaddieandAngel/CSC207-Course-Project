@@ -4,6 +4,8 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
 
     final DrawButtonOutputBoundary drawButtonPresenter;
 
+    final DrawButtonData
+
     public DrawButtonInteractor(DrawButtonOutputBoundary drawButtonPresenter) {
         this.drawButtonPresenter = drawButtonPresenter;
     }

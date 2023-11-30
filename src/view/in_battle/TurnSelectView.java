@@ -31,12 +31,6 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final DefendButtonController defendButtonController;
     private final FleeButtonController fleeButtonController;
 
-    private final APIAccessInterface api;
-
-    private DeckInterface deck;
-
-    private Enemy enemy;
-
     private final JButton attack;
     private final JButton draw;
     private final JButton items;
@@ -48,16 +42,13 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
-                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, APIAccessInterface api, Enemy enemy, DeckInterface deck){
+                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel){
         this.attackButtonController = atk_control;
         this.drawButtonController = draw_control;
         this.itemsButtonController = item_control;
         this.defendButtonController = defend_control;
         this.fleeButtonController = flee_control;
         this.turnSelectViewModel = turnSelectViewModel;
-        this.api = api;
-        this.enemy = enemy;
-        this.deck = deck;
         turnSelectViewModel.addPropertyChangeListener(this);
 
         //Text for the textbox at the bottom of the screen:
@@ -115,7 +106,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_draw) {
                         if (e_draw.getSource().equals(draw)) {
-                            drawButtonController.execute(api, enemy);
+                            drawButtonController.execute();
                         }
                     }
                 }

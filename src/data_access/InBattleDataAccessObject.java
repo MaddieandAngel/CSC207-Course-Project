@@ -6,8 +6,10 @@ import entity.Player;
 import entity.PlayerFactory;
 import interface_adapter.TitleScreen.SaveDeckDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
+import use_case.DrawButton.DrawButtonDataAccessInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, DrawButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
