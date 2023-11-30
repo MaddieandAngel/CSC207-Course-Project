@@ -1,7 +1,9 @@
 package entity;
 
 
-public class healingPotion implements Item{
+import entity.BagAndItems.Item;
+
+public class healingPotion implements Item {
     private final String itemName = "HealingPotion";
     private final double percentage;
 
