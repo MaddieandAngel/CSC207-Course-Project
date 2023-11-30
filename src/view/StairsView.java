@@ -23,10 +23,10 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
     private final JButton nextFloor;
     private final JButton stayOnFloor;
 
-    public StairsView(NextFloorController nextFloorController, StayOnFloorController stayOnFloorController,
+    public StairsView(NextFloorController nextFloorControl, StayOnFloorController stayOnFloorControl,
                       StairsViewModel stairsViewModel){
-        this.nextFloorController = nextFloorController;
-        this.stayOnFloorController = stayOnFloorController;
+        this.nextFloorController = nextFloorControl;
+        this.stayOnFloorController = stayOnFloorControl;
         this.stairsViewModel = stairsViewModel;
 
         JPanel textbox = new JPanel();
@@ -42,6 +42,10 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(textbox);
+        this.add(buttons);
 
         nextFloor.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

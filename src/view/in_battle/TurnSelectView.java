@@ -35,8 +35,8 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final JButton defend;
     private final JButton flee;
 
-    private JLabel textboxText;
-    private JLabel playerStats; //Holds the player's level, health, AND max health
+    private final JLabel textBoxText;
+    private final JLabel playerStats; //Holds the player's level, health, AND max health
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
@@ -49,11 +49,10 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         this.turnSelectViewModel = turnSelectViewModel;
         turnSelectViewModel.addPropertyChangeListener(this);
 
-        //Text for the textbox at the bottom of the screen:
-        JPanel textbox = new JPanel();
-        textboxText = new JLabel("A level " + turnSelectViewModel.getState().getEnemyLevel() + " " +
-                turnSelectViewModel.getState().getEnemyName() + " has appeared!");
-        textbox.add(textboxText);
+        //Text for the textBox at the bottom of the screen:
+        JPanel textBox = new JPanel();
+        textBoxText = new JLabel("A placeholder enemy has appeared!");
+        textBox.add(textBoxText);
 
         //Text for the player's level and health:
         JPanel playerStatsPanel = new JPanel();
@@ -80,11 +79,15 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
 
-        textbox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        textbox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        textBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 
         playerStatsPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         playerStatsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+
+        this.add(playerStatsPanel);
+        this.add(buttons);
+        this.add(textBox);
 
         attack.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -154,7 +157,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         TurnSelectState state = turnSelectViewModel.getState();
-        textboxText.setText("A level " + state.getEnemyLevel() + " " + state.getEnemyName() + " has appeared!");
+        textBoxText.setText("A level " + state.getEnemyLevel() + " " + state.getEnemyName() + " has appeared!");
         // ^ Unnecessary? Not sure
         playerStats.setText("Level: " + state.getPlayerLevel() + "\nHealth: " + state.getPlayerHealth() + "/" +
                 state.getPlayerMaxHealth());
