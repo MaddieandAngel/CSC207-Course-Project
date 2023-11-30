@@ -10,7 +10,6 @@ import interface_adapter.explore.GenerateEnemyDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.DrawButton.DrawButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
-import use_case.movement.EnemyOutputData;
 
 public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, DrawButtonDataAccessInterface {
 

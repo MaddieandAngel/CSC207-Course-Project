@@ -1,7 +1,5 @@
 package view.in_battle;
 
-import entity.Enemy;
-import interface_adapter.APIAccessInterface;
 import interface_adapter.turn_select.AttackButtonController;
 import interface_adapter.turn_select.DrawButtonController;
 import interface_adapter.turn_select.ItemsButtonController;
