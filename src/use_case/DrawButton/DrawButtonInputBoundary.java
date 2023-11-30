@@ -1,6 +1,8 @@
 package use_case.DrawButton;
 
+import java.io.IOException;
+
 public interface DrawButtonInputBoundary {
 
-    void execute(DrawButtonInputData drawButtonInputData);
+    void execute() throws IOException;
 }

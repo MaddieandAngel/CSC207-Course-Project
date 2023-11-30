@@ -1,9 +1,8 @@
 package interface_adapter.turn_select;
 
-import entity.Enemy;
-import interface_adapter.APIAccessInterface;
 import use_case.DrawButton.DrawButtonInputBoundary;
-import use_case.DrawButton.DrawButtonInputData;
+
+import java.io.IOException;
 
 public class DrawButtonController {
 
@@ -13,7 +12,7 @@ public class DrawButtonController {
         this.drawButtonInteractor = drawButtonInteractor;
     }
 
-    public void execute() {
+    public void execute() throws IOException {
         drawButtonInteractor.execute();
     }
 }

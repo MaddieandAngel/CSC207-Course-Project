@@ -160,5 +160,9 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         // ^ Unnecessary? Not sure
         playerStats.setText("Level: " + state.getPlayerLevel() + "\nHealth: " + state.getPlayerHealth() + "/" +
                 state.getPlayerMaxHealth());
+
+        if (state.getDrawError() != null) {
+            JOptionPane.showMessageDialog(this, state.getDrawError());
+        }
     }
 }

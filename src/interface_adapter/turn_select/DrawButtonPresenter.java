@@ -25,6 +25,15 @@ public class DrawButtonPresenter implements DrawButtonOutputBoundary {
         // When a card is successfully drawn, switch to BattleResultView
         BattleResultState state = battleResultViewModel.getState();
         // Update all the values in the battle result state
+        state.setPlayerCurrentHealth(drawButtonOutputData.getPlayerCurrentHealth());
+        state.setPlayerMaxHealth(drawButtonOutputData.getPlayerMaxHealth());
+        state.setPlayerLevel(drawButtonOutputData.getPlayerLevel());
+        state.setEnemyAction(drawButtonOutputData.getEnemyAction());
+        state.setEnemyHealth(drawButtonOutputData.getEnemyHealth());
+        state.setRevivePotionUsed(drawButtonOutputData.revivePotionUsed());
+        state.setDamageToPlayer(drawButtonOutputData.getDamageToPlayer());
+        state.setDamageToEnemy(0);
+        state.setPlayerAction("draw");
         this.battleResultViewModel.setState(state);
         battleResultViewModel.firePropertyChanged();
 
