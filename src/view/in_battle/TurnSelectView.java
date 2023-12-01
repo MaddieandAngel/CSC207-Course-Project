@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 // TODO: Certain sections in here are waiting for other parts of the code to be implemented
 
@@ -104,7 +105,11 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_draw) {
                         if (e_draw.getSource().equals(draw)) {
-                            drawButtonController.execute();
+                            try {
+                                drawButtonController.execute();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

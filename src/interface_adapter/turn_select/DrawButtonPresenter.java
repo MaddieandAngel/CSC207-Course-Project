@@ -43,7 +43,7 @@ public class DrawButtonPresenter implements DrawButtonOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        // Will remain in TurnSelectView since the player did not make their turn (since they could not draw)
+        // Will remain in TurnSelectView since the player did not take their turn (since they could not draw)
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
         turnSelectState.setDrawError(error);
         turnSelectViewModel.firePropertyChanged();

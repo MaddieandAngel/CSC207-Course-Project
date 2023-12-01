@@ -141,6 +141,12 @@ class DrawButtonInteractorTest {
     void handFull() throws IOException {
         DrawButtonDataAccessInterface dataAccessInterface = battleRepository;
 
+        // Ensure that the player's hand is full
+        while (playerOriginalHandLength != 5) {
+            dataAccessInterface.getAPI().DrawCard("player");
+            playerOriginalHandLength++;
+        }
+
         DrawButtonOutputBoundary failPresenter = new DrawButtonOutputBoundary() {
             @Override
             public void prepareSuccessView(DrawButtonOutputData data) {
