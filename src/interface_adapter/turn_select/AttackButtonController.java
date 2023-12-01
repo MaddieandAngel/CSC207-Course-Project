@@ -1,8 +1,8 @@
 package interface_adapter.turn_select;
 
-import entity.Player;
 import use_case.AttackButton.AttackButtonInputBoundary;
-import use_case.AttackButton.AttackButtonInputData;
+
+import java.io.IOException;
 
 public class AttackButtonController {
 
@@ -12,9 +12,8 @@ public class AttackButtonController {
         this.attackButtonInteractor = attackButtonInteractor;
     }
 
-    public void execute(Player player) {
-        AttackButtonInputData attackButtonInputData = new AttackButtonInputData(player);
-        attackButtonInteractor.execute(attackButtonInputData);
+    public void execute() throws IOException {
+        attackButtonInteractor.execute();
     }
 
 }

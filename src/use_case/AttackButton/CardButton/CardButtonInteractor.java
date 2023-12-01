@@ -38,7 +38,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         // Determining if there is any damage bonus
         char playerCardSuit = cardButtonInputData.getCardSuit();
 
-        // if enemy suit is weak to player suit, player gets damage bonus
+        // If enemy suit is weak to player suit, player gets damage bonus
         if (enemyMove.getSuitEnemyIsWeakTo() == playerCardSuit) {
             damageToEnemy = damageToEnemy * 2;
         } else if (enemyMove.getSuitEnemyBeats() == playerCardSuit) { // enemy gets damage bonus when player suit is weak to enemy suit

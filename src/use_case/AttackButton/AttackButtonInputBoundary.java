@@ -1,7 +1,9 @@
 package use_case.AttackButton;
 
+import java.io.IOException;
+
 public interface AttackButtonInputBoundary {
 
-    void execute(AttackButtonInputData attackButtonInputData);
+    void execute() throws IOException;
 
 }

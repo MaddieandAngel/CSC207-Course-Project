@@ -205,7 +205,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
     @Override
     public void propertyChange(PropertyChangeEvent e) {
         AttackSelectState state = (AttackSelectState) e.getNewValue();
-        // don't think anything needs to be implemented here
+        // Don't think anything needs to be implemented here
     }
 
     @Override

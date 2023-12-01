@@ -2,18 +2,23 @@ package use_case.AttackButton;
 
 import entity.Player;
 
+import java.io.IOException;
+
 public class AttackButtonInteractor implements AttackButtonInputBoundary{
 
     final AttackButtonOutputBoundary attackButtonPresenter;
 
-    public AttackButtonInteractor(AttackButtonOutputBoundary attackButtonPresenter) {
+    final AttackButtonDataAccessInterface attackButtonDataAccessInterface;
+
+    public AttackButtonInteractor(AttackButtonOutputBoundary attackButtonPresenter, AttackButtonDataAccessInterface attackButtonDataAccessInterface) {
         this.attackButtonPresenter = attackButtonPresenter;
+        this.attackButtonDataAccessInterface = attackButtonDataAccessInterface;
     }
 
     @Override
-    public void execute(AttackButtonInputData attackButtonInputData) {
-        Player player = attackButtonInputData.getCurrentPlayer();
-        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(player.getCurrentHealth(), player.getMaxHealth(), player.getHand());
+    public void execute() throws IOException {
+        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(attackButtonDataAccessInterface.getPlayer().getCurrentHealth(),
+                attackButtonDataAccessInterface.getPlayer().getMaxHealth(), attackButtonDataAccessInterface.getAPI().GetCardsInPile("player"));
 
         attackButtonPresenter.prepareSuccessView(attackButtonOutputData);
     }

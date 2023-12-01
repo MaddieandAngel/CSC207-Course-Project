@@ -14,7 +14,5 @@ public interface Player {
     int getMaxCardHold();
     void setMaxCardHold(int cardHold);
     Bag getBag();
-    String[] getHand();
-    void setHand(String[] hand);
 
 }

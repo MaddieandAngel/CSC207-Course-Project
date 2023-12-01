@@ -1,6 +1,5 @@
 package view.in_battle;
 
-import entity.Player;
 import interface_adapter.turn_select.AttackButtonController;
 import interface_adapter.turn_select.DrawButtonController;
 import interface_adapter.turn_select.ItemsButtonController;
@@ -15,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 // TODO: Certain sections in here are waiting for other parts of the code to be implemented
 
@@ -30,8 +30,6 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
     private final DefendButtonController defendButtonController;
     private final FleeButtonController fleeButtonController;
 
-    private final Player player;
-
     private final JButton attack;
     private final JButton draw;
     private final JButton items;
@@ -43,14 +41,13 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
     public TurnSelectView(AttackButtonController atk_control, DrawButtonController draw_control,
                           ItemsButtonController item_control, DefendButtonController defend_control,
-                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel, Player player){
+                          FleeButtonController flee_control, TurnSelectViewModel turnSelectViewModel){
         this.attackButtonController = atk_control;
         this.drawButtonController = draw_control;
         this.itemsButtonController = item_control;
         this.defendButtonController = defend_control;
         this.fleeButtonController = flee_control;
         this.turnSelectViewModel = turnSelectViewModel;
-        this.player = player;
         turnSelectViewModel.addPropertyChangeListener(this);
 
         //Text for the textbox at the bottom of the screen:
@@ -96,7 +93,11 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_atk) {
                         if (e_atk.getSource().equals(attack)) {
-                            attackButtonController.execute(player);
+                            try {
+                                attackButtonController.execute();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

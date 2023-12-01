@@ -7,6 +7,7 @@ import entity.PlayerFactory;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.TitleScreen.SaveDeckDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+import use_case.AttackButton.AttackButtonDataAccessInterface;
 import use_case.AttackButton.BackButton.BackButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviour;
@@ -14,7 +15,7 @@ import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
 import java.io.IOException;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, SaveDeckDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
@@ -45,4 +46,6 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     public void setEnemyBehaviourInterface(EnemyBehaviourInterface enemyBehaviour) { this.enemyBehaviour = enemyBehaviour;}
 
     public EnemyBehaviourInterface getEnemyBehaviour() { return this.enemyBehaviour;}
+
+    public APIAccessInterface getAPI() { return this.api;}
 }
