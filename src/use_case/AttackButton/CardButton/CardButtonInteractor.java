@@ -36,11 +36,10 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         }
 
         // Determining if there is any damage bonus
-        char enemyCardSuit = enemyMove.getCardSuit();
         char playerCardSuit = cardButtonInputData.getCardSuit();
 
-        // if suits are equal or enemy suit is weak to player suit, player gets damage bonus
-        if (enemyCardSuit == playerCardSuit || enemyMove.getSuitEnemyIsWeakTo() == playerCardSuit) {
+        // if enemy suit is weak to player suit, player gets damage bonus
+        if (enemyMove.getSuitEnemyIsWeakTo() == playerCardSuit) {
             damageToEnemy = damageToEnemy * 2;
         } else if (enemyMove.getSuitEnemyBeats() == playerCardSuit) { // enemy gets damage bonus when player suit is weak to enemy suit
             damageToPlayer = damageToPlayer * 2;
@@ -59,7 +58,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         if (updatedPlayerHealth <= 0 && updatedEnemyHealth > 0) {
             // Search if player has a revive potion in inventory
             boolean hasRevivePotion = cardButtonDataAccessObject.getPlayer().getBag().numOfRevive() > 0;
-            // If player has a revive potion, it is automatically used and player's health is fully resotred
+            // If player has a revive potion, it is automatically used and player's health is fully restored
             if (hasRevivePotion) {
                 cardButtonDataAccessObject.getPlayer().getBag().useItem(0, cardButtonDataAccessObject.getPlayer());
                 revivePotionUsed = true;
