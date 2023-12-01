@@ -15,7 +15,6 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
 
     private Player player;
     private Enemy enemy;
-    private Deck deck;
 
     private APIAccessInterface api;
 
@@ -38,15 +37,6 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     @Override
     public Enemy getEnemy() {
         return enemy;
-    }
-
-    @Override
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
     }
 
     public EnemyBehaviourInterface getEnemyBehaviour() { return this.enemyBehaviour;}

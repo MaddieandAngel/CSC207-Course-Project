@@ -1,7 +1,6 @@
 package use_case.DrawButton;
 
 import use_case.EnemyBehaviour.EnemyBehaviourOutputData;
-import use_case.movement.EnemyOutputData;
 
 import java.io.IOException;
 
@@ -50,6 +49,9 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
                     updatedPlayerHealth = 0;
                 }
             }
+
+            // Update player's health
+            drawButtonDataAccessObject.getPlayer().setHealth(updatedPlayerHealth);
 
             // Create output data
             DrawButtonOutputData drawButtonOutputData = new DrawButtonOutputData(updatedPlayerHealth, drawButtonDataAccessObject.getPlayer().getMaxHealth(),

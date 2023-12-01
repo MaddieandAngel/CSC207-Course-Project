@@ -57,8 +57,7 @@ public class MovementInteractor implements MovementInputBoundary {
 
             //Draws 5 cards for the enemy's initial hand (or at least attempts to):
             try {
-                EnemyBehaviourInterface enemyHandGenerator = new EnemyBehaviour(apiAccessObject,
-                        inBattleDataAccessObject.getDeck(), inBattleDataAccessObject.getEnemy());
+                EnemyBehaviourInterface enemyHandGenerator = new EnemyBehaviour(apiAccessObject, inBattleDataAccessObject.getEnemy());
                 //Note: creates an instance of an EnemyBehaviour instead of its interface. Might be a problem?
 
                 enemyHandGenerator.enemyDrawInitialHand();

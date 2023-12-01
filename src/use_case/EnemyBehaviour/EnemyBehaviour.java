@@ -13,7 +13,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
     private final Random randomizer;
     private final Enemy enemy;
 
-    public EnemyBehaviour(APIAccessInterface apiAccessInterface, Deck deck, Enemy enemy) throws IOException {
+    public EnemyBehaviour(APIAccessInterface apiAccessInterface, Enemy enemy) throws IOException {
         apiAccess = apiAccessInterface;
         this.enemy = enemy;
         randomizer = new Random();
