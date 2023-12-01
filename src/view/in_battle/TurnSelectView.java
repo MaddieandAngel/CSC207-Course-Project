@@ -166,6 +166,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
         if (state.getDrawError() != null) {
             JOptionPane.showMessageDialog(this, state.getDrawError());
+            state.setDrawError(null);
         }
     }
 }
