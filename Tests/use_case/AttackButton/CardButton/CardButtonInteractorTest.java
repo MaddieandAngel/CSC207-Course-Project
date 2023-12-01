@@ -25,6 +25,16 @@ class CardButtonInteractorTest {
 
     APIAccessInterface api;
 
+    int originalPlayerHealth;
+
+    int originalEnemyHealth;
+
+    int originalPlayerMaxHealth;
+
+    int originalPlayerLevel;
+
+    int numberOfRevive;
+
     @BeforeEach
     void setUp() throws IOException {
         Random random = new Random();
@@ -56,6 +66,12 @@ class CardButtonInteractorTest {
             player.getBag().addItem(revive);
             numRevive--;
         }
+        originalPlayerHealth = player.getCurrentHealth();
+        originalPlayerMaxHealth = player.getMaxHealth();
+        originalPlayerLevel = player.getLevel();
+        originalEnemyHealth = player.getCurrentHealth();
+        numberOfRevive = player.getBag().numOfRevive();
+
     }
 
     @Test
@@ -64,8 +80,9 @@ class CardButtonInteractorTest {
         CardButtonOutputBoundary successPresenter = new CardButtonOutputBoundary() {
             @Override
             public void prepareSuccessView(CardButtonOutputData data) {
-                int originalPlayerHealth = dataAccessInterface.getPlayer().getCurrentHealth();
-                int originalEnemyHealth = dataAccessInterface.getEnemy().getCurrentHealth();
+                // Check if max health and level remain unchanged
+                assertEquals(originalPlayerMaxHealth, data.getPlayerMaxHealth());
+                assertEquals(originalPlayerLevel, data.getPlayerLevel());
 
                 // Checking if damage values are correct for enemy
                 if (!(data.getEnemyAction().equals("attack"))) {
@@ -93,9 +110,13 @@ class CardButtonInteractorTest {
                         assertEquals(data.getPlayerCurrentHealth(), data.getPlayerMaxHealth());
                     } else if (data.getPlayerCurrentHealth() == dataAccessInterface.getPlayer().getMaxHealth()) {
                         assert data.getRevivePotionUsed();
+                        // Check player's inventory for one less revive potion
+                        assertEquals(numberOfRevive - 1, dataAccessInterface.getPlayer().getBag().numOfRevive());
                     } else {
                         assertEquals(data.getPlayerCurrentHealth(), 0);
                         assert !data.getRevivePotionUsed();
+                        // Check player's inventory for same number of revive potions
+                        assertEquals(numberOfRevive, dataAccessInterface.getPlayer().getBag().numOfRevive());
                     }
                 } else {
                     assertEquals(data.getPlayerCurrentHealth(), originalPlayerHealth - data.getDamageToPlayer());
