@@ -71,6 +71,9 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         }
         // Else, both player and enemy health > 0, nothing changes
 
+        cardButtonDataAccessObject.getPlayer().setHealth(updatedPlayerHealth);
+        cardButtonDataAccessObject.getEnemy().setHealth(updatedEnemyHealth);
+
         CardButtonOutputData cardButtonOutputData = new CardButtonOutputData(updatedPlayerHealth, updatedEnemyHealth, revivePotionUsed,
                 damageToEnemy, damageToPlayer, enemyAction, cardButtonDataAccessObject.getPlayer().getMaxHealth(), cardButtonDataAccessObject.getPlayer().getLevel());
         cardButtonPresenter.prepareSuccessView(cardButtonOutputData);

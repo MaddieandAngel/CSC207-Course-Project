@@ -101,6 +101,10 @@ class CardButtonInteractorTest {
                     assertEquals(data.getPlayerCurrentHealth(), originalPlayerHealth - data.getDamageToPlayer());
                 }
 
+                // Check that player's and enemy's current health was updated
+                assertEquals(data.getEnemyHealth(), dataAccessInterface.getEnemy().getCurrentHealth());
+                assertEquals(data.getPlayerCurrentHealth(), dataAccessInterface.getPlayer().getCurrentHealth());
+
                 assertEquals(dataAccessInterface.getPlayer().getMaxHealth(), data.getPlayerMaxHealth());
                 assertEquals(data.getPlayerLevel(), dataAccessInterface.getPlayer().getLevel());
             }

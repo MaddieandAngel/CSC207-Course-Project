@@ -25,7 +25,7 @@ class APIAccessTest {
     }
 
     @Test
-    void newDeck() throws IOException {
+    void newDeck() {
         assert testDeck instanceof Deck;
         assert testDeck.getRemainingCards() == 54;
         assert testDeck.isShuffled();
