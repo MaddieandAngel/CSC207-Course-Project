@@ -19,15 +19,9 @@ public class BackButtonPresenter implements BackButtonOutputBoundary {
 
     @Override
     public void prepareSuccessView(BackButtonOutputData backButtonOutputData) {
-
-        TurnSelectState state = new TurnSelectState();
-        state.setPlayerHealth(backButtonOutputData.getCurrentHealth());
-        state.setPlayerMaxHealth(backButtonOutputData.getMaxHealth());
-        state.setPlayerLevel(backButtonOutputData.getPlayerLevel());
-        this.turnSelectViewModel.setState(state);
         turnSelectViewModel.firePropertyChanged();
 
+        viewManagerModel.setActiveView(turnSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-
     }
 }

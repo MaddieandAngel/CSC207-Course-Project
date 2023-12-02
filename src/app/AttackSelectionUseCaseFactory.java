@@ -1,6 +1,5 @@
 package app;
 
-import interface_adapter.APIAccessInterface;
 import interface_adapter.AttackSelect.*;
 import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.ViewManagerModel;
@@ -21,11 +20,11 @@ public class AttackSelectionUseCaseFactory {
 
     public static AttackSelectionView create(ViewManagerModel viewManagerModel, AttackSelectViewModel attackSelectViewModel,
                                              BattleResultViewModel battleResultViewModel, TurnSelectViewModel turnSelectViewModel,
-                                             APIAccessInterface api, CardButtonDataAccessInterface cardButtonDataAccessInterface, BackButtonDataAccessInterface backButtonDataAccessInterface) {
+                                             CardButtonDataAccessInterface cardButtonDataAccessInterface, BackButtonDataAccessInterface backButtonDataAccessInterface) {
         CardButtonController cardButtonController = createUserCardButtonUseCase(battleResultViewModel, viewManagerModel, cardButtonDataAccessInterface);
         BackButtonController backButtonController = createUserBackButtonUseCase(turnSelectViewModel, viewManagerModel, backButtonDataAccessInterface);
 
-        return new AttackSelectionView(attackSelectViewModel, cardButtonController, backButtonController, api);
+        return new AttackSelectionView(attackSelectViewModel, cardButtonController, backButtonController);
     }
 
     private static CardButtonController createUserCardButtonUseCase(BattleResultViewModel battleResultViewModel, ViewManagerModel viewManagerModel,

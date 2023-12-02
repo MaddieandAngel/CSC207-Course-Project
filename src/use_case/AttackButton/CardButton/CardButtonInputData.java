@@ -5,16 +5,11 @@ import entity.Player;
 
 public class CardButtonInputData {
 
-    private int cardValue;
+    private String cardCode;
 
-    private char cardSuit;
-
-    public CardButtonInputData(int cardValue, char cardSuit) {
-        this.cardValue = cardValue;
-        this.cardSuit = cardSuit;
+    public CardButtonInputData(String cardCode) {
+        this.cardCode = cardCode;
     }
 
-    public int getCardValue() { return this.cardValue;}
-
-    public char getCardSuit() { return this.cardSuit;}
+    public String getCardCode() { return this.cardCode;}
 }

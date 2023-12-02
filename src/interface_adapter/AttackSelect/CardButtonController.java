@@ -15,8 +15,8 @@ public class CardButtonController {
         this.cardButtonInteractor = cardButtonInteractor;
     }
 
-    public void execute(int cardValue, char cardSuit) throws IOException {
-        CardButtonInputData cardButtonInputData = new CardButtonInputData(cardValue, cardSuit);
+    public void execute(String cardCode) throws IOException {
+        CardButtonInputData cardButtonInputData = new CardButtonInputData(cardCode);
         cardButtonInteractor.execute(cardButtonInputData);
     }
 }

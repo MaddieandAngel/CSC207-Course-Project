@@ -1,7 +1,5 @@
 package view.in_battle;
 
-import interface_adapter.APIAccessInterface;
-import interface_adapter.AttackSelect.AttackSelectState;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.AttackSelect.BackButtonController;
 import interface_adapter.AttackSelect.CardButtonController;
@@ -24,8 +22,6 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     private final BackButtonController backButtonController;
 
-    private final APIAccessInterface api;
-
     private final JButton card1;
 
     private final JButton card2;
@@ -39,20 +35,19 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
     private final JButton back;
 
     public AttackSelectionView(AttackSelectViewModel attackSelectViewModel, CardButtonController cardButtonController,
-                               BackButtonController backButtonController, APIAccessInterface api) {
+                               BackButtonController backButtonController) {
         this.attackSelectViewModel = attackSelectViewModel;
         this.backButtonController = backButtonController;
         this.cardButtonController = cardButtonController;
-        this.api = api;
         attackSelectViewModel.addPropertyChangeListener(this);
 
         String[] playerHand = attackSelectViewModel.getState().getHand();
-        int handSize = attackSelectViewModel.getState().getHand().length;
+        int handSize = playerHand.length;
 
         JPanel cardButtons = new JPanel();
         // Creating the button for the first card
         if (handSize >= 1) {
-            card1 = new JButton(new ImageIcon(api.GetCardImage(playerHand[0])));
+            card1 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard1Image()));
         } else {
             card1 = new JButton();
             card1.setEnabled(false);
@@ -61,7 +56,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the second card
         if (handSize >= 2) {
-            card2 = new JButton(new ImageIcon(api.GetCardImage(playerHand[1])));
+            card2 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard2Image()));
         } else {
             card2 = new JButton();
             card2.setEnabled(false);
@@ -70,7 +65,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the third card
         if (handSize >= 3) {
-            card3 = new JButton(new ImageIcon(api.GetCardImage(playerHand[2])));
+            card3 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard3Image()));
         } else {
             card3 = new JButton();
             card3.setEnabled(false);
@@ -79,7 +74,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the fourth card
         if (handSize >= 4) {
-            card4 = new JButton(new ImageIcon(api.GetCardImage(playerHand[3])));
+            card4 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard4Image()));
         } else {
             card4 = new JButton();
             card4.setEnabled(false);
@@ -88,7 +83,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the fifth card
         if (handSize == 5) {
-            card5 = new JButton(new ImageIcon(api.GetCardImage(playerHand[4])));
+            card5 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard5Image()));
         } else {
             card5 = new JButton();
             card5.setEnabled(false);
@@ -110,8 +105,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card1)) {
                             try {
-                                api.CardPlayed("player", playerHand[0]);
-                                cardButtonController.execute(api.GetCardValue(playerHand[0]), api.GetCardSuit(playerHand[0]));
+                                cardButtonController.execute(playerHand[0]);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -127,8 +121,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card2)) {
                             try {
-                                api.CardPlayed("player", playerHand[1]);
-                                cardButtonController.execute(api.GetCardValue(playerHand[1]), api.GetCardSuit(playerHand[1]));
+                                cardButtonController.execute(playerHand[1]);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -144,8 +137,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card3)) {
                             try {
-                                api.CardPlayed("player", playerHand[2]);
-                                cardButtonController.execute(api.GetCardValue(playerHand[2]), api.GetCardSuit(playerHand[2]));
+                                cardButtonController.execute(playerHand[2]);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -161,8 +153,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card4)) {
                             try {
-                                api.CardPlayed("player", playerHand[3]);
-                                cardButtonController.execute(api.GetCardValue(playerHand[3]), api.GetCardSuit(playerHand[3]));
+                                cardButtonController.execute(playerHand[3]);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -178,8 +169,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card5)) {
                             try {
-                                api.CardPlayed("player", playerHand[4]);
-                                cardButtonController.execute(api.GetCardValue(playerHand[4]), api.GetCardSuit(playerHand[4]));
+                                cardButtonController.execute(playerHand[4]);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -204,7 +194,6 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     @Override
     public void propertyChange(PropertyChangeEvent e) {
-        AttackSelectState state = (AttackSelectState) e.getNewValue();
         // Don't think anything needs to be implemented here
     }
 

@@ -21,9 +21,12 @@ public class AttackButtonPresenter implements AttackButtonOutputBoundary {
     public void prepareSuccessView(AttackButtonOutputData attackButtonOutputData) {
 
         AttackSelectState attackSelectState = this.attackSelectViewModel.getState();
-        attackSelectState.setPlayerHealth(attackButtonOutputData.getCurrentHealth());
-        attackSelectState.setPlayerMaxHealth(attackButtonOutputData.getMaxHealth());
         attackSelectState.setPlayerHand(attackButtonOutputData.getHand());
+        attackSelectState.setCard1Image(attackButtonOutputData.getCard1Image());
+        attackSelectState.setCard2Image(attackButtonOutputData.getCard2Image());
+        attackSelectState.setCard3Image(attackButtonOutputData.getCard3Image());
+        attackSelectState.setCard4Image(attackButtonOutputData.getCard4Image());
+        attackSelectState.setCard5Image(attackButtonOutputData.getCard5Image());
         this.attackSelectViewModel.setState(attackSelectState);
         attackSelectViewModel.firePropertyChanged();
 

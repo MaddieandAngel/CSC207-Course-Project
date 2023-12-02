@@ -1,7 +1,5 @@
 package use_case.AttackButton;
 
-import entity.Player;
-
 import java.io.IOException;
 
 public class AttackButtonInteractor implements AttackButtonInputBoundary{
@@ -17,8 +15,26 @@ public class AttackButtonInteractor implements AttackButtonInputBoundary{
 
     @Override
     public void execute() throws IOException {
-        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(attackButtonDataAccessInterface.getPlayer().getCurrentHealth(),
-                attackButtonDataAccessInterface.getPlayer().getMaxHealth(), attackButtonDataAccessInterface.getAPI().GetCardsInPile("player"));
+        String[] playerHand = attackButtonDataAccessInterface.getAPI().GetCardsInPile("player");
+
+        String[] cardImages = new String[5];
+        int i = 0;
+        while (i < 5) {
+            if (i < playerHand.length) {
+                cardImages[i] = attackButtonDataAccessInterface.getAPI().GetCardImage(playerHand[i]);
+            } else {
+                cardImages[i] = null;
+            }
+            i++;
+        }
+        String card1Image = cardImages[0];
+        String card2Image = cardImages[1];
+        String card3Image = cardImages[2];
+        String card4Image = cardImages[3];
+        String card5Image = cardImages[4];
+
+        AttackButtonOutputData attackButtonOutputData = new AttackButtonOutputData(playerHand, card1Image, card2Image,
+                card3Image, card4Image, card5Image);
 
         attackButtonPresenter.prepareSuccessView(attackButtonOutputData);
     }

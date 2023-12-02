@@ -23,6 +23,8 @@ class CardButtonInteractorTest {
 
     char cardPlayedSuit;
 
+    String cardPlayed;
+
     APIAccessInterface api;
 
     int originalPlayerHealth;
@@ -41,7 +43,7 @@ class CardButtonInteractorTest {
 
         api = new APIAccess();
         api.DrawCard("player");
-        String cardPlayed = api.GetCardsInPile("player")[0];
+        cardPlayed = api.GetCardsInPile("player")[0];
         cardPlayedValue = api.GetCardValue(cardPlayed);
         cardPlayedSuit = api.GetCardSuit(cardPlayed);
 
@@ -80,6 +82,13 @@ class CardButtonInteractorTest {
         CardButtonOutputBoundary successPresenter = new CardButtonOutputBoundary() {
             @Override
             public void prepareSuccessView(CardButtonOutputData data) {
+                // Check that card was removed from player's hand
+                try {
+                    assertNull(dataAccessInterface.getAPI().GetCardsInPile("player"));
+                } catch (IOException e) {
+                    fail("Not expecting IOException");
+                }
+
                 // Check if max health and level remain unchanged
                 assertEquals(originalPlayerMaxHealth, data.getPlayerMaxHealth());
                 assertEquals(originalPlayerLevel, data.getPlayerLevel());
@@ -99,9 +108,9 @@ class CardButtonInteractorTest {
 
                 // Check if health for enemy was updated correctly
                 if (originalEnemyHealth <= data.getDamageToEnemy()) {
-                    assertEquals(data.getEnemyHealth(), 0);
+                    assertEquals(dataAccessInterface.getEnemy().getCurrentHealth(), 0);
                 } else {
-                    assertEquals(data.getEnemyHealth(), originalEnemyHealth - data.getDamageToEnemy());
+                    assertEquals(dataAccessInterface.getEnemy().getCurrentHealth(), originalEnemyHealth - data.getDamageToEnemy());
                 }
 
                 // Check if health for player was updated correctly
@@ -121,17 +130,10 @@ class CardButtonInteractorTest {
                 } else {
                     assertEquals(data.getPlayerCurrentHealth(), originalPlayerHealth - data.getDamageToPlayer());
                 }
-
-                // Check that player's and enemy's current health was updated
-                assertEquals(data.getEnemyHealth(), dataAccessInterface.getEnemy().getCurrentHealth());
-                assertEquals(data.getPlayerCurrentHealth(), dataAccessInterface.getPlayer().getCurrentHealth());
-
-                assertEquals(dataAccessInterface.getPlayer().getMaxHealth(), data.getPlayerMaxHealth());
-                assertEquals(data.getPlayerLevel(), dataAccessInterface.getPlayer().getLevel());
             }
         };
 
-        CardButtonInputData inputData = new CardButtonInputData(cardPlayedValue, cardPlayedSuit);
+        CardButtonInputData inputData = new CardButtonInputData(cardPlayed);
         CardButtonInputBoundary interactor = new CardButtonInteractor(successPresenter, battleRepository);
         interactor.execute(inputData);
     }

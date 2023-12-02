@@ -23,17 +23,21 @@ public class CardButtonPresenter implements CardButtonOutputBoundary {
 
         BattleResultState state = battleResultViewModel.getState();
         state.setPlayerCurrentHealth(cardButtonOutputData.getPlayerCurrentHealth());
-        state.setPlayerMaxHealth(cardButtonOutputData.getPlayerMaxHealth());
-        state.setPlayerLevel(cardButtonOutputData.getPlayerLevel());
         state.setPlayerAction("attack");
-        state.setEnemyHealth(cardButtonOutputData.getEnemyHealth());
         state.setEnemyAction(cardButtonOutputData.getEnemyAction());
         state.setRevivePotionUsed(cardButtonOutputData.getRevivePotionUsed());
         state.setDamageToPlayer(cardButtonOutputData.getDamageToPlayer());
         state.setDamageToEnemy(cardButtonOutputData.getDamageToEnemy());
+        state.setPlayerCardValue(cardButtonOutputData.getPlayerCardValue());
+        state.setPlayerCardSuit(cardButtonOutputData.getPlayerCardSuit());
+        state.setPlayerCardImage(cardButtonOutputData.getPlayerCardImage());
+        state.setEnemyCardValue(cardButtonOutputData.getEnemyCardValue());
+        state.setEnemyCardSuit(cardButtonOutputData.getEnemyCardSuit());
+        state.setEnemyCardImage(cardButtonOutputData.getEnemyCardImage());
         this.battleResultViewModel.setState(state);
         battleResultViewModel.firePropertyChanged();
 
+        viewManagerModel.setActiveView(battleResultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 
