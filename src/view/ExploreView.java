@@ -41,10 +41,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         textBox.add(textBoxText);
 
         JPanel playerStatsPanel = new JPanel();
-        playerStats = new JLabel("Level: " + exploreViewModel.getState().getPlayerLevel() + " | Health: " +
-                exploreViewModel.getState().getPlayerCurrentHealth() + "/" +
-                exploreViewModel.getState().getPlayerMaxHealth() + " | Floor Level: " +
-                exploreViewModel.getState().getFloorLevel());
+        playerStats = new JLabel("Level: X | Health: X/X | Floor Level: X");
         playerStatsPanel.add(playerStats);
 
         JPanel buttons = new JPanel();

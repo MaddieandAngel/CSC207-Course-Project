@@ -9,6 +9,7 @@ import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,9 +57,8 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
 
         //Text for the player's level and health:
         JPanel playerStatsPanel = new JPanel();
-        playerStats = new JLabel("Level: " + turnSelectViewModel.getState().getPlayerLevel() + "\nHealth: " +
-                turnSelectViewModel.getState().getPlayerHealth() + "/" +
-                turnSelectViewModel.getState().getPlayerMaxHealth());
+        playerStats = new JLabel("Level: X | Health: X/X");
+        //TODO: include floor level? Would require some changes to many files, I think. Is it worth it?
         playerStatsPanel.add(playerStats);
 
         //Buttons for the player's possible actions:
@@ -77,13 +77,41 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
         buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
         buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
-        // TODO: Figure out how to give the buttons JPanel a border
 
-        textBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        textBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        //Set borders
+        Border borders = BorderFactory.createLineBorder(Color.white, 5);
+        buttons.setBorder(borders);
+        textBox.setBorder(borders);
 
-        playerStatsPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        playerStatsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        attack.setBorder(buttonBorders);
+        draw.setBorder(buttonBorders);
+        items.setBorder(buttonBorders);
+        defend.setBorder(buttonBorders);
+        flee.setBorder(buttonBorders);
+
+        //Set background colours
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        buttons.setBackground(bg);
+        textBox.setBackground(bg);
+        playerStatsPanel.setBackground(bg);
+
+        attack.setBackground(bg);
+        draw.setBackground(bg);
+        items.setBackground(bg);
+        defend.setBackground(bg);
+        flee.setBackground(bg);
+
+        //Set text colours
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        textBoxText.setForeground(text);
+        playerStats.setForeground(text);
+        attack.setForeground(text);
+        draw.setForeground(text);
+        items.setForeground(text);
+        defend.setForeground(text);
+        flee.setForeground(text);
 
         this.add(playerStatsPanel);
         this.add(buttons);
@@ -143,7 +171,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_flee) {
                         if (e_flee.getSource().equals(flee)) {
-                            // TODO: Implement this once the FleeButtonController is written
+                            JOptionPane.showConfirmDialog(flee, "Fleeing has not been implemented yet. Fight your battle!");
                         }
                     }
                 }
@@ -159,7 +187,7 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         TurnSelectState state = turnSelectViewModel.getState();
         textBoxText.setText("A level " + state.getEnemyLevel() + " " + state.getEnemyName() + " has appeared!");
         // ^ Unnecessary? Not sure
-        playerStats.setText("Level: " + state.getPlayerLevel() + "\nHealth: " + state.getPlayerHealth() + "/" +
+        playerStats.setText("Level: " + state.getPlayerLevel() + "| Health: " + state.getPlayerHealth() + "/" +
                 state.getPlayerMaxHealth());
     }
 }
