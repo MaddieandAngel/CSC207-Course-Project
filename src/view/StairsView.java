@@ -5,6 +5,7 @@ import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.stairs.StayOnFloorController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +33,8 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         this.stairsViewModel = stairsViewModel;
 
         JPanel textBox = new JPanel();
-        textBox.add(new JLabel(stairsViewModel.textbox_text));
+        JLabel textBoxText = new JLabel(stairsViewModel.textbox_text);
+        textBox.add(textBoxText);
 
         JPanel playerStatsPanel = new JPanel();
         playerStats = new JLabel("Level: X | Health: X/X | Floor Level: X");
@@ -45,12 +47,38 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         buttons.add(stayOnFloor);
 
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
-        // TODO: Figure out how to give the buttons JPanel a border
+
+        //Set borders
+        Border borders = BorderFactory.createLineBorder(Color.white, 5);
+        buttons.setBorder(borders);
+        textBox.setBorder(borders);
+
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        nextFloor.setBorder(buttonBorders);
+        stayOnFloor.setBorder(buttonBorders);
+
+
+        //Set background colours
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        buttons.setBackground(bg);
+        textBox.setBackground(bg);
+        playerStatsPanel.setBackground(bg);
+
+        nextFloor.setBackground(bg);
+        stayOnFloor.setBackground(bg);
+
+        //Set text colours
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        textBoxText.setForeground(text);
+        playerStats.setForeground(text);
+        nextFloor.setForeground(text);
+        stayOnFloor.setForeground(text);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(playerStatsPanel);
-        this.add(textBox);
         this.add(buttons);
+        this.add(textBox);
 
         nextFloor.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

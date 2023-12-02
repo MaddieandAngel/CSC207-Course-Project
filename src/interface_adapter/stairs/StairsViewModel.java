@@ -1,7 +1,6 @@
 package interface_adapter.stairs;
 
 import interface_adapter.ViewModel;
-import interface_adapter.explore.ExploreState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -12,17 +11,17 @@ public class StairsViewModel extends ViewModel {
     public final String STAY_FLOOR_LABEL = "No";
     public String textbox_text = "You've found the stairs! Continue to the next floor?";
 
-    private ExploreState state = new ExploreState();
+    private StairsState state = new StairsState();
 
     public StairsViewModel(){
         super("found_stairs");
     }
 
-    public void setState(ExploreState state){
+    public void setState(StairsState state){
         this.state = state;
     }
 
-    public ExploreState getState() {
+    public StairsState getState() {
         return state;
     }
 

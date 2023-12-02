@@ -2,6 +2,7 @@ package interface_adapter.explore;
 
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.stairs.StairsState;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import interface_adapter.stairs.StairsViewModel;
@@ -38,7 +39,15 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareStairsView() {
-        stairsViewModel.setState(exploreViewModel.getState());
+        StairsState stairsState = stairsViewModel.getState();
+        ExploreState exploreState = exploreViewModel.getState();
+
+        stairsState.setPlayerLevel(exploreState.getPlayerLevel());
+        stairsState.setFloorLevel(exploreState.getFloorLevel());
+        stairsState.setPlayerCurrentHealth(exploreState.getPlayerCurrentHealth());
+        stairsState.setPlayerMaxHealth(exploreState.getPlayerMaxHealth());
+
+        stairsViewModel.setState(stairsState);
         stairsViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(stairsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
