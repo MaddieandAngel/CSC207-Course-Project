@@ -49,7 +49,7 @@ public class ExploreUseCaseFactory {
 
     private static SearchButtonController createSearchRoomUseCase(){
         //TODO: implement properly
-        return new SearchButtonController();
+        return new SearchButtonController(searchButtonInputBoundary);
     }
 
     //TODO: createOpenBagUseCase ?

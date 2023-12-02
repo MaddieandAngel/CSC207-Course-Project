@@ -1,11 +1,11 @@
-package use_case.movement;
+package use_case.SearchButton;
 
 import entity.BagAndItems.Item;
+import use_case.movement.EnemyOutputData;
+import use_case.movement.MovementOutputData;
 
-public interface MovementOutputBoundary {
-
+public interface SearchButtonOutputBoundary {
     void prepareEmptyRoomView(MovementOutputData movementOutputData);
-    void prepareStairsView(MovementOutputData movementOutputData);
     void prepareTurnSelectView(EnemyOutputData enemyOutputData);
     void prepareItemCollectionView(Item item);
 }

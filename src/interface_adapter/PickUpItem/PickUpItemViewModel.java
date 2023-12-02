@@ -31,4 +31,5 @@ public class PickUpItemViewModel extends ViewModel {
     public PickUpItemState getState(){
         return state;
     }
+    public void setState(PickUpItemState pickUpItemState){this.state = state;}
 }

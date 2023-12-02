@@ -4,6 +4,7 @@ import entity.ActivePlayer;
 import entity.BagAndItems.*;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.PickUpItem.PickUpItemController;
+import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 
 import javax.swing.*;
@@ -35,21 +36,21 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
         this.dropToPickController = dropToPickController;
         this.player = player;
         Random r = new Random();
-        int random = r.nextInt(100);
-        if (random < 40){
-            this.item = new healingPotion10();
-        }
-        else if (random <70){
-            this.item = new healingPotion20();
-        }
-        else if (random < 90){
-            this.item = new healingPotion45();
-        }
-        else{
-            this.item = new revivePotion();
-        }
-
-
+//        int random = r.nextInt(100);
+//        if (random < 40){
+//            this.item = new healingPotion10();
+//        }
+//        else if (random <70){
+//            this.item = new healingPotion20();
+//        }
+//        else if (random < 90){
+//            this.item = new healingPotion45();
+//        }
+//        else{
+//            this.item = new revivePotion();
+//        }
+        PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
+        item = pickUpItemState.getItem();
 
         JPanel buttons = new JPanel();
 

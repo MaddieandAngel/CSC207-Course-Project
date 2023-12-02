@@ -4,44 +4,36 @@ import entity.BagAndItems.Item;
 import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
-import interface_adapter.stairs.StairsViewModel;
+import use_case.SearchButton.SearchButtonOutputBoundary;
 import use_case.movement.EnemyOutputData;
-import use_case.movement.MovementOutputBoundary;
 import use_case.movement.MovementOutputData;
 
-public class ExplorePresenter implements MovementOutputBoundary {
-
+public class SearchButtonPresenter implements SearchButtonOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
     private final StairsViewModel stairsViewModel;
-    private final PickUpItemViewModel itemCollectViewModel;
-
+    private final PickUpItemViewModel pickUpItemViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public ExplorePresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel,
-                            TurnSelectViewModel turnSelectViewModel, StairsViewModel stairsViewModel,
-                            PickUpItemViewModel itemCollectViewModel){
-        this.viewManagerModel = viewManagerModel;
+    public SearchButtonPresenter(ExploreViewModel exploreViewModel, TurnSelectViewModel turnSelectViewModel,
+                                 StairsViewModel stairsViewModel, PickUpItemViewModel pickUpItemViewModel,
+                                 ViewManagerModel viewManagerModel) {
         this.exploreViewModel = exploreViewModel;
         this.turnSelectViewModel = turnSelectViewModel;
         this.stairsViewModel = stairsViewModel;
-        this.itemCollectViewModel = itemCollectViewModel;
+        this.pickUpItemViewModel = pickUpItemViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
+
 
     @Override
     public void prepareEmptyRoomView(MovementOutputData movementOutputData) {
         ExploreState exploreState = exploreViewModel.getState();
         exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
         exploreViewModel.firePropertyChanged();
-        //No need to change active view
-    }
-
-    @Override
-    public void prepareStairsView(MovementOutputData movementOutputData) {
-        viewManagerModel.setActiveView(stairsViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -49,7 +41,7 @@ public class ExplorePresenter implements MovementOutputBoundary {
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
 
         //Updates player output information, if it has changed:
-        //TODO
+        //TODO directly Copy and paste from explorePresenter, not sure if there's anything need to be fixed
 
         //Updates enemy output information:
         turnSelectState.setEnemyName(enemyOutputData.getEnemyName());
@@ -63,12 +55,10 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareItemCollectionView(Item item) {
-        //TODO: Everything related to moving to the item collection view
-        PickUpItemState pickUpItemState = itemCollectViewModel.getState();
+        PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
         pickUpItemState.setItem(item);
-        itemCollectViewModel.setState(pickUpItemState);
-        viewManagerModel.setActiveView(itemCollectViewModel.getViewName());
+        pickUpItemViewModel.setState(pickUpItemState);
+        viewManagerModel.setActiveView(pickUpItemViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
-
 }
