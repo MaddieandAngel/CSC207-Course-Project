@@ -37,9 +37,12 @@ public class ExplorePresenter implements MovementOutputBoundary {
     }
 
     @Override
-    public void prepareStairsView(MovementOutputData movementOutputData) {
+    public void prepareStairsView() {
+        stairsViewModel.setState(exploreViewModel.getState());
+        stairsViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(stairsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+        System.out.println("Fired property change to viewManagerModel"); //TODO: delete later
     }
 
     @Override

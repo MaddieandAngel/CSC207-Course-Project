@@ -13,12 +13,10 @@ import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
+import interface_adapter.stairs.StairsDataAccessInterface;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
-import view.ExploreView;
-import view.PickItemView;
-import view.TitleScreenView;
-import view.ViewManager;
+import view.*;
 import view.in_battle.BattleResultView;
 import view.in_battle.TurnSelectView;
 
@@ -78,12 +76,14 @@ public class Main {
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
                 pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);
         views.add(exploreView, exploreView.viewName);
+        StairsView stairsView = StairsUseCaseFactory.create(viewManagerModel, exploreViewModel, stairsViewModel, exploreDataAccessObject,
+                exploreDataAccessObject);
+        views.add(stairsView);
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
         views.add(battleResultView);
-
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();

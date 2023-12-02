@@ -23,14 +23,20 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
     private final JButton nextFloor;
     private final JButton stayOnFloor;
 
+    private final JLabel playerStats;
+
     public StairsView(NextFloorController nextFloorControl, StayOnFloorController stayOnFloorControl,
                       StairsViewModel stairsViewModel){
         this.nextFloorController = nextFloorControl;
         this.stayOnFloorController = stayOnFloorControl;
         this.stairsViewModel = stairsViewModel;
 
-        JPanel textbox = new JPanel();
-        textbox.add(new JLabel(stairsViewModel.textbox_text));
+        JPanel textBox = new JPanel();
+        textBox.add(new JLabel(stairsViewModel.textbox_text));
+
+        JPanel playerStatsPanel = new JPanel();
+        playerStats = new JLabel("Level: X | Health: X/X | Floor Level: X");
+        playerStatsPanel.add(playerStats);
 
         JPanel buttons = new JPanel();
         nextFloor = new JButton(stairsViewModel.NEXT_FLOOR_LABEL);
@@ -39,12 +45,10 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         buttons.add(stayOnFloor);
 
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
-        buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
-        buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
         // TODO: Figure out how to give the buttons JPanel a border
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(textbox);
+        this.add(textBox);
         this.add(buttons);
 
         nextFloor.addActionListener(
@@ -79,6 +83,10 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        playerStats.setText("Level: " + stairsViewModel.getState().getPlayerLevel() + " | Health: " +
+                stairsViewModel.getState().getPlayerCurrentHealth() + "/" +
+                stairsViewModel.getState().getPlayerMaxHealth() + " | Floor Level: " +
+                stairsViewModel.getState().getFloorLevel());
+        System.out.println("Visible: " + this.isVisible()); //TODO: delete later
     }
 }

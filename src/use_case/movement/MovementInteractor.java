@@ -45,9 +45,11 @@ public class MovementInteractor implements MovementInputBoundary {
         MovementOutputData movementOutputData = new MovementOutputData(directions);
 
         if (exploreDataAccessObject.checkForStairs()){
-            movementPresenter.prepareStairsView(movementOutputData);
+            System.out.println("stairs"); //TODO: delete later
+            movementPresenter.prepareStairsView();
         }
         else if (exploreDataAccessObject.checkForEnemy()){
+            System.out.println("enemy"); //TODO: delete later
             // Generates a random enemy:
             Random randomizer = new Random();
             int floorLevel = exploreDataAccessObject.getFloorLevel();
@@ -69,6 +71,7 @@ public class MovementInteractor implements MovementInputBoundary {
             movementPresenter.prepareTurnSelectView(new EnemyOutputData(enemy.getName(), enemy.getLevel()));
         }
         else if (exploreDataAccessObject.checkForItem()){
+            System.out.println("item"); //TODO: delete later
             //TODO: Generate item for output data
             movementPresenter.prepareItemCollectionView(movementOutputData);
         }

@@ -157,30 +157,39 @@ public class BattleResultView extends JPanel implements ActionListener, Property
             action1.setVisible(false);
         }
 
-        //Set action2 label
+        //Set the action2 and action3 labels:
 
-        //Set action3 label
+        //The player attacking has the second lowest textbox priority. Unless the enemy also attacks, it will be shown in the action3 label.
+        //If the enemy attacks, the text for the player's attack will be shown in the action2 label instead.
+        //The player's non-attacking actions have the highest priority and will always be shown in the action2 label
+        if (state.getPlayerAction().equals("attack") && !(state.getEnemyAction().equals("attack"))){
+            setTextForPlayerAction(state, action3, playerCardName);
+        }
+        else{
+            setTextForPlayerAction(state, action2, playerCardName);
+        }
+
+        //The enemy attacking always has the lowest priority. It will always be shown in the action3 label
+        //Enemy actions that are not attacking will be shown in the action2 label if the player attacked, otherwise in the action3 label
+        if (state.getEnemyAction().equals("attack") || !(state.getPlayerAction().equals("attack"))){
+            setTextForEnemyAction(state, action3, enemyCardName);
+        }
+        else{
+            setTextForEnemyAction(state, action2, enemyCardName);
+        }
 
         //Set whether revivePotionUsed label should be visible
         revivePotionUsed.setVisible(state.getRevivePotionUsed());
     }
 
     private String convertSuitsToFullName(char suit){
-        if (suit == 'H'){
-            return "Hearts";
-        }
-        else if (suit == 'S'){
-            return  "Spades";
-        }
-        else if (suit == 'C'){
-            return "Clubs";
-        }
-        else if (suit == 'D'){
-            return "Diamonds";
-        }
-        else {
-            return "Joker";
-        }
+        return switch (suit) {
+            case 'H' -> "Hearts";
+            case 'S' -> "Spades";
+            case 'C' -> "Clubs";
+            case 'D' -> "Diamonds";
+            default -> "Joker";
+        };
     }
 
     private String convertCardValues(String value){
@@ -191,5 +200,27 @@ public class BattleResultView extends JPanel implements ActionListener, Property
             case "13" -> "King";
             default -> value;
         };
+    }
+
+    private void setTextForPlayerAction(BattleResultState state, JLabel textBoxLine, String playerCardName){
+        switch (state.getPlayerAction()) {
+            case "attack" -> textBoxLine.setText("Player attacks with " + playerCardName + "! Deals " +
+                    state.getDamageToEnemy() + " damage!");
+            case "draw" -> textBoxLine.setText("Player drew the " + playerCardName + "!");
+            case "defend" -> textBoxLine.setText("Player defended!");
+            default ->  //Player used an item
+                //TODO: edit this text to include the specific name of the item that was used
+                    textBoxLine.setText("Player used a Healing Potion!");
+        }
+    }
+
+    private void setTextForEnemyAction(BattleResultState state, JLabel textBoxLine, String enemyCardName){
+        switch (state.getEnemyAction()){
+            case "attack" -> textBoxLine.setText(state.getEnemyName() + " attacks with " + enemyCardName + "! Deals " +
+                    state.getDamageToPlayer() + " damage!");
+            case "draw" -> textBoxLine.setText(state.getEnemyName() + " drew a card!");
+            case "defend" -> textBoxLine.setText(state.getEnemyName() + " defended!");
+        }
+
     }
 }
