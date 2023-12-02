@@ -5,10 +5,11 @@ import entity.Player;
 import entity.PlayerFactory;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
+import use_case.DefendButton.DefendButtonDataAccessInterface;
 import use_case.DrawButton.DrawButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, DrawButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, DrawButtonDataAccessInterface, DefendButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
