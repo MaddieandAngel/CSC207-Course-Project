@@ -109,7 +109,11 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_draw) {
                         if (e_draw.getSource().equals(draw)) {
-                            // TODO: implement
+                            try {
+                                drawButtonController.execute();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }
@@ -163,5 +167,10 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         // ^ Unnecessary? Not sure
         playerStats.setText("Level: " + state.getPlayerLevel() + "\nHealth: " + state.getPlayerHealth() + "/" +
                 state.getPlayerMaxHealth());
+
+        if (state.getDrawError() != null) {
+            JOptionPane.showMessageDialog(this, state.getDrawError());
+            state.setDrawError(null);
+        }
     }
 }

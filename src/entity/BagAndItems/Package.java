@@ -1,6 +1,5 @@
 package entity.BagAndItems;
 
-import entity.ActivePlayer;
 import entity.Player;
 
 import java.util.ArrayList;

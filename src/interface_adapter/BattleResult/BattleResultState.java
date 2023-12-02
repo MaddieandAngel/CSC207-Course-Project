@@ -78,9 +78,9 @@ public class BattleResultState {
 
     public String getPlayerCardImage() { return this.playerCardImage;}
 
-    public void setPlayerCardImage(String playerCardImage) {this.playerCardImage = playerCardImage;}
+    public void setPlayerCardImage(String url) { this.playerCardImage = url;}
 
-    public String getEnemyCardValue() { return enemyCardValue;}
+    public String getEnemyCardValue() { return this.enemyCardValue;}
 
     public void setEnemyCardValue(String value) { this.enemyCardValue = value;}
 
@@ -88,9 +88,9 @@ public class BattleResultState {
 
     public void setEnemyCardSuit(char suit) { this.enemyCardSuit = suit;}
 
-    public String getEnemyCardImage() { return enemyCardImage;}
+    public String getEnemyCardImage() { return this.enemyCardImage;}
 
-    public void setEnemyCardImage(String image) { this.enemyCardImage = image;}
+    public void setEnemyCardImage(String url) { this.enemyCardImage = url;}
 
     public String getDamageBonus() { return this.damageBonus;}
 

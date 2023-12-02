@@ -13,4 +13,9 @@ public class revivePotion implements Item {
     public String usage(){
         return "This potion will be used when you fail a game, and will heal you with your max hp";
     }
+
+    @Override
+    public String getName() {
+        return "RevivePotion";
+    }
 }

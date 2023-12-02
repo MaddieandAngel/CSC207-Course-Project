@@ -4,8 +4,6 @@ import interface_adapter.TitleScreen.CreateDeckDataAccessInterface;
 import interface_adapter.stairs.StairsDataAccessInterface;
 import use_case.movement.MovementOutputData;
 
-import java.io.IOException;
-
 public class PlayButtonInteractor implements PlayButtonInputBoundary{
     final PlayButtonOutputBoundary playPresenter;
     final CreateDeckDataAccessInterface apiAccess;

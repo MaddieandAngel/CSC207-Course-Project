@@ -9,15 +9,17 @@ import use_case.AttackButton.AttackButtonDataAccessInterface;
 import use_case.AttackButton.BackButton.BackButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.DrawButton.DrawButtonDataAccessInterface;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface, DrawButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
 
-    private EnemyBehaviourInterface enemyBehaviour;
-
     private APIAccessInterface api;
+
+    private EnemyBehaviourInterface enemyBehaviour;
 
     public InBattleDataAccessObject(PlayerFactory playerFactory, APIAccessInterface api, EnemyBehaviourInterface enemyBehaviour){
         this.player = playerFactory.create();
@@ -38,9 +40,12 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
         return enemy;
     }
 
-    public void setEnemyBehaviourInterface(EnemyBehaviourInterface enemyBehaviour) { this.enemyBehaviour = enemyBehaviour;}
-
     public EnemyBehaviourInterface getEnemyBehaviour() { return this.enemyBehaviour;}
 
+    public void setEnemyBehaviour(EnemyBehaviourInterface enemyBehaviour) { this.enemyBehaviour = enemyBehaviour;}
+
     public APIAccessInterface getAPI() { return this.api;}
+
+    public void setAPI(APIAccessInterface api) { this.api = api;}
+
 }

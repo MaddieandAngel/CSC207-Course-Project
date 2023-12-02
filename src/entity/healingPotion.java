@@ -21,4 +21,9 @@ public class healingPotion implements Item {
     public String usage(){
         return "This potion heals " + percentage + " of your max HP.";
     }
+
+    @Override
+    public String getName() {
+        return "HealingPotion";
+    }
 }

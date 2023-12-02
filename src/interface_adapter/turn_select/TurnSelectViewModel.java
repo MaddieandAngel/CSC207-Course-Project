@@ -40,5 +40,4 @@ public class TurnSelectViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-
 }

@@ -1,6 +1,5 @@
 package entity.BagAndItems;
 
-import entity.ActivePlayer;
 import entity.Player;
 
 public class revivePotion implements Item{
