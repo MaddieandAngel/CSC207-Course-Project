@@ -4,7 +4,6 @@ import use_case.SearchButton.SearchButtonInputBoundary;
 
 public class SearchButtonController {
 
-    //TODO: Add constructor, implement
     final SearchButtonInputBoundary searchButtonInputBoundary;
 
     public SearchButtonController(SearchButtonInputBoundary searchButtonInputBoundary) {
@@ -12,7 +11,6 @@ public class SearchButtonController {
     }
 
     public void execute(){
-        //TODO: implement
         searchButtonInputBoundary.execute();
 
     }

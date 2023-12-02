@@ -11,19 +11,19 @@ import use_case.SearchButton.SearchButtonOutputBoundary;
 import use_case.movement.EnemyOutputData;
 import use_case.movement.MovementOutputData;
 
+import javax.swing.*;
+
 public class SearchButtonPresenter implements SearchButtonOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
-    private final StairsViewModel stairsViewModel;
     private final PickUpItemViewModel pickUpItemViewModel;
     private ViewManagerModel viewManagerModel;
 
     public SearchButtonPresenter(ExploreViewModel exploreViewModel, TurnSelectViewModel turnSelectViewModel,
-                                 StairsViewModel stairsViewModel, PickUpItemViewModel pickUpItemViewModel,
+                                 PickUpItemViewModel pickUpItemViewModel,
                                  ViewManagerModel viewManagerModel) {
         this.exploreViewModel = exploreViewModel;
         this.turnSelectViewModel = turnSelectViewModel;
-        this.stairsViewModel = stairsViewModel;
         this.pickUpItemViewModel = pickUpItemViewModel;
         this.viewManagerModel = viewManagerModel;
     }
@@ -58,6 +58,8 @@ public class SearchButtonPresenter implements SearchButtonOutputBoundary {
         PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
         pickUpItemState.setItem(item);
         pickUpItemViewModel.setState(pickUpItemState);
+        pickUpItemViewModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, "You found a" + item.getName()+" !");
         viewManagerModel.setActiveView(pickUpItemViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

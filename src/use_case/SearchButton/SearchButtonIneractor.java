@@ -9,20 +9,27 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 import entity.EnemyFactory;
+import interface_adapter.explore.ExploreDataAccessInterface;
+import interface_adapter.explore.GenerateEnemyDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.movement.EnemyOutputData;
 import use_case.movement.MovementOutputData;
 
+import javax.swing.*;
+
 public class SearchButtonIneractor implements SearchButtonInputBoundary{
     final SearchButtonOutputBoundary searchButtonPresenter;
     final EnemyFactory enemyFactory;
     final APIAccessInterface apiAccessObject;
-    final ExploreDataAccessObject exploreDataAccessObject;
-    final InBattleDataAccessObject inBattleDataAccessObject;
+    final ExploreDataAccessInterface exploreDataAccessObject;
+    final GenerateEnemyDataAccessInterface inBattleDataAccessObject;
 
 
-    public SearchButtonIneractor(SearchButtonOutputBoundary searchButtonPresenter, EnemyFactory enemyFactory, APIAccessInterface apiAccessInterface, ExploreDataAccessObject exploreDataAccessObject, InBattleDataAccessObject inBattleDataAccessObject) {
+    public SearchButtonIneractor(SearchButtonOutputBoundary searchButtonPresenter,
+                                 EnemyFactory enemyFactory, APIAccessInterface apiAccessInterface,
+                                 ExploreDataAccessInterface exploreDataAccessObject,
+                                 GenerateEnemyDataAccessInterface inBattleDataAccessObject) {
         this.searchButtonPresenter = searchButtonPresenter;
         this.enemyFactory = enemyFactory;
         this.apiAccessObject = apiAccessInterface;
@@ -37,7 +44,9 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
         int random = r.nextInt(100);
         if (random <= 60){
             searchButtonPresenter.prepareEmptyRoomView(movementOutputData);
-        }else if (random <= 80){
+            JOptionPane.showMessageDialog(null, "The room is empty:(");
+        }else if (random <= 90){
+            JOptionPane.showMessageDialog(null, "There's enemy in the room");
             Random randomizer = new Random();
             int floorLevel = exploreDataAccessObject.getFloorLevel();
             Enemy enemy = enemyFactory.create(randomizer.nextInt(0, 6),
@@ -54,7 +63,7 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
             }
             searchButtonPresenter.prepareTurnSelectView(new EnemyOutputData(enemy.getName(), enemy.getLevel()));
         }else{
-
+            JOptionPane.showMessageDialog(null, "There's an item in the room!");
             int randomItem = r.nextInt(100);
             if (randomItem < 40){
                 Item item = new healingPotion10();

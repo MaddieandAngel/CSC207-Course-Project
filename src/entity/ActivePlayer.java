@@ -1,6 +1,7 @@
 package entity;
 
 import entity.BagAndItems.Bag;
+import entity.BagAndItems.Item;
 import entity.BagAndItems.Package;
 
 import java.util.ArrayList;

@@ -33,4 +33,10 @@ public class PickUpItemPresenter implements PickUpItemOutputBoundary {
         viewManagerModel.setActiveView(pickUpItemViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void back() {
+        viewManagerModel.setActiveView(exploreViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
 }

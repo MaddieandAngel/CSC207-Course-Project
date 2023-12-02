@@ -17,4 +17,7 @@ public class PickUpItemController {
         pickUpItemInteractor.execute(pickUpItemInputData);
 
     }
+    public void back(){
+        pickUpItemInteractor.back();
+    }
 }

@@ -20,4 +20,9 @@ public class PickUpItemInteractor implements PickUpItemInputBoundary{
         }
 
     }
+
+    @Override
+    public void back() {
+        pickUpItemPresenter.back();
+    }
 }

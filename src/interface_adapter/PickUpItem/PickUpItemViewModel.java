@@ -10,7 +10,7 @@ import java.beans.PropertyChangeSupport;
 public class PickUpItemViewModel extends ViewModel {
     public final String PICK = "Pick Up";
     public final String DROP_FROM_BAG = "Drop From Bag";
-    public final String DROP = "Drop";
+    public final String BACK = "Back";
     public final String TITLE_LABEL = "Pick Up Item";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private PickUpItemState state = new PickUpItemState();

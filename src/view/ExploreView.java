@@ -2,7 +2,6 @@ package view;
 
 import interface_adapter.explore.MovementButtonController;
 import interface_adapter.explore.SearchButtonController;
-import interface_adapter.explore.ExploreState;
 import interface_adapter.explore.ExploreViewModel;
 
 import javax.swing.*;
@@ -20,12 +19,14 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
 
     private final MovementButtonController movementButtonController;
     private final SearchButtonController searchButtonController;
+   // private final ExploreBagController exploreBagController;
 
     private final JButton north;
     private final JButton east;
     private final JButton south;
     private final JButton west;
     private final JButton search;
+    private final JButton bag;
 
     private JLabel playerStats;
 
@@ -34,6 +35,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         this.movementButtonController = moveControl;
         this.searchButtonController = searchControl;
         this.exploreViewModel = exploreViewModel;
+        //this.exploreBagController = exploreBagController;
         exploreViewModel.addPropertyChangeListener(this);
 
         JPanel textbox = new JPanel();
@@ -57,6 +59,8 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         buttons.add(west);
         search = new JButton(exploreViewModel.SEARCH_LABEL);
         buttons.add(search);
+        bag = new JButton(exploreViewModel.BAG);
+        buttons.add(bag);
 
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
         buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
@@ -128,6 +132,25 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     }
                 }
         );
+//        bag.addActionListener(
+//                // This creates an anonymous subclass of ActionListener and instantiates it.
+//                new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e_search) {
+//                        if (e_search.getSource().equals(bag)){
+//                            exploreBagController.execute();
+//                        }
+//                    }
+//                }
+//        );
+        // add buttons to the screen
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(bag);
+        this.add(search);
+        this.add(west);
+        this.add(south);
+        this.add(north);
+        this.add(east);
     }
 
     @Override
