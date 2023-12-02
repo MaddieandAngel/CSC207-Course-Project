@@ -127,6 +127,8 @@ public class ItemSelectionView extends JPanel implements ActionListener, Propert
                 }
         );
 
+        this.add(healButtons);
+
     }
 
     @Override

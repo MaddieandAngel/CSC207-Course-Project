@@ -190,6 +190,8 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                 }
         );
 
+        this.add(cardButtons);
+
     }
 
     @Override
