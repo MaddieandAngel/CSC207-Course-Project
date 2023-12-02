@@ -34,7 +34,7 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
             playerCardImage = drawButtonDataAccessObject.getAPI().GetCardImage(playerCardCode);
 
             // Enemy will make their move
-            EnemyBehaviourOutputData enemyBehaviour = drawButtonDataAccessObject.getEnemyBehaviour().performRandomAction();
+            EnemyBehaviourOutputData enemyBehaviour = drawButtonDataAccessObject.getEnemyBehaviour().performRandomAction(drawButtonDataAccessObject.getEnemy());
             String enemyAction = enemyBehaviour.getAction();
             String enemyCardValue = "";
             char enemyCardSuit = ' ';

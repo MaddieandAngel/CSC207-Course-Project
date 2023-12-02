@@ -1,6 +1,5 @@
 package use_case.EnemyBehaviour;
 
-import entity.Deck;
 import entity.Enemy;
 import interface_adapter.APIAccessInterface;
 
@@ -11,15 +10,13 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
 
     private final APIAccessInterface apiAccess;
     private final Random randomizer;
-    private final Enemy enemy;
 
-    public EnemyBehaviour(APIAccessInterface apiAccessInterface, Enemy enemy) throws IOException {
+    public EnemyBehaviour(APIAccessInterface apiAccessInterface) throws IOException {
         apiAccess = apiAccessInterface;
-        this.enemy = enemy;
         randomizer = new Random();
     }
 
-    public EnemyBehaviourOutputData performRandomAction() throws IOException {
+    public EnemyBehaviourOutputData performRandomAction(Enemy enemy) throws IOException {
         // Random number generator. 0 = attack, 1 = defend, 2 = draw. That way we can just lower the origin or bound
         // if the enemy cannot attack or draw
 
@@ -41,7 +38,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             return new EnemyBehaviourOutputData("defend", -1, ' ', null);
         }
         else { // actionID == 2
-            enemyDraw();
+            enemyDraw(enemy);
             return new EnemyBehaviourOutputData("draw", -1, ' ', null);
         }
     }
@@ -58,7 +55,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         return new EnemyBehaviourOutputData("attack", cardValue, cardSuit, enemyHand[cardUsed]);
     }
 
-    private void enemyDraw() throws IOException {
+    private void enemyDraw(Enemy enemy) throws IOException {
         // This one is public because it's called when an enemy is generated
         boolean successfulDraw = false;
         int attempts = 0;
@@ -91,10 +88,10 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         // only ever has one card in it, which was just moved into a new pile, so it should be empty
     }
 
-    public void enemyDrawInitialHand() throws IOException {
+    public void enemyDrawInitialHand(Enemy enemy) throws IOException {
         //Draws five cards
         for (int i = 0; i < 5; i++) {
-            enemyDraw();
+            enemyDraw(enemy);
         }
     }
 }

@@ -152,11 +152,11 @@ public class BattleResultView extends JPanel implements ActionListener, Property
         }
 
         //Set action1 label, which is only visible if bonus damage occurred this turn
-        if (state.getBonusDamage().equals("player")){ //Player dealt bonus damage this turn
+        if (state.getDamageBonus().equals("player")){ //Player dealt bonus damage this turn
             action1.setText("Player's " + playerCardName + " is super effective against enemy's " + enemyCardName + "!");
             action1.setVisible(true);
         }
-        else if (state.getBonusDamage().equals("enemy")){ //Enemy dealt bonus damage this turn
+        else if (state.getDamageBonus().equals("enemy")){ //Enemy dealt bonus damage this turn
             action1.setText("Enemy's " + enemyCardName + " is super effective against player's " + playerCardName + "!");
             action1.setVisible(true);
         }

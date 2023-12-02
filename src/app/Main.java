@@ -3,7 +3,6 @@ package app;
 import data_access.*;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
-import entity.Enemy;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
@@ -14,7 +13,6 @@ import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
-import interface_adapter.stairs.StairsDataAccessInterface;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import use_case.EnemyBehaviour.EnemyBehaviour;
@@ -25,9 +23,10 @@ import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Copied from CACoding:
 
         // Build the main program window, the main panel containing the
@@ -65,8 +64,7 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
-        Enemy enemy = null;
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory(), apiAccess, enemyBehaviour);
         DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
@@ -76,10 +74,10 @@ public class Main {
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
-                exploreViewModel, inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
+                exploreViewModel, exploreDataAccessObject);
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
-                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);
+                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccess);
         views.add(exploreView, exploreView.viewName);
         StairsView stairsView = StairsUseCaseFactory.create(viewManagerModel, exploreViewModel, stairsViewModel, exploreDataAccessObject,
                 exploreDataAccessObject);

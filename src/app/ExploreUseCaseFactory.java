@@ -8,6 +8,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.*;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.movement.MovementInputBoundary;
 import use_case.movement.MovementInteractor;
 import use_case.movement.MovementOutputBoundary;
@@ -20,10 +21,11 @@ public class ExploreUseCaseFactory {
     public static ExploreView create(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel,
                                      TurnSelectViewModel turnSelectViewModel, StairsViewModel stairsViewModel,
                                      PickUpItemViewModel pickUpItemViewModel, ExploreDataAccessInterface exploreDataAccessObject,
-                                     GenerateEnemyDataAccessInterface inBattleDataAccessObject, APIAccessInterface apiAccessInterface){
+                                     GenerateEnemyDataAccessInterface inBattleDataAccessObject, EnemyBehaviourInterface enemyBehaviour,
+                                     APIAccessInterface apiAccessInterface){
 
         MovementButtonController movementButtonController = createMovementUseCase(viewManagerModel, exploreViewModel, turnSelectViewModel,
-                stairsViewModel, pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccessInterface);
+                stairsViewModel, pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccessInterface);
         SearchButtonController searchButtonController = createSearchRoomUseCase();
 
         return new ExploreView(movementButtonController, searchButtonController, exploreViewModel);
@@ -34,6 +36,7 @@ public class ExploreUseCaseFactory {
                                                                   PickUpItemViewModel pickUpItemViewModel,
                                                                   ExploreDataAccessInterface exploreDataAccessObject,
                                                                   GenerateEnemyDataAccessInterface inBattleDataAccessObject,
+                                                                  EnemyBehaviourInterface enemyBehaviour,
                                                                   APIAccessInterface apiAccessInterface){
 
         MovementOutputBoundary movementOutputBoundary = new ExplorePresenter(viewManagerModel, exploreViewModel, turnSelectViewModel,
@@ -42,7 +45,7 @@ public class ExploreUseCaseFactory {
         EnemyFactory enemyFactory = new CurrentEnemyFactory();
 
         MovementInputBoundary movementUseCaseInteractor = new MovementInteractor(exploreDataAccessObject, inBattleDataAccessObject,
-                movementOutputBoundary, enemyFactory, apiAccessInterface);
+                movementOutputBoundary, enemyFactory, enemyBehaviour, apiAccessInterface);
 
         return new MovementButtonController(movementUseCaseInteractor);
     }
