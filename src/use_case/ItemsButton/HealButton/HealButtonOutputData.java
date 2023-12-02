@@ -38,7 +38,7 @@ public class HealButtonOutputData {
 
     public int getDamageToPlayer() { return this.damageToPlayer;}
 
-    public String enemyCardValue() { return this.enemyCardValue;}
+    public String getEnemyCardValue() { return this.enemyCardValue;}
 
     public char getEnemyCardSuit() { return this.enemyCardSuit;}
 

@@ -134,7 +134,7 @@ class CardButtonInteractorTest {
         };
 
         CardButtonInputData inputData = new CardButtonInputData(cardPlayed);
-        CardButtonInputBoundary interactor = new CardButtonInteractor(successPresenter, battleRepository);
+        CardButtonInputBoundary interactor = new CardButtonInteractor(successPresenter, dataAccessInterface);
         interactor.execute(inputData);
     }
 }

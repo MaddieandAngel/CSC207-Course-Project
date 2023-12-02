@@ -32,6 +32,10 @@ public class HealButtonInteractor implements HealButtonInputBoundary {
         int damageToPlayer = 0;
         // If enemy attacks, calculate damage to player
         if (enemyAction.equals("attack")) {
+            enemyCardValue = enemyMove.getCardCode().substring(0, enemyMove.getCardCode().length() - 1);
+            enemyCardSuit = enemyMove.getCardSuit();
+            enemyCardImage = healButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode());
+
             int cardValue = enemyMove.getCardValue();
             damageToPlayer = healButtonDataAccessObject.getEnemy().getLevel() * cardValue;
             // No damage bonus since player is not attacking
