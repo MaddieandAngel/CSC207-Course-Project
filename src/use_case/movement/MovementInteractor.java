@@ -45,7 +45,6 @@ public class MovementInteractor implements MovementInputBoundary {
         MovementOutputData movementOutputData = new MovementOutputData(directions);
 
         if (exploreDataAccessObject.checkForStairs()){
-            System.out.println("stairs"); //TODO: delete later
             movementPresenter.prepareStairsView();
         }
         else if (exploreDataAccessObject.checkForEnemy()){

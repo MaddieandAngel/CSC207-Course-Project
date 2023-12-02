@@ -48,6 +48,7 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         // TODO: Figure out how to give the buttons JPanel a border
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(playerStatsPanel);
         this.add(textBox);
         this.add(buttons);
 
@@ -87,6 +88,5 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
                 stairsViewModel.getState().getPlayerCurrentHealth() + "/" +
                 stairsViewModel.getState().getPlayerMaxHealth() + " | Floor Level: " +
                 stairsViewModel.getState().getFloorLevel());
-        System.out.println("Visible: " + this.isVisible()); //TODO: delete later
     }
 }
