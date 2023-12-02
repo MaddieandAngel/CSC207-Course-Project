@@ -5,6 +5,7 @@ import data_access.ExploreDataAccessObject;
 import data_access.InBattleDataAccessObject;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+import entity.Enemy;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
@@ -12,6 +13,8 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+import use_case.EnemyBehaviour.EnemyBehaviour;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import view.ExploreView;
 import view.TitleScreenView;
 import view.ViewManager;
@@ -19,9 +22,10 @@ import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Copied from CACoding:
 
         // Build the main program window, the main panel containing the
@@ -55,8 +59,10 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
+        Enemy enemy = null;
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess, enemy);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory());
+        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory(), apiAccess, enemyBehaviour);
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,

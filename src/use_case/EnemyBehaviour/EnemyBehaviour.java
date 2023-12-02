@@ -11,12 +11,10 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
 
     private final APIAccessInterface apiAccess;
     private final Random randomizer;
-    private final Deck deck;
     private final Enemy enemy;
 
-    public EnemyBehaviour(APIAccessInterface apiAccessInterface, Deck deck, Enemy enemy) throws IOException {
+    public EnemyBehaviour(APIAccessInterface apiAccessInterface, Enemy enemy) throws IOException {
         apiAccess = apiAccessInterface;
-        this.deck = deck;
         this.enemy = enemy;
         randomizer = new Random();
     }
@@ -26,10 +24,10 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         // if the enemy cannot attack or draw
 
         int actionID;
-        if (apiAccess.GetCardsInPile(deck, "enemyHand").length == 0) { // Enemy has no cards and thus cannot attack
+        if (apiAccess.GetCardsInPile("enemyHand").length == 0) { // Enemy has no cards and thus cannot attack
             actionID = randomizer.nextInt(1,3);
         }
-        else if (apiAccess.GetCardsInPile(deck, "enemyHand").length > 5) { // Enemy has a full hand and thus cannot draw
+        else if (apiAccess.GetCardsInPile("enemyHand").length > 5) { // Enemy has a full hand and thus cannot draw
             actionID = randomizer.nextInt(0,2);
         }
         else {
@@ -40,24 +38,24 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             return enemyAttack();
         }
         else if (actionID == 1){
-            return new EnemyBehaviourOutputData("defend", -1, ' ');
+            return new EnemyBehaviourOutputData("defend", -1, ' ', "");
         }
         else { // actionID == 2
             enemyDraw();
-            return new EnemyBehaviourOutputData("draw", -1, ' ');
+            return new EnemyBehaviourOutputData("draw", -1, ' ', "");
         }
     }
 
     private EnemyBehaviourOutputData enemyAttack() throws IOException {
         //Sets cardValue and cardSuit
-        String[] enemyHand = apiAccess.GetCardsInPile(deck, "enemyHand");
+        String[] enemyHand = apiAccess.GetCardsInPile("enemyHand");
         // This method should only be called when enemyHand has at least one card in it
         int cardUsed = randomizer.nextInt(0, enemyHand.length);
         int cardValue = apiAccess.GetCardValue(enemyHand[cardUsed]);
         char cardSuit = apiAccess.GetCardSuit(enemyHand[cardUsed]);
-        apiAccess.CardPlayed(deck.getDeckID(), "enemyHand", enemyHand[cardUsed]);
+        apiAccess.CardPlayed("enemyHand", enemyHand[cardUsed]);
 
-        return new EnemyBehaviourOutputData("attack", cardValue, cardSuit);
+        return new EnemyBehaviourOutputData("attack", cardValue, cardSuit, enemyHand[cardUsed]);
     }
 
     private void enemyDraw() throws IOException {
@@ -67,9 +65,9 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         String newCard = "";
 
         while (!successfulDraw || attempts < 10){ // Tries at most 10 times to draw a preferred card for the enemy
-            apiAccess.DrawCard(deck, "possibleEnemyHandAddition");
+            apiAccess.DrawCard("possibleEnemyHandAddition");
             // Creates a new temporary pile with only one card in it.
-            newCard = apiAccess.GetCardsInPile(deck, "possibleEnemyHandAddition")[0];
+            newCard = apiAccess.GetCardsInPile("possibleEnemyHandAddition")[0];
 
             if (enemy.getPreferredSuit() != '\0' && apiAccess.GetCardSuit(newCard) == enemy.getPreferredSuit()){
                 // new card is the enemy's preferred suit, if it has a preferred suit
@@ -82,12 +80,12 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             }
             else{
                 // new card is not what the enemy wants. Return it to the deck and try again
-                apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
+                apiAccess.MovePileToDeck("possibleEnemyHandAddition");
             }
             attempts++;
         }
         // Adds the new card to the enemy's actual hand
-        apiAccess.AddToPile(deck.getDeckID(), "enemyHand", newCard);
+        apiAccess.AddToPile("enemyHand", newCard);
         //apiAccess.MovePileToDeck(deck, "possibleEnemyHandAddition");
         // ^ The above code has been commented out since I don't think it's necessary anymore? The possibleEnemyHandAddition pile
         // only ever has one card in it, which was just moved into a new pile, so it should be empty

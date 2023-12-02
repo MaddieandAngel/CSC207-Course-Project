@@ -10,10 +10,6 @@ public class AttackButtonInteractor implements AttackButtonInputBoundary{
 
     @Override
     public void execute() {
-        // Check if the Player's hand is empty (has 0 cards)
-        // If Player.getHand().size() > 0, will call success view (ActionSelectView)
-        // Else, will call fail view, (TurnSelectView)
-
         attackButtonPresenter.prepareSuccessView();
     }
 }

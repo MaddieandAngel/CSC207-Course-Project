@@ -9,6 +9,8 @@ public class TurnSelectState {
     private int enemyLevel = 1;
     // I'm not implementing that "copy" constructor right now, it seems useless in week5ca
 
+    private String drawError = null; // message for pop-up when player tries to draw a card when their hand is full
+
     public TurnSelectState(){}
 
     public int getPlayerHealth(){
@@ -41,4 +43,8 @@ public class TurnSelectState {
     public void setEnemyLevel(int enemyLevel) {
         this.enemyLevel = enemyLevel;
     }
+
+    public String getDrawError() { return this.drawError;}
+
+    public void setDrawError(String error) {this.drawError = error;}
 }
