@@ -8,6 +8,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.*;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+import use_case.SearchButton.SearchButtonIneractor;
+import use_case.SearchButton.SearchButtonInputBoundary;
+import use_case.SearchButton.SearchButtonOutputBoundary;
 import use_case.movement.MovementInputBoundary;
 import use_case.movement.MovementInteractor;
 import use_case.movement.MovementOutputBoundary;
@@ -24,7 +27,8 @@ public class ExploreUseCaseFactory {
 
         MovementButtonController movementButtonController = createMovementUseCase(viewManagerModel, exploreViewModel, turnSelectViewModel,
                 stairsViewModel, pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccessInterface);
-        SearchButtonController searchButtonController = createSearchRoomUseCase();
+        SearchButtonController searchButtonController = createSearchRoomUseCase(exploreViewModel, turnSelectViewModel, pickUpItemViewModel, viewManagerModel,
+                apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject);
 
         return new ExploreView(movementButtonController, searchButtonController, exploreViewModel);
     }
@@ -47,7 +51,16 @@ public class ExploreUseCaseFactory {
         return new MovementButtonController(movementUseCaseInteractor);
     }
 
-    private static SearchButtonController createSearchRoomUseCase(){
+    private static SearchButtonController createSearchRoomUseCase( ExploreViewModel exploreViewModel,
+                                                                   TurnSelectViewModel turnSelectViewModel,
+                                                                   PickUpItemViewModel pickUpItemViewModel,
+                                                                   ViewManagerModel viewManagerModel,
+                                                                   APIAccessInterface apiAccessInterface,
+                                                                   ExploreDataAccessInterface exploreDataAccessObject,
+                                                                   GenerateEnemyDataAccessInterface inBattleDataAccessObject){
+        EnemyFactory enemyFactory = new CurrentEnemyFactory();
+        SearchButtonOutputBoundary searchButtonOutputBoundary = new SearchButtonPresenter(exploreViewModel, turnSelectViewModel, pickUpItemViewModel, viewManagerModel);
+        SearchButtonInputBoundary searchButtonInputBoundary = new SearchButtonIneractor(searchButtonOutputBoundary, enemyFactory, apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject);
         //TODO: implement properly
         return new SearchButtonController(searchButtonInputBoundary);
     }

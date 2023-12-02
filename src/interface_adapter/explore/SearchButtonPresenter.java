@@ -4,7 +4,6 @@ import entity.BagAndItems.Item;
 import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import use_case.SearchButton.SearchButtonOutputBoundary;
@@ -14,16 +13,13 @@ import use_case.movement.MovementOutputData;
 public class SearchButtonPresenter implements SearchButtonOutputBoundary {
     private final ExploreViewModel exploreViewModel;
     private final TurnSelectViewModel turnSelectViewModel;
-    private final StairsViewModel stairsViewModel;
     private final PickUpItemViewModel pickUpItemViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public SearchButtonPresenter(ExploreViewModel exploreViewModel, TurnSelectViewModel turnSelectViewModel,
-                                 StairsViewModel stairsViewModel, PickUpItemViewModel pickUpItemViewModel,
+    public SearchButtonPresenter(ExploreViewModel exploreViewModel, TurnSelectViewModel turnSelectViewModel, PickUpItemViewModel pickUpItemViewModel,
                                  ViewManagerModel viewManagerModel) {
         this.exploreViewModel = exploreViewModel;
         this.turnSelectViewModel = turnSelectViewModel;
-        this.stairsViewModel = stairsViewModel;
         this.pickUpItemViewModel = pickUpItemViewModel;
         this.viewManagerModel = viewManagerModel;
     }
@@ -41,7 +37,6 @@ public class SearchButtonPresenter implements SearchButtonOutputBoundary {
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
 
         //Updates player output information, if it has changed:
-        //TODO directly Copy and paste from explorePresenter, not sure if there's anything need to be fixed
 
         //Updates enemy output information:
         turnSelectState.setEnemyName(enemyOutputData.getEnemyName());

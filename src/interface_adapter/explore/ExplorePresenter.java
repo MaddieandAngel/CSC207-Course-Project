@@ -18,7 +18,7 @@ public class ExplorePresenter implements MovementOutputBoundary {
     private final StairsViewModel stairsViewModel;
     private final PickUpItemViewModel itemCollectViewModel;
 
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     public ExplorePresenter(ViewManagerModel viewManagerModel, ExploreViewModel exploreViewModel,
                             TurnSelectViewModel turnSelectViewModel, StairsViewModel stairsViewModel,
@@ -63,7 +63,6 @@ public class ExplorePresenter implements MovementOutputBoundary {
 
     @Override
     public void prepareItemCollectionView(Item item) {
-        //TODO: Everything related to moving to the item collection view
         PickUpItemState pickUpItemState = itemCollectViewModel.getState();
         pickUpItemState.setItem(item);
         itemCollectViewModel.setState(pickUpItemState);

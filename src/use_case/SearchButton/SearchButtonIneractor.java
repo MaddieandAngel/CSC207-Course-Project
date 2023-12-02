@@ -1,7 +1,4 @@
 package use_case.SearchButton;
-
-import data_access.ExploreDataAccessObject;
-import data_access.InBattleDataAccessObject;
 import entity.BagAndItems.*;
 import entity.Enemy;
 import interface_adapter.APIAccessInterface;
@@ -9,6 +6,8 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 import entity.EnemyFactory;
+import interface_adapter.explore.ExploreDataAccessInterface;
+import interface_adapter.explore.GenerateEnemyDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.movement.EnemyOutputData;
@@ -18,11 +17,12 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
     final SearchButtonOutputBoundary searchButtonPresenter;
     final EnemyFactory enemyFactory;
     final APIAccessInterface apiAccessObject;
-    final ExploreDataAccessObject exploreDataAccessObject;
-    final InBattleDataAccessObject inBattleDataAccessObject;
+    final ExploreDataAccessInterface exploreDataAccessObject;
+    final GenerateEnemyDataAccessInterface inBattleDataAccessObject;
 
 
-    public SearchButtonIneractor(SearchButtonOutputBoundary searchButtonPresenter, EnemyFactory enemyFactory, APIAccessInterface apiAccessInterface, ExploreDataAccessObject exploreDataAccessObject, InBattleDataAccessObject inBattleDataAccessObject) {
+    public SearchButtonIneractor(SearchButtonOutputBoundary searchButtonPresenter, EnemyFactory enemyFactory, APIAccessInterface apiAccessInterface, ExploreDataAccessInterface exploreDataAccessObject,
+                                 GenerateEnemyDataAccessInterface inBattleDataAccessObject) {
         this.searchButtonPresenter = searchButtonPresenter;
         this.enemyFactory = enemyFactory;
         this.apiAccessObject = apiAccessInterface;
