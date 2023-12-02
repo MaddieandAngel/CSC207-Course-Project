@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.Deck;
+import entity.DeckInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,18 +15,17 @@ class APIAccessTest {
 
     private APIAccess api;
 
-    private Deck testDeck;
+    private DeckInterface testDeck;
 
     @BeforeEach
     void setUp() throws IOException {
         api = new APIAccess();
-        // Assume NewDeck works
-        testDeck = api.NewDeck();
+        // Assume constructor works
+        testDeck = api.getDeck();
     }
 
     @Test
-    void newDeck() throws IOException {
-        testDeck = api.NewDeck();
+    void newDeck() {
         assert testDeck instanceof Deck;
         assert testDeck.getRemainingCards() == 54;
         assert testDeck.isShuffled();
@@ -35,7 +35,7 @@ class APIAccessTest {
     void shuffleWorks() {
         testDeck.setShuffled(false);
         try {
-            api.Shuffle(testDeck);
+            api.Shuffle();
             assert testDeck.isShuffled();
         } catch (IOException e) {
             fail("IOException not expected");
@@ -43,25 +43,12 @@ class APIAccessTest {
     }
 
     @Test
-    void shuffleFails() {
-        // will have an incorrect deckID
-        Deck failDeck = new Deck(true, "4uf9823r08rb???", 54);
-        try {
-            api.Shuffle(failDeck);
-            // Expected to fail. "?" shouldn't be in the deckID
-            fail("expected IOException");
-        } catch (IOException e) {
-            assert true;
-        }
-    }
-
-    @Test
     void drawCard() {
         int currentRemaining = testDeck.getRemainingCards();
         try {
-            api.DrawCard(testDeck, "testPile");
+            api.DrawCard("testPile");
             assert testDeck.getRemainingCards() == currentRemaining - 1;
-            assert api.GetCardsInPile(testDeck, "testPile").length == 1;
+            assert api.GetCardsInPile("testPile").length == 1;
         } catch (IOException e) {
             fail("IOException not expected");
         }
@@ -71,59 +58,36 @@ class APIAccessTest {
     void drawCardZeroRemaining() {
         try {
             for (int i = 0; i < 53; i++) {
-                api.DrawCard(testDeck, "discard");
+                api.DrawCard("discard");
             }
             // There should be only one remaining card left, so the cards should be added back from the discard pile
-            api.DrawCard(testDeck, "testPile");
+            api.DrawCard("testPile");
             assert testDeck.getRemainingCards() == 53;
-            assert api.GetCardsInPile(testDeck, "discard").length == 0;
-            assert api.GetCardsInPile(testDeck, "testPile").length == 1;
+            assert api.GetCardsInPile("discard").length == 0;
+            assert api.GetCardsInPile("testPile").length == 1;
         } catch (IOException e) {
             fail("IOException not expected");
         }
     }
 
     @Test
-    void drawCardFails() {
-        testDeck = new Deck(true, "42gfffo2r??f3", 54);
-        try {
-            api.DrawCard(testDeck, "testPile");
-            fail("Expected IOException since deckID is not a valid deckID");
-        } catch (IOException e) {
-            assert true;
-        }
-    }
-
-    @Test
     void cardPlayed() {
         try {
-            api.DrawCard(testDeck, "testPile");
-            String card = api.GetCardsInPile(testDeck, "testPile")[0];
-            api.CardPlayed(testDeck.getDeckID(), "testPile", card);
-            assert api.GetCardsInPile(testDeck, "testPile").length == 0 && api.GetCardsInPile(testDeck, "discard").length == 1;
+            api.DrawCard("testPile");
+            String card = api.GetCardsInPile("testPile")[0];
+            api.CardPlayed("testPile", card);
+            assert api.GetCardsInPile("testPile").length == 0 && api.GetCardsInPile("discard").length == 1;
         } catch (IOException e) {
             fail("iOException not expected");
         }
     }
 
     @Test
-    void cardPlayedInvalidDeckID() {
-        try {
-            api.DrawCard(testDeck, "testPile");
-            String card = api.GetCardsInPile(testDeck, "testPile")[0];
-            api.CardPlayed("iu37bd???e", "testPile", card);
-            fail("IOException expected since incorrect/invalid deckID was provided");
-        } catch (IOException e) {
-            assert true;
-        }
-
-    }
-    @Test
     void cardPlayedInvalidPile() {
         try {
-            api.DrawCard(testDeck, "testPile");
-            String card = api.GetCardsInPile(testDeck, "testPile")[0];
-            api.CardPlayed(testDeck.getDeckID(), "nonexistentPile", card);
+            api.DrawCard("testPile");
+            String card = api.GetCardsInPile("testPile")[0];
+            api.CardPlayed("nonexistentPile", card);
             fail("IOException expected since an invalid non-existing pile was put as a parameter");
         } catch (IOException e) {
             assert true;
@@ -134,8 +98,8 @@ class APIAccessTest {
     @Test
     void cardPlayedInvalidCardCode() {
         try {
-            api.DrawCard(testDeck, "testPile");
-            api.CardPlayed(testDeck.getDeckID(), "testPile", "1F");
+            api.DrawCard("testPile");
+            api.CardPlayed("testPile", "1F");
             fail("IOException expected due to invalid cardCode (1 is not a valid value, and F is not a valid suit");
         } catch (IOException e) {
             assert true;
@@ -147,8 +111,8 @@ class APIAccessTest {
     void addToPile() {
         // Only used by other methods. Assuming all other methods are correct, the correct values should always be provided
         try {
-            api.AddToPile(testDeck.getDeckID(), "testPile", "5S");
-            String[] cards = api.GetCardsInPile(testDeck, "testPile");
+            api.AddToPile("testPile", "5S");
+            String[] cards = api.GetCardsInPile("testPile");
             assert cards.length == 1 && Objects.equals(cards[0], "5S");
         } catch (IOException e) {
             fail("IOException not expected");
@@ -157,17 +121,29 @@ class APIAccessTest {
     }
 
     @Test
-    void moveDiscardPileToDeck() {
-        // Only used by other methods. Assuming all other methods are correct, the correct values should always be provided
+    void movePileToDeckSuccessful() {
+        // Assume the provided deck and pile name are correct. Assume all other methods are correct
         try {
-            api.DrawCard(testDeck, "discard");
+            api.DrawCard("discard");
             int currentRemainingCards = testDeck.getRemainingCards();
-            api.MoveDiscardPileToDeck(testDeck);
+            api.MovePileToDeck("discard");
             assert !testDeck.isShuffled() && testDeck.getRemainingCards() == currentRemainingCards + 1;
         } catch (IOException e) {
-            fail("IOEception not expected");
+            fail("IOException not expected");
         }
 
+    }
+
+    @Test
+    void MovePileToDeckInvalidPileName() {
+        try {
+            api.DrawCard("test1");
+            int currentRemainingCards = testDeck.getRemainingCards();
+            api.MovePileToDeck("fail");
+            fail("IOException expected");
+        } catch (IOException e) {
+            assert true;
+        }
     }
 
     @Test
@@ -176,9 +152,9 @@ class APIAccessTest {
             Random random = new Random();
             int randomInt = random.nextInt(1, 6);
             for (int i = 0; i < randomInt; i++) {
-                api.DrawCard(testDeck, "testPile");
+                api.DrawCard("testPile");
             }
-            String[] cards = api.GetCardsInPile(testDeck, "testPile");
+            String[] cards = api.GetCardsInPile("testPile");
             assert cards.length == randomInt;
         } catch (IOException e) {
             fail("IOException not expected");
@@ -191,9 +167,9 @@ class APIAccessTest {
             Random random = new Random();
             int randomInt = random.nextInt(1, 6);
             for (int i = 0; i < randomInt; i++) {
-                api.DrawCard(testDeck, "testPile");
+                api.DrawCard("testPile");
             }
-            String[] cards = api.GetCardsInPile(testDeck, "failPile");
+            String[] cards = api.GetCardsInPile("failPile");
             fail("IOException expected due to incorrect pile name");
         } catch (IOException e) {
             assert true;
@@ -205,8 +181,8 @@ class APIAccessTest {
     void getCardImage() {
         // Preconditions assume correct card code is provided
         try {
-            api.DrawCard(testDeck, "testPile");
-            String card = api.GetCardsInPile(testDeck, "testPile")[0];
+            api.DrawCard("testPile");
+            String card = api.GetCardsInPile("testPile")[0];
             String expectedImage = "https://www.deckofcardsapi.com/static/img/" + card + ".png";
             String image = api.GetCardImage(card);
             assert Objects.equals(image, expectedImage);

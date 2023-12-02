@@ -1,66 +1,101 @@
 package interface_adapter.BattleResult;
 
 public class BattleResultState {
-    //TODO: I was unsure what to put here. Open to modification.
-    private boolean continueBattle = true;
-    private int currentPlayerHealth = 15;
-    private int playerMaxHealth = 15;
-    private int playerLevel = 1; // Change if necessary
-    private String enemyAction = null; //Change when enemyAction class is made
-    private String winner = null;
+    private int playerCurrentHealth;
 
-    //I don't think we need the constructor, will delete later
-    public BattleResultState(BattleResultState copy, int currentPlayerHealth, int playerMaxHealth){
-        this.currentPlayerHealth = copy.currentPlayerHealth;
-        this.playerMaxHealth = copy.playerMaxHealth;
-    }
+    private int playerMaxHealth;
+
+    private int playerLevel;
+
+    private String playerAction;
+
+    private String enemyAction;
+
+    private boolean revivePotionUsed;
+
+    private int damageToPlayer;
+
+    private int damageToEnemy;
+
+    private String playerCardValue;
+
+    private char playerCardSuit;
+
+    private String playerCardImage;
+
+    private String enemyCardValue;
+
+    private char enemyCardSuit;
+
+    private String enemyCardImage;
+
+    private String damageBonus;
+
+    private String enemyName;
+
     public BattleResultState(){}
 
-    public int getCurrentPlayerHealth() {
-        return currentPlayerHealth;
-    }
+    public int getPlayerCurrentHealth() { return this.playerCurrentHealth;}
 
-    public int getPlayerMaxHealth() {
-        return playerMaxHealth;
-    }
+    public void setPlayerCurrentHealth(int updatedHealth) { this.playerCurrentHealth = updatedHealth;}
 
-    public int getPlayerLevel() {
-        return playerLevel;
-    }
+    public int getPlayerMaxHealth() { return this.playerMaxHealth;}
 
-    public String getEnemyAction() {
-        return enemyAction;
-    }
+    public void setPlayerMaxHealth(int maxHealth) { this.playerMaxHealth = maxHealth;}
 
-    public boolean getContinueBattle() {
-        return continueBattle;
-    }
+    public int getPlayerLevel() { return this.playerLevel;}
 
-    public String getWinner() {
-        return winner;
-    }
+    public void setPlayerLevel(int level) { this.playerLevel = level;}
 
-    public void setCurrentPlayerHealth(int currentPlayerHealth) {
-        this.currentPlayerHealth = currentPlayerHealth;
-    }
+    public String getPlayerAction() {return this.playerAction;}
 
-    public void setPlayerMaxHealth(int playerMaxHealth) {
-        this.playerMaxHealth = playerMaxHealth;
-    }
+    public void setPlayerAction(String action) {this.playerAction = action;}
 
-    public void setPlayerLevel(int playerLevel) {
-        this.playerLevel = playerLevel;
-    }
+    public String getEnemyAction() { return this.enemyAction;}
 
-    public void setEnemyAction(String enemyAction) {
-        this.enemyAction = enemyAction;
-    }
+    public void setEnemyAction(String enemyAction) { this.enemyAction = enemyAction;}
 
-    public void setContinueBattle(boolean continueBattle) {
-        this.continueBattle = continueBattle;
-    }
+    public boolean getRevivePotionUsed() { return this.revivePotionUsed;}
 
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
+    public void setRevivePotionUsed(boolean reviveUsed) { this.revivePotionUsed = reviveUsed;}
+
+    public int getDamageToPlayer() { return this.damageToPlayer;}
+
+    public void setDamageToPlayer(int damage) { this.damageToPlayer = damage;}
+
+    public int getDamageToEnemy() { return this.damageToEnemy;}
+
+    public void setDamageToEnemy(int damage) {this.damageToEnemy = damage;}
+
+    public String getPlayerCardValue() { return this.playerCardValue;}
+
+    public void setPlayerCardValue(String value) { this.playerCardValue = value;}
+
+    public char getPlayerCardSuit() { return this.playerCardSuit;}
+
+    public void setPlayerCardSuit(char suit) { this.playerCardSuit = suit;}
+
+    public String getPlayerCardImage() { return this.playerCardImage;}
+
+    public void setPlayerCardImage(String url) { this.playerCardImage = url;}
+
+    public String getEnemyCardValue() { return this.enemyCardValue;}
+
+    public void setEnemyCardValue(String value) { this.enemyCardValue = value;}
+
+    public char getEnemyCardSuit() { return this.enemyCardSuit;}
+
+    public void setEnemyCardSuit(char suit) { this.enemyCardSuit = suit;}
+
+    public String getEnemyCardImage() { return this.enemyCardImage;}
+
+    public void setEnemyCardImage(String url) { this.enemyCardImage = url;}
+
+    public String getDamageBonus() { return this.damageBonus;}
+
+    public void setDamageBonus(String character) { this.damageBonus = character;}
+
+    public String getEnemyName() { return this.enemyName;}
+
+    public void setEnemyName(String name) { this.enemyName = name;}
 }

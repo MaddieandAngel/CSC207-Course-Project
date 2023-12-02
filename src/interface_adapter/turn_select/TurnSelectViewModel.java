@@ -13,16 +13,17 @@ public class TurnSelectViewModel extends ViewModel {
     public static final String DEFEND_BUTTON_LABEL = "Defend";
     public static final String FLEE_BUTTON_LABEL = "Flee";
 
-    public String textbox_text = "";
-
     private TurnSelectState state = new TurnSelectState();
 
-    public TurnSelectViewModel(String viewName) {
+    public TurnSelectViewModel() {
         super("turn select");
     }
 
     public void setState(TurnSelectState state) {
         this.state = state;
+    }
+    public TurnSelectState getState() {
+        return state;
     }
 
     // Copied the below from week5ca:
@@ -39,5 +40,4 @@ public class TurnSelectViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public TurnSelectState getState(){return state;}
 }

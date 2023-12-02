@@ -1,6 +1,6 @@
 package entity;
 
-public class Deck {
+public class Deck implements DeckInterface{
 
     private boolean shuffled;
 
