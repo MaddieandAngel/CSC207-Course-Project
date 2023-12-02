@@ -1,9 +1,9 @@
 package entity.BagAndItems;
 
-import entity.ActivePlayer;
+import entity.Player;
 
 public interface Item {
-    void heal(ActivePlayer player);
+    void heal(Player player);
     String usage();
     String getName();
 

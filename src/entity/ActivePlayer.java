@@ -11,7 +11,6 @@ public class ActivePlayer implements Player{
     private int maxHealth;
     private int level;
     private int experiencePoints;
-    private ArrayList<Item> inventory;
     private int maxCardHold; //Note: unneeded?
     private Bag bag;
 

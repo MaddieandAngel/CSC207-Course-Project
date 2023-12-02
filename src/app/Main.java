@@ -3,6 +3,7 @@ package app;
 import data_access.*;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+import entity.Enemy;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
@@ -16,6 +17,8 @@ import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsDataAccessInterface;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+import use_case.EnemyBehaviour.EnemyBehaviour;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import view.*;
 import view.in_battle.BattleResultView;
 import view.in_battle.TurnSelectView;
@@ -62,8 +65,10 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
+        Enemy enemy = null;
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess, enemy);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory());
+        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory(), apiAccess, enemyBehaviour);
         DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
         DropToPickPackageDataAccessObject dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
         PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();

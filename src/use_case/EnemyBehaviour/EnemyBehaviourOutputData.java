@@ -3,15 +3,18 @@ package use_case.EnemyBehaviour;
 public class EnemyBehaviourOutputData {
 
     private final String action;
+
+    private final String cardCode;
     private final int cardValue;
     private final char cardSuit;
     private final char suitEnemyIsWeakTo;
     private final char suitEnemyBeats;
 
-    public EnemyBehaviourOutputData(String action, int cardValue, char cardSuit){
+    public EnemyBehaviourOutputData(String action, int cardValue, char cardSuit, String cardCode){
         this.action = action;
         this.cardValue = cardValue;
         this.cardSuit = cardSuit;
+        this.cardCode = cardCode;
 
         if (cardSuit == 'S'){ //Spades beats Hearts and is beaten by Diamonds
             suitEnemyBeats = 'H';
@@ -50,4 +53,5 @@ public class EnemyBehaviourOutputData {
     public int getCardValue() {
         return cardValue;
     }
+    public String getCardCode() { return this.cardCode;}
 }

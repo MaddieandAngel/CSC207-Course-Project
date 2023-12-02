@@ -14,23 +14,20 @@ public class TitleScreenUseCaseFactory {
     private TitleScreenUseCaseFactory(){}
 
     public static TitleScreenView create(ViewManagerModel viewManagerModel, TitleScreenViewModel titleScreenViewModel, ExploreViewModel exploreViewModel,
-                                         SaveDeckDataAccessInterface inBattleDataAccessObject, CreateDeckDataAccessInterface apiAccess,
-                                         StairsDataAccessInterface exploreDataAccessObject){
+                                         CreateDeckDataAccessInterface apiAccess, StairsDataAccessInterface exploreDataAccessObject){
 
-        PlayButtonController playButtonController = createPlayButtonUseCase(viewManagerModel, titleScreenViewModel, exploreViewModel,
-                inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
+        PlayButtonController playButtonController = createPlayButtonUseCase(viewManagerModel, titleScreenViewModel, exploreViewModel, apiAccess, exploreDataAccessObject);
 
         return new TitleScreenView(titleScreenViewModel, playButtonController);
     }
 
     private static PlayButtonController createPlayButtonUseCase(ViewManagerModel viewManagerModel, TitleScreenViewModel titleScreenViewModel,
-                                                                ExploreViewModel exploreViewModel, SaveDeckDataAccessInterface inBattleDataAccessObject,
-                                                                CreateDeckDataAccessInterface apiAccess, StairsDataAccessInterface exploreDataAccessObject){
+                                                                ExploreViewModel exploreViewModel, CreateDeckDataAccessInterface apiAccess,
+                                                                StairsDataAccessInterface exploreDataAccessObject){
 
         PlayButtonOutputBoundary playButtonOutputBoundary = new PlayButtonPresenter(viewManagerModel, titleScreenViewModel, exploreViewModel);
 
-        PlayButtonInputBoundary playButtonUseCaseInteractor = new PlayButtonInteractor(playButtonOutputBoundary, inBattleDataAccessObject,
-                apiAccess, exploreDataAccessObject);
+        PlayButtonInputBoundary playButtonUseCaseInteractor = new PlayButtonInteractor(playButtonOutputBoundary, apiAccess, exploreDataAccessObject);
 
         return new PlayButtonController(playButtonUseCaseInteractor);
     }

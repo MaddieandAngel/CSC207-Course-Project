@@ -1,6 +1,7 @@
 package data_access;
 
 import interface_adapter.TitleScreen.CreateDeckDataAccessInterface;
+import entity.DeckInterface;
 import okhttp3.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,10 +14,11 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 
-public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterface {
+public class APIAccess implements APIAccessInterface {
 
-    @Override
-    public Deck NewDeck() throws IOException, RuntimeException{
+    private final DeckInterface deck;
+
+    public APIAccess() throws IOException, RuntimeException{
         // Make a call to the API and create a new deck
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -32,29 +34,27 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
                 throw new RuntimeException("New deck was not successfully made");
             }
 
-            // Converting responseBody into a String
-            if (responseBody != null) {
-                String responseBodyString = responseBody.string();
-                String[] newString = responseBodyString.split(",");
+                // Converting responseBody into a String
+                if (responseBody != null) {
+                    String responseBodyString = responseBody.string();
+                    String[] newString = responseBodyString.split(",");
 
-                // Accessing values for new deck
-                boolean shuffled = false;
-                String deckID = newString[1].split(":")[1].trim().replace("\"", "");
-                int remainingCards = Integer.parseInt(newString[2].split(":")[1].trim().replace("}", ""));
+                    // Accessing values for new deck
+                    boolean shuffled = false;
+                    String deckID = newString[1].split(":")[1].trim().replace("\"", "");
+                    int remainingCards = Integer.parseInt(newString[2].split(":")[1].trim().replace("}", ""));
 
 
-                // Creating new Deck
-                Deck newDeck = new Deck(shuffled, deckID, remainingCards);
+                    // Creating new Deck
+                    this.deck = new Deck(shuffled, deckID, remainingCards);
 
-                // Shuffle new deck
-                Shuffle(newDeck);
+                    // Shuffle new deck
+                    Shuffle();
 
-                // return the new, shuffled deck
-                return newDeck;
-            } else {
-                // means responseBody is null, so a new deck was not created, will therefore throw a RuntimeException
-                throw new RuntimeException("New deck not created");
-            }
+                } else {
+                    // means responseBody is null, so a new deck was not created, will therefore throw a RuntimeException
+                    throw new RuntimeException("New deck not created");
+                }
         }  catch (RuntimeException e) {
             throw new RuntimeException("New deck not created");
         } catch (IOException e) {
@@ -63,7 +63,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public void Shuffle(Deck deck) throws IOException, RuntimeException{
+    public void Shuffle() throws IOException, RuntimeException{
         // Make a call to the API and shuffle the deck, given by the deckID parameter
         String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/shuffle/?remaining=true";
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -103,7 +103,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public void DrawCard(Deck deck, String pileName) throws IOException, RuntimeException{
+    public void DrawCard(String pileName) throws IOException, RuntimeException{
         // Will draw a card from the deck and add it to the intended pile, using the AddToPile method.
         // If there are zero cards left in the deck, the cards from the discard pile will be returned to the deck and will be shuffled
 
@@ -132,14 +132,14 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
 
                 // Adding the drawn card to the corresponding pile/hand
                 String cardCode = newString[2].split(":")[2].replace("\"", "").trim();
-                AddToPile(deck.getDeckID(), pileName, cardCode);
+                AddToPile(pileName, cardCode);
 
                 // Update the value of remaining cards
                 int updatedRemainingCards = Integer.parseInt(newString[8].split(":")[1].replace("}", "").trim());
                 deck.setRemainingCards(updatedRemainingCards);
                 if (deck.getRemainingCards() == 0) {
-                    MovePileToDeck(deck, "discard");
-                    Shuffle(deck);
+                    MovePileToDeck("discard");
+                    Shuffle();
                 }
             }
         } catch (IOException e) {
@@ -151,11 +151,11 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public void CardPlayed(String deckID, String pileName, String cardCode) throws IOException, RuntimeException{
+    public void CardPlayed(String pileName, String cardCode) throws IOException, RuntimeException{
         // Will remove the card that was played from the provided pile/hand and will add it to the discard pile
 
         // Make call to the API and draw the specified card from the provided pile
-        String url = "https://www.deckofcardsapi.com/api/deck/" + deckID + "/pile/" + pileName + "/draw/?cards=" + cardCode;
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/" + pileName + "/draw/?cards=" + cardCode;
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder().url(url).build();
@@ -175,7 +175,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
                 if (!successful) {
                     throw new RuntimeException("Provided card not in pile");
                 }
-                AddToPile(deckID,"discard", cardCode);
+                AddToPile("discard", cardCode);
             }
         } catch (IOException e) {
             throw new IOException(e);
@@ -186,12 +186,12 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public void AddToPile(String deckID, String pileName, String cardCode) throws IOException, RuntimeException{
+    public void AddToPile(String pileName, String cardCode) throws IOException, RuntimeException{
         // Will add the provided card and add it to the specified pile
         // cardCode follows the cardCode convention in the API
 
         // Make call to API, adding the specified card to the requested pile
-        String url = "https://www.deckofcardsapi.com/api/deck/" + deckID + "/pile/" + pileName + "/add/?cards=" + cardCode;
+        String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/" + pileName + "/add/?cards=" + cardCode;
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder().url(url).build();
@@ -220,7 +220,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public void MovePileToDeck(Deck deck, String pileName) throws IOException, RuntimeException{
+    public void MovePileToDeck(String pileName) throws IOException, RuntimeException{
         // Will move the cards from the specified pile return them to the main deck then shuffle the main deck
         // Will assume the pile name provided is an already created pile in the deck
 
@@ -251,7 +251,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
 
                 deck.setShuffled(false); // Since the deck is no longer shuffled
                 // Shuffle the main deck
-                Shuffle(deck);
+                Shuffle();
             } else {
                 // else runs when responseBody is null, indicating the pile was not moved to the deck, so will
                 // throw a RuntimeException
@@ -266,7 +266,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
     }
 
     @Override
-    public String[] GetCardsInPile(Deck deck, String pileName) throws IOException, RuntimeException{
+    public String[] GetCardsInPile(String pileName) throws IOException, RuntimeException{
         // Will return a list of the card codes for all the cards in the requested pile. If the pile is empty, will return null
 
         // Make a call to the API to get a list of the cards in the requested pile
@@ -359,4 +359,7 @@ public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterf
             return cardCode.charAt(1);
         }
     }
+
+    @Override
+    public DeckInterface getDeck() { return this.deck;} // Mainly for testing purposes
 }
