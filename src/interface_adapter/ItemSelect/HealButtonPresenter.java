@@ -29,7 +29,7 @@ public class HealButtonPresenter implements HealButtonOutputBoundary {
         state.setPlayerCardValue("");
         state.setPlayerCardSuit(' ');
         state.setPlayerCardImage("");
-        state.setEnemyCardValue(healButtonOutputData.enemyCardValue());
+        state.setEnemyCardValue(healButtonOutputData.getEnemyCardValue());
         state.setEnemyCardSuit(healButtonOutputData.getEnemyCardSuit());
         state.setEnemyCardImage(healButtonOutputData.getEnemyCardImage());
         state.setDamageBonus("");
