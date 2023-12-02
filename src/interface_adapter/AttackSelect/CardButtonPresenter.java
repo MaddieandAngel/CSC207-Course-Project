@@ -34,6 +34,7 @@ public class CardButtonPresenter implements CardButtonOutputBoundary {
         state.setEnemyCardValue(cardButtonOutputData.getEnemyCardValue());
         state.setEnemyCardSuit(cardButtonOutputData.getEnemyCardSuit());
         state.setEnemyCardImage(cardButtonOutputData.getEnemyCardImage());
+        state.setDamageBonus(cardButtonOutputData.getDamageBonus());
         this.battleResultViewModel.setState(state);
         battleResultViewModel.firePropertyChanged();
 

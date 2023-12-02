@@ -28,9 +28,12 @@ public class CardButtonOutputData {
 
     private String enemyCardImage;
 
+    private String damageBonus;
+
     public CardButtonOutputData(int updatedPlayerHealth, boolean revivePotionUsed, int damageToEnemy,
                                 int damageToPlayer, String enemyAction, int playerMaxHealth, int playerLevel, String playerCardValue,
-                                char playerCardSuit, String playerCardImage, String enemyCardValue, char enemyCardSuit, String enemyCardImage) {
+                                char playerCardSuit, String playerCardImage, String enemyCardValue, char enemyCardSuit,
+                                String enemyCardImage, String damageBonus) {
         this.updatedPlayerHealth = updatedPlayerHealth;
         this.revivePotionUsed = revivePotionUsed;
         this.damageToEnemy = damageToEnemy;
@@ -44,6 +47,7 @@ public class CardButtonOutputData {
         this.enemyCardValue = enemyCardValue;
         this.enemyCardSuit = enemyCardSuit;
         this.enemyCardImage = enemyCardImage;
+        this.damageBonus = damageBonus;
     }
 
     public int getPlayerCurrentHealth() { return this.updatedPlayerHealth;}
@@ -71,4 +75,6 @@ public class CardButtonOutputData {
     public char getEnemyCardSuit() { return this.enemyCardSuit;}
 
     public String getEnemyCardImage() { return this.enemyCardImage;}
+
+    public String getDamageBonus() { return this.damageBonus;}
 }

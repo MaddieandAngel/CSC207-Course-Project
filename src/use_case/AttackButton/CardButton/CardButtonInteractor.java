@@ -34,6 +34,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
             damageToEnemy = (int) Math.ceil(cardButtonDataAccessObject.getPlayer().getLevel() * playerCardValue * 0.5);
         }
 
+        String damageBonus = "";
         // Calculating damage done to player
         int damageToPlayer = 0;
         if (enemyAction.equals("attack")) {
@@ -45,8 +46,10 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
             // If enemy suit is weak to player suit, player gets damage bonus
             if (enemyMove.getSuitEnemyIsWeakTo() == playerCardSuit) {
                 damageToEnemy = damageToEnemy * 2;
+                damageBonus = "player";
             } else if (enemyMove.getSuitEnemyBeats() == playerCardSuit) { // enemy gets damage bonus when player suit is weak to enemy suit
                 damageToPlayer = damageToPlayer * 2;
+                damageBonus = "enemy";
             }
         }
 
@@ -84,7 +87,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
                 cardButtonInputData.getCardCode().length() - 1), playerCardSuit,
                 cardButtonDataAccessObject.getAPI().GetCardImage(cardButtonInputData.getCardCode()),
                 enemyMove.getCardCode().substring(0, enemyMove.getCardCode().length() - 1), enemyMove.getCardSuit(),
-                cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode()));
+                cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode()), damageBonus);
         cardButtonPresenter.prepareSuccessView(cardButtonOutputData);
 
     }

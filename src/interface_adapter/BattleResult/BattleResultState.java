@@ -30,6 +30,8 @@ public class BattleResultState {
 
     private String enemyCardImage;
 
+    private String damageBonus;
+
     public BattleResultState(){}
 
     public int getPlayerCurrentHealth() { return this.playerCurrentHealth;}
@@ -87,4 +89,8 @@ public class BattleResultState {
     public String getEnemyCardImage() { return enemyCardImage;}
 
     public void setEnemyCardImage(String image) { this.enemyCardImage = image;}
+
+    public String getDamageBonus() { return this.damageBonus;}
+
+    public void setDamageBonus(String character) { this.damageBonus = character;}
 }
