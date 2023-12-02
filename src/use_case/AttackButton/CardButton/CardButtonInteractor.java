@@ -87,7 +87,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
                 cardButtonInputData.getCardCode().length() - 1), playerCardSuit,
                 cardButtonDataAccessObject.getAPI().GetCardImage(cardButtonInputData.getCardCode()),
                 enemyMove.getCardCode().substring(0, enemyMove.getCardCode().length() - 1), enemyMove.getCardSuit(),
-                cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode()), damageBonus);
+                cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode()), damageBonus, cardButtonDataAccessObject.getEnemy().getName());
         cardButtonPresenter.prepareSuccessView(cardButtonOutputData);
 
     }

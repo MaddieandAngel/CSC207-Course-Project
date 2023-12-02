@@ -32,6 +32,8 @@ public class BattleResultState {
 
     private String damageBonus;
 
+    private String enemyName;
+
     public BattleResultState(){}
 
     public int getPlayerCurrentHealth() { return this.playerCurrentHealth;}
@@ -93,4 +95,8 @@ public class BattleResultState {
     public String getDamageBonus() { return this.damageBonus;}
 
     public void setDamageBonus(String character) { this.damageBonus = character;}
+
+    public String getEnemyName() { return this.enemyName;}
+
+    public void setEnemyName(String name) { this.enemyName = name;}
 }
