@@ -56,7 +56,8 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         search = new JButton(exploreViewModel.SEARCH_LABEL);
         buttons.add(search);
 
-        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
+        buttons.setLayout(new GridLayout(6, 1, 0, 5));
+        textBox.setLayout(new GridBagLayout());
 
         //Set borders
         Border borders = BorderFactory.createLineBorder(Color.white, 5);
@@ -94,15 +95,15 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         search.setForeground(text);
 
         this.setLayout(new GridBagLayout());
-        this.add(playerStatsPanel, new GridBagConstraints(3, 0, this.getWidth() / 3, this.getHeight() / 5,
+        this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,
                 0.5, 0.5, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(10, 10, 10 ,10),
                 5, 5));
-        this.add(buttons, new GridBagConstraints(3, 3, this.getWidth() / 3, this.getHeight() / 5,
-                0.5, 0.5, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(10, 10, 10 ,10),
-                50, 20));
-        this.add(textBox, new GridBagConstraints(0, 4, this.getWidth() / 3, this.getHeight() / 5,
+        this.add(buttons, new GridBagConstraints(2, 1, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(10, 0, 10 ,10),
+                50, 45));
+        this.add(textBox, new GridBagConstraints(0, 3, this.getWidth() / 3, this.getHeight() / 5,
                 0.5, 0.5, GridBagConstraints.PAGE_END, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 10 ,10),
-                5, 100));
+                5, 90));
 
         north.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

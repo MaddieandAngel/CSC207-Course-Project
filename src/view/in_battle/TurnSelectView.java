@@ -74,9 +74,8 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         flee = new JButton(TurnSelectViewModel.FLEE_BUTTON_LABEL);
         buttons.add(flee);
 
-        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
-        buttons.setAlignmentX(Component.RIGHT_ALIGNMENT); //Should put the buttons on the right side of the screen?
-        buttons.setAlignmentY(Component.CENTER_ALIGNMENT); //Should put the buttons in the center (Y-axis) of the screen?
+        buttons.setLayout(new GridLayout(5, 1));
+        textBox.setLayout(new GridBagLayout());
 
         //Set borders
         Border borders = BorderFactory.createLineBorder(Color.white, 5);
@@ -113,9 +112,16 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
         defend.setForeground(text);
         flee.setForeground(text);
 
-        this.add(playerStatsPanel);
-        this.add(buttons);
-        this.add(textBox);
+        this.setLayout(new GridBagLayout());
+        this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(10, 10, 10 ,10),
+                5, 5));
+        this.add(buttons, new GridBagConstraints(2, 1, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(10, 0, 10 ,10),
+                50, 45));
+        this.add(textBox, new GridBagConstraints(0, 3, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.PAGE_END, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 10 ,10),
+                5, 90));
 
         attack.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

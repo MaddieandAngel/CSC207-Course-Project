@@ -29,9 +29,9 @@ public class BattleResultView extends JPanel implements ActionListener, Property
 
         JPanel buttonAndPlayerCard = new JPanel();
         playerCard = new JLabel(new ImageIcon());
-        playerCard.add(buttonAndPlayerCard);
+        buttonAndPlayerCard.add(playerCard);
         JButton continueButton = new JButton(battleResultViewModel.CONTINUE_LABEL);
-        continueButton.add(buttonAndPlayerCard);
+        buttonAndPlayerCard.add(continueButton);
 
         buttonAndPlayerCard.setLayout(new BoxLayout(buttonAndPlayerCard, BoxLayout.Y_AXIS));
 
@@ -41,13 +41,13 @@ public class BattleResultView extends JPanel implements ActionListener, Property
 
         JPanel textBox = new JPanel();
         action1 = new JLabel("Placeholder text for turn action 1 (if applicable)");
-        action1.add(textBox);
+        textBox.add(action1);
         action2 = new JLabel("Placeholder text for turn action 2");
-        action2.add(textBox);
+        textBox.add(action2);
         action3 = new JLabel("Placeholder text for turn action 3");
-        action3.add(textBox);
+        textBox.add(action3);
         revivePotionUsed = new JLabel("Player's HP fell to 0! Player used Revive Potion!");
-        revivePotionUsed.add(textBox);
+        textBox.add(revivePotionUsed);
 
         textBox.setLayout(new BoxLayout(textBox, BoxLayout.Y_AXIS));
 
@@ -88,11 +88,18 @@ public class BattleResultView extends JPanel implements ActionListener, Property
         revivePotionUsed.setVisible(false);
 
         this.setLayout(new GridBagLayout());
-        //TODO: pain and suffering with making the grid bag layout work
-        this.add(enemyCard);
-        this.add(playerStatsPanel);
-        this.add(buttonAndPlayerCard);
-        this.add(textBox);
+        this.add(enemyCard, new GridBagConstraints(0, 1, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.WEST, GridBagConstraints.NONE,
+                new Insets(10, 10, 10 ,10), 5, 5));
+        this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(10, 10, 10 ,10),
+                5, 5));
+        this.add(buttonAndPlayerCard, new GridBagConstraints(2, 1, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(10, 0, 10 ,10),
+                50, 45));
+        this.add(textBox, new GridBagConstraints(0, 3, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.PAGE_END, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 10 ,10),
+                5, 90));
 
         continueButton.addActionListener(
                 new ActionListener() {

@@ -24,7 +24,7 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
     private final JButton nextFloor;
     private final JButton stayOnFloor;
 
-    private final JLabel playerStats;
+//    private final JLabel playerStats; //Removed for now because the text never gets updated for some reason
 
     public StairsView(NextFloorController nextFloorControl, StayOnFloorController stayOnFloorControl,
                       StairsViewModel stairsViewModel){
@@ -36,9 +36,9 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         JLabel textBoxText = new JLabel(stairsViewModel.textbox_text);
         textBox.add(textBoxText);
 
-        JPanel playerStatsPanel = new JPanel();
-        playerStats = new JLabel("Level: X | Health: X/X | Floor Level: X");
-        playerStatsPanel.add(playerStats);
+//        JPanel playerStatsPanel = new JPanel();
+//        playerStats = new JLabel("Level: X | Health: X/X | Floor Level: X");
+//        playerStatsPanel.add(playerStats);
 
         JPanel buttons = new JPanel();
         nextFloor = new JButton(stairsViewModel.NEXT_FLOOR_LABEL);
@@ -46,7 +46,8 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         stayOnFloor = new JButton(stairsViewModel.STAY_FLOOR_LABEL);
         buttons.add(stayOnFloor);
 
-        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS)); //Should give the buttons a vertical layout?
+        buttons.setLayout(new GridLayout(2, 1, 0, 5));
+        textBox.setLayout(new GridBagLayout());
 
         //Set borders
         Border borders = BorderFactory.createLineBorder(Color.white, 5);
@@ -63,7 +64,7 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         this.setBackground(bg);
         buttons.setBackground(bg);
         textBox.setBackground(bg);
-        playerStatsPanel.setBackground(bg);
+        //playerStatsPanel.setBackground(bg);
 
         nextFloor.setBackground(bg);
         stayOnFloor.setBackground(bg);
@@ -71,14 +72,20 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
         //Set text colours
         Color text = Color.getHSBColor(0, 0, 0.9F);
         textBoxText.setForeground(text);
-        playerStats.setForeground(text);
+        //playerStats.setForeground(text);
         nextFloor.setForeground(text);
         stayOnFloor.setForeground(text);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(playerStatsPanel);
-        this.add(buttons);
-        this.add(textBox);
+        this.setLayout(new GridBagLayout());
+//        this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,
+//                0.5, 0.5, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(10, 10, 10 ,10),
+//                5, 5));
+        this.add(buttons, new GridBagConstraints(2, 1, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(10, 0, 10 ,10),
+                50, 20));
+        this.add(textBox, new GridBagConstraints(0, 3, this.getWidth() / 3, this.getHeight() / 5,
+                0.5, 0.5, GridBagConstraints.PAGE_END, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 10 ,10),
+                5, 100));
 
         nextFloor.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -112,9 +119,9 @@ public class StairsView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        playerStats.setText("Level: " + stairsViewModel.getState().getPlayerLevel() + " | Health: " +
-                stairsViewModel.getState().getPlayerCurrentHealth() + "/" +
-                stairsViewModel.getState().getPlayerMaxHealth() + " | Floor Level: " +
-                stairsViewModel.getState().getFloorLevel());
+//        playerStats.setText("Level: " + stairsViewModel.getState().getPlayerLevel() + " | Health: " +
+//                stairsViewModel.getState().getPlayerCurrentHealth() + "/" +
+//                stairsViewModel.getState().getPlayerMaxHealth() + " | Floor Level: " +
+//                stairsViewModel.getState().getFloorLevel());
     }
 }
