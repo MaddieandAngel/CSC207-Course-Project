@@ -2,6 +2,7 @@ package view.in_battle;
 
 import interface_adapter.BattleResult.BattleResultState;
 import interface_adapter.BattleResult.BattleResultViewModel;
+import interface_adapter.BattleResult.ContinueButtonController;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-//TODO: Finish implementing
 
 public class BattleResultView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "battle result";
@@ -25,7 +24,7 @@ public class BattleResultView extends JPanel implements ActionListener, Property
     private final JLabel enemyCard;
     private final BattleResultViewModel battleResultViewModel;
 
-    public BattleResultView(BattleResultViewModel battleResultViewModel) {
+    public BattleResultView(BattleResultViewModel battleResultViewModel, ContinueButtonController continueController) {
         this.battleResultViewModel = battleResultViewModel;
 
         JPanel buttonAndPlayerCard = new JPanel();
@@ -99,7 +98,7 @@ public class BattleResultView extends JPanel implements ActionListener, Property
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //TODO: implement
+                        continueController.execute();
                     }
                 }
         );
