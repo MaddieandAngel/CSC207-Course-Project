@@ -38,11 +38,11 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             return enemyAttack();
         }
         else if (actionID == 1){
-            return new EnemyBehaviourOutputData("defend", -1, ' ');
+            return new EnemyBehaviourOutputData("defend", -1, ' ', "");
         }
         else { // actionID == 2
             enemyDraw();
-            return new EnemyBehaviourOutputData("draw", -1, ' ');
+            return new EnemyBehaviourOutputData("draw", -1, ' ', "");
         }
     }
 
@@ -55,7 +55,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         char cardSuit = apiAccess.GetCardSuit(enemyHand[cardUsed]);
         apiAccess.CardPlayed("enemyHand", enemyHand[cardUsed]);
 
-        return new EnemyBehaviourOutputData("attack", cardValue, cardSuit);
+        return new EnemyBehaviourOutputData("attack", cardValue, cardSuit, enemyHand[cardUsed]);
     }
 
     private void enemyDraw() throws IOException {

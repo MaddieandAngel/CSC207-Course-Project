@@ -1,7 +1,6 @@
 package interface_adapter.BattleResult;
 
 public class BattleResultState {
-    //TODO: I was unsure what to put here. Open to modification.
     private int playerCurrentHealth;
 
     private int playerMaxHealth;
@@ -10,8 +9,6 @@ public class BattleResultState {
 
     private String playerAction;
 
-    private int enemyHealth;
-
     private String enemyAction;
 
     private boolean revivePotionUsed;
@@ -19,6 +16,20 @@ public class BattleResultState {
     private int damageToPlayer;
 
     private int damageToEnemy;
+
+    private String playerCardValue;
+
+    private char playerCardSuit;
+
+    private String playerCardImage;
+
+    private String enemyCardValue;
+
+    private char enemyCardSuit;
+
+    private String enemyCardImage;
+
+    private String damageBonus;
 
     public BattleResultState(){}
 
@@ -38,10 +49,6 @@ public class BattleResultState {
 
     public void setPlayerAction(String action) {this.playerAction = action;}
 
-    public int getEnemyHealth() { return this.enemyHealth;}
-
-    public void setEnemyHealth(int enemyHealth) { this.enemyHealth = enemyHealth;}
-
     public String getEnemyAction() { return this.enemyAction;}
 
     public void setEnemyAction(String enemyAction) { this.enemyAction = enemyAction;}
@@ -58,9 +65,33 @@ public class BattleResultState {
 
     public void setDamageToEnemy(int damage) {this.damageToEnemy = damage;}
 
-    public boolean playerDead() { return playerCurrentHealth == 0;}
+    public String getPlayerCardValue() { return this.playerCardValue;}
 
-    public boolean enemyDead() { return enemyHealth == 0;}
+    public void setPlayerCardValue(String value) { this.playerCardValue = value;}
+
+    public char getPlayerCardSuit() { return this.playerCardSuit;}
+
+    public void setPlayerCardSuit(char suit) { this.playerCardSuit = suit;}
+
+    public String getPlayerCardImage() { return this.playerCardImage;}
+
+    public void setPlayerCardImage(String url) { this.playerCardImage = url;}
+
+    public String getEnemyCardValue() { return this.enemyCardValue;}
+
+    public void setEnemyCardValue(String value) { this.enemyCardValue = value;}
+
+    public char getEnemyCardSuit() { return this.enemyCardSuit;}
+
+    public void setEnemyCardSuit(char suit) { this.enemyCardSuit = suit;}
+
+    public String getEnemyCardImage() { return this.enemyCardImage;}
+
+    public void setEnemyCardImage(String url) { this.enemyCardImage = url;}
+
+    public String getDamageBonus() { return this.damageBonus;}
+
+    public void setDamageBonus(String character) { this.damageBonus = character;}
 
 
 }

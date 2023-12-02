@@ -21,18 +21,33 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
 
         // Player will draw card if their hand is < 5
         int playerHandLength = drawButtonDataAccessObject.getAPI().GetCardsInPile("player").length;
+        String playerCardCode = "";
+        String playerCardValue = "";
+        char playerCardSuit = ' ';
+        String playerCardImage = "";
+
         if (playerHandLength < 5) {
             drawButtonDataAccessObject.getAPI().DrawCard("player");
+            playerCardCode = drawButtonDataAccessObject.getAPI().GetCardsInPile("player")[playerHandLength];
+            playerCardValue = playerCardCode.substring(0, playerCardCode.length() - 1);
+            playerCardSuit = drawButtonDataAccessObject.getAPI().GetCardSuit(playerCardCode);
+            playerCardImage = drawButtonDataAccessObject.getAPI().GetCardImage(playerCardCode);
 
             // Enemy will make their move
             EnemyBehaviourOutputData enemyBehaviour = drawButtonDataAccessObject.getEnemyBehaviour().performRandomAction();
             String enemyAction = enemyBehaviour.getAction();
+            String enemyCardValue = "";
+            char enemyCardSuit = ' ';
+            String enemyCardImage = "";
 
             // Calculate damage done to player by enemy
             int damageToPlayer = 0;
 
             if (enemyAction.equals("attack")) {
                 damageToPlayer = drawButtonDataAccessObject.getEnemy().getLevel() * enemyBehaviour.getCardValue();
+                enemyCardValue = enemyBehaviour.getCardCode().substring(0, enemyBehaviour.getCardCode().length() - 1);
+                enemyCardSuit = enemyBehaviour.getCardSuit();
+                enemyCardImage = drawButtonDataAccessObject.getAPI().GetCardImage(enemyBehaviour.getCardCode());
             }
 
             // Update health of player
@@ -55,7 +70,8 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
 
             // Create output data
             DrawButtonOutputData drawButtonOutputData = new DrawButtonOutputData(updatedPlayerHealth, drawButtonDataAccessObject.getPlayer().getMaxHealth(),
-                    drawButtonDataAccessObject.getPlayer().getLevel(), enemyAction, drawButtonDataAccessObject.getEnemy().getCurrentHealth(), reviveUsed, damageToPlayer);
+                    drawButtonDataAccessObject.getPlayer().getLevel(), enemyAction, reviveUsed, damageToPlayer, playerCardValue,
+                    playerCardSuit, playerCardImage, enemyCardValue, enemyCardSuit, enemyCardImage);
             drawButtonPresenter.prepareSuccessView(drawButtonOutputData);
 
         } else {

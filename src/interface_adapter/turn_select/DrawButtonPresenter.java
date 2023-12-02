@@ -29,11 +29,17 @@ public class DrawButtonPresenter implements DrawButtonOutputBoundary {
         state.setPlayerMaxHealth(drawButtonOutputData.getPlayerMaxHealth());
         state.setPlayerLevel(drawButtonOutputData.getPlayerLevel());
         state.setEnemyAction(drawButtonOutputData.getEnemyAction());
-        state.setEnemyHealth(drawButtonOutputData.getEnemyHealth());
         state.setRevivePotionUsed(drawButtonOutputData.revivePotionUsed());
         state.setDamageToPlayer(drawButtonOutputData.getDamageToPlayer());
         state.setDamageToEnemy(0);
         state.setPlayerAction("draw");
+        state.setPlayerCardValue(drawButtonOutputData.getPlayerCardValue());
+        state.setPlayerCardSuit(drawButtonOutputData.getPlayerCardSuit());
+        state.setPlayerCardImage(drawButtonOutputData.getPlayerCardImage());
+        state.setEnemyCardValue(drawButtonOutputData.enemyCardValue());
+        state.setEnemyCardSuit(drawButtonOutputData.getEnemyCardSuit());
+        state.setEnemyCardImage(drawButtonOutputData.getEnemyImage());
+        state.setDamageBonus("");
         this.battleResultViewModel.setState(state);
         battleResultViewModel.firePropertyChanged();
 
