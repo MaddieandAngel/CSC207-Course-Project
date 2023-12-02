@@ -14,7 +14,7 @@ import interface_adapter.APIAccessInterface;
 import java.io.IOException;
 import java.util.Random;
 
-public class APIAccess implements APIAccessInterface, CreateDeckDataAccessInterface {
+public class APIAccess implements APIAccessInterface {
 
     private final DeckInterface deck;
 
