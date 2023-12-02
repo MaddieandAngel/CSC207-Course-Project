@@ -40,6 +40,7 @@ public class DrawButtonPresenter implements DrawButtonOutputBoundary {
         state.setEnemyCardSuit(drawButtonOutputData.getEnemyCardSuit());
         state.setEnemyCardImage(drawButtonOutputData.getEnemyImage());
         state.setDamageBonus("");
+        state.setEnemyName(drawButtonOutputData.getEnemyName());
         this.battleResultViewModel.setState(state);
         battleResultViewModel.firePropertyChanged();
 

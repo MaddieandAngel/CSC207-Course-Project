@@ -71,7 +71,7 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
             // Create output data
             DrawButtonOutputData drawButtonOutputData = new DrawButtonOutputData(updatedPlayerHealth, drawButtonDataAccessObject.getPlayer().getMaxHealth(),
                     drawButtonDataAccessObject.getPlayer().getLevel(), enemyAction, reviveUsed, damageToPlayer, playerCardValue,
-                    playerCardSuit, playerCardImage, enemyCardValue, enemyCardSuit, enemyCardImage);
+                    playerCardSuit, playerCardImage, enemyCardValue, enemyCardSuit, enemyCardImage, drawButtonDataAccessObject.getEnemy().getName());
             drawButtonPresenter.prepareSuccessView(drawButtonOutputData);
 
         } else {

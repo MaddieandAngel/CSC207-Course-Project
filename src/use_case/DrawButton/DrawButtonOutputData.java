@@ -26,9 +26,12 @@ public class DrawButtonOutputData {
 
     private String enemyCardImage;
 
+    private String enemyName;
+
     public DrawButtonOutputData(int playerCurrentHealth, int playerMaxHealth, int playerLevel, String enemyAction,
                                 boolean revivePotionUsed, int damageToPlayer, String playerCardValue, char playerCardSuit,
-                                String playerCardImage, String enemyCardValue, char enemyCardSuit, String enemyCardImage) {
+                                String playerCardImage, String enemyCardValue, char enemyCardSuit, String enemyCardImage,
+                                String enemyName) {
         this.playerCurrentHealth = playerCurrentHealth;
         this.playerMaxHealth = playerMaxHealth;
         this.playerLevel = playerLevel;
@@ -41,6 +44,7 @@ public class DrawButtonOutputData {
         this.enemyCardValue = enemyCardValue;
         this.enemyCardSuit = enemyCardSuit;
         this.enemyCardImage = enemyCardImage;
+        this.enemyName = enemyName;
     }
 
     public int getPlayerCurrentHealth() { return this.playerCurrentHealth;}
@@ -66,4 +70,6 @@ public class DrawButtonOutputData {
     public char getEnemyCardSuit() { return this.enemyCardSuit;}
 
     public String getEnemyImage() { return this.enemyCardImage;}
+
+    public String getEnemyName() { return this.enemyName;}
 }
