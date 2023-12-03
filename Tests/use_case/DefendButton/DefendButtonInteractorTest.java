@@ -11,6 +11,8 @@ import entity.Player;
 import interface_adapter.APIAccessInterface;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import use_case.DrawButton.DrawButtonInputBoundary;
+import use_case.DrawButton.DrawButtonInteractor;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
@@ -66,7 +68,6 @@ public class DefendButtonInteractorTest {
 
     @Test
     void canDefend() throws IOException{
-        DefendButtonDataAccessInterface defendButtonDataAccessInterface = battleRepository;
         DefendButtonOutputBoundary successPresenter = new DefendButtonOutputBoundary() {
             @Override
             public void prepareDefendSuccessView(DefendButtonOutputData defendButtonOutputData) {
@@ -106,6 +107,7 @@ public class DefendButtonInteractorTest {
 
             }
         };
-
+        DefendButtonInputBoundary interactor = new DefendButtonInteractor(successPresenter, battleRepository);
+        interactor.execute();
     }
 }
