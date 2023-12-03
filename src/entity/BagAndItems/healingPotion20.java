@@ -1,6 +1,6 @@
 package entity.BagAndItems;
 
-import entity.ActivePlayer;
+import entity.Player;
 
 public class healingPotion20 implements Item{
     private final String itemName;
@@ -12,7 +12,7 @@ public class healingPotion20 implements Item{
     }
 
     @Override
-    public void heal(ActivePlayer player) {
+    public void heal(Player player) {
         int currentHealth = player.getCurrentHealth();
         int addHealth = (int) Math.floor(player.getMaxHealth() * percentage);
         int set_health = currentHealth + addHealth;

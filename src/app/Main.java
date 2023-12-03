@@ -4,7 +4,11 @@ import data_access.*;
 import entity.ActivePlayer;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+<<<<<<< HEAD
 import entity.Player;
+=======
+import entity.Enemy;
+>>>>>>> 2e8097e4bc0813a3bb73bcaa0f5685f3c5bb2406
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPick.DropToPickViewModel;
@@ -16,16 +20,24 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+<<<<<<< HEAD
 import use_case.DropToPickPackage.DropToPickPackageDataAccessInterface;
 import use_case.PickUpItem.PickUpItemDataAccessInterface;
 import view.*;
+=======
+import use_case.EnemyBehaviour.EnemyBehaviour;
+import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import view.ExploreView;
+import view.TitleScreenView;
+import view.ViewManager;
 import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Copied from CACoding:
 
         // Build the main program window, the main panel containing the
@@ -62,15 +74,19 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
+        Enemy enemy = null;
+        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
+        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess, enemy);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory());
+
+        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(activePlayerFactory, apiAccess, enemyBehaviour);
         UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
         DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
         PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
         DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
 
-        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
-        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
+
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,

@@ -1,5 +1,18 @@
 package interface_adapter.turn_select;
 
-// TODO: To be implemented
+import use_case.DrawButton.DrawButtonInputBoundary;
+
+import java.io.IOException;
+
 public class DrawButtonController {
+
+    DrawButtonInputBoundary drawButtonInteractor;
+
+    public DrawButtonController(DrawButtonInputBoundary drawButtonInteractor) {
+        this.drawButtonInteractor = drawButtonInteractor;
+    }
+
+    public void execute() throws IOException {
+        drawButtonInteractor.execute();
+    }
 }
