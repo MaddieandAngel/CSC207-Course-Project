@@ -10,6 +10,7 @@ import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final JButton DropAnItem;
     private final JButton Back;
     private Item item;
+    private JLabel itemFind;
 
 
     public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, InBattleDataAccessObject inBattleDataAccessObject) {
@@ -36,7 +38,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
         this.dropToPickController = dropToPickController;
         this.player = inBattleDataAccessObject.getPlayer();
 
-        PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
+
         this.PickUpItem = new JButton(pickUpItemViewModel.PICK);
         this.DropAnItem = new JButton(pickUpItemViewModel.DROP_FROM_BAG);
         this.Back = new JButton(pickUpItemViewModel.BACK);
@@ -46,10 +48,34 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
             buttons.add(PickUpItem);
             buttons.add(DropAnItem);
             buttons.add(Back);
+
         JLabel Notice = new JLabel("*If your bag is full, you have to drop an item in order to pick up a new one(click Drop From Bag)");
         JLabel title = new JLabel(pickUpItemViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        buttons.setBackground(bg);
+        buttons.setLayout(new GridLayout(3, 1, 0, 5));
+        PickUpItem.setBackground(bg);
+        DropAnItem.setBackground(bg);
+        Back.setBackground(bg);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        PickUpItem.setBorder(buttonBorders);
+        DropAnItem.setBorder(buttonBorders);
+        Back.setBorder(buttonBorders);
+
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        PickUpItem.setForeground(text);
+        DropAnItem.setForeground(text);
+        Back.setForeground(text);
+        Notice.setForeground(text);
+        title.setForeground(text);
+
+        PickUpItem.setFont(new Font("Verdana", Font.PLAIN, 18));
+        DropAnItem.setFont(new Font("Verdana", Font.PLAIN, 18));
+        Back.setFont(new Font("Verdana", Font.PLAIN, 18));
 
         this.add(title);
         this.add(buttons);

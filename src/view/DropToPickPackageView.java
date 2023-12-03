@@ -7,6 +7,7 @@ import interface_adapter.DropToPickPackage.DropToPickPackageController;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +39,8 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
 
 
         JPanel buttons = new JPanel();
-        JButton numOfItems = new JButton("Update number of Items");
+        JPanel textBox = new JPanel();
+        JButton numOfItems = new JButton("Update");
         this.dropHeal10 = new JButton(dropToPickPackageViewModel.DROP_HEAL10);
         this.dropHeal20 = new JButton(dropToPickPackageViewModel.DROP_HEAL20);
         this.dropHeal45 = new JButton(dropToPickPackageViewModel.DROP_HEAL45);
@@ -50,14 +52,71 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
         buttons.add(dropHeal45);
         buttons.add(dropRevive);
         buttons.add(numOfItems);
-        buttons.add(back);
+
+
         heal10 = new JLabel("" );
         heal20 = new JLabel("");
         heal45 = new JLabel("");
         revive = new JLabel("" );
+        JLabel notice = new JLabel("*click Update button to update \n info of items in bag");
+        textBox.add(notice);
+        textBox.add(heal10);
+        textBox.add(heal20);
+        textBox.add(heal45);
+        textBox.add(revive);
 
+        Border borders = BorderFactory.createLineBorder(Color.white, 5);
+        buttons.setBorder(borders);
+        textBox.setBorder(borders);
+
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        dropHeal10.setBorder(buttonBorders);
+        dropHeal20.setBorder(buttonBorders);
+        dropHeal45.setBorder(buttonBorders);
+        dropRevive.setBorder(buttonBorders);
+        back.setBorder(buttonBorders);
+        numOfItems.setBorder(buttonBorders);
+
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        buttons.setBackground(bg);
+        textBox.setBackground(bg);
+        dropHeal10.setBackground(bg);
+        dropHeal20.setBackground(bg);
+        dropHeal45.setBackground(bg);
+        dropRevive.setBackground(bg);
+        back.setBackground(bg);
+        numOfItems.setBackground(bg);
+
+
+
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        dropHeal10.setForeground(text);
+        dropHeal20.setForeground(text);
+        dropHeal45.setForeground(text);
+        dropRevive.setForeground(text);
+        back.setForeground(text);
+        numOfItems.setForeground(text);
+        heal10.setForeground(text);
+        heal20.setForeground(text);
+        heal45.setForeground(text);
+        revive.setForeground(text);
+        notice.setForeground(text);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(dropToPickPackageViewModel.TITLE_LABEL);
+        title.setForeground(text);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttons.setLayout(new GridLayout(6, 1, 0, 5));
+        textBox.setLayout(new GridLayout(6, 1, 0, 5));
+        this.setLayout(new GridLayout(2, 3, 0, 0));
+        this.add(title);
+        this.add(textBox);
+        this.add(buttons);
+        this.add(back);
+
+
+
         numOfItems.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,14 +188,8 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
         );
 
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(title);
-        this.add(buttons);
-        this.add(heal10);
-        this.add(heal20);
-        this.add(heal45);
-        this.add(revive);
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {

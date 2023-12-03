@@ -41,10 +41,10 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
         MovementOutputData movementOutputData = new MovementOutputData(exploreDataAccessObject.getDirections());
         Random r = new Random();
         int random = r.nextInt(100);
-        if (random <= 50){
+        if (random <= 1){
             searchButtonPresenter.prepareEmptyRoomView();
             JOptionPane.showMessageDialog(null, "The room is empty:(");
-        }else if (random <= 80){
+        }else if (random <= 1){
             JOptionPane.showMessageDialog(null, "There's enemy in the room");
             Random randomizer = new Random();
             int floorLevel = exploreDataAccessObject.getFloorLevel();
