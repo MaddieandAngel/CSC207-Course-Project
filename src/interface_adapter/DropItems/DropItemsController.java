@@ -1,5 +1,6 @@
 package interface_adapter.DropItems;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.Player;
 import use_case.DropItem.DropItemInputBoundary;
@@ -12,8 +13,8 @@ public class DropItemsController {
         this.dropItemInteractor = dropItemInteractor;
     }
 
-    public void execute(Player player, int num){
-        DropItemInputData useItemInputData = new DropItemInputData(player, num);
+    public void execute(InBattleDataAccessObject inBattleDataAccessObject, int num){
+        DropItemInputData useItemInputData = new DropItemInputData(inBattleDataAccessObject.getPlayer(), num);
         dropItemInteractor.execute(useItemInputData);}
 
     public void back(){

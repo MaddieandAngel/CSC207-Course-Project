@@ -82,7 +82,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(useHeal10)) {
-                            useItemsController.execute(player, 10);
+                            useItemsController.execute(inBattleDataAccessObject, 10);
                             heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
 
                         }
@@ -95,7 +95,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(useHeal20)) {
-                            useItemsController.execute(player, 20);
+                            useItemsController.execute(inBattleDataAccessObject, 20);
                             heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
 
                         }
@@ -108,7 +108,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(useHeal45)) {
-                            useItemsController.execute(player, 45);
+                            useItemsController.execute(inBattleDataAccessObject, 45);
                             heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
 
                         }
@@ -124,7 +124,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal10)) {
-                            dropItemsController.execute(player, 10);
+                            dropItemsController.execute(inBattleDataAccessObject, 10);
                             heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
 
                         }
@@ -137,7 +137,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal20)) {
-                            dropItemsController.execute(player, 20);
+                            dropItemsController.execute(inBattleDataAccessObject, 20);
                             heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
 
                         }
@@ -150,7 +150,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal45)) {
-                            dropItemsController.execute(player, 45);
+                            dropItemsController.execute(inBattleDataAccessObject, 45);
                             heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
                         }
                     }
@@ -162,7 +162,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropRevive)) {
-                            dropItemsController.execute(player, 0);
+                            dropItemsController.execute(inBattleDataAccessObject, 0);
                             revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
                         }
                     }

@@ -55,11 +55,6 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
         heal20 = new JLabel("");
         heal45 = new JLabel("");
         revive = new JLabel("" );
-//
-//        heal10 = new JLabel("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
-//        heal20 = new JLabel("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
-//        heal45 = new JLabel("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
-//        revive = new JLabel("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
 
         JLabel title = new JLabel(dropToPickPackageViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -81,9 +76,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal10)) {
-                            dropToPickPackageController.execute(player, 10, 0);
-                            //heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
-
+                            dropToPickPackageController.execute(inBattleDataAccessObject, 10);
                         }
                     }
 
@@ -94,9 +87,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal20)) {
-                            dropToPickPackageController.execute(player, 20, 0);
-                           // heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
-
+                            dropToPickPackageController.execute(inBattleDataAccessObject, 20);
                         }
                     }
 
@@ -107,8 +98,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal45)) {
-                            dropToPickPackageController.execute(player, 45, 0);
-                           // heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+                            dropToPickPackageController.execute(inBattleDataAccessObject, 45);
                         }
                     }
 
@@ -119,8 +109,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropRevive)) {
-                            dropToPickPackageController.execute(player, 0, 0);
-                            //revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
+                            dropToPickPackageController.execute(inBattleDataAccessObject, 0);
                         }
                     }
 
@@ -132,7 +121,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            dropToPickPackageController.back(player);
+                            dropToPickPackageController.back(inBattleDataAccessObject);
                         }
                     }
 
@@ -155,9 +144,6 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
-        heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
-        heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
-        revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
+
     }
 }

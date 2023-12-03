@@ -1,5 +1,6 @@
 package interface_adapter.PickUpItem;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.BagAndItems.Item;
 import entity.Player;
@@ -13,8 +14,8 @@ public class PickUpItemController {
         this.pickUpItemInteractor = pickUpItemInteractor;
     }
 
-    public void execute(Player player, Item item) {
-        PickUpItemInputData pickUpItemInputData = new PickUpItemInputData(player, item);
+    public void execute(InBattleDataAccessObject inBattleDataAccessObject, Item item) {
+        PickUpItemInputData pickUpItemInputData = new PickUpItemInputData(inBattleDataAccessObject.getPlayer(), item);
         pickUpItemInteractor.execute(pickUpItemInputData);
 
     }

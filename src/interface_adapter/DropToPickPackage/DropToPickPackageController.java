@@ -1,5 +1,6 @@
 package interface_adapter.DropToPickPackage;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.Player;
 import use_case.DropToPickPackage.DropToPickPackageInputBoundary;
@@ -12,13 +13,13 @@ public class DropToPickPackageController {
     public DropToPickPackageController(DropToPickPackageInputBoundary dropToPickPackageInteractor) {
         this.dropToPickPackageInteractor = dropToPickPackageInteractor;
     }
-    public void execute(Player player, int num, int back){
+    public void execute(InBattleDataAccessObject inBattleDataAccessObject, int num){
 
-            DropToPickPackageInputData dropToPickPackageInputData = new DropToPickPackageInputData(player, num);
+            DropToPickPackageInputData dropToPickPackageInputData = new DropToPickPackageInputData(inBattleDataAccessObject.getPlayer(), num);
             dropToPickPackageInteractor.execute(dropToPickPackageInputData);
 
     }
-    public void back(Player player){
-        dropToPickPackageInteractor.back(player);
+    public void back(InBattleDataAccessObject inBattleDataAccessObject){
+        dropToPickPackageInteractor.back(inBattleDataAccessObject.getPlayer());
     }
 }

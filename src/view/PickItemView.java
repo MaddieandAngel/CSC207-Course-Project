@@ -59,7 +59,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(DropAnItem)){
-                            dropToPickController.execute(player);
+                            dropToPickController.execute(inBattleDataAccessObject);
                         }
 
                     }
@@ -82,7 +82,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(PickUpItem)){
                             item = pickUpItemViewModel.getState().getItem();
-                            pickUpItemController.execute(player,item);
+                            pickUpItemController.execute(inBattleDataAccessObject,item);
                         }
                     }
                 }

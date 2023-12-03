@@ -71,7 +71,6 @@ public class Main {
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
         ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
-        Player player = activePlayerFactory.create();
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(activePlayerFactory, apiAccess, enemyBehaviour);
@@ -105,17 +104,12 @@ public class Main {
                 useItemsViewModel, inBattleDataAccessObject);
                 views.add(dropToPickPackageView, dropToPickPackageView.viewName);
 
-
-        viewManagerModel.setActiveView(titleScreenView.viewName);
-        viewManagerModel.firePropertyChanged();
-        //application.pack();
-
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
         views.add(battleResultView, battleResultView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
-
+        application.pack();
         application.setSize(800,500);
         application.setVisible(true);
 
