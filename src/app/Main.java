@@ -66,7 +66,7 @@ public class Main {
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
-                exploreViewModel, inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
+                exploreViewModel, apiAccess, exploreDataAccessObject);
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
                 pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);

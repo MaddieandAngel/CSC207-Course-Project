@@ -1,5 +1,6 @@
 package app;
 
+import interface_adapter.APIAccessInterface;
 import interface_adapter.TitleScreen.*;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
@@ -14,7 +15,7 @@ public class TitleScreenUseCaseFactory {
     private TitleScreenUseCaseFactory(){}
 
     public static TitleScreenView create(ViewManagerModel viewManagerModel, TitleScreenViewModel titleScreenViewModel, ExploreViewModel exploreViewModel,
-                                         CreateDeckDataAccessInterface apiAccess, StairsDataAccessInterface exploreDataAccessObject){
+                                         APIAccessInterface apiAccess, StairsDataAccessInterface exploreDataAccessObject){
 
         PlayButtonController playButtonController = createPlayButtonUseCase(viewManagerModel, titleScreenViewModel, exploreViewModel, apiAccess, exploreDataAccessObject);
 
@@ -22,7 +23,7 @@ public class TitleScreenUseCaseFactory {
     }
 
     private static PlayButtonController createPlayButtonUseCase(ViewManagerModel viewManagerModel, TitleScreenViewModel titleScreenViewModel,
-                                                                ExploreViewModel exploreViewModel, CreateDeckDataAccessInterface apiAccess,
+                                                                ExploreViewModel exploreViewModel, APIAccessInterface apiAccess,
                                                                 StairsDataAccessInterface exploreDataAccessObject){
 
         PlayButtonOutputBoundary playButtonOutputBoundary = new PlayButtonPresenter(viewManagerModel, titleScreenViewModel, exploreViewModel);
