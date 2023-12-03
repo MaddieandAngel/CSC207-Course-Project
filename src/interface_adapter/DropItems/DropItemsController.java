@@ -15,5 +15,9 @@ public class DropItemsController {
         DropItemInputData useItemInputData = new DropItemInputData(player, num);
         dropItemInteractor.execute(useItemInputData);}
 
+    public void back(){
+        dropItemInteractor.back();
+    }
+
 }
 

@@ -23,11 +23,12 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
     private final JButton dropHeal20;
     private final JButton dropHeal45;
     private final JButton dropRevive;
+    private final JButton back;
 
-    private final JLabel heal10;
-    private final JLabel heal20;
-    private final JLabel heal45;
-    private final JLabel revive;
+    private JLabel heal10;
+    private JLabel heal20;
+    private JLabel heal45;
+    private JLabel revive;
 
     private final UseItemsController useItemsController;
     private final DropItemsController dropItemsController;
@@ -53,6 +54,8 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
         this.dropHeal45 = new JButton(dropItemsViewModel.DROP_HEAL45);
         this.dropRevive = new JButton(dropItemsViewModel.DROP_REVIVE);
 
+        this.back = new JButton(useItemsViewModel.BACK);
+
         buttons.add(useHeal10);
         buttons.add(useHeal20);
         buttons.add(useHeal45);
@@ -60,6 +63,7 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
         buttons.add(dropHeal20);
         buttons.add(dropHeal45);
         buttons.add(dropRevive);
+        buttons.add(back);
 
         heal10 = new JLabel("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
         heal20 = new JLabel("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
@@ -163,6 +167,18 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
 
                 }
         );
+        back.addActionListener(
+                new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(back)) {
+                            dropItemsController.back();
+                        }
+                    }
+
+                }
+        );
+
 
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -180,5 +196,9 @@ public class PackageView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
+        heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
+        heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+        revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
     }
 }

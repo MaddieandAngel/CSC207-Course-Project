@@ -26,4 +26,10 @@ public class DropItemInteractor implements DropItemInputBoundary{
 
 
     }
+
+    @Override
+    public void back() {
+        dropItemPresenter.prepareExploreView();
+    }
+
 }

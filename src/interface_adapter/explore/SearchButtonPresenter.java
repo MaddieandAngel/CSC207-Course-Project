@@ -57,9 +57,10 @@ public class SearchButtonPresenter implements SearchButtonOutputBoundary {
     public void prepareItemCollectionView(Item item) {
         PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
         pickUpItemState.setItem(item);
+
+        JOptionPane.showMessageDialog(null, "You found a" + item.getName()+" !");
         pickUpItemViewModel.setState(pickUpItemState);
         pickUpItemViewModel.firePropertyChanged();
-        JOptionPane.showMessageDialog(null, "You found a" + item.getName()+" !");
         viewManagerModel.setActiveView(pickUpItemViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

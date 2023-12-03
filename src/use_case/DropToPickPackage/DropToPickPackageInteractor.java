@@ -1,5 +1,6 @@
 package use_case.DropToPickPackage;
 
+import entity.ActivePlayer;
 import use_case.DropToPickPackage.DropToPickPackageInputBoundary;
 import use_case.DropToPickPackage.DropToPickPackageDataAccessInterface;
 import use_case.DropToPickPackage.DropToPickPackageOutputBoundary;
@@ -27,7 +28,7 @@ public class DropToPickPackageInteractor implements DropToPickPackageInputBounda
 
     }
     @Override
-    public void back(){
-        dropToPickPackagePresenter.preparePickItemView();
+    public void back(ActivePlayer player){
+        dropToPickPackagePresenter.preparePickItemView(player);
     }
 }

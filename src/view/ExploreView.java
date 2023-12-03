@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.BagInExplore.ExploreBagController;
 import interface_adapter.explore.MovementButtonController;
 import interface_adapter.explore.SearchButtonController;
 import interface_adapter.explore.ExploreViewModel;
@@ -19,7 +20,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
 
     private final MovementButtonController movementButtonController;
     private final SearchButtonController searchButtonController;
-   // private final ExploreBagController exploreBagController;
+    private final ExploreBagController exploreBagController;
 
     private final JButton north;
     private final JButton east;
@@ -31,11 +32,11 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
     private JLabel playerStats;
 
     public ExploreView(MovementButtonController moveControl, SearchButtonController searchControl,
-                       ExploreViewModel exploreViewModel){
+                       ExploreViewModel exploreViewModel, ExploreBagController exploreBagController){
         this.movementButtonController = moveControl;
         this.searchButtonController = searchControl;
         this.exploreViewModel = exploreViewModel;
-        //this.exploreBagController = exploreBagController;
+        this.exploreBagController = exploreBagController;
         exploreViewModel.addPropertyChangeListener(this);
 
         JPanel textbox = new JPanel();
@@ -132,17 +133,17 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     }
                 }
         );
-//        bag.addActionListener(
-//                // This creates an anonymous subclass of ActionListener and instantiates it.
-//                new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e_search) {
-//                        if (e_search.getSource().equals(bag)){
-//                            exploreBagController.execute();
-//                        }
-//                    }
-//                }
-//        );
+        bag.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e_search) {
+                        if (e_search.getSource().equals(bag)){
+                            exploreBagController.execute();
+                        }
+                    }
+                }
+        );
         // add buttons to the screen
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(bag);

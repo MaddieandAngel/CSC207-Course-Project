@@ -17,7 +17,7 @@ public class DropToPickPackageController {
             dropToPickPackageInteractor.execute(dropToPickPackageInputData);
 
     }
-    public void back(){
-        dropToPickPackageInteractor.back();
+    public void back(ActivePlayer player){
+        dropToPickPackageInteractor.back(player);
     }
 }

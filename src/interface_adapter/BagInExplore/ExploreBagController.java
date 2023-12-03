@@ -1,5 +1,15 @@
 package interface_adapter.BagInExplore;
 
+import use_case.ExploreBag.ExploreBagInputBoundary;
+
 public class ExploreBagController {
-    void execute(){}
+    final ExploreBagInputBoundary exploreBagInteractor;
+
+    public ExploreBagController(ExploreBagInputBoundary exploreBagInputBoundary) {
+        this.exploreBagInteractor = exploreBagInputBoundary;
+    }
+
+    public void execute(){
+        exploreBagInteractor.execute();
+    }
 }

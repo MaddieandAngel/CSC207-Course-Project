@@ -3,6 +3,7 @@ package entity.BagAndItems;
 import entity.ActivePlayer;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Package implements Bag {
     private final ArrayList<Item> heal10;
@@ -28,15 +29,15 @@ public class Package implements Bag {
         if (isFull()){
             return false;
         }
-        else if (newItem instanceof healingPotion10){
+        else if (Objects.equals(newItem.getName(), "HealingPotion(10%)")){
             heal10.add(newItem);
             return true;
         }
-        else if (newItem instanceof healingPotion20){
+        else if (Objects.equals(newItem.getName(), "HealingPotion(20%)")){
             heal20.add(newItem);
             return true;
         }
-        else if (newItem instanceof healingPotion45){
+        else if (Objects.equals(newItem.getName(), "HealingPotion(45%)")){
             heal45.add(newItem);
             return true;
         }

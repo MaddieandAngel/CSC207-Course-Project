@@ -14,6 +14,7 @@ public class UseItemsViewModel extends ViewModel {
     public static final String DROP_HEAL20 = "Drop HealPotion(20%)";
     public static final String DROP_HEAL45 = "Drop HealPotion(45%)";
     public static final String DROP_REVIVE = "Drop RevivePotion";
+    public static final String BACK = "Back";
 
     public static final String TITLE_LABEL = "Your Bag";
     private UseItemState state = new UseItemState();

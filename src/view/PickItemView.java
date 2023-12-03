@@ -25,7 +25,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final JButton PickUpItem;
     private final JButton DropAnItem;
     private final JButton Back;
-    private final Item item;
+    private Item item;
 
 
     public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, ActivePlayer player) {
@@ -35,7 +35,6 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
         this.player = player;
 
         PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
-        item = pickUpItemState.getItem();
         this.PickUpItem = new JButton(pickUpItemViewModel.PICK);
         this.DropAnItem = new JButton(pickUpItemViewModel.DROP_FROM_BAG);
         this.Back = new JButton(pickUpItemViewModel.BACK);
@@ -45,7 +44,6 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
             buttons.add(PickUpItem);
             buttons.add(DropAnItem);
             buttons.add(Back);
-        //JLabel ItemInfo = new JLabel("You found a " + item.getName() + "! Do you want to pick it up?");
         JLabel Notice = new JLabel("*If your bag is full, you have to drop an item in order to pick up a new one(click Drop From Bag)");
         JLabel title = new JLabel(pickUpItemViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -53,7 +51,6 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
 
         this.add(title);
         this.add(buttons);
-        //this.add(ItemInfo);
         this.add(Notice);
         DropAnItem.addActionListener(
                 new ActionListener() {
@@ -82,6 +79,7 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(PickUpItem)){
+                            item = pickUpItemViewModel.getState().getItem();
                             pickUpItemController.execute(player,item);
                         }
                     }
@@ -96,6 +94,5 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
     }
 }

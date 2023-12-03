@@ -113,7 +113,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            dropToPickPackageController.back();
+                            dropToPickPackageController.back(player);
                         }
                     }
 
@@ -136,5 +136,9 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
+        heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
+        heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+        revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
     }
 }

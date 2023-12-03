@@ -1,20 +1,24 @@
 package app;
 
-import data_access.APIAccess;
-import data_access.ExploreDataAccessObject;
-import data_access.InBattleDataAccessObject;
+import data_access.*;
+import entity.ActivePlayer;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+import entity.Player;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
+import interface_adapter.DropItems.DropItemsViewModel;
+import interface_adapter.DropToPick.DropToPickViewModel;
+import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
+import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
-import view.ExploreView;
-import view.TitleScreenView;
-import view.ViewManager;
+import use_case.DropToPickPackage.DropToPickPackageDataAccessInterface;
+import use_case.PickUpItem.PickUpItemDataAccessInterface;
+import view.*;
 import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
@@ -51,7 +55,9 @@ public class Main {
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
         TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
         AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
-
+        UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
+        DropToPickViewModel dropToPickViewModel = new DropToPickViewModel();
+        DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
@@ -63,7 +69,7 @@ public class Main {
                 exploreViewModel, inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
-                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess);
+                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess, useItemsViewModel);
         views.add(exploreView, exploreView.viewName);
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
@@ -71,10 +77,35 @@ public class Main {
 
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
-        viewManagerModel.firePropertyChanged();
 
+
+        UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
+        DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
+        DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
+        PickUpItemDataAccessInterface pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+
+
+        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
+        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
+        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, player, pickUpItemViewModel,
+                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel);
+
+
+        DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
+        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, player, useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
+        DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel, dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject, player, useItemsViewModel);
+        views.add(packageView, packageView.viewName);
+        views.add(pickItemView, pickItemView.viewName);
+        views.add(dropToPickPackageView, dropToPickPackageView.viewName);
+
+        viewManagerModel.firePropertyChanged();
         //application.pack();
         application.setSize(800,500);
         application.setVisible(true);
+
+
+
+
+
     }
 }

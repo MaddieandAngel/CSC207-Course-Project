@@ -10,6 +10,7 @@ import interface_adapter.UseItems.UseItemsController;
 import interface_adapter.UseItems.UseItemsPresenter;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreViewModel;
 import use_case.DropItem.DropItemInputBoundary;
 import use_case.DropItem.DropItemInteractor;
 import use_case.DropItem.DropItemOutputBoundary;
@@ -20,9 +21,10 @@ import view.PackageView;
 
 public class UseItemUseCaseFactory {
     private UseItemUseCaseFactory(){}
-    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, ActivePlayer player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject){
+    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, ActivePlayer player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject,
+                                     ExploreViewModel exploreViewModel){
         UseItemsController useItemsController = createUseItemsUseCase(viewManagerModel, useItemsViewModel, useItemDataAccessObject);
-        DropItemsController dropItemsController = createDropItemsUseCase(viewManagerModel, dropItemsViewModel, dropItemDataAccessObject);
+        DropItemsController dropItemsController = createDropItemsUseCase(viewManagerModel, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
         return new PackageView(useItemsViewModel, useItemsController, dropItemsController, player, dropItemsViewModel);
 
     }
@@ -31,8 +33,8 @@ public class UseItemUseCaseFactory {
         UseItemInputBoundary useItemInteracter = new UseItemInteractor(useItemDataAccessObject, useItemOutputBoundary);
         return new UseItemsController(useItemInteracter);
     }
-    public static DropItemsController createDropItemsUseCase(ViewManagerModel viewManagerModel, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject){
-        DropItemOutputBoundary dropItemOutputBoundary = new DropItemsPresenter(viewManagerModel, dropItemsViewModel);
+    public static DropItemsController createDropItemsUseCase(ViewManagerModel viewManagerModel, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject, ExploreViewModel exploreViewModel){
+        DropItemOutputBoundary dropItemOutputBoundary = new DropItemsPresenter(viewManagerModel, dropItemsViewModel, exploreViewModel);
         DropItemInputBoundary dropItemInteracter = new DropItemInteractor(dropItemDataAccessObject, dropItemOutputBoundary);
         return new DropItemsController(dropItemInteracter);
     }
