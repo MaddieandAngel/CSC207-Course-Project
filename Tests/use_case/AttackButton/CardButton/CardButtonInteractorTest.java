@@ -4,6 +4,7 @@ import data_access.APIAccess;
 import data_access.InBattleDataAccessObject;
 import entity.*;
 import entity.BagAndItems.Item;
+import entity.BagAndItems.revivePotion;
 import interface_adapter.APIAccessInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ class CardButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
         Player player = battleRepository.getPlayer();
 

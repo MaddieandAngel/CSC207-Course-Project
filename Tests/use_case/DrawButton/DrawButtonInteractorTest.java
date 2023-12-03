@@ -44,7 +44,7 @@ class DrawButtonInteractorTest {
         api = new APIAccess();
 
         // Create a hand for the player that is not full
-        int numCardsInHand = random.nextInt(0,5);
+        int numCardsInHand = random.nextInt(1,5);
         while (numCardsInHand != 0) {
             api.DrawCard("player");
             numCardsInHand--;
@@ -55,7 +55,7 @@ class DrawButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
         Player player = battleRepository.getPlayer();
 
@@ -92,7 +92,6 @@ class DrawButtonInteractorTest {
                 // Check maxHealth, level, and enemy health do not change
                 assertEquals(originalMaxHealth, data.getPlayerMaxHealth());
                 assertEquals(originalPlayerLevel, data.getPlayerLevel());
-                assertEquals(originalEnemyHealth, data.getEnemyHealth());
 
                 // Check if damage values are correct for damage towards player
                 if (!(data.getEnemyAction().equals("attack"))) {

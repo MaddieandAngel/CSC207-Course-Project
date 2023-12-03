@@ -15,7 +15,7 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
 
     public void execute() throws IOException {
         // create an EnemyActions class then call to get enemy's action
-        EnemyBehaviourOutputData enemyBehaviour = defendButtonDataAccessObject.getEnemyBehaviour().performRandomAction();
+        EnemyBehaviourOutputData enemyBehaviour = defendButtonDataAccessObject.getEnemyBehaviour().performRandomAction(defendButtonDataAccessObject.getEnemy());
         String enemyAction = enemyBehaviour.getAction();
         String enemyCardValue = "";
         char enemyCardSuit = ' ';

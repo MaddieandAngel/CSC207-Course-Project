@@ -10,6 +10,7 @@ import entity.Deck;
 import interface_adapter.APIAccessInterface;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 public class APIAccess implements APIAccessInterface {
@@ -151,6 +152,22 @@ public class APIAccess implements APIAccessInterface {
     @Override
     public void CardPlayed(String pileName, String cardCode) throws IOException, RuntimeException{
         // Will remove the card that was played from the provided pile/hand and will add it to the discard pile
+
+        // Check that card is in the pile
+        String[] pile = GetCardsInPile(pileName);
+        if (pile == null) {
+            throw new RuntimeException("Card not in pile");
+        } else {
+            boolean inPile = false;
+            for (String card : pile) {
+                if (card.equals(cardCode)) {
+                    inPile = true;
+                }
+            }
+            if (!inPile) {
+                throw new RuntimeException("Card not in pile");
+            }
+        }
 
         // Make call to the API and draw the specified card from the provided pile
         String url = "https://www.deckofcardsapi.com/api/deck/" + deck.getDeckID() + "/pile/" + pileName + "/draw/?cards=" + cardCode;

@@ -20,8 +20,12 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         // Random number generator. 0 = attack, 1 = defend, 2 = draw. That way we can just lower the origin or bound
         // if the enemy cannot attack or draw
 
+        // Ensures the pile enemyHand exists when GetCardsInPile is called
+        apiAccess.DrawCard("enemyHand");
+        apiAccess.MovePileToDeck("enemyHand");
+
         int actionID;
-        if (apiAccess.GetCardsInPile("enemyHand").length == 0) { // Enemy has no cards and thus cannot attack
+        if (apiAccess.GetCardsInPile("enemyHand") == null) { // Enemy has no cards and thus cannot attack
             actionID = randomizer.nextInt(1,3);
         }
         else if (apiAccess.GetCardsInPile("enemyHand").length > 5) { // Enemy has a full hand and thus cannot draw

@@ -44,7 +44,7 @@ class HealButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
         Player player = battleRepository.getPlayer();
 
