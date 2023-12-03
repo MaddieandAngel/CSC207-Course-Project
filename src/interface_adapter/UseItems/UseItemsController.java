@@ -1,6 +1,8 @@
 package interface_adapter.UseItems;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
+import entity.Player;
 import use_case.UseItem.UseItemInputBoundary;
 import use_case.UseItem.UseItemInputData;
 
@@ -11,8 +13,8 @@ public class UseItemsController {
         this.useItemInteractor = useItemInteractor;
     }
 
-    public void execute(ActivePlayer player, int num){
-        UseItemInputData useItemInputData = new UseItemInputData(player, num);
+    public void execute(int num){
+        UseItemInputData useItemInputData = new UseItemInputData(num);
         useItemInteractor.execute(useItemInputData);}
 
     }

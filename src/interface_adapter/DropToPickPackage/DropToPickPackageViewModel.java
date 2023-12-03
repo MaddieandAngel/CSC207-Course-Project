@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class DropToPickPackageViewModel extends ViewModel {
-    public static final String TITLE_LABEL = "Drop an Item from bag before pick up a new one.";
+    public static final String TITLE_LABEL = "Drop An Item!";
     public static final String DROP_HEAL10 = "Drop HealPotion(10%)";
     public static final String DROP_HEAL20 = "Drop HealPotion(20%)";
     public static final String DROP_HEAL45 = "Drop HealPotion(45%)";
