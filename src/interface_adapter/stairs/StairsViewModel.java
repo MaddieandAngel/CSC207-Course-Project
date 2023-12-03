@@ -11,8 +11,18 @@ public class StairsViewModel extends ViewModel {
     public final String STAY_FLOOR_LABEL = "No";
     public String textbox_text = "You've found the stairs! Continue to the next floor?";
 
+    private StairsState state = new StairsState();
+
     public StairsViewModel(){
         super("found_stairs");
+    }
+
+    public void setState(StairsState state){
+        this.state = state;
+    }
+
+    public StairsState getState() {
+        return state;
     }
 
     //
@@ -21,7 +31,7 @@ public class StairsViewModel extends ViewModel {
 
     @Override
     public void firePropertyChanged() {
-        //support.firePropertyChange("state", null, this.state);
+        support.firePropertyChange("state", null, this.state);
     }
 
     @Override

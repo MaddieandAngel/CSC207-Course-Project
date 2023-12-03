@@ -1,10 +1,12 @@
 package use_case.EnemyBehaviour;
 
+import entity.Enemy;
+
 import java.io.IOException;
 
 public interface EnemyBehaviourInterface {
 
-    EnemyBehaviourOutputData performRandomAction() throws IOException;
+    EnemyBehaviourOutputData performRandomAction(Enemy enemy) throws IOException;
 
-    void enemyDrawInitialHand() throws IOException;
+    void enemyDrawInitialHand(Enemy enemy) throws IOException;
 }
