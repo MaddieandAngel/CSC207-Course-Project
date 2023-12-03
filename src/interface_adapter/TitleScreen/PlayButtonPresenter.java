@@ -28,8 +28,4 @@ public class PlayButtonPresenter implements PlayButtonOutputBoundary {
         viewManagerModel.firePropertyChanged();
     }
 
-    @Override
-    public void prepareFailView(String error) {
-
-    }
 }

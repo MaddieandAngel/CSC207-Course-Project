@@ -35,10 +35,6 @@ public class PlayButtonInteractorTest {
                 assertEquals(numberOfRooms, 16);
             }
 
-            @Override
-            public void prepareFailView(String error) {
-                fail("Fail not expected");
-            }
         };
         PlayButtonInputBoundary interactor = new PlayButtonInteractor(playButtonOutputBoundary, dataAccessObject);
         interactor.execute();
