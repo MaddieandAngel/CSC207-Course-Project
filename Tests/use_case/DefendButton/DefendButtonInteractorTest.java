@@ -11,8 +11,6 @@ import entity.Player;
 import interface_adapter.APIAccessInterface;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import use_case.DrawButton.DrawButtonInputBoundary;
-import use_case.DrawButton.DrawButtonInteractor;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
@@ -26,8 +24,6 @@ public class DefendButtonInteractorTest {
     InBattleDataAccessObject battleRepository;
     int originalPlayerHealth;
     APIAccessInterface api;
-    int originalMaxHealth;
-    int originalPlayerLevel;
     int enemyLevel;
     int numberOfRevive;
 
@@ -40,8 +36,11 @@ public class DefendButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
+        //Generate a hand for the enemy
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
+        enemyBehaviour.enemyDrawInitialHand(enemy);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
+        battleRepository.setEnemy(enemy);
         Player player = battleRepository.getPlayer();
 
         // Generate random values for player health, level, and number of revive potions
@@ -60,9 +59,6 @@ public class DefendButtonInteractorTest {
             numRevive--;
         }
         numberOfRevive = player.getBag().numOfRevive();
-
-        originalMaxHealth = player.getMaxHealth();
-        originalPlayerLevel = player.getLevel();
         enemyLevel = enemy.getLevel();
     }
 
@@ -88,9 +84,7 @@ public class DefendButtonInteractorTest {
                     } else if (Objects.equals(cardValue, "K")) {
                         cardValueInt = 13;
                     } else if (Objects.equals(cardValue, "X")) {
-                        // Generate a random int between 0 (inclusive) and 16 (exclusive) for jokers
-                        Random random = new Random();
-                        cardValueInt = random.nextInt(16);
+                        cardValueInt = defendButtonOutputData.getEnemyCardValueInt();
                     } else {
                         cardValueInt = Integer.parseInt(String.valueOf(cardValue));
                     }

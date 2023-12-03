@@ -22,6 +22,7 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
         String enemyCardImage = "";
         int damageToPlayer = 0;
         boolean reviveUsed = false;
+        int enemyCardValueInt = 0;
 
         // If the enemy attacked, calculate the damage the enemy has done to the player
         // Keep in mind, defend reduces enemy damage by 50%
@@ -30,6 +31,7 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
             enemyCardValue = enemyBehaviour.getCardCode().substring(0, enemyBehaviour.getCardCode().length() - 1);
             enemyCardSuit = enemyBehaviour.getCardSuit();
             enemyCardImage = defendButtonDataAccessObject.getAPI().GetCardImage(enemyBehaviour.getCardCode());
+            enemyCardValueInt = enemyBehaviour.getCardValue();
         }
         // Update health of player
         int updatedPlayerHealth = defendButtonDataAccessObject.getPlayer().getCurrentHealth() - damageToPlayer;
@@ -50,7 +52,7 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
 
         DefendButtonOutputData defendButtonOutputData = new DefendButtonOutputData(updatedPlayerHealth, defendButtonDataAccessObject.getPlayer().getMaxHealth(),
                 defendButtonDataAccessObject.getPlayer().getLevel(), enemyAction, reviveUsed, damageToPlayer, enemyCardValue, enemyCardSuit, enemyCardImage,
-                defendButtonDataAccessObject.getEnemy().getName());
+                defendButtonDataAccessObject.getEnemy().getName(), enemyCardValueInt);
 
         //Send player's health and enemy's health to the presenter
         defendPresenter.prepareDefendSuccessView(defendButtonOutputData);
