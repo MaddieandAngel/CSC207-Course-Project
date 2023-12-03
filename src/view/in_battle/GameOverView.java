@@ -2,7 +2,6 @@ package view.in_battle;
 
 import interface_adapter.GameOver.GameOverViewModel;
 import interface_adapter.GameOver.ReturnToTitleController;
-import interface_adapter.GameOver.ReturnToTitlePresenter;
 import interface_adapter.TitleScreen.PlayButtonController;
 
 import javax.swing.*;
