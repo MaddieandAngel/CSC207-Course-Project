@@ -66,7 +66,7 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
         int attempts = 0;
         String newCard = "";
 
-        while (!successfulDraw || attempts < 10){ // Tries at most 10 times to draw a preferred card for the enemy
+        while (!successfulDraw && attempts < 10){ // Tries at most 10 times to draw a preferred card for the enemy
             apiAccess.DrawCard("possibleEnemyHandAddition");
             // Creates a new temporary pile with only one card in it.
             newCard = apiAccess.GetCardsInPile("possibleEnemyHandAddition")[0];
