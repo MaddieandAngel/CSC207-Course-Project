@@ -52,8 +52,11 @@ class CardButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
+        api.DrawCard("enemyHand");
+
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
+        battleRepository.setEnemy(enemy);
         Player player = battleRepository.getPlayer();
 
         // Generate random values for player health, level, and number of revive potions
@@ -72,7 +75,7 @@ class CardButtonInteractorTest {
         originalPlayerHealth = player.getCurrentHealth();
         originalPlayerMaxHealth = player.getMaxHealth();
         originalPlayerLevel = player.getLevel();
-        originalEnemyHealth = player.getCurrentHealth();
+        originalEnemyHealth = enemy.getCurrentHealth();
         numberOfRevive = player.getBag().numOfRevive();
 
     }

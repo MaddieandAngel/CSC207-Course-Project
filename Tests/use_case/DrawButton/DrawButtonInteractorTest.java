@@ -57,6 +57,7 @@ class DrawButtonInteractorTest {
 
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
+        battleRepository.setEnemy(enemy);
         Player player = battleRepository.getPlayer();
 
         // Generate random values for player health, level, and number of revive potions
