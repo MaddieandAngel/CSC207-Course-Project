@@ -13,7 +13,7 @@ import view.in_battle.WinBattleView;
 public class WinBattleUseCaseFactory {
     private WinBattleUseCaseFactory(){}
     public static WinBattleView create(ViewManagerModel viewManagerModel, WinBattleViewModel winBattleViewModel, ExploreViewModel exploreViewModel){
-        WinBattleContinueController winBattleContinueController = createWinBattleContinueUseCase();
+        WinBattleContinueController winBattleContinueController = createWinBattleContinueUseCase(viewManagerModel, winBattleViewModel, exploreViewModel);
         return new WinBattleView(winBattleViewModel, winBattleContinueController);
     }
     private static WinBattleContinueController createWinBattleContinueUseCase(ViewManagerModel viewManagerModel,
