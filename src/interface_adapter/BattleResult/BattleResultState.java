@@ -1,6 +1,7 @@
 package interface_adapter.BattleResult;
 
 public class BattleResultState {
+
     private int playerCurrentHealth;
 
     private int playerMaxHealth;

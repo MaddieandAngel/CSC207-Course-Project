@@ -93,7 +93,11 @@ public class TurnSelectView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e_atk) {
                         if (e_atk.getSource().equals(attack)) {
-                            attackButtonController.execute();
+                            try {
+                                attackButtonController.execute();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

@@ -38,11 +38,11 @@ public class EnemyBehaviour implements EnemyBehaviourInterface{
             return enemyAttack();
         }
         else if (actionID == 1){
-            return new EnemyBehaviourOutputData("defend", -1, ' ', "");
+            return new EnemyBehaviourOutputData("defend", -1, ' ', null);
         }
         else { // actionID == 2
             enemyDraw();
-            return new EnemyBehaviourOutputData("draw", -1, ' ', "");
+            return new EnemyBehaviourOutputData("draw", -1, ' ', null);
         }
     }
 

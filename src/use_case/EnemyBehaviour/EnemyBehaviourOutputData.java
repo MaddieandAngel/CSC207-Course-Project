@@ -53,6 +53,5 @@ public class EnemyBehaviourOutputData {
     public int getCardValue() {
         return cardValue;
     }
-
     public String getCardCode() { return this.cardCode;}
 }
