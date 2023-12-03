@@ -13,13 +13,13 @@ public class DropToPickPackageController {
     public DropToPickPackageController(DropToPickPackageInputBoundary dropToPickPackageInteractor) {
         this.dropToPickPackageInteractor = dropToPickPackageInteractor;
     }
-    public void execute(InBattleDataAccessObject inBattleDataAccessObject, int num){
+    public void execute(int num){
 
-            DropToPickPackageInputData dropToPickPackageInputData = new DropToPickPackageInputData(inBattleDataAccessObject.getPlayer(), num);
+            DropToPickPackageInputData dropToPickPackageInputData = new DropToPickPackageInputData(num);
             dropToPickPackageInteractor.execute(dropToPickPackageInputData);
 
     }
-    public void back(InBattleDataAccessObject inBattleDataAccessObject){
-        dropToPickPackageInteractor.back(inBattleDataAccessObject.getPlayer());
+    public void back(){
+        dropToPickPackageInteractor.back();
     }
 }

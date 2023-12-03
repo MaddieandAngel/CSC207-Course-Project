@@ -13,8 +13,8 @@ public class UseItemsController {
         this.useItemInteractor = useItemInteractor;
     }
 
-    public void execute(InBattleDataAccessObject inBattleDataAccessObject, int num){
-        UseItemInputData useItemInputData = new UseItemInputData(inBattleDataAccessObject.getPlayer(), num);
+    public void execute(int num){
+        UseItemInputData useItemInputData = new UseItemInputData(num);
         useItemInteractor.execute(useItemInputData);}
 
     }

@@ -24,13 +24,13 @@ public class DropToPickPackageUseCaseFactory {
                                                PickUpItemViewModel pickUpItemViewModel,
                                                DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject,
                                                UseItemsViewModel useItemsViewModel, InBattleDataAccessObject inBattleDataAccessObject){
-        DropToPickPackageController dropToPickPackageController = createDropToPickPackageController(viewManagerModel,dropToPickPackageViewModel,dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject, useItemsViewModel);
+        DropToPickPackageController dropToPickPackageController = createDropToPickPackageController(viewManagerModel,dropToPickPackageViewModel,dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject, useItemsViewModel, inBattleDataAccessObject);
         return new DropToPickPackageView(dropToPickPackageController, inBattleDataAccessObject, dropToPickPackageViewModel);
 
     }
-    public static DropToPickPackageController createDropToPickPackageController(ViewManagerModel viewManagerModel, DropToPickPackageViewModel dropToPickPackageViewModel, DropToPickViewModel dropToPickViewModel, PickUpItemViewModel pickUpItemViewModel, DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject, UseItemsViewModel useItemsViewModel){
+    public static DropToPickPackageController createDropToPickPackageController(ViewManagerModel viewManagerModel, DropToPickPackageViewModel dropToPickPackageViewModel, DropToPickViewModel dropToPickViewModel, PickUpItemViewModel pickUpItemViewModel, DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject, UseItemsViewModel useItemsViewModel, InBattleDataAccessObject inBattleDataAccessObject){
         DropToPickPackageOutputBoundary dropToPickPackageOutputBoundary = new DropToPickPackagePresenter(viewManagerModel, dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, useItemsViewModel);
-        DropToPickPackageInputBoundary dropToPickPackageInteractor = new DropToPickPackageInteractor(dropToPickPackageDataAccessObject, dropToPickPackageOutputBoundary);
+        DropToPickPackageInputBoundary dropToPickPackageInteractor = new DropToPickPackageInteractor(dropToPickPackageDataAccessObject, dropToPickPackageOutputBoundary, inBattleDataAccessObject);
         return new DropToPickPackageController(dropToPickPackageInteractor);
     }
 }

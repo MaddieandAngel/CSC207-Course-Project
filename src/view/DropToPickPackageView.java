@@ -135,7 +135,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal10)) {
-                            dropToPickPackageController.execute(inBattleDataAccessObject, 10);
+                            dropToPickPackageController.execute(10);
                         }
                     }
 
@@ -146,7 +146,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal20)) {
-                            dropToPickPackageController.execute(inBattleDataAccessObject, 20);
+                            dropToPickPackageController.execute(20);
                         }
                     }
 
@@ -157,7 +157,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal45)) {
-                            dropToPickPackageController.execute(inBattleDataAccessObject, 45);
+                            dropToPickPackageController.execute(45);
                         }
                     }
 
@@ -168,7 +168,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropRevive)) {
-                            dropToPickPackageController.execute(inBattleDataAccessObject, 0);
+                            dropToPickPackageController.execute(0);
                         }
                     }
 
@@ -180,7 +180,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            dropToPickPackageController.back(inBattleDataAccessObject);
+                            dropToPickPackageController.back();
                         }
                     }
 

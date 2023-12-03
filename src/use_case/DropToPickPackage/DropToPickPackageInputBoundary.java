@@ -6,5 +6,5 @@ import use_case.DropItem.DropItemInputData;
 
 public interface DropToPickPackageInputBoundary {
     void execute(DropToPickPackageInputData dropToPickPackageInputData);
-    void back(Player player);
+    void back();
 }

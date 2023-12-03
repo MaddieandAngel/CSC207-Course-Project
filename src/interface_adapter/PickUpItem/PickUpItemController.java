@@ -14,8 +14,8 @@ public class PickUpItemController {
         this.pickUpItemInteractor = pickUpItemInteractor;
     }
 
-    public void execute(InBattleDataAccessObject inBattleDataAccessObject, Item item) {
-        PickUpItemInputData pickUpItemInputData = new PickUpItemInputData(inBattleDataAccessObject.getPlayer(), item);
+    public void execute(Item item) {
+        PickUpItemInputData pickUpItemInputData = new PickUpItemInputData(item);
         pickUpItemInteractor.execute(pickUpItemInputData);
 
     }

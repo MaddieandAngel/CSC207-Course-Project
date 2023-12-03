@@ -13,8 +13,8 @@ public class DropItemsController {
         this.dropItemInteractor = dropItemInteractor;
     }
 
-    public void execute(InBattleDataAccessObject inBattleDataAccessObject, int num){
-        DropItemInputData useItemInputData = new DropItemInputData(inBattleDataAccessObject.getPlayer(), num);
+    public void execute(int num){
+        DropItemInputData useItemInputData = new DropItemInputData(num);
         dropItemInteractor.execute(useItemInputData);}
 
     public void back(){

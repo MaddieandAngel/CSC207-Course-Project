@@ -4,5 +4,5 @@ import entity.ActivePlayer;
 import entity.Player;
 
 public interface DropToPickInputBoundary {
-    public void execute(Player player);
+    public void execute();
 }

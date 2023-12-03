@@ -13,8 +13,8 @@ public class UseItemDataAccessObject implements UseItemDataAccessInterface{
 //        this.player = player;
 //    }
     @Override
-    public boolean useItem(int potionType, Player player) {
-        boolean success = player.getBag().useItem(potionType, player);
+    public boolean useItem(int potionType, InBattleDataAccessObject inBattleDataAccessObject) {
+        boolean success = inBattleDataAccessObject.getPlayer().getBag().useItem(potionType, inBattleDataAccessObject.getPlayer());
         return success;
     }
 }

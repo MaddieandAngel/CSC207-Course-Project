@@ -11,7 +11,7 @@ public class DropToPickController {
     public DropToPickController(DropToPickInputBoundary dropToPickInteractor) {
         this.dropToPickInteractor = dropToPickInteractor;
     }
-    public void execute(InBattleDataAccessObject inBattleDataAccessObject){
-         dropToPickInteractor.execute(inBattleDataAccessObject.getPlayer());
+    public void execute(){
+         dropToPickInteractor.execute();
     }
 }

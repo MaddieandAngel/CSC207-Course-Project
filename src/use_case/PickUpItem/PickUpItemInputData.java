@@ -6,14 +6,11 @@ import entity.BagAndItems.Item;
 import entity.Player;
 
 public class PickUpItemInputData {
-    final Player player;
     final Item item;
 
-    public PickUpItemInputData(Player player, Item item) {
-        this.player = player;
+    public PickUpItemInputData(Item item) {
+
         this.item = item;
     }
-    public Bag getBag(){
-        return player.getBag();
-    }
+
 }

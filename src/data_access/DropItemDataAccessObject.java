@@ -6,8 +6,8 @@ import use_case.DropItem.DropItemDataAccessInterface;
 
 public class DropItemDataAccessObject implements DropItemDataAccessInterface {
     @Override
-    public boolean dropItem(int potionType, Player player) {
-        boolean success = player.getBag().dropItem(potionType);
+    public boolean dropItem(int potionType, InBattleDataAccessObject inBattleDataAccessObject) {
+        boolean success = inBattleDataAccessObject.getPlayer().getBag().dropItem(potionType);
         return success;
     }
 }

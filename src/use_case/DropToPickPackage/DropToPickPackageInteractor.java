@@ -1,5 +1,6 @@
 package use_case.DropToPickPackage;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.Player;
 import use_case.DropToPickPackage.DropToPickPackageInputBoundary;
@@ -9,19 +10,19 @@ import use_case.DropToPickPackage.DropToPickPackageOutputBoundary;
 public class DropToPickPackageInteractor implements DropToPickPackageInputBoundary{
     final DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject;
     final DropToPickPackageOutputBoundary dropToPickPackagePresenter;
+    final InBattleDataAccessObject inBattleDataAccessObject;
 
-    public DropToPickPackageInteractor(DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject, DropToPickPackageOutputBoundary dropToPickPackagePresenter) {
+    public DropToPickPackageInteractor(DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject, DropToPickPackageOutputBoundary dropToPickPackagePresenter, InBattleDataAccessObject inBattleDataAccessObject) {
         this.dropToPickPackageDataAccessObject = dropToPickPackageDataAccessObject;
         this.dropToPickPackagePresenter = dropToPickPackagePresenter;
+        this.inBattleDataAccessObject = inBattleDataAccessObject;
     }
 
     @Override
     public void execute(DropToPickPackageInputData dropToPickPackageInputData) {
-        boolean success = dropToPickPackageDataAccessObject.dropItem(dropToPickPackageInputData.potionType, dropToPickPackageInputData.player);
+        boolean success = dropToPickPackageDataAccessObject.dropItem(dropToPickPackageInputData.potionType, inBattleDataAccessObject.getPlayer());
         if (success){
             dropToPickPackagePresenter.prepareSuccessView();
-            System.out.println("drop:"+Integer.toString(dropToPickPackageInputData.player.getCurrentHealth()));
-
         }
         else{
             dropToPickPackagePresenter.prepareFailView();}
@@ -29,8 +30,8 @@ public class DropToPickPackageInteractor implements DropToPickPackageInputBounda
 
     }
     @Override
-    public void back(Player player){
-        DropToPickPackageOutputData dropToPickPackageOutputData = new DropToPickPackageOutputData(player);
+    public void back(){
+        DropToPickPackageOutputData dropToPickPackageOutputData = new DropToPickPackageOutputData(inBattleDataAccessObject.getPlayer());
         dropToPickPackagePresenter.preparePickItemView(dropToPickPackageOutputData);
     }
 }

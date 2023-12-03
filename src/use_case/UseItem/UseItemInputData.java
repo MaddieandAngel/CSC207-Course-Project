@@ -4,14 +4,9 @@ import entity.BagAndItems.Bag;
 import entity.Player;
 
 public class UseItemInputData{
-
-    final Player player;
     final int potionType;
-    public UseItemInputData(Player player, int num){
-        this.player = player;
+    public UseItemInputData(int num){
         this.potionType = num;
     }
-    Bag getBag(){
-        return player.getBag();
-    }
+   int getPotionType(){return potionType;}
 }
