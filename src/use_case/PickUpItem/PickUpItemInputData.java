@@ -3,16 +3,14 @@ package use_case.PickUpItem;
 import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
 import entity.BagAndItems.Item;
+import entity.Player;
 
 public class PickUpItemInputData {
-    final ActivePlayer player;
     final Item item;
 
-    public PickUpItemInputData(ActivePlayer player, Item item) {
-        this.player = player;
+    public PickUpItemInputData(Item item) {
+
         this.item = item;
     }
-    public Bag getBag(){
-        return player.getBag();
-    }
+
 }

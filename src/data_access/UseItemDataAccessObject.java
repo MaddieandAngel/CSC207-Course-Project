@@ -1,5 +1,6 @@
 package data_access;
 import entity.ActivePlayer;
+import entity.Player;
 import use_case.UseItem.UseItemDataAccessInterface;
 
 public class UseItemDataAccessObject implements UseItemDataAccessInterface{
@@ -12,8 +13,8 @@ public class UseItemDataAccessObject implements UseItemDataAccessInterface{
 //        this.player = player;
 //    }
     @Override
-    public boolean useItem(int potionType, ActivePlayer player) {
-        boolean success = player.getBag().useItem(potionType, player);
+    public boolean useItem(int potionType, InBattleDataAccessObject inBattleDataAccessObject) {
+        boolean success = inBattleDataAccessObject.getPlayer().getBag().useItem(potionType, inBattleDataAccessObject.getPlayer());
         return success;
     }
 }

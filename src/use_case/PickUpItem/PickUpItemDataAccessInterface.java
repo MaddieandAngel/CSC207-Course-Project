@@ -4,5 +4,5 @@ import entity.BagAndItems.Bag;
 import entity.BagAndItems.Item;
 
 public interface PickUpItemDataAccessInterface {
-    public boolean addItem(Bag bag, Item item);
+    boolean addItem(Bag bag, Item item);
 }
