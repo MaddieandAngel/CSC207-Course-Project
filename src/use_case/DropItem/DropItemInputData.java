@@ -2,11 +2,12 @@ package use_case.DropItem;
 
 import entity.ActivePlayer;
 import entity.BagAndItems.Bag;
+import entity.Player;
 
 public class DropItemInputData {
-    final ActivePlayer player;
+    final Player player;
     final int potionType;
-    public DropItemInputData(ActivePlayer player, int num){
+    public DropItemInputData(Player player, int num){
         this.player = player;
         this.potionType = num;
     }

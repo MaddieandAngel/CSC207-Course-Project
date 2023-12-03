@@ -1,10 +1,7 @@
 package app;
 
 import data_access.*;
-import entity.ActivePlayer;
-import entity.ActivePlayerFactory;
-import entity.CurrentFloorFactory;
-import entity.Enemy;
+import entity.*;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
@@ -73,12 +70,10 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
-        Enemy enemy = null;
         ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
-        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
+        Player player = activePlayerFactory.create();
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(activePlayerFactory, apiAccess, enemyBehaviour);
         UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
         DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();

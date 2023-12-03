@@ -4,7 +4,7 @@ import entity.BagAndItems.Bag;
 import entity.BagAndItems.Item;
 
 public interface PickUpItemOutputBoundary {
-    void prepareSuccessView(Bag bag);
+    void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData);
     void prepareFailView();
     void back();
 }

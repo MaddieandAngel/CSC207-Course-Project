@@ -1,6 +1,7 @@
 package interface_adapter.DropToPick;
 
 import entity.ActivePlayer;
+import entity.Player;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.UseItems.UseItemState;
@@ -22,7 +23,7 @@ public class DropToPickPresenter implements DropToPickOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(ActivePlayer player) {
+    public void prepareSuccessView(Player player) {
         UseItemState useItemState = useItemsViewModel.getState();
         useItemState.setBag(player.getBag());
         useItemsViewModel.setState(useItemState);

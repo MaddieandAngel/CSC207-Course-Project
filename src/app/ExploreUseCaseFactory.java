@@ -37,7 +37,7 @@ public class ExploreUseCaseFactory {
         MovementButtonController movementButtonController = createMovementUseCase(viewManagerModel, exploreViewModel, turnSelectViewModel,
                 stairsViewModel, pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccessInterface);
         SearchButtonController searchButtonController = createSearchRoomUseCase(exploreViewModel, turnSelectViewModel, viewManagerModel,
-                apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject, pickUpItemViewModel);
+                apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject, pickUpItemViewModel, enemyBehaviour);
         ExploreBagController exploreBagController = createExploreBagUseCase(viewManagerModel, useItemsViewModel);
 
         return new ExploreView(movementButtonController, searchButtonController, exploreViewModel, exploreBagController);
@@ -68,10 +68,11 @@ public class ExploreUseCaseFactory {
                                                                    APIAccessInterface apiAccessInterface,
                                                                    ExploreDataAccessInterface exploreDataAccessObject,
                                                                    GenerateEnemyDataAccessInterface inBattleDataAccessObject,
-                                                                   PickUpItemViewModel pickUpItemViewModel){
+                                                                   PickUpItemViewModel pickUpItemViewModel,
+                                                                   EnemyBehaviourInterface enemyBehaviour){
         EnemyFactory enemyFactory = new CurrentEnemyFactory();
         SearchButtonOutputBoundary searchButtonOutputBoundary = new SearchButtonPresenter(exploreViewModel, turnSelectViewModel, pickUpItemViewModel, viewManagerModel);
-        SearchButtonInputBoundary searchButtonInputBoundary = new SearchButtonIneractor(searchButtonOutputBoundary, enemyFactory, apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject);
+        SearchButtonInputBoundary searchButtonInputBoundary = new SearchButtonIneractor(searchButtonOutputBoundary, enemyFactory, apiAccessInterface, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour);
         //TODO: implement properly
         return new SearchButtonController(searchButtonInputBoundary);
     }

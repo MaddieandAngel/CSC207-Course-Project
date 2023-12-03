@@ -1,7 +1,5 @@
 package use_case.SearchButton;
 
-import data_access.ExploreDataAccessObject;
-import data_access.InBattleDataAccessObject;
 import entity.BagAndItems.*;
 import entity.Enemy;
 import interface_adapter.APIAccessInterface;
@@ -11,7 +9,6 @@ import java.util.Random;
 import entity.EnemyFactory;
 import interface_adapter.explore.ExploreDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
-import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.movement.EnemyOutputData;
 import use_case.movement.MovementOutputData;
@@ -24,17 +21,19 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
     final APIAccessInterface apiAccessObject;
     final ExploreDataAccessInterface exploreDataAccessObject;
     final GenerateEnemyDataAccessInterface inBattleDataAccessObject;
+    final EnemyBehaviourInterface enemyBehaviour;
 
 
     public SearchButtonIneractor(SearchButtonOutputBoundary searchButtonPresenter,
                                  EnemyFactory enemyFactory, APIAccessInterface apiAccessInterface,
                                  ExploreDataAccessInterface exploreDataAccessObject,
-                                 GenerateEnemyDataAccessInterface inBattleDataAccessObject) {
+                                 GenerateEnemyDataAccessInterface inBattleDataAccessObject, EnemyBehaviourInterface enemyBehaviour) {
         this.searchButtonPresenter = searchButtonPresenter;
         this.enemyFactory = enemyFactory;
         this.apiAccessObject = apiAccessInterface;
         this.exploreDataAccessObject = exploreDataAccessObject;
         this.inBattleDataAccessObject = inBattleDataAccessObject;
+        this.enemyBehaviour = enemyBehaviour;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
         Random r = new Random();
         int random = r.nextInt(100);
         if (random <= 50){
-            searchButtonPresenter.prepareEmptyRoomView(movementOutputData);
+            searchButtonPresenter.prepareEmptyRoomView();
             JOptionPane.showMessageDialog(null, "The room is empty:(");
         }else if (random <= 80){
             JOptionPane.showMessageDialog(null, "There's enemy in the room");
@@ -53,11 +52,7 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
                     randomizer.nextInt(floorLevel / 5, (floorLevel / 5) + 3));
             inBattleDataAccessObject.setEnemy(enemy);
             try {
-                EnemyBehaviourInterface enemyHandGenerator = new EnemyBehaviour(apiAccessObject,
-                        inBattleDataAccessObject.getDeck(), inBattleDataAccessObject.getEnemy());
-                //Note: creates an instance of an EnemyBehaviour instead of its interface. Might be a problem?
-
-                enemyHandGenerator.enemyDrawInitialHand();
+                enemyBehaviour.enemyDrawInitialHand(inBattleDataAccessObject.getEnemy());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

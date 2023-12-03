@@ -1,7 +1,9 @@
 package view;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.BagAndItems.*;
+import entity.Player;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.PickUpItem.PickUpItemController;
 import interface_adapter.PickUpItem.PickUpItemState;
@@ -21,18 +23,18 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final PickUpItemViewModel pickUpItemViewModel;
     private final PickUpItemController pickUpItemController;
     private final DropToPickController dropToPickController;
-    private final ActivePlayer player;
+    private final Player player;
     private final JButton PickUpItem;
     private final JButton DropAnItem;
     private final JButton Back;
     private Item item;
 
 
-    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, ActivePlayer player) {
+    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, InBattleDataAccessObject inBattleDataAccessObject) {
         this.pickUpItemViewModel = pickUpItemViewModel;
         this.pickUpItemController = pickUpItemController;
         this.dropToPickController = dropToPickController;
-        this.player = player;
+        this.player = inBattleDataAccessObject.getPlayer();
 
         PickUpItemState pickUpItemState = pickUpItemViewModel.getState();
         this.PickUpItem = new JButton(pickUpItemViewModel.PICK);

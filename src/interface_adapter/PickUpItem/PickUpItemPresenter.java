@@ -9,6 +9,7 @@ import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import use_case.PickUpItem.PickUpItemOutputBoundary;
+import use_case.PickUpItem.PickUpItemOutputData;
 
 import javax.swing.*;
 
@@ -28,8 +29,10 @@ public class PickUpItemPresenter implements PickUpItemOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(Bag bag) {
+    public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData) {
         JOptionPane.showMessageDialog(null, "Successfully picked the item");
+
+        Bag bag = pickUpItemOutputData.getBag();
 
         DropToPickPackageState dropToPickPackageState = dropToPickPackageViewModel.getState();
         dropToPickPackageState.setBag(bag);

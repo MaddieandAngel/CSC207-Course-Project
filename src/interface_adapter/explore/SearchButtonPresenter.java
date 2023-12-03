@@ -30,9 +30,9 @@ public class SearchButtonPresenter implements SearchButtonOutputBoundary {
 
 
     @Override
-    public void prepareEmptyRoomView(MovementOutputData movementOutputData) {
+    public void prepareEmptyRoomView() {
         ExploreState exploreState = exploreViewModel.getState();
-        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+        exploreState.setSearchVisible(false);
         exploreViewModel.firePropertyChanged();
     }
 

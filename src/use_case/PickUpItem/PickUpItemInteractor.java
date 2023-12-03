@@ -12,8 +12,9 @@ public class PickUpItemInteractor implements PickUpItemInputBoundary{
     @Override
     public void execute(PickUpItemInputData pickUpItemInputData) {
         boolean success = pickUpItemDataAccessObject.addItem(pickUpItemInputData.getBag(), pickUpItemInputData.item);
+        PickUpItemOutputData pickUpItemOutputData = new PickUpItemOutputData(pickUpItemInputData.getBag());
         if (success){
-            pickUpItemPresenter.prepareSuccessView(pickUpItemInputData.getBag());
+            pickUpItemPresenter.prepareSuccessView(pickUpItemOutputData);
         }
         else{
             pickUpItemPresenter.prepareFailView();

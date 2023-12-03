@@ -2,6 +2,7 @@ package interface_adapter.PickUpItem;
 
 import entity.ActivePlayer;
 import entity.BagAndItems.Item;
+import entity.Player;
 import use_case.PickUpItem.PickUpItemInputBoundary;
 import use_case.PickUpItem.PickUpItemInputData;
 
@@ -12,7 +13,7 @@ public class PickUpItemController {
         this.pickUpItemInteractor = pickUpItemInteractor;
     }
 
-    public void execute(ActivePlayer player, Item item) {
+    public void execute(Player player, Item item) {
         PickUpItemInputData pickUpItemInputData = new PickUpItemInputData(player, item);
         pickUpItemInteractor.execute(pickUpItemInputData);
 

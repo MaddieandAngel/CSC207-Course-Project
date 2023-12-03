@@ -1,6 +1,7 @@
 package interface_adapter.DropItems;
 
 import entity.ActivePlayer;
+import entity.Player;
 import use_case.DropItem.DropItemInputBoundary;
 import use_case.DropItem.DropItemInputData;
 
@@ -11,7 +12,7 @@ public class DropItemsController {
         this.dropItemInteractor = dropItemInteractor;
     }
 
-    public void execute(ActivePlayer player, int num){
+    public void execute(Player player, int num){
         DropItemInputData useItemInputData = new DropItemInputData(player, num);
         dropItemInteractor.execute(useItemInputData);}
 

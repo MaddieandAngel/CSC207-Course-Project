@@ -1,6 +1,7 @@
 package app;
 
 import data_access.DropItemDataAccessObject;
+import data_access.InBattleDataAccessObject;
 import data_access.UseItemDataAccessObject;
 import entity.ActivePlayer;
 import interface_adapter.DropItems.DropItemsController;
@@ -21,11 +22,11 @@ import view.PackageView;
 
 public class UseItemUseCaseFactory {
     private UseItemUseCaseFactory(){}
-    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, ActivePlayer player, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject,
+    public static PackageView create(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, InBattleDataAccessObject inBattleDataAccessObject, UseItemDataAccessObject useItemDataAccessObject, DropItemsViewModel dropItemsViewModel, DropItemDataAccessObject dropItemDataAccessObject,
                                      ExploreViewModel exploreViewModel){
         UseItemsController useItemsController = createUseItemsUseCase(viewManagerModel, useItemsViewModel, useItemDataAccessObject);
         DropItemsController dropItemsController = createDropItemsUseCase(viewManagerModel, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
-        return new PackageView(useItemsViewModel, useItemsController, dropItemsController, player, dropItemsViewModel);
+        return new PackageView(useItemsViewModel, useItemsController, dropItemsController, inBattleDataAccessObject, dropItemsViewModel);
 
     }
     public static UseItemsController createUseItemsUseCase(ViewManagerModel viewManagerModel, UseItemsViewModel useItemsViewModel, UseItemDataAccessObject useItemDataAccessObject){

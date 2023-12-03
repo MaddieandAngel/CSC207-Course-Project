@@ -181,14 +181,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     }
                 }
         );
-        // add buttons to the screen
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(bag);
-        this.add(search);
-        this.add(west);
-        this.add(south);
-        this.add(north);
-        this.add(east);
+
     }
 
     @Override
