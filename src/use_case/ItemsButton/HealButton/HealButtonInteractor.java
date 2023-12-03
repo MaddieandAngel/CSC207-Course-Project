@@ -23,7 +23,7 @@ public class HealButtonInteractor implements HealButtonInputBoundary {
         boolean revivePotionUsed = false;
 
         // Enemy will make their move
-        EnemyBehaviourOutputData enemyMove = healButtonDataAccessObject.getEnemyBehaviour().performRandomAction();
+        EnemyBehaviourOutputData enemyMove = healButtonDataAccessObject.getEnemyBehaviour().performRandomAction(healButtonDataAccessObject.getEnemy());
         String enemyAction = enemyMove.getAction();
         String enemyCardValue = "";
         char enemyCardSuit = ' ';

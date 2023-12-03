@@ -44,8 +44,9 @@ class HealButtonInteractorTest {
         Enemy enemy = new CurrentEnemyFactory().create(random.nextInt(0, 6), random.nextInt(1, 11));
         enemy.setHealth(random.nextInt(1, enemy.getCurrentHealth()));
 
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(api);
         battleRepository = new InBattleDataAccessObject(new ActivePlayerFactory(), api, enemyBehaviour);
+        battleRepository.setEnemy(enemy);
         Player player = battleRepository.getPlayer();
 
         // Generate random values for player health, level number of revive potions, heal10, heal20, and heal45 potions
@@ -66,28 +67,16 @@ class HealButtonInteractorTest {
         numberOfRevive = player.getBag().numOfRevive();
 
         Item heal10 = new healingPotion10();
-        int numHeal10 = random.nextInt(0, 2);
-        while (numHeal10 != 0) {
-            player.getBag().addItem(heal10);
-            numHeal10--;
-        }
-        numberOfHeal10 = player.getBag().numOfHeal10();
+        player.getBag().addItem(heal10);
+        numberOfHeal10 = 1;
 
         Item heal20 = new healingPotion20();
-        int numHeal20 = random.nextInt(0, 2);
-        while (numHeal20 != 0) {
-            player.getBag().addItem(heal10);
-            numHeal20--;
-        }
-        numberOfHeal20 = player.getBag().numOfHeal20();
+        player.getBag().addItem(heal20);
+        numberOfHeal20 = 1;
 
         Item heal45 = new healingPotion45();
-        int numHeal45 = random.nextInt(0, 2);
-        while (numHeal45 != 0) {
-            player.getBag().addItem(heal10);
-            numHeal45--;
-        }
-        numberOfHeal45 = player.getBag().numOfHeal45();
+        player.getBag().addItem(heal45);
+        numberOfHeal45 = 1;
 
         int temp = random.nextInt(1, 4);
         if (temp == 1) {
