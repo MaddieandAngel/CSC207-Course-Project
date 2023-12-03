@@ -21,6 +21,7 @@ import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import view.*;
 import view.in_battle.BattleResultView;
+import view.in_battle.GameOverView;
 import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
@@ -92,6 +93,9 @@ public class Main {
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
                 turnSelectViewModel, gameOverViewModel, winBattleViewModel);
         views.add(battleResultView, battleResultView.viewName);
+        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, titleScreenViewModel,
+                exploreViewModel, exploreDataAccessObject);
+        views.add(gameOverView, gameOverView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
