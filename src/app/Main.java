@@ -8,10 +8,12 @@ import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
+import interface_adapter.GameOver.GameOverViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.WinBattle.WinBattleViewModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
@@ -61,6 +63,8 @@ public class Main {
         DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
+        GameOverViewModel gameOverViewModel = new GameOverViewModel();
+        WinBattleViewModel winBattleViewModel = new WinBattleViewModel();
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
@@ -85,7 +89,8 @@ public class Main {
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
-        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
+        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
+                turnSelectViewModel, gameOverViewModel, winBattleViewModel);
         views.add(battleResultView, battleResultView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
