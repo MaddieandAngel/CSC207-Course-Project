@@ -23,6 +23,7 @@ import view.*;
 import view.in_battle.BattleResultView;
 import view.in_battle.GameOverView;
 import view.in_battle.TurnSelectView;
+import view.in_battle.WinBattleView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -96,6 +97,8 @@ public class Main {
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, titleScreenViewModel,
                 exploreViewModel, exploreDataAccessObject);
         views.add(gameOverView, gameOverView.viewName);
+        WinBattleView winBattleView = WinBattleUseCaseFactory.create(viewManagerModel, winBattleViewModel, exploreViewModel);
+        views.add(winBattleView, winBattleView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
