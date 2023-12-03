@@ -36,6 +36,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
 
 
         JPanel buttons = new JPanel();
+        JButton numOfItems = new JButton("Update number of Items");
         this.dropHeal10 = new JButton(dropToPickPackageViewModel.DROP_HEAL10);
         this.dropHeal20 = new JButton(dropToPickPackageViewModel.DROP_HEAL20);
         this.dropHeal45 = new JButton(dropToPickPackageViewModel.DROP_HEAL45);
@@ -46,16 +47,32 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
         buttons.add(dropHeal20);
         buttons.add(dropHeal45);
         buttons.add(dropRevive);
+        buttons.add(numOfItems);
         buttons.add(back);
-
-        heal10 = new JLabel("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
-        heal20 = new JLabel("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
-        heal45 = new JLabel("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
-        revive = new JLabel("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
+        heal10 = new JLabel("" );
+        heal20 = new JLabel("");
+        heal45 = new JLabel("");
+        revive = new JLabel("" );
+//
+//        heal10 = new JLabel("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
+//        heal20 = new JLabel("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
+//        heal45 = new JLabel("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+//        revive = new JLabel("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
 
         JLabel title = new JLabel(dropToPickPackageViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        numOfItems.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(numOfItems)) {
+                    heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
+                    heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
+                    heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+                    revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
+                }
+            }
 
+        });
 
         dropHeal10.addActionListener(
                 new ActionListener(){
@@ -63,7 +80,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal10)) {
                             dropToPickPackageController.execute(player, 10, 0);
-                            heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
+                            //heal10.setText("Heal Potion(10%):" + Integer.toString(player.getBag().numOfHeal10()));
 
                         }
                     }
@@ -76,7 +93,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal20)) {
                             dropToPickPackageController.execute(player, 20, 0);
-                            heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
+                           // heal20.setText("Heal Potion(20%):" + Integer.toString(player.getBag().numOfHeal20()));
 
                         }
                     }
@@ -89,7 +106,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropHeal45)) {
                             dropToPickPackageController.execute(player, 45, 0);
-                            heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
+                           // heal45.setText("Heal Potion(45%):" + Integer.toString(player.getBag().numOfHeal45()));
                         }
                     }
 
@@ -101,7 +118,7 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(dropRevive)) {
                             dropToPickPackageController.execute(player, 0, 0);
-                            revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
+                            //revive.setText("Rerive Potion:" + Integer.toString(player.getBag().numOfRevive()));
                         }
                     }
 
