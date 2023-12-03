@@ -4,12 +4,12 @@ import data_access.*;
 import entity.ActivePlayer;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
-<<<<<<< HEAD
-import entity.Player;
-=======
 import entity.Enemy;
->>>>>>> 2e8097e4bc0813a3bb73bcaa0f5685f3c5bb2406
 import interface_adapter.AttackSelect.AttackSelectViewModel;
+import entity.ActivePlayerFactory;
+import entity.CurrentFloorFactory;
+import interface_adapter.AttackSelect.AttackSelectViewModel;
+import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
@@ -20,16 +20,13 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
-<<<<<<< HEAD
 import use_case.DropToPickPackage.DropToPickPackageDataAccessInterface;
 import use_case.PickUpItem.PickUpItemDataAccessInterface;
 import view.*;
-=======
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
-import view.ExploreView;
-import view.TitleScreenView;
-import view.ViewManager;
+import view.*;
+import view.in_battle.BattleResultView;
 import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
@@ -64,20 +61,22 @@ public class Main {
         ExploreViewModel exploreViewModel = new ExploreViewModel();
         TurnSelectViewModel turnSelectViewModel = new TurnSelectViewModel();
         StairsViewModel stairsViewModel = new StairsViewModel();
-        PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
         TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
         AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
+        BattleResultViewModel battleResultViewModel = new BattleResultViewModel();
+
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         DropToPickViewModel dropToPickViewModel = new DropToPickViewModel();
         DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
         DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
+        PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
         Enemy enemy = null;
         ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
         ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
-        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess, enemy);
+        EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
 
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(activePlayerFactory, apiAccess, enemyBehaviour);
@@ -86,15 +85,17 @@ public class Main {
         PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
         DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
 
-
-
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
-                exploreViewModel, inBattleDataAccessObject, apiAccess, exploreDataAccessObject);
+                exploreViewModel, exploreDataAccessObject);
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
-                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, apiAccess, useItemsViewModel);
+                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccess, useItemsViewModel);
+
         views.add(exploreView, exploreView.viewName);
+        StairsView stairsView = StairsUseCaseFactory.create(viewManagerModel, exploreViewModel, stairsViewModel, exploreDataAccessObject,
+                exploreDataAccessObject);
+        views.add(stairsView, stairsView.viewName);
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
@@ -113,6 +114,13 @@ public class Main {
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
         //application.pack();
+
+        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
+        views.add(battleResultView, battleResultView.viewName);
+
+        viewManagerModel.setActiveView(titleScreenView.viewName);
+        viewManagerModel.firePropertyChanged();
+
         application.setSize(800,500);
         application.setVisible(true);
 

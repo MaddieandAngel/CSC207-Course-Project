@@ -4,6 +4,7 @@ import entity.BagAndItems.Item;
 import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.stairs.StairsState;
 import interface_adapter.turn_select.TurnSelectState;
 import interface_adapter.turn_select.TurnSelectViewModel;
 import interface_adapter.stairs.StairsViewModel;
@@ -39,7 +40,17 @@ public class ExplorePresenter implements MovementOutputBoundary {
     }
 
     @Override
-    public void prepareStairsView(MovementOutputData movementOutputData) {
+    public void prepareStairsView() {
+        StairsState stairsState = stairsViewModel.getState();
+        ExploreState exploreState = exploreViewModel.getState();
+
+        stairsState.setPlayerLevel(exploreState.getPlayerLevel());
+        stairsState.setFloorLevel(exploreState.getFloorLevel());
+        stairsState.setPlayerCurrentHealth(exploreState.getPlayerCurrentHealth());
+        stairsState.setPlayerMaxHealth(exploreState.getPlayerMaxHealth());
+
+        stairsViewModel.setState(stairsState);
+        stairsViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(stairsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
@@ -47,9 +58,12 @@ public class ExplorePresenter implements MovementOutputBoundary {
     @Override
     public void prepareTurnSelectView(EnemyOutputData enemyOutputData) {
         TurnSelectState turnSelectState = turnSelectViewModel.getState();
+        ExploreState exploreState = exploreViewModel.getState();
 
         //Updates player output information, if it has changed:
-        //TODO
+        turnSelectState.setPlayerLevel(exploreState.getPlayerLevel());
+        turnSelectState.setPlayerHealth(exploreState.getPlayerCurrentHealth());
+        turnSelectState.setPlayerMaxHealth(exploreState.getPlayerMaxHealth());
 
         //Updates enemy output information:
         turnSelectState.setEnemyName(enemyOutputData.getEnemyName());

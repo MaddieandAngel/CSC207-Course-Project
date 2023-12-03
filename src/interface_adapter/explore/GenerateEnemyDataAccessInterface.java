@@ -1,6 +1,5 @@
 package interface_adapter.explore;
 
-import entity.Deck;
 import entity.Enemy;
 
 public interface GenerateEnemyDataAccessInterface {
