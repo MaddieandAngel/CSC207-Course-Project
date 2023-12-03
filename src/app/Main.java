@@ -3,6 +3,7 @@ package app;
 import data_access.*;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
+import entity.MapBuilderFactory;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
 import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
@@ -65,7 +66,7 @@ public class Main {
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
-        ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
+        ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory(), new MapBuilderFactory());
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory(), apiAccess, enemyBehaviour);
         DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
         DropToPickPackageDataAccessObject dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();

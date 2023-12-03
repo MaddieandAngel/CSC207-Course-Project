@@ -1,5 +1,5 @@
 package entity;
 
 public interface FloorFactory {
-    Floor create(int columns, int rows);
+    Floor create(int columns, int rows, MapBuilderInterface mapBuilder);
 }

@@ -2,6 +2,8 @@ package data_access;
 
 import entity.Floor;
 import entity.FloorFactory;
+import entity.MapBuilderInterface;
+import entity.MapBuilderInterfaceFactory;
 import interface_adapter.explore.ExploreDataAccessInterface;
 import interface_adapter.stairs.StairsDataAccessInterface;
 
@@ -10,9 +12,11 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
     private int floorLevel = 0;
     private Floor currentFloor;
     private final FloorFactory floorFactory;
+    private final MapBuilderInterfaceFactory mapBuilderFactory;
 
-    public ExploreDataAccessObject(FloorFactory floorFactory){
+    public ExploreDataAccessObject(FloorFactory floorFactory, MapBuilderInterfaceFactory mapBuilderFactory){
         this.floorFactory = floorFactory;
+        this.mapBuilderFactory = mapBuilderFactory;
     }
 
     @Override
@@ -57,7 +61,8 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
 
     @Override
     public String MoveToNextFloor(int columns, int rows){
-        currentFloor = floorFactory.create(columns, rows);
+        MapBuilderInterface mapBuilder = mapBuilderFactory.create(columns, rows);
+        currentFloor = floorFactory.create(columns, rows, mapBuilder);
         floorLevel++;
         return getDirections();
     }

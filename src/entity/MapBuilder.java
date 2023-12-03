@@ -3,31 +3,31 @@ package entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MapBuilder {
+public class MapBuilder implements MapBuilderInterface{
 
     int columns;
     int rows;
     Random randomizer;
 
-    MapBuilder(int length, int width){
-        this.columns = length;
-        this.rows = width;
+    public MapBuilder(int columns, int rows){
+        this.columns = columns;
+        this.rows = rows;
         randomizer = new Random();
     }
 
-    public ArrayList<Room> buildMapLayout(){
-        ArrayList<Room> map = new ArrayList<>(columns * rows);
-
-        buildFirstRow(map);
-
-        for (int row_num = 1; row_num < rows - 1; row_num++){
-            buildOtherRows(map, row_num * columns);
-        }
-
-        buildFinalRow(map, (rows - 1) * columns);
-
-        return map;
-    }
+//    public ArrayList<Room> buildMapLayout(){
+//        ArrayList<Room> map = new ArrayList<>(columns * rows);
+//
+//        buildFirstRow(map);
+//
+//        for (int row_num = 1; row_num < rows - 1; row_num++){
+//            buildOtherRows(map, row_num * columns);
+//        }
+//
+//        buildFinalRow(map, (rows - 1) * columns);
+//
+//        return map;
+//    }
 
     public int assignAll(ArrayList<Room> map){
         int enemyCount = randomizer.nextInt(1, (columns * rows / 3) + 1);
@@ -40,7 +40,7 @@ public class MapBuilder {
         return assignStartingRoom(map, stairLocation);
     }
 
-    private void buildFirstRow(ArrayList<Room> map){ // rowIndex = 0
+    public void buildFirstRow(ArrayList<Room> map){ // rowIndex = 0
         //First room of first row, always has nothing to the west or north
         map.add(new Room());
         map.get(0).setHasEast(randomizer.nextBoolean());
@@ -59,7 +59,7 @@ public class MapBuilder {
         map.get(columns - 1).setHasSouth(randomizer.nextBoolean());
     }
 
-    private void buildOtherRows(ArrayList<Room> map, int startIndex){
+    public void buildOtherRows(ArrayList<Room> map, int startIndex){
         assert map.size() == startIndex;
         //First room of new row, always has nothing to the west
         map.add(new Room());
@@ -82,7 +82,7 @@ public class MapBuilder {
         map.get(startIndex + columns - 1).setHasSouth(randomizer.nextBoolean());
     }
 
-    private void buildFinalRow(ArrayList<Room> map, int startIndex){
+    public void buildFinalRow(ArrayList<Room> map, int startIndex){
         assert map.size() == startIndex;
         //First room of final row, always has nothing to the west or south
         map.add(new Room());

@@ -6,19 +6,14 @@ public class CurrentFloor implements Floor{
 
     private final int columns;
     private final int rows;
-    private ArrayList<Room> map;
-    private int currentRoom = -1;
+    private final ArrayList<Room> map;
+    private int currentRoom;
 
-    public CurrentFloor(int num_columns, int num_rows){
+    public CurrentFloor(int num_columns, int num_rows, ArrayList<Room> map, int startingRoom){
         this.columns = num_columns;
         this.rows = num_rows;
-
-        MapBuilder mapBuilder = new MapBuilder(columns, rows);
-
-        while (currentRoom == -1) { //Generates random floors until one with at least two viable rooms is created
-            map = mapBuilder.buildMapLayout();
-            currentRoom = mapBuilder.assignAll(map);
-        }
+        this.map = map;
+        this.currentRoom = startingRoom;
     }
 
     public int getColumns(){
@@ -65,5 +60,9 @@ public class CurrentFloor implements Floor{
             directions += "W";
         }
         return directions;
+    }
+
+    public ArrayList<Room> getMap() {
+        return map;
     }
 }
