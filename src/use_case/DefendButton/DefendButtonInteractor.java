@@ -1,6 +1,5 @@
 package use_case.DefendButton;
 
-import use_case.DrawButton.DrawButtonOutputData;
 import use_case.EnemyBehaviour.EnemyBehaviourOutputData;
 
 import java.io.IOException;
@@ -45,6 +44,9 @@ public class DefendButtonInteractor implements DefendButtonInputBoundary{
                 updatedPlayerHealth = 0;
             }
         }
+
+        // Set player's health
+        defendButtonDataAccessObject.getPlayer().setHealth(updatedPlayerHealth);
 
         DefendButtonOutputData defendButtonOutputData = new DefendButtonOutputData(updatedPlayerHealth, defendButtonDataAccessObject.getPlayer().getMaxHealth(),
                 defendButtonDataAccessObject.getPlayer().getLevel(), enemyAction, reviveUsed, damageToPlayer, enemyCardValue, enemyCardSuit, enemyCardImage,
