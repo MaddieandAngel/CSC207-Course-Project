@@ -25,7 +25,7 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         char playerCardSuit = cardButtonDataAccessObject.getAPI().GetCardSuit(cardButtonInputData.getCardCode());
 
         // Enemy will make their move
-        EnemyBehaviourOutputData enemyMove = cardButtonDataAccessObject.getEnemyBehaviour().performRandomAction();
+        EnemyBehaviourOutputData enemyMove = cardButtonDataAccessObject.getEnemyBehaviour().performRandomAction(cardButtonDataAccessObject.getEnemy());
         String enemyAction = enemyMove.getAction();
 
         // Calculating the damage done to the enemy (card value * player level)

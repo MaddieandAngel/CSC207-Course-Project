@@ -9,6 +9,7 @@ import use_case.AttackButton.AttackButtonDataAccessInterface;
 import use_case.AttackButton.BackButton.BackButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.DefendButton.DefendButtonDataAccessInterface;
 import use_case.DrawButton.DrawButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.ItemsButton.HealButton.HealButtonDataAccessInterface;
@@ -49,5 +50,4 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     public APIAccessInterface getAPI() { return this.api;}
 
     public void setAPI(APIAccessInterface api) { this.api = api;}
-
 }

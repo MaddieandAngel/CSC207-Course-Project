@@ -1,5 +1,7 @@
 package use_case.DefendButton;
 
+import java.io.IOException;
+
 public interface DefendButtonInputBoundary {
-    void execute();
+    void execute() throws IOException;
 }

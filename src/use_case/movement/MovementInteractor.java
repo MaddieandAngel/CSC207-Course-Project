@@ -5,7 +5,6 @@ import entity.EnemyFactory;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.explore.ExploreDataAccessInterface;
 import interface_adapter.explore.GenerateEnemyDataAccessInterface;
-import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 
 import java.io.IOException;
@@ -17,16 +16,18 @@ public class MovementInteractor implements MovementInputBoundary {
     final GenerateEnemyDataAccessInterface inBattleDataAccessObject;
     final MovementOutputBoundary movementPresenter;
     final EnemyFactory enemyFactory;
+    final EnemyBehaviourInterface enemyBehaviour;
     final APIAccessInterface apiAccessObject;
 
     public MovementInteractor(ExploreDataAccessInterface exploreDataAccessObject,
                               GenerateEnemyDataAccessInterface inBattleDataAccessObject,
                               MovementOutputBoundary movementOutputBoundary, EnemyFactory enemyFactory,
-                              APIAccessInterface apiAccessInterface){
+                              EnemyBehaviourInterface enemyBehaviour, APIAccessInterface apiAccessInterface){
         this.exploreDataAccessObject = exploreDataAccessObject;
         this.inBattleDataAccessObject = inBattleDataAccessObject;
         this.movementPresenter = movementOutputBoundary;
         this.enemyFactory = enemyFactory;
+        this.enemyBehaviour = enemyBehaviour;
         this.apiAccessObject = apiAccessInterface;
     }
 
@@ -45,9 +46,10 @@ public class MovementInteractor implements MovementInputBoundary {
         MovementOutputData movementOutputData = new MovementOutputData(directions);
 
         if (exploreDataAccessObject.checkForStairs()){
-            movementPresenter.prepareStairsView(movementOutputData);
+            movementPresenter.prepareStairsView();
         }
         else if (exploreDataAccessObject.checkForEnemy()){
+            System.out.println("enemy"); //TODO: delete later
             // Generates a random enemy:
             Random randomizer = new Random();
             int floorLevel = exploreDataAccessObject.getFloorLevel();
@@ -57,10 +59,7 @@ public class MovementInteractor implements MovementInputBoundary {
 
             //Draws 5 cards for the enemy's initial hand (or at least attempts to):
             try {
-                EnemyBehaviourInterface enemyHandGenerator = new EnemyBehaviour(apiAccessObject, inBattleDataAccessObject.getEnemy());
-                //Note: creates an instance of an EnemyBehaviour instead of its interface. Might be a problem?
-
-                enemyHandGenerator.enemyDrawInitialHand();
+                enemyBehaviour.enemyDrawInitialHand(inBattleDataAccessObject.getEnemy());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -68,6 +67,7 @@ public class MovementInteractor implements MovementInputBoundary {
             movementPresenter.prepareTurnSelectView(new EnemyOutputData(enemy.getName(), enemy.getLevel()));
         }
         else if (exploreDataAccessObject.checkForItem()){
+            System.out.println("item"); //TODO: delete later
             //TODO: Generate item for output data
             movementPresenter.prepareItemCollectionView(movementOutputData);
         }
