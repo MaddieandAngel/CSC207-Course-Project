@@ -58,11 +58,19 @@ public class Main {
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         DropToPickViewModel dropToPickViewModel = new DropToPickViewModel();
         DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
+        DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
         InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory());
+        UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
+        DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
+        PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+        DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
+
+        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
+        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
@@ -74,30 +82,19 @@ public class Main {
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
+        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, player, pickUpItemViewModel,
+                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel);
+                views.add(pickItemView, pickItemView.viewName);
+        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, player,
+                useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
+                views.add(packageView, packageView.viewName);
+        DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel,
+                dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject,
+                player, useItemsViewModel);
+                views.add(dropToPickPackageView, dropToPickPackageView.viewName);
 
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
-
-
-        UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
-        DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
-        DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
-        PickUpItemDataAccessInterface pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
-
-
-        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
-        ActivePlayer player = (ActivePlayer)activePlayerFactory.create();
-        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, player, pickUpItemViewModel,
-                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel);
-
-
-        DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
-        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, player, useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
-        DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel, dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject, player, useItemsViewModel);
-        views.add(packageView, packageView.viewName);
-        views.add(pickItemView, pickItemView.viewName);
-        views.add(dropToPickPackageView, dropToPickPackageView.viewName);
-
         viewManagerModel.firePropertyChanged();
         //application.pack();
         application.setSize(800,500);
