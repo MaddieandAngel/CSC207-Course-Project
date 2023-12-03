@@ -109,7 +109,6 @@ public class Main {
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
-        application.pack();
         application.setSize(800,500);
         application.setVisible(true);
 
