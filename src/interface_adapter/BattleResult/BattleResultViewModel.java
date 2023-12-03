@@ -6,6 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class BattleResultViewModel extends ViewModel {
+
+    public final String CONTINUE_LABEL = "Continue";
     private BattleResultState state = new BattleResultState();
     public BattleResultViewModel() {
         super("battle result");

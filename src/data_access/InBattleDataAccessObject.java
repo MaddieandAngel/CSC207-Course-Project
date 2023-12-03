@@ -9,10 +9,13 @@ import use_case.AttackButton.AttackButtonDataAccessInterface;
 import use_case.AttackButton.BackButton.BackButtonDataAccessInterface;
 import use_case.AttackButton.CardButton.CardButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.DefendButton.DefendButtonDataAccessInterface;
 import use_case.DrawButton.DrawButtonDataAccessInterface;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.ItemsButton.HealButton.HealButtonDataAccessInterface;
+import use_case.ItemsButton.ItemsButtonDataAccessInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface, DrawButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface, DrawButtonDataAccessInterface, ItemsButtonDataAccessInterface, HealButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;
@@ -47,5 +50,4 @@ public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterfac
     public APIAccessInterface getAPI() { return this.api;}
 
     public void setAPI(APIAccessInterface api) { this.api = api;}
-
 }

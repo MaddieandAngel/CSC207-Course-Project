@@ -1,18 +1,14 @@
 package use_case.PlayButton;
 
-import interface_adapter.APIAccessInterface;
 import interface_adapter.stairs.StairsDataAccessInterface;
 import use_case.movement.MovementOutputData;
 
 public class PlayButtonInteractor implements PlayButtonInputBoundary{
     final PlayButtonOutputBoundary playPresenter;
-    final APIAccessInterface apiAccess;
     final StairsDataAccessInterface exploreDataAccessObject;
 
-    public PlayButtonInteractor(PlayButtonOutputBoundary playPresenter, APIAccessInterface apiAccess,
-                                StairsDataAccessInterface exploreDataAccessObject){
+    public PlayButtonInteractor(PlayButtonOutputBoundary playPresenter, StairsDataAccessInterface exploreDataAccessObject){
         this.playPresenter = playPresenter;
-        this.apiAccess = apiAccess;
         this.exploreDataAccessObject = exploreDataAccessObject;
     }
 
