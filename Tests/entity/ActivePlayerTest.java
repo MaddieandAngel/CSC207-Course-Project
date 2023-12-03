@@ -1,5 +1,6 @@
 package entity;
 
+import entity.BagAndItems.Bag;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,6 @@ class ActivePlayerTest {
 
     @Test
     void getBag() {
-        assert player.getBag() instanceof Package;
+        assert player.getBag() != null;
     }
 }
