@@ -1,6 +1,8 @@
 package view;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
+import entity.Player;
 import interface_adapter.DropToPickPackage.DropToPickPackageController;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
 
@@ -26,13 +28,13 @@ public class DropToPickPackageView extends JPanel implements ActionListener, Pro
     private final JLabel revive;
 
     private final DropToPickPackageController dropToPickPackageController;
-    private final ActivePlayer player;
+    private final Player player;
 
-    public DropToPickPackageView(DropToPickPackageController dropToPickPackageController, ActivePlayer player, DropToPickPackageViewModel dropToPickPackageViewModel) {
+    public DropToPickPackageView(DropToPickPackageController dropToPickPackageController, InBattleDataAccessObject inBattleDataAccessObject, DropToPickPackageViewModel dropToPickPackageViewModel) {
 
         this.dropToPickPackageController = dropToPickPackageController;
         this.dropToPickPackageViewModel = dropToPickPackageViewModel;
-        this.player = player;
+        this.player = inBattleDataAccessObject.getPlayer();
 
 
         JPanel buttons = new JPanel();

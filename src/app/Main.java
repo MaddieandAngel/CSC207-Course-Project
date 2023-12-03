@@ -94,15 +94,15 @@ public class Main {
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
-        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, player, pickUpItemViewModel,
-                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel);
+        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, pickUpItemViewModel,
+                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel, inBattleDataAccessObject);
                 views.add(pickItemView, pickItemView.viewName);
-        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, player,
+        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, inBattleDataAccessObject,
                 useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
                 views.add(packageView, packageView.viewName);
         DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel,
                 dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject,
-                player, useItemsViewModel);
+                useItemsViewModel, inBattleDataAccessObject);
                 views.add(dropToPickPackageView, dropToPickPackageView.viewName);
 
 

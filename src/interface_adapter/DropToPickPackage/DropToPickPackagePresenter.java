@@ -1,12 +1,14 @@
 package interface_adapter.DropToPickPackage;
 
 import entity.ActivePlayer;
+import entity.Player;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.UseItems.UseItemState;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.DropToPickPackage.DropToPickPackageOutputBoundary;
+import use_case.DropToPickPackage.DropToPickPackageOutputData;
 
 import javax.swing.*;
 
@@ -38,9 +40,9 @@ public class DropToPickPackagePresenter implements DropToPickPackageOutputBounda
     }
 
     @Override
-    public void preparePickItemView(ActivePlayer player) {
+    public void preparePickItemView(DropToPickPackageOutputData dropToPickPackageOutputData) {
         UseItemState useItemState = useItemsViewModel.getState();
-        useItemState.setBag(player.getBag());
+        useItemState.setBag(dropToPickPackageOutputData.getPlayer().getBag());
         useItemsViewModel.setState(useItemState);
         useItemsViewModel.firePropertyChanged();
         pickUpItemViewModel.firePropertyChanged();

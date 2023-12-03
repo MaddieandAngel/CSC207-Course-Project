@@ -14,7 +14,7 @@ public class ExploreViewModel extends ViewModel {
     public final String SEARCH_LABEL = "Search Room";
 
     public final String BAG = "Bag";
-    public String textbox_text = "There's nothing here.";
+    public String TEXTBOX_TEXT = "There's nothing here.";
 
 
     private ExploreState state = new ExploreState();

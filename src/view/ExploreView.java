@@ -76,6 +76,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setBorder(buttonBorders);
         west.setBorder(buttonBorders);
         search.setBorder(buttonBorders);
+        bag.setBorder(buttonBorders);
 
         //Set background colours
         Color bg = Color.getHSBColor(0, 0, 0.1F);
@@ -89,6 +90,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setBackground(bg);
         west.setBackground(bg);
         search.setBackground(bg);
+        bag.setBackground(bg);
 
         //Set text colours
         Color text = Color.getHSBColor(0, 0, 0.9F);
@@ -99,6 +101,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setForeground(text);
         west.setForeground(text);
         search.setForeground(text);
+        bag.setForeground(text);
 
         this.setLayout(new GridBagLayout());
         this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,

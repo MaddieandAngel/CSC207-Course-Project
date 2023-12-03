@@ -1,6 +1,8 @@
 package app;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
+import entity.Player;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.DropToPick.DropToPickPresenter;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
@@ -21,10 +23,10 @@ import view.PickItemView;
 
 public class ItemCollectionUseCaseFactory {
     private ItemCollectionUseCaseFactory(){}
-    public static PickItemView create(ViewManagerModel viewManagerModel, ActivePlayer player, PickUpItemViewModel pickUpItemViewModel, PickUpItemDataAccessInterface pickUpItemDataAccessObject, DropToPickPackageViewModel dropToPickPackageViewModel, ExploreViewModel exploreViewModel, UseItemsViewModel useItemsViewModel){
+    public static PickItemView create(ViewManagerModel viewManagerModel, PickUpItemViewModel pickUpItemViewModel, PickUpItemDataAccessInterface pickUpItemDataAccessObject, DropToPickPackageViewModel dropToPickPackageViewModel, ExploreViewModel exploreViewModel, UseItemsViewModel useItemsViewModel, InBattleDataAccessObject inBattleDataAccessObject){
         PickUpItemController pickUpItemController = createPickUpItemsUseCase(viewManagerModel, pickUpItemViewModel, pickUpItemDataAccessObject, exploreViewModel, useItemsViewModel, dropToPickPackageViewModel);
         DropToPickController dropToPickController = createDropToPickUseCase(viewManagerModel, dropToPickPackageViewModel, pickUpItemViewModel, useItemsViewModel);
-        return new PickItemView(pickUpItemViewModel, pickUpItemController, dropToPickController, player);
+        return new PickItemView(pickUpItemViewModel, pickUpItemController, dropToPickController,inBattleDataAccessObject);
     }
     public static PickUpItemController createPickUpItemsUseCase(ViewManagerModel viewManagerModel, PickUpItemViewModel pickUpItemViewModel, PickUpItemDataAccessInterface pickUpItemDataAccessObject, ExploreViewModel exploreViewModel, UseItemsViewModel useItemsViewModel, DropToPickPackageViewModel dropToPickPackageViewModel){
         PickUpItemOutputBoundary pickUpItemPresenter = new PickUpItemPresenter(viewManagerModel, pickUpItemViewModel, exploreViewModel, useItemsViewModel, dropToPickPackageViewModel);
