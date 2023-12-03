@@ -16,6 +16,7 @@ public class WinBattleView extends JPanel implements ActionListener, PropertyCha
     private final WinBattleContinueController winBattleContinueController;
 
     private final JButton Continue;
+    private final JLabel expGained;
 
     public WinBattleView(WinBattleViewModel winBattleViewModel, WinBattleContinueController winBattleContinueController) {
         this.winBattleViewModel = winBattleViewModel;
@@ -23,6 +24,7 @@ public class WinBattleView extends JPanel implements ActionListener, PropertyCha
 
         JLabel title = new JLabel(WinBattleViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
         JPanel buttons = new JPanel();
         Continue = new JButton(WinBattleViewModel.CONTINUE_LABEL);
@@ -36,6 +38,7 @@ public class WinBattleView extends JPanel implements ActionListener, PropertyCha
                 }
             }
         });
+        this.add(buttons);
     }
 
     @Override

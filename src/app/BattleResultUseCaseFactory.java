@@ -1,5 +1,6 @@
 package app;
 
+import data_access.InBattleDataAccessObject;
 import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.BattleResult.ContinueButtonController;
 import interface_adapter.BattleResult.ContinueButtonPresenter;
@@ -17,21 +18,21 @@ public class BattleResultUseCaseFactory {
 
     public static BattleResultView create(ViewManagerModel viewManagerModel, BattleResultViewModel battleResultViewModel,
                                           TurnSelectViewModel turnSelectViewModel, GameOverViewModel gameOverViewModel,
-                                          WinBattleViewModel winBattleViewModel){
+                                          WinBattleViewModel winBattleViewModel, InBattleDataAccessObject inBattleDataAccessObject){
 
         ContinueButtonController continueButtonController = createContinueButtonUseCase(viewManagerModel, battleResultViewModel,
-                turnSelectViewModel, gameOverViewModel, winBattleViewModel);
+                turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
 
         return new BattleResultView(battleResultViewModel, continueButtonController);
     }
 
     private static ContinueButtonController createContinueButtonUseCase(ViewManagerModel viewManagerModel, BattleResultViewModel battleResultViewModel,
                                                                         TurnSelectViewModel turnSelectViewModel, GameOverViewModel gameOverViewModel,
-                                                                        WinBattleViewModel winBattleViewModel){
+                                                                        WinBattleViewModel winBattleViewModel, InBattleDataAccessObject inBattleDataAccessObject){
 
         BattleResultContinueOutputBoundary battleResultContinueOutputBoundary = new ContinueButtonPresenter(turnSelectViewModel,
                 battleResultViewModel, gameOverViewModel, winBattleViewModel, viewManagerModel);
-        BattleResultContinueInputBoundary battleResultContinueInteractor = new BattleResultContinueInteractor(battleResultContinueOutputBoundary);
+        BattleResultContinueInputBoundary battleResultContinueInteractor = new BattleResultContinueInteractor(battleResultContinueOutputBoundary, inBattleDataAccessObject);
         return new ContinueButtonController(battleResultContinueInteractor);
     }
 }

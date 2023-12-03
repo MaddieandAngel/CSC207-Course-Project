@@ -52,6 +52,7 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
                     }
                 }
         );
+        this.add(buttons);
     }
 
     @Override

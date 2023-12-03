@@ -1,5 +1,7 @@
 package use_case.BattleResultContinueButton;
 
 public interface BattleResultContinueOutputBoundary {
-    void prepareSuccessView();
+    void prepareWinBattleView();
+    void prepareGameOverView();
+    void prepareTurnSelectView();
 }

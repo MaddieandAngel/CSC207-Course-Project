@@ -1,5 +1,6 @@
 package app;
 
+import data_access.ExploreDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.WinBattle.WinBattleContinueController;
 import interface_adapter.WinBattle.WinBattleContinuePresenter;
@@ -12,14 +13,14 @@ import view.in_battle.WinBattleView;
 
 public class WinBattleUseCaseFactory {
     private WinBattleUseCaseFactory(){}
-    public static WinBattleView create(ViewManagerModel viewManagerModel, WinBattleViewModel winBattleViewModel, ExploreViewModel exploreViewModel){
-        WinBattleContinueController winBattleContinueController = createWinBattleContinueUseCase(viewManagerModel, winBattleViewModel, exploreViewModel);
+    public static WinBattleView create(ViewManagerModel viewManagerModel, WinBattleViewModel winBattleViewModel, ExploreViewModel exploreViewModel, ExploreDataAccessObject exploreDataAccessObject){
+        WinBattleContinueController winBattleContinueController = createWinBattleContinueUseCase(viewManagerModel, winBattleViewModel, exploreViewModel, exploreDataAccessObject);
         return new WinBattleView(winBattleViewModel, winBattleContinueController);
     }
     private static WinBattleContinueController createWinBattleContinueUseCase(ViewManagerModel viewManagerModel,
-                                                                              WinBattleViewModel winBattleViewModel, ExploreViewModel exploreViewModel){
+                                                                              WinBattleViewModel winBattleViewModel, ExploreViewModel exploreViewModel, ExploreDataAccessObject exploreDataAccessObject){
         WinBattleContinueOutputBoundary winBattleContinueOutputBoundary = new WinBattleContinuePresenter(exploreViewModel, winBattleViewModel, viewManagerModel);
-        WinBattleContinueInputBoundary winBattleContinueInputBoundary = new WinBattleContinueInteractor(winBattleContinueOutputBoundary);
+        WinBattleContinueInputBoundary winBattleContinueInputBoundary = new WinBattleContinueInteractor(winBattleContinueOutputBoundary, exploreDataAccessObject);
         return new WinBattleContinueController(winBattleContinueInputBoundary);
     }
 }

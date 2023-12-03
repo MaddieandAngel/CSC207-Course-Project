@@ -19,7 +19,9 @@ public class WinBattleContinuePresenter implements WinBattleContinueOutputBounda
     }
 
     @Override
-    public void prepareSuccessView() {
+    public void prepareSuccessView(MovementOutputData movementOutputData) {
+        ExploreState state = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(state, movementOutputData));
         viewManagerModel.setActiveView(exploreViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

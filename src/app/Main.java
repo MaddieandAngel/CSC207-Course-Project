@@ -92,12 +92,12 @@ public class Main {
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
-                turnSelectViewModel, gameOverViewModel, winBattleViewModel);
+                turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
         views.add(battleResultView, battleResultView.viewName);
         GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, titleScreenViewModel,
                 exploreViewModel, exploreDataAccessObject);
         views.add(gameOverView, gameOverView.viewName);
-        WinBattleView winBattleView = WinBattleUseCaseFactory.create(viewManagerModel, winBattleViewModel, exploreViewModel);
+        WinBattleView winBattleView = WinBattleUseCaseFactory.create(viewManagerModel, winBattleViewModel, exploreViewModel, exploreDataAccessObject);
         views.add(winBattleView, winBattleView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
