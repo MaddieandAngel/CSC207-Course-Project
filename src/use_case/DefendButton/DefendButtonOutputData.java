@@ -71,8 +71,4 @@ public class DefendButtonOutputData {
     public int getEnemyCardValueInt() {
         return enemyCardValueInt;
     }
-
-    public void setEnemyCardValueInt(int enemyCardValueInt) {
-        this.enemyCardValueInt = enemyCardValueInt;
-    }
 }
