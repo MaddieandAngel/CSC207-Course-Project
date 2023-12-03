@@ -9,6 +9,7 @@ import java.beans.PropertyChangeSupport;
 public class GameOverViewModel extends ViewModel{
     public static final String PLAY_AGAIN_LABEL = "Play Again";
     public static final String RETURN_TO_TITLE_LABEL = "Return to Title Screen";
+    public static final String TITLE_LABEL = "GAME OVER!";
     private GameOverState state = new GameOverState();
 
     public GameOverViewModel() {
