@@ -62,7 +62,7 @@ public class CurrentFloor implements Floor{
         return directions;
     }
 
-    public ArrayList<Room> getMap() {
+    public ArrayList<Room> getMap() { //Exclusively needed for testing
         return map;
     }
 }

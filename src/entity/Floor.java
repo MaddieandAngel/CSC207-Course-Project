@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 public interface Floor {
 
     int getColumns();
@@ -9,4 +11,6 @@ public interface Floor {
     boolean checkForItem();
     boolean checkForStairs();
     String getDirections();
+
+    ArrayList<Room> getMap(); //Exclusively needed for testing
 }
