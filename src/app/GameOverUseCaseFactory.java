@@ -1,5 +1,6 @@
 package app;
 
+import interface_adapter.APIAccessInterface;
 import interface_adapter.GameOver.GameOverViewModel;
 import interface_adapter.GameOver.ReturnToTitleController;
 import interface_adapter.GameOver.ReturnToTitlePresenter;
@@ -21,9 +22,9 @@ public class GameOverUseCaseFactory {
     private GameOverUseCaseFactory(){}
 
     public static GameOverView create(ViewManagerModel viewManagerModel, GameOverViewModel gameOverViewModel,
-                                      TitleScreenViewModel titleScreenViewModel, ExploreViewModel exploreViewModel, StairsDataAccessInterface dataAccessObject){
+                                      TitleScreenViewModel titleScreenViewModel, ExploreViewModel exploreViewModel, StairsDataAccessInterface dataAccessObject, APIAccessInterface api){
         ReturnToTitleController returnToTitleController = createReturnToTitleUseCase(viewManagerModel, gameOverViewModel, titleScreenViewModel);
-        PlayButtonController playButtonController = createPlayAgainUseCase(viewManagerModel, titleScreenViewModel, exploreViewModel, dataAccessObject);
+        PlayButtonController playButtonController = createPlayAgainUseCase(viewManagerModel, titleScreenViewModel, exploreViewModel, dataAccessObject, api);
         return new GameOverView(gameOverViewModel, playButtonController, returnToTitleController);
     }
     private static ReturnToTitleController createReturnToTitleUseCase(ViewManagerModel viewManagerModel, GameOverViewModel gameOverViewModel,
@@ -33,9 +34,9 @@ public class GameOverUseCaseFactory {
         return new ReturnToTitleController(returnToTitleInputBoundary);
     }
     private static PlayButtonController createPlayAgainUseCase(ViewManagerModel viewManagerModel, TitleScreenViewModel
-            titleScreenViewModel, ExploreViewModel exploreViewModel, StairsDataAccessInterface dataAccessObject){
+            titleScreenViewModel, ExploreViewModel exploreViewModel, StairsDataAccessInterface dataAccessObject, APIAccessInterface api){
         PlayButtonOutputBoundary playButtonOutputBoundary = new PlayButtonPresenter(viewManagerModel, titleScreenViewModel, exploreViewModel);
-        PlayButtonInputBoundary playButtonInputBoundary = new PlayButtonInteractor(playButtonOutputBoundary, dataAccessObject);
+        PlayButtonInputBoundary playButtonInputBoundary = new PlayButtonInteractor(playButtonOutputBoundary, dataAccessObject, api);
         return new PlayButtonController(playButtonInputBoundary);
     }
 }

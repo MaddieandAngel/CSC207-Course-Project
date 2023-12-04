@@ -9,7 +9,7 @@ import entity.CurrentEnemyFactory;
 import entity.Enemy;
 import entity.Player;
 import interface_adapter.APIAccessInterface;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
