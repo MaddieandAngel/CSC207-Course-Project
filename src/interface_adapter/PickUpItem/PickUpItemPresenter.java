@@ -64,7 +64,11 @@ public class PickUpItemPresenter implements PickUpItemOutputBoundary {
     }
 
     @Override
-    public void back() {
+    public void back(MovementOutputData movementOutputData) {
+        ExploreState exploreState = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+        exploreViewModel.firePropertyChanged();
+
         viewManagerModel.setActiveView(exploreViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

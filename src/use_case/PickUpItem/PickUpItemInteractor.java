@@ -38,6 +38,9 @@ public class PickUpItemInteractor implements PickUpItemInputBoundary{
 
     @Override
     public void back() {
-        pickUpItemPresenter.back();
+        String directions = exploreDataAccessObject.getDirections();
+        boolean searchable = !(exploreDataAccessObject.getHasBeenSearched());
+        MovementOutputData movementOutputData = new MovementOutputData(directions, searchable);
+        pickUpItemPresenter.back(movementOutputData);
     }
 }

@@ -7,5 +7,5 @@ import use_case.movement.MovementOutputData;
 public interface PickUpItemOutputBoundary {
     void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData, MovementOutputData movementOutputData);
     void prepareFailView();
-    void back();
+    void back(MovementOutputData movementOutputData);
 }
