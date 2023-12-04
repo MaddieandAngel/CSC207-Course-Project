@@ -26,10 +26,7 @@ import use_case.PickUpItem.PickUpItemDataAccessInterface;
 import view.*;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
-import view.in_battle.AttackSelectionView;
-import view.in_battle.BattleResultView;
-import view.in_battle.ItemSelectionView;
-import view.in_battle.TurnSelectView;
+import view.in_battle.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -123,6 +120,9 @@ public class Main {
         ItemSelectionView itemSelectionView = ItemSelectionUseCaseFactory.create(battleResultViewModel, viewManagerModel,
                 inBattleDataAccessObject, turnSelectViewModel, inBattleDataAccessObject, itemSelectViewModel);
         views.add(itemSelectionView, itemSelectionView.viewName);
+        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel,
+                titleScreenViewModel, exploreViewModel, exploreDataAccessObject, apiAccess);
+        views.add(gameOverView);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
