@@ -71,7 +71,6 @@ public class Main {
         DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
         DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
-        UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
         WinBattleViewModel winBattleViewModel = new WinBattleViewModel();
 
@@ -111,7 +110,6 @@ public class Main {
                 useItemsViewModel, inBattleDataAccessObject);
                 views.add(dropToPickPackageView, dropToPickPackageView.viewName);
 
-        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
                 turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
         views.add(battleResultView, battleResultView.viewName);
