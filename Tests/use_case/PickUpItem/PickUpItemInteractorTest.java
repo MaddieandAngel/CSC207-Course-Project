@@ -1,8 +1,8 @@
-package Tests.use_case.DropItem;
+package Tests.use_case.PickUpItem;
 
 import data_access.APIAccess;
-import data_access.DropItemDataAccessObject;
 import data_access.InBattleDataAccessObject;
+import data_access.PickUpItemDataAccessObject;
 import data_access.UseItemDataAccessObject;
 import entity.ActivePlayerFactory;
 import entity.BagAndItems.*;
@@ -11,18 +11,22 @@ import entity.Enemy;
 import entity.Player;
 import interface_adapter.APIAccessInterface;
 import interface_adapter.UseItems.UseItemsPresenter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.DropItem.DropItemDataAccessInterface;
-import use_case.DropItem.DropItemOutputBoundary;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.PickUpItem.PickUpItemDataAccessInterface;
+import use_case.PickUpItem.PickUpItemOutputBoundary;
+import use_case.PickUpItem.PickUpItemOutputData;
 
 import java.io.IOException;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
-public class DropItemsInteractorTest {
+
+public class PickUpItemInteractorTest {
+
     InBattleDataAccessObject inBattleDataAccessObject;
 
     int numberOfRevive;
@@ -37,6 +41,8 @@ public class DropItemsInteractorTest {
 
     int originalPlayerHealth;
     int playerMaxHealth;
+    Bag bag;
+    Item item;
     @BeforeEach
     void setUp() throws IOException {
         Random random = new Random();
@@ -89,41 +95,39 @@ public class DropItemsInteractorTest {
 
         int temp = random.nextInt(1, 5);
         if (temp == 1) {
-            healAmount = 10;
+            item = new healingPotion10();
         } else if (temp == 2) {
-            healAmount = 20;
+            item = new healingPotion20();
         } else if (temp == 3){
-            healAmount = 45;
+            item = new healingPotion45();
         }
-        else{healAmount = 0;}
+        else{item = new revivePotion();}
+
+        bag = player.getBag();
     }
     @Test
-    void DropItemsInteractor(){
-        DropItemDataAccessInterface dropItemDataAccessObject = new DropItemDataAccessObject();
-        DropItemOutputBoundary dropItemOutputBoundary = new DropItemOutputBoundary() {
+    void PickUpItemsInteractor(){
+        PickUpItemDataAccessInterface pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+        PickUpItemOutputBoundary pickUpItemOutputBoundary = new PickUpItemOutputBoundary() {
             @Override
-            public void prepareSuccessView() {
-                if (healAmount == 10){
-                    dropItemDataAccessObject.dropItem(10, inBattleDataAccessObject);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal10(), numberOfHeal10-1);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getCurrentHealth(), originalPlayerHealth );
+            public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData) {
+                if (item instanceof healingPotion10){
+                    pickUpItemDataAccessObject.addItem(bag, item);
+                    Assertions.assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal10(), numberOfHeal10+1);
                 }
-                else if (healAmount == 20){
-                    dropItemDataAccessObject.dropItem(20, inBattleDataAccessObject);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal20(), numberOfHeal20-1);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getCurrentHealth(), originalPlayerHealth);
+                else if (item instanceof healingPotion20){
+                    pickUpItemDataAccessObject.addItem(bag, item);
+                    Assertions.assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal20(), numberOfHeal20+1);
 
                 }
-                else if (healAmount == 45){
-                    dropItemDataAccessObject.dropItem(45, inBattleDataAccessObject);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal45(), numberOfHeal45-1);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getCurrentHealth(), originalPlayerHealth);
+                else if (item instanceof healingPotion45){
+                    pickUpItemDataAccessObject.addItem(bag, item);
+                    Assertions.assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal45(), numberOfHeal45+1);
 
                 }
                 else{
-                    dropItemDataAccessObject.dropItem(0, inBattleDataAccessObject);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfRevive(), numberOfRevive-1);
-                    assertEquals(inBattleDataAccessObject.getPlayer().getCurrentHealth(), originalPlayerHealth);
+                    pickUpItemDataAccessObject.addItem(bag, new revivePotion());
+                    Assertions.assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal45(), numberOfRevive+1);
                 }
             }
 
@@ -133,10 +137,10 @@ public class DropItemsInteractorTest {
             }
 
             @Override
-            public void prepareExploreView() {
+            public void back() {
 
             }
         };
-        };
     }
+}
 
