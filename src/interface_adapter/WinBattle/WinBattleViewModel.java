@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class WinBattleViewModel extends ViewModel {
     public static final String CONTINUE_LABEL = "Continue";
-    public static final String TITLE_LABEL = "YOU WON!";
+    public static final String TITLE_LABEL = "Battle Results";
     private WinBattleState state = new WinBattleState();
 
     public WinBattleViewModel() {
