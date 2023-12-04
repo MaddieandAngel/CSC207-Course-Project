@@ -14,7 +14,7 @@ public class WinBattleContinueInteractor implements WinBattleContinueInputBounda
 
     @Override
     public void execute() {
-        MovementOutputData movementOutputData = new MovementOutputData(this.exploreDataAccessObject.getDirections());
+        MovementOutputData movementOutputData = new MovementOutputData(this.exploreDataAccessObject.getDirections(), false);
         winBattleContinueOutputBoundary.prepareSuccessView(movementOutputData);
     }
 }
