@@ -5,6 +5,7 @@ import interface_adapter.AttackSelect.BackButtonController;
 import interface_adapter.AttackSelect.CardButtonController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,8 +95,31 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         back = new JButton("Back");
         cardButtons.add(back);
 
-        // Setting the layout for the buttons
+        // Customize View
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        cardButtons.setBackground(bg);
         cardButtons.setLayout(new FlowLayout());
+        card1.setBackground(bg);
+        card2.setBackground(bg);
+        card3.setBackground(bg);
+        card4.setBackground(bg);
+        card5.setBackground(bg);
+        back.setBackground(bg);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        card1.setBorder(buttonBorders);
+        card2.setBorder(buttonBorders);
+        card3.setBorder(buttonBorders);
+        card4.setBorder(buttonBorders);
+        card5.setBorder(buttonBorders);
+        back.setBorder(buttonBorders);
+
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        back.setForeground(text);
+
+        back.setFont(new Font("Verdana", Font.PLAIN, 18));
+
+        this.add(cardButtons);
 
         // Creating action listeners for each of the buttons
         card1.addActionListener(
@@ -189,8 +213,6 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     }
                 }
         );
-
-        this.add(cardButtons);
 
     }
 

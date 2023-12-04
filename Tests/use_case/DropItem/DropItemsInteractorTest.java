@@ -1,4 +1,4 @@
-package Tests.use_case.DropItem;
+package use_case.DropItem;
 
 import data_access.APIAccess;
 import data_access.DropItemDataAccessObject;
@@ -22,7 +22,7 @@ import use_case.movement.MovementOutputData;
 import java.io.IOException;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 public class DropItemsInteractorTest {
     InBattleDataAccessObject inBattleDataAccessObject;
 

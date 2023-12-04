@@ -23,7 +23,7 @@ public class AttackSelectViewModel extends ViewModel {
 
 
     public void firePropertyChanged() {
-        support.firePropertyChange("Attack Select", null, this.state);
+        support.firePropertyChange("state", null, this.state);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

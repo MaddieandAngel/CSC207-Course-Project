@@ -5,6 +5,7 @@ import interface_adapter.ItemSelect.HealButtonController;
 import interface_adapter.ItemSelect.ItemSelectViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,8 +64,33 @@ public class ItemSelectionView extends JPanel implements ActionListener, Propert
         back = new JButton("Back");
         healButtons.add(back);
 
-        // Setting the layout for the buttons
+        // Customize View
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        healButtons.setBackground(bg);
         healButtons.setLayout(new FlowLayout());
+        heal10.setBackground(bg);
+        heal20.setBackground(bg);
+        heal45.setBackground(bg);
+        back.setBackground(bg);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        heal10.setBorder(buttonBorders);
+        heal20.setBorder(buttonBorders);
+        heal45.setBorder(buttonBorders);
+        back.setBorder(buttonBorders);
+
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        heal10.setForeground(text);
+        heal20.setForeground(text);
+        heal45.setForeground(text);
+        back.setForeground(text);
+
+        heal10.setFont(new Font("Verdana", Font.PLAIN, 18));
+        heal20.setFont(new Font("Verdana", Font.PLAIN, 18));
+        heal45.setFont(new Font("Verdana", Font.PLAIN, 18));
+        back.setFont(new Font("Verdana", Font.PLAIN, 18));
+
+        this.add(healButtons);
 
         // Creating action listeners for each of the buttons
         heal10.addActionListener(
@@ -126,8 +152,6 @@ public class ItemSelectionView extends JPanel implements ActionListener, Propert
                     }
                 }
         );
-
-        this.add(healButtons);
 
     }
 
