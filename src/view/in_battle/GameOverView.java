@@ -5,6 +5,7 @@ import interface_adapter.GameOver.ReturnToTitleController;
 import interface_adapter.TitleScreen.PlayButtonController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,11 +37,19 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         //Set background colours
         Color bg = Color.getHSBColor(0, 0, 0.1F);
         this.setBackground(bg);
+        buttons.setBackground(bg);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        playAgain.setBorder(buttonBorders);
+        returnToTitle.setBorder(buttonBorders);
+
 
         //Set text colours
         Color text = Color.getHSBColor(0, 0, 0.9F);
         playAgain.setForeground(text);
         returnToTitle.setForeground(text);
+
+        playAgain.setFont(new Font("Verdana", Font.PLAIN, 18));
+        returnToTitle.setFont(new Font("Verdana", Font.PLAIN, 18));
 
         playAgain.addActionListener(new ActionListener() {
             @Override

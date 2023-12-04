@@ -68,8 +68,11 @@ public class MovementInteractor implements MovementInputBoundary {
                 enemyBehaviour.enemyDrawInitialHand(inBattleDataAccessObject.getEnemy());
                 // Will draw 5 cards for the player when the battle starts
                 for (int i = 0; i < 5; i++) {
-                    apiAccessObject.DrawCard("player");
+                    if (apiAccessObject.GetCardsInPile("player") == null || apiAccessObject.GetCardsInPile("player").length < 5) {
+                        apiAccessObject.DrawCard("player");
+                    }
                 }
+                System.out.println(apiAccessObject.GetCardsInPile("player").length == 5);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
