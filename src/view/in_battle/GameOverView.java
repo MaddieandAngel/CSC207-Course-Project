@@ -33,6 +33,15 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         returnToTitle = new JButton(GameOverViewModel.RETURN_TO_TITLE_LABEL);
         buttons.add(returnToTitle);
 
+        //Set background colours
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+
+        //Set text colours
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        playAgain.setForeground(text);
+        returnToTitle.setForeground(text);
+
         playAgain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

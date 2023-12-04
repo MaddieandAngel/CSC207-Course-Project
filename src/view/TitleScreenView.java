@@ -5,6 +5,7 @@ import interface_adapter.TitleScreen.TitleScreenState;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +24,9 @@ public class TitleScreenView extends JPanel implements ActionListener, PropertyC
         this.playButtonController = playButtonController;
         titleScreenViewModel.addPropertyChangeListener(this);
 
+        JPanel titlePanel = new JPanel();
         JLabel title = new JLabel(TitleScreenViewModel.TITLE_LABEL);
+        titlePanel.add(title);
         // Places title somewhere on the screen
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -32,6 +35,18 @@ public class TitleScreenView extends JPanel implements ActionListener, PropertyC
         buttons.add(play);
         instructions = new JButton(TitleScreenViewModel.INSTRUCTIONS_BUTTON_LABEL);
         buttons.add(instructions);
+
+        //Set background colours
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        title.setBackground(bg);
+        titlePanel.setBackground(bg);
+        buttons.setBackground(bg);
+
+        //Set text colours
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        buttons.setForeground(text);
+        title.setForeground(text);
 
         play.addActionListener(
                 new ActionListener() {
