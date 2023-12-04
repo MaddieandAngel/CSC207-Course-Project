@@ -90,12 +90,10 @@ public class Main {
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
                 pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccess, useItemsViewModel);
-
         views.add(exploreView, exploreView.viewName);
         StairsView stairsView = StairsUseCaseFactory.create(viewManagerModel, exploreViewModel, stairsViewModel, exploreDataAccessObject,
                 exploreDataAccessObject);
         views.add(stairsView, stairsView.viewName);
-        //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
         TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel,
                 battleResultViewModel, itemSelectViewModel, inBattleDataAccessObject, inBattleDataAccessObject, inBattleDataAccessObject,
                 inBattleDataAccessObject);
@@ -120,9 +118,12 @@ public class Main {
         ItemSelectionView itemSelectionView = ItemSelectionUseCaseFactory.create(battleResultViewModel, viewManagerModel,
                 inBattleDataAccessObject, turnSelectViewModel, inBattleDataAccessObject, itemSelectViewModel);
         views.add(itemSelectionView, itemSelectionView.viewName);
-        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel,
-                titleScreenViewModel, exploreViewModel, exploreDataAccessObject, apiAccess);
-        views.add(gameOverView);
+        WinBattleView winBattleView = WinBattleUseCaseFactory.create(viewManagerModel, winBattleViewModel, exploreViewModel,
+                exploreDataAccessObject);
+        views.add(winBattleView, winBattleView.viewName);
+        GameOverView gameOverView = GameOverUseCaseFactory.create(viewManagerModel, gameOverViewModel, titleScreenViewModel,
+                exploreViewModel, exploreDataAccessObject, apiAccess);
+        views.add(gameOverView, gameOverView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
