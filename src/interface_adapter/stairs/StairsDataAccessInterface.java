@@ -5,4 +5,5 @@ import entity.Floor;
 public interface StairsDataAccessInterface {
 
     String MoveToNextFloor(int columns, int rows);
+    boolean getHasBeenSearched();
 }

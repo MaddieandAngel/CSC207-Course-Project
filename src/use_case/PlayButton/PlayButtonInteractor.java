@@ -19,6 +19,6 @@ public class PlayButtonInteractor implements PlayButtonInputBoundary{
         //Generates floor. For simplicity, this first floor's size is always 4x4
         String directions = exploreDataAccessObject.MoveToNextFloor(4,4);
 
-        playPresenter.prepareSuccessView(new MovementOutputData(directions));
+        playPresenter.prepareSuccessView(new MovementOutputData(directions, true));
     }
 }
