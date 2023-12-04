@@ -37,10 +37,17 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
         String damageBonus = "";
         // Calculating damage done to player
         int damageToPlayer = 0;
+        String enemyCardValue = "";
+        char enemyCardSuit = ' ';
+        String enemyCardImage = "";
         if (enemyAction.equals("attack")) {
-            int enemyCardValue = enemyMove.getCardValue();
+            enemyCardValue = enemyMove.getCardCode().substring(0, enemyMove.getCardCode().length() - 1);
+            enemyCardSuit = enemyMove.getCardSuit();
+            enemyCardImage = cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode());
+
+            int CardValue = enemyMove.getCardValue();
             // Damage done to player will be calculated
-            damageToPlayer = cardButtonDataAccessObject.getEnemy().getLevel() * enemyCardValue;
+            damageToPlayer = cardButtonDataAccessObject.getEnemy().getLevel() * CardValue;
 
             // Determining if there is any damage bonus
             // If enemy suit is weak to player suit, player gets damage bonus
@@ -76,6 +83,9 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
                 updatedPlayerHealth = 0;
             }
         }
+        if (updatedEnemyHealth < 0) {
+            updatedEnemyHealth = 0;
+        }
         // Else, both player and enemy health > 0, nothing changes
 
         cardButtonDataAccessObject.getPlayer().setHealth(updatedPlayerHealth);
@@ -86,8 +96,8 @@ public class CardButtonInteractor implements CardButtonInputBoundary{
                 cardButtonDataAccessObject.getPlayer().getLevel(), cardButtonInputData.getCardCode().substring(0,
                 cardButtonInputData.getCardCode().length() - 1), playerCardSuit,
                 cardButtonDataAccessObject.getAPI().GetCardImage(cardButtonInputData.getCardCode()),
-                enemyMove.getCardCode().substring(0, enemyMove.getCardCode().length() - 1), enemyMove.getCardSuit(),
-                cardButtonDataAccessObject.getAPI().GetCardImage(enemyMove.getCardCode()), damageBonus, cardButtonDataAccessObject.getEnemy().getName());
+                enemyCardValue, enemyCardSuit,
+                enemyCardImage, damageBonus, cardButtonDataAccessObject.getEnemy().getName());
         cardButtonPresenter.prepareSuccessView(cardButtonOutputData);
 
     }
