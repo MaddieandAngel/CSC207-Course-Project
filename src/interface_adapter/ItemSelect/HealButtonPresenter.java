@@ -10,11 +10,14 @@ public class HealButtonPresenter implements HealButtonOutputBoundary {
 
     private final BattleResultViewModel battleResultViewModel;
 
+    private final ItemSelectViewModel itemSelectViewModel;
+
     private final ViewManagerModel viewManagerModel;
 
-    public HealButtonPresenter(BattleResultViewModel battleResultViewModel, ViewManagerModel vewManagerModel) {
+    public HealButtonPresenter(BattleResultViewModel battleResultViewModel, ViewManagerModel vewManagerModel, ItemSelectViewModel itemSelectViewModel) {
         this.battleResultViewModel = battleResultViewModel;
         this.viewManagerModel = vewManagerModel;
+        this.itemSelectViewModel = itemSelectViewModel;
     }
 
     @Override
@@ -39,5 +42,14 @@ public class HealButtonPresenter implements HealButtonOutputBoundary {
 
         viewManagerModel.setActiveView(battleResultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareFailView(String error) {
+        // Will still remain in ItemSelectionView
+        ItemSelectState state = itemSelectViewModel.getState();
+        state.setItemError(error);
+        this.itemSelectViewModel.setState(state);
+        itemSelectViewModel.firePropertyChanged();
     }
 }

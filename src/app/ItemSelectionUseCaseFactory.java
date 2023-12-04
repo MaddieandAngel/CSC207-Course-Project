@@ -25,15 +25,15 @@ public class ItemSelectionUseCaseFactory {
     public static ItemSelectionView create(BattleResultViewModel battleResultViewModel, ViewManagerModel viewManagerModel,
                                            HealButtonDataAccessInterface healButtonDataAccessInterface, TurnSelectViewModel turnSelectViewModel,
                                            BackButtonDataAccessInterface backButtonDataAccessInterface, ItemSelectViewModel itemSelectViewModel) {
-        HealButtonController healButtonController = createUserHealButtonUseCase(battleResultViewModel, viewManagerModel, healButtonDataAccessInterface);
+        HealButtonController healButtonController = createUserHealButtonUseCase(battleResultViewModel, viewManagerModel, healButtonDataAccessInterface, itemSelectViewModel);
         BackButtonController backButtonController = createUserBackButtonUseCase(turnSelectViewModel, viewManagerModel, backButtonDataAccessInterface);
 
         return new ItemSelectionView(itemSelectViewModel, healButtonController, backButtonController);
     }
 
     private static HealButtonController createUserHealButtonUseCase(BattleResultViewModel battleResultViewModel, ViewManagerModel viewManagerModel,
-                                                                    HealButtonDataAccessInterface healButtonDataAccessInterface) {
-        HealButtonOutputBoundary healButtonOutputBoundary = new HealButtonPresenter(battleResultViewModel, viewManagerModel);
+                                                                    HealButtonDataAccessInterface healButtonDataAccessInterface, ItemSelectViewModel itemSelectViewModel) {
+        HealButtonOutputBoundary healButtonOutputBoundary = new HealButtonPresenter(battleResultViewModel, viewManagerModel, itemSelectViewModel);
 
         HealButtonInputBoundary healButtonInteractor = new HealButtonInteractor(healButtonOutputBoundary, healButtonDataAccessInterface);
 

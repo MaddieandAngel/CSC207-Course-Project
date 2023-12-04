@@ -8,6 +8,8 @@ public class ItemSelectState {
 
     private int numberOfHeal45;
 
+    private String itemError;
+
     ItemSelectState() {
     }
 
@@ -22,4 +24,8 @@ public class ItemSelectState {
     public int getNumberOfHeal45() { return this.numberOfHeal45;}
 
     public void setNumberOfHeal45(int num) { this.numberOfHeal45 = num;}
+
+    public String getItemError() { return this.itemError;}
+
+    public void setItemError(String error) { this.itemError = error;}
 }

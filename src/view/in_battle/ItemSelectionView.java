@@ -2,6 +2,7 @@ package view.in_battle;
 
 import interface_adapter.AttackSelect.BackButtonController;
 import interface_adapter.ItemSelect.HealButtonController;
+import interface_adapter.ItemSelect.ItemSelectState;
 import interface_adapter.ItemSelect.ItemSelectViewModel;
 
 import javax.swing.*;
@@ -40,24 +41,15 @@ public class ItemSelectionView extends JPanel implements ActionListener, Propert
 
         JPanel healButtons = new JPanel();
         // Creating the button for using heal10
-        heal10 = new JButton("Heal 10% (" + itemSelectViewModel.getState().getNumberOfHeal10() + ")");
-        if (itemSelectViewModel.getState().getNumberOfHeal10() == 0) {
-            heal10.setEnabled(false);
-        }
+        heal10 = new JButton("Heal 10% ");
         healButtons.add(heal10);
 
         // Creating the button for using heal20
-        heal20 = new JButton("Heal 20% (" + itemSelectViewModel.getState().getNumberOfHeal20() + ")");
-        if (itemSelectViewModel.getState().getNumberOfHeal20() == 0) {
-            heal20.setEnabled(false);
-        }
+        heal20 = new JButton("Heal 20% ");
         healButtons.add(heal20);
 
         // Creating the button for using heal45
-        heal45 = new JButton("Heal 45% (" + itemSelectViewModel.getState().getNumberOfHeal45() + ")");
-        if (itemSelectViewModel.getState().getNumberOfHeal45() == 0) {
-            heal45.setEnabled(false);
-        }
+        heal45 = new JButton("Heal 45% ");
         healButtons.add(heal45);
 
         // Creating the back button
@@ -156,7 +148,14 @@ public class ItemSelectionView extends JPanel implements ActionListener, Propert
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent e) {}
+    public void propertyChange(PropertyChangeEvent e) {
+        ItemSelectState state = itemSelectViewModel.getState();
+        if (state.getItemError() != null) {
+            JOptionPane.showMessageDialog(this, state.getItemError());
+            state.setItemError(null);
+            itemSelectViewModel.setState(state);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {}
