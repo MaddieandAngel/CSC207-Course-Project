@@ -1,5 +1,6 @@
 package use_case.movement;
 
+import entity.BagAndItems.*;
 import entity.Enemy;
 import entity.EnemyFactory;
 import interface_adapter.APIAccessInterface;
@@ -69,7 +70,24 @@ public class MovementInteractor implements MovementInputBoundary {
         else if (exploreDataAccessObject.checkForItem()){
             System.out.println("item"); //TODO: delete later
             //TODO: Generate item for output data
-            movementPresenter.prepareItemCollectionView(movementOutputData);
+            Random r = new Random();
+            int randomItem = r.nextInt(100);
+            if (randomItem < 40){
+                Item item = new healingPotion10();
+                movementPresenter.prepareItemCollectionView(item);
+            }
+            else if (randomItem <70){
+                Item item = new healingPotion20();
+                movementPresenter.prepareItemCollectionView(item);
+            }
+            else if (randomItem < 90){
+                Item item = new healingPotion45();
+                movementPresenter.prepareItemCollectionView(item);
+            }
+            else{
+                Item item= new revivePotion();
+                movementPresenter.prepareItemCollectionView(item);
+            }
         }
         else {
             movementPresenter.prepareEmptyRoomView(movementOutputData);

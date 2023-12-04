@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.BagInExplore.ExploreBagController;
 import interface_adapter.explore.MovementButtonController;
 import interface_adapter.explore.SearchButtonController;
 import interface_adapter.explore.ExploreViewModel;
@@ -20,20 +21,23 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
 
     private final MovementButtonController movementButtonController;
     private final SearchButtonController searchButtonController;
+    private final ExploreBagController exploreBagController;
 
     private final JButton north;
     private final JButton east;
     private final JButton south;
     private final JButton west;
     private final JButton search;
+    private final JButton bag;
 
     private final JLabel playerStats;
 
     public ExploreView(MovementButtonController moveControl, SearchButtonController searchControl,
-                       ExploreViewModel exploreViewModel){
+                       ExploreViewModel exploreViewModel, ExploreBagController exploreBagController){
         this.movementButtonController = moveControl;
         this.searchButtonController = searchControl;
         this.exploreViewModel = exploreViewModel;
+        this.exploreBagController = exploreBagController;
         exploreViewModel.addPropertyChangeListener(this);
 
         JPanel textBox = new JPanel();
@@ -55,6 +59,8 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         buttons.add(west);
         search = new JButton(exploreViewModel.SEARCH_LABEL);
         buttons.add(search);
+        bag = new JButton(exploreViewModel.BAG);
+        buttons.add(bag);
 
         buttons.setLayout(new GridLayout(6, 1, 0, 5));
         textBox.setLayout(new GridBagLayout());
@@ -70,6 +76,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setBorder(buttonBorders);
         west.setBorder(buttonBorders);
         search.setBorder(buttonBorders);
+        bag.setBorder(buttonBorders);
 
         //Set background colours
         Color bg = Color.getHSBColor(0, 0, 0.1F);
@@ -83,6 +90,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setBackground(bg);
         west.setBackground(bg);
         search.setBackground(bg);
+        bag.setBackground(bg);
 
         //Set text colours
         Color text = Color.getHSBColor(0, 0, 0.9F);
@@ -93,6 +101,7 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
         south.setForeground(text);
         west.setForeground(text);
         search.setForeground(text);
+        bag.setForeground(text);
 
         this.setLayout(new GridBagLayout());
         this.add(playerStatsPanel, new GridBagConstraints(2, 0, this.getWidth() / 3, this.getHeight() / 5,
@@ -164,6 +173,18 @@ public class ExploreView extends JPanel implements ActionListener, PropertyChang
                     }
                 }
         );
+        bag.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e_search) {
+                        if (e_search.getSource().equals(bag)){
+                            exploreBagController.execute();
+                        }
+                    }
+                }
+        );
+
     }
 
     @Override

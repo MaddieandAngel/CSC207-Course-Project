@@ -12,7 +12,10 @@ public class ExploreViewModel extends ViewModel {
     public final String SOUTH_MOVE_LABEL = "Go South";
     public final String WEST_MOVE_LABEL = "Go West";
     public final String SEARCH_LABEL = "Search Room";
+
+    public final String BAG = "Bag";
     public String TEXTBOX_TEXT = "There's nothing here.";
+
 
     private ExploreState state = new ExploreState();
 

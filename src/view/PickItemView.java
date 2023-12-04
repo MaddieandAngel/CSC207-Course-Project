@@ -1,12 +1,16 @@
 package view;
 
+import data_access.InBattleDataAccessObject;
 import entity.ActivePlayer;
 import entity.BagAndItems.*;
+import entity.Player;
 import interface_adapter.DropToPick.DropToPickController;
 import interface_adapter.PickUpItem.PickUpItemController;
+import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,73 +24,79 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
     private final PickUpItemViewModel pickUpItemViewModel;
     private final PickUpItemController pickUpItemController;
     private final DropToPickController dropToPickController;
-    private final ActivePlayer player;
+    private final Player player;
     private final JButton PickUpItem;
     private final JButton DropAnItem;
-    private final JButton Drop;
-    private final Item item;
+    private final JButton Back;
+    private Item item;
+    private JLabel itemFind;
 
-    private final JLabel ItemInfo;
-    private final JLabel Notice;
 
-    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, ActivePlayer player) {
+    public PickItemView(PickUpItemViewModel pickUpItemViewModel, PickUpItemController pickUpItemController, DropToPickController dropToPickController, InBattleDataAccessObject inBattleDataAccessObject) {
         this.pickUpItemViewModel = pickUpItemViewModel;
         this.pickUpItemController = pickUpItemController;
         this.dropToPickController = dropToPickController;
-        this.player = player;
-        Random r = new Random();
-        int random = r.nextInt(100);
-        if (random < 40){
-            this.item = new healingPotion10();
-        }
-        else if (random <70){
-            this.item = new healingPotion20();
-        }
-        else if (random < 90){
-            this.item = new healingPotion45();
-        }
-        else{
-            this.item = new revivePotion();
-        }
+        this.player = inBattleDataAccessObject.getPlayer();
 
-
-
-        JPanel buttons = new JPanel();
 
         this.PickUpItem = new JButton(pickUpItemViewModel.PICK);
         this.DropAnItem = new JButton(pickUpItemViewModel.DROP_FROM_BAG);
-        this.Drop = new JButton(pickUpItemViewModel.DROP);
+        this.Back = new JButton(pickUpItemViewModel.BACK);
 
-        buttons.add(PickUpItem);
-        buttons.add(DropAnItem);
-        buttons.add(Drop);
-        ItemInfo = new JLabel("You found a " + item.getName() + "! Do you want to pick it up?");
-        Notice = new JLabel("*If your bag is full, you have to drop an item in order to pick up a new one(click Drop From Bag)");
+            JPanel buttons = new JPanel();
+
+            buttons.add(PickUpItem);
+            buttons.add(DropAnItem);
+            buttons.add(Back);
+
+        JLabel Notice = new JLabel("*If your bag is full, you have to drop an item in order to pick up a new one(click Drop From Bag)");
         JLabel title = new JLabel(pickUpItemViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        Color bg = Color.getHSBColor(0, 0, 0.1F);
+        this.setBackground(bg);
+        buttons.setBackground(bg);
+        buttons.setLayout(new GridLayout(3, 1, 0, 5));
+        PickUpItem.setBackground(bg);
+        DropAnItem.setBackground(bg);
+        Back.setBackground(bg);
+        Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
+        PickUpItem.setBorder(buttonBorders);
+        DropAnItem.setBorder(buttonBorders);
+        Back.setBorder(buttonBorders);
+
+        Color text = Color.getHSBColor(0, 0, 0.9F);
+        PickUpItem.setForeground(text);
+        DropAnItem.setForeground(text);
+        Back.setForeground(text);
+        Notice.setForeground(text);
+        title.setForeground(text);
+
+        PickUpItem.setFont(new Font("Verdana", Font.PLAIN, 18));
+        DropAnItem.setFont(new Font("Verdana", Font.PLAIN, 18));
+        Back.setFont(new Font("Verdana", Font.PLAIN, 18));
+
         this.add(title);
         this.add(buttons);
-        this.add(ItemInfo);
         this.add(Notice);
         DropAnItem.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(DropAnItem)){
-                            dropToPickController.execute(player);
+                            dropToPickController.execute();
                         }
 
                     }
                 }
         );
-        Drop.addActionListener(
+        Back.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(Drop)){
-
+                        if (e.getSource().equals(Back)){
+                            pickUpItemController.back();
                         }
 
                     }
@@ -97,10 +107,9 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(PickUpItem)){
-                            pickUpItemController.execute(player,item);
+                            item = pickUpItemViewModel.getState().getItem();
+                            pickUpItemController.execute(item);
                         }
-
-
                     }
                 }
         );
@@ -113,6 +122,5 @@ public class PickItemView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
     }
 }

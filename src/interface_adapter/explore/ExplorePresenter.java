@@ -1,5 +1,7 @@
 package interface_adapter.explore;
 
+import entity.BagAndItems.Item;
+import interface_adapter.PickUpItem.PickUpItemState;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.stairs.StairsState;
@@ -74,8 +76,13 @@ public class ExplorePresenter implements MovementOutputBoundary {
     }
 
     @Override
-    public void prepareItemCollectionView(MovementOutputData movementOutputData) {
+    public void prepareItemCollectionView(Item item) {
         //TODO: Everything related to moving to the item collection view
+        PickUpItemState pickUpItemState = itemCollectViewModel.getState();
+        pickUpItemState.setItem(item);
+        itemCollectViewModel.setState(pickUpItemState);
+        viewManagerModel.setActiveView(itemCollectViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
 }

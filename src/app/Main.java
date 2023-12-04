@@ -1,6 +1,8 @@
 package app;
 
 import data_access.*;
+import entity.*;
+import interface_adapter.AttackSelect.AttackSelectViewModel;
 import entity.ActivePlayerFactory;
 import entity.CurrentFloorFactory;
 import interface_adapter.AttackSelect.AttackSelectViewModel;
@@ -17,6 +19,9 @@ import interface_adapter.WinBattle.WinBattleViewModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
+import use_case.DropToPickPackage.DropToPickPackageDataAccessInterface;
+import use_case.PickUpItem.PickUpItemDataAccessInterface;
+import view.*;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import view.*;
@@ -60,9 +65,11 @@ public class Main {
         TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
         AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
         BattleResultViewModel battleResultViewModel = new BattleResultViewModel();
-        DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
+
+        UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         DropToPickViewModel dropToPickViewModel = new DropToPickViewModel();
         DropToPickPackageViewModel dropToPickPackageViewModel = new DropToPickPackageViewModel();
+        DropItemsViewModel dropItemsViewModel = new DropItemsViewModel();
         PickUpItemViewModel pickUpItemViewModel = new PickUpItemViewModel();
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         GameOverViewModel gameOverViewModel = new GameOverViewModel();
@@ -70,20 +77,22 @@ public class Main {
 
         //Create the Data Access Objects
         APIAccess apiAccess = new APIAccess();
+        ActivePlayerFactory activePlayerFactory = new ActivePlayerFactory();
         EnemyBehaviourInterface enemyBehaviour = new EnemyBehaviour(apiAccess);
         ExploreDataAccessObject exploreDataAccessObject = new ExploreDataAccessObject(new CurrentFloorFactory());
-        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(new ActivePlayerFactory(), apiAccess, enemyBehaviour);
-        DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
-        DropToPickPackageDataAccessObject dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
-        PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+        InBattleDataAccessObject inBattleDataAccessObject = new InBattleDataAccessObject(activePlayerFactory, apiAccess, enemyBehaviour);
         UseItemDataAccessObject useItemDataAccessObject = new UseItemDataAccessObject();
+        DropItemDataAccessObject dropItemDataAccessObject = new DropItemDataAccessObject();
+        PickUpItemDataAccessObject pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+        DropToPickPackageDataAccessInterface dropToPickPackageDataAccessObject = new DropToPickPackageDataAccessObject();
 
         //Create the Views using their UseCaseFactories
         TitleScreenView titleScreenView = TitleScreenUseCaseFactory.create(viewManagerModel, titleScreenViewModel,
                 exploreViewModel, exploreDataAccessObject);
         views.add(titleScreenView, titleScreenView.viewName);
         ExploreView exploreView = ExploreUseCaseFactory.create(viewManagerModel, exploreViewModel,turnSelectViewModel, stairsViewModel,
-                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccess);
+                pickUpItemViewModel, exploreDataAccessObject, inBattleDataAccessObject, enemyBehaviour, apiAccess, useItemsViewModel);
+
         views.add(exploreView, exploreView.viewName);
         StairsView stairsView = StairsUseCaseFactory.create(viewManagerModel, exploreViewModel, stairsViewModel, exploreDataAccessObject,
                 exploreDataAccessObject);
@@ -91,6 +100,18 @@ public class Main {
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
 //        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
 //        views.add(turnSelectView, turnSelectView.viewName);
+        PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, pickUpItemViewModel,
+                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel, inBattleDataAccessObject);
+                views.add(pickItemView, pickItemView.viewName);
+        PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, inBattleDataAccessObject,
+                useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
+                views.add(packageView, packageView.viewName);
+        DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel,
+                dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject,
+                useItemsViewModel, inBattleDataAccessObject);
+                views.add(dropToPickPackageView, dropToPickPackageView.viewName);
+
+        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
                 turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
         views.add(battleResultView, battleResultView.viewName);
@@ -102,8 +123,12 @@ public class Main {
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();
-
         application.setSize(800,500);
         application.setVisible(true);
+
+
+
+
+
     }
 }
