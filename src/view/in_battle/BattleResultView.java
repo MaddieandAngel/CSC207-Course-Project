@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class BattleResultView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "battle result";
@@ -105,7 +106,11 @@ public class BattleResultView extends JPanel implements ActionListener, Property
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        continueController.execute();
+                        try {
+                            continueController.execute();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
         );

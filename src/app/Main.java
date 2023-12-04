@@ -11,11 +11,13 @@ import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
+import interface_adapter.GameOver.GameOverViewModel;
 import interface_adapter.ItemSelect.ItemSelectViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.WinBattle.WinBattleViewModel;
 import interface_adapter.explore.ExploreViewModel;
 import interface_adapter.stairs.StairsViewModel;
 import interface_adapter.turn_select.TurnSelectViewModel;
@@ -63,6 +65,8 @@ public class Main {
         AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
         ItemSelectViewModel itemSelectViewModel = new ItemSelectViewModel();
         BattleResultViewModel battleResultViewModel = new BattleResultViewModel();
+        GameOverViewModel gameOverViewModel = new GameOverViewModel();
+        WinBattleViewModel winBattleViewModel = new WinBattleViewModel();
 
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
         DropToPickViewModel dropToPickViewModel = new DropToPickViewModel();
@@ -108,7 +112,8 @@ public class Main {
                 dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject,
                 useItemsViewModel, inBattleDataAccessObject);
                 views.add(dropToPickPackageView, dropToPickPackageView.viewName);
-        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel);
+        BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
+                turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
         views.add(battleResultView, battleResultView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);

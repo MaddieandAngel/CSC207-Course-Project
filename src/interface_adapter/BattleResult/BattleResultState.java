@@ -34,6 +34,8 @@ public class BattleResultState {
 
     private String enemyName;
 
+    private int enemyCurrentHealth;
+
     public BattleResultState(){}
 
     public int getPlayerCurrentHealth() { return this.playerCurrentHealth;}
@@ -99,4 +101,8 @@ public class BattleResultState {
     public String getEnemyName() { return this.enemyName;}
 
     public void setEnemyName(String name) { this.enemyName = name;}
+
+    public int getEnemyCurrentHealth(){return this.enemyCurrentHealth;}
+
+    public void setEnemyCurrentHealth(int enemyCurrentHealth){this.enemyCurrentHealth = enemyCurrentHealth;}
 }
