@@ -15,7 +15,9 @@ import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.ItemsButton.HealButton.HealButtonDataAccessInterface;
 import use_case.ItemsButton.ItemsButtonDataAccessInterface;
 
-public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface, AttackButtonDataAccessInterface, DrawButtonDataAccessInterface, ItemsButtonDataAccessInterface, HealButtonDataAccessInterface, DefendButtonDataAccessInterface {
+public class InBattleDataAccessObject implements GenerateEnemyDataAccessInterface, CardButtonDataAccessInterface, BackButtonDataAccessInterface,
+        AttackButtonDataAccessInterface, DrawButtonDataAccessInterface, ItemsButtonDataAccessInterface, HealButtonDataAccessInterface,
+        DefendButtonDataAccessInterface {
 
     private Player player;
     private Enemy enemy;

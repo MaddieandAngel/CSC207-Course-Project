@@ -12,6 +12,9 @@ public class ExploreButtonVisibility {
         exploreState.setEastVisible(movementOutputData.getDirections().contains("E"));
         exploreState.setSouthVisible(movementOutputData.getDirections().contains("S"));
         exploreState.setWestVisible(movementOutputData.getDirections().contains("W"));
+        exploreState.setSearchVisible(movementOutputData.isSearchable());
+
+        System.out.println(movementOutputData.getDirections()); //TODO: delete later
 
         return exploreState;
     }

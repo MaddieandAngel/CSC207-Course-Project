@@ -3,44 +3,32 @@ package entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MapBuilder {
+public class MapBuilder implements MapBuilderInterface{
 
     int columns;
     int rows;
+    ArrayList<Room> map;
     Random randomizer;
 
-    MapBuilder(int length, int width){
-        this.columns = length;
-        this.rows = width;
+    public MapBuilder(int columns, int rows){
+        this.columns = columns;
+        this.rows = rows;
+        map = new ArrayList<>(columns * rows);
         randomizer = new Random();
     }
 
-    public ArrayList<Room> buildMapLayout(){
-        ArrayList<Room> map = new ArrayList<>(columns * rows);
-
-        buildFirstRow(map);
-
-        for (int row_num = 1; row_num < rows - 1; row_num++){
-            buildOtherRows(map, row_num * columns);
-        }
-
-        buildFinalRow(map, (rows - 1) * columns);
-
-        return map;
-    }
-
-    public int assignAll(ArrayList<Room> map){
+    public int assignAll(){
         int enemyCount = randomizer.nextInt(1, (columns * rows / 3) + 1);
         int itemCount = randomizer.nextInt(0, (columns * rows / 3) + 1);
 
-        int stairLocation = assignStairs(map);
-        assignEnemies(map, enemyCount);
-        assignItems(map, itemCount);
+        int stairLocation = assignStairs();
+        assignEnemies(enemyCount);
+        assignItems(itemCount);
 
-        return assignStartingRoom(map, stairLocation);
+        return assignStartingRoom(stairLocation);
     }
 
-    private void buildFirstRow(ArrayList<Room> map){ // rowIndex = 0
+    public void buildFirstRow(){ // rowIndex = 0
         //First room of first row, always has nothing to the west or north
         map.add(new Room());
         map.get(0).setHasEast(randomizer.nextBoolean());
@@ -59,7 +47,7 @@ public class MapBuilder {
         map.get(columns - 1).setHasSouth(randomizer.nextBoolean());
     }
 
-    private void buildOtherRows(ArrayList<Room> map, int startIndex){
+    public void buildOtherRows(int startIndex){
         assert map.size() == startIndex;
         //First room of new row, always has nothing to the west
         map.add(new Room());
@@ -82,7 +70,7 @@ public class MapBuilder {
         map.get(startIndex + columns - 1).setHasSouth(randomizer.nextBoolean());
     }
 
-    private void buildFinalRow(ArrayList<Room> map, int startIndex){
+    public void buildFinalRow(int startIndex){
         assert map.size() == startIndex;
         //First room of final row, always has nothing to the west or south
         map.add(new Room());
@@ -102,19 +90,19 @@ public class MapBuilder {
         map.get(startIndex + columns - 1).setHasWest(map.get(startIndex + columns - 2).isHasEast());
     }
 
-    private int assignStairs(ArrayList<Room> map){
+    private int assignStairs(){
         int stairLocation = randomizer.nextInt(0, map.size());
-        while (isRoomFilled(map, stairLocation)){
+        while (isRoomFilled(stairLocation)){
             stairLocation = randomizer.nextInt(0, map.size());
         }
         map.get(stairLocation).setHasStairs(true);
         return stairLocation;
     }
 
-    private void assignEnemies(ArrayList<Room> map, int enemyCount){
+    private void assignEnemies(int enemyCount){
         for (int numAdded = 0; numAdded < enemyCount; numAdded++){
             int enemyLocation = randomizer.nextInt(0, map.size());
-            while (isRoomFilled(map, enemyLocation)){
+            while (isRoomFilled(enemyLocation)){
                 // Re-rolls if selected room is already occupied by something
                 enemyLocation = randomizer.nextInt(0, map.size());
             }
@@ -122,10 +110,10 @@ public class MapBuilder {
         }
     }
 
-    private void assignItems(ArrayList<Room> map, int itemCount){
+    private void assignItems(int itemCount){
         for (int numAdded = 0; numAdded < itemCount; numAdded++){
             int itemLocation = randomizer.nextInt(0, map.size());
-            while (isRoomFilled(map, itemLocation)){
+            while (isRoomFilled(itemLocation)){
                 // Re-rolls if selected room is already occupied by something
                 itemLocation = randomizer.nextInt(0, map.size());
             }
@@ -133,7 +121,7 @@ public class MapBuilder {
         }
     }
 
-    private int assignStartingRoom(ArrayList<Room> map, int stairLocation){
+    private int assignStartingRoom(int stairLocation){
         ArrayList<Integer> possibleStartingRooms = getConnectedRooms(map, stairLocation, new ArrayList<>());
 
         if (possibleStartingRooms.size() < 2){ //Only possible room to start in is the stairs room (bad)
@@ -144,7 +132,7 @@ public class MapBuilder {
         }
     }
 
-    private boolean isRoomFilled(ArrayList<Room> map, int roomIndex){
+    private boolean isRoomFilled(int roomIndex){
         return (map.get(roomIndex).isHasStairs() || map.get(roomIndex).isHasEnemy() || map.get(roomIndex).isHasItem());
     }
 
@@ -171,6 +159,10 @@ public class MapBuilder {
             }
         }
         return connectedRooms;
+    }
+
+    public ArrayList<Room> getMap(){
+        return map;
     }
 
 }
