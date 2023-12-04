@@ -11,6 +11,7 @@ import interface_adapter.BattleResult.BattleResultViewModel;
 import interface_adapter.DropItems.DropItemsViewModel;
 import interface_adapter.DropToPick.DropToPickViewModel;
 import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
+import interface_adapter.ItemSelect.ItemSelectViewModel;
 import interface_adapter.PickUpItem.PickUpItemViewModel;
 import interface_adapter.TitleScreen.TitleScreenViewModel;
 import interface_adapter.UseItems.UseItemsViewModel;
@@ -60,6 +61,7 @@ public class Main {
         StairsViewModel stairsViewModel = new StairsViewModel();
         TitleScreenViewModel titleScreenViewModel = new TitleScreenViewModel();
         AttackSelectViewModel attackSelectViewModel = new AttackSelectViewModel();
+        ItemSelectViewModel itemSelectViewModel = new ItemSelectViewModel();
         BattleResultViewModel battleResultViewModel = new BattleResultViewModel();
 
         UseItemsViewModel useItemsViewModel = new UseItemsViewModel();
@@ -91,8 +93,10 @@ public class Main {
                 exploreDataAccessObject);
         views.add(stairsView, stairsView.viewName);
         //Commented out for now because the TurnSelectUseCaseFactory doesn't fully work yet
-//        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel);
-//        views.add(turnSelectView, turnSelectView.viewName);
+        TurnSelectView turnSelectView = TurnSelectUseCaseFactory.create(viewManagerModel, attackSelectViewModel, turnSelectViewModel,
+                battleResultViewModel, itemSelectViewModel, inBattleDataAccessObject, inBattleDataAccessObject, inBattleDataAccessObject,
+                inBattleDataAccessObject);
+        views.add(turnSelectView, turnSelectView.viewName);
         PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, pickUpItemViewModel,
                 pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel, inBattleDataAccessObject);
                 views.add(pickItemView, pickItemView.viewName);
