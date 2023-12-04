@@ -44,7 +44,8 @@ public class MovementInteractor implements MovementInputBoundary {
         }
 
         String directions = exploreDataAccessObject.getDirections();
-        MovementOutputData movementOutputData = new MovementOutputData(directions);
+        boolean searchable = !(exploreDataAccessObject.getHasBeenSearched());
+        MovementOutputData movementOutputData = new MovementOutputData(directions, searchable);
 
         if (exploreDataAccessObject.checkForStairs()){
             movementPresenter.prepareStairsView();

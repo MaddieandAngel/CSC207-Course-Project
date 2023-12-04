@@ -16,7 +16,8 @@ public class StayOnFloorInteractor implements StayOnFloorInputBoundary{
     @Override
     public void execute() {
         String directions = exploreDataAccessObject.getDirections();
-        MovementOutputData movementOutputData = new MovementOutputData(directions);
+        boolean searchable = !(exploreDataAccessObject.getHasBeenSearched());
+        MovementOutputData movementOutputData = new MovementOutputData(directions, searchable);
 
         stayOnFloorPresenter.prepareEmptyRoomView(movementOutputData);
     }

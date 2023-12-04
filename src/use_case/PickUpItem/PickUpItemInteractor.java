@@ -23,7 +23,10 @@ public class PickUpItemInteractor implements PickUpItemInputBoundary{
         boolean success = pickUpItemDataAccessObject.addItem(inBattleDataAccessObject.getPlayer().getBag(), pickUpItemInputData.item);
         PickUpItemOutputData pickUpItemOutputData = new PickUpItemOutputData(inBattleDataAccessObject.getPlayer().getBag());
 
-        MovementOutputData movementOutputData = new MovementOutputData(exploreDataAccessObject.getDirections());
+        String directions = exploreDataAccessObject.getDirections();
+        boolean searchable = !(exploreDataAccessObject.getHasBeenSearched());
+        MovementOutputData movementOutputData = new MovementOutputData(directions, searchable);
+
         if (success){
             pickUpItemPresenter.prepareSuccessView(pickUpItemOutputData, movementOutputData);
         }

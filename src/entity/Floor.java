@@ -13,6 +13,8 @@ public interface Floor {
     String getDirections();
     void removeEnemyFromRoom();
     void removeItemFromRoom();
+    void setHasBeenSearched();
+    boolean getHasBeenSearched();
 
     ArrayList<Room> getMap(); //Exclusively needed for testing
 }

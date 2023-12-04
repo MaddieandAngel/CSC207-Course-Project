@@ -70,6 +70,14 @@ public class CurrentFloor implements Floor{
         map.get(currentRoom).setHasItem(false);
     }
 
+    public void setHasBeenSearched(){
+        map.get(currentRoom).setHasBeenSearched(true);
+    }
+
+    public boolean getHasBeenSearched(){
+        return map.get(currentRoom).isHasBeenSearched();
+    }
+
     public ArrayList<Room> getMap() { //Exclusively needed for testing
         return map;
     }

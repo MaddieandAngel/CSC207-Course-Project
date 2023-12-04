@@ -102,7 +102,7 @@ public class Main {
                 exploreDataAccessObject);
                 views.add(pickItemView, pickItemView.viewName);
         PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, inBattleDataAccessObject,
-                useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);
+                useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel, exploreDataAccessObject);
                 views.add(packageView, packageView.viewName);
         DropToPickPackageView dropToPickPackageView = DropToPickPackageUseCaseFactory.create(viewManagerModel,
                 dropToPickPackageViewModel, dropToPickViewModel, pickUpItemViewModel, dropToPickPackageDataAccessObject,

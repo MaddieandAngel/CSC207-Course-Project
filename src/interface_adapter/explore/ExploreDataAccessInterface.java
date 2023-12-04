@@ -13,4 +13,6 @@ public interface ExploreDataAccessInterface {
     int getFloorLevel();
     void removeEnemyFromRoom();
     void removeItemFromRoom();
+    void setHasBeenSearched();
+    boolean getHasBeenSearched();
 }

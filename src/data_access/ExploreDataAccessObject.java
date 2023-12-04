@@ -81,4 +81,12 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
     public void removeItemFromRoom(){
         currentFloor.removeItemFromRoom();
     }
+
+    public void setHasBeenSearched(){
+        currentFloor.setHasBeenSearched();
+    }
+
+    public boolean getHasBeenSearched(){
+        return currentFloor.getHasBeenSearched();
+    }
 }
