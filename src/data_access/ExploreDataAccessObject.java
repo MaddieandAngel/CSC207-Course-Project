@@ -66,7 +66,19 @@ public class ExploreDataAccessObject implements ExploreDataAccessInterface, Stai
         floorLevel++;
         return getDirections();
     }
+
+    @Override
     public int getFloorLevel(){
         return floorLevel;
+    }
+
+    @Override
+    public void removeEnemyFromRoom(){
+        currentFloor.removeEnemyFromRoom();
+    }
+
+    @Override
+    public void removeItemFromRoom(){
+        currentFloor.removeItemFromRoom();
     }
 }

@@ -98,7 +98,8 @@ public class Main {
                 inBattleDataAccessObject);
         views.add(turnSelectView, turnSelectView.viewName);
         PickItemView pickItemView = ItemCollectionUseCaseFactory.create(viewManagerModel, pickUpItemViewModel,
-                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel, inBattleDataAccessObject);
+                pickUpItemDataAccessObject, dropToPickPackageViewModel, exploreViewModel, useItemsViewModel, inBattleDataAccessObject,
+                exploreDataAccessObject);
                 views.add(pickItemView, pickItemView.viewName);
         PackageView packageView = UseItemUseCaseFactory.create(viewManagerModel, useItemsViewModel, inBattleDataAccessObject,
                 useItemDataAccessObject, dropItemsViewModel, dropItemDataAccessObject, exploreViewModel);

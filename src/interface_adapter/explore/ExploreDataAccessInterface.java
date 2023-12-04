@@ -11,4 +11,6 @@ public interface ExploreDataAccessInterface {
     boolean checkForItem();
     String getDirections();
     int getFloorLevel();
+    void removeEnemyFromRoom();
+    void removeItemFromRoom();
 }

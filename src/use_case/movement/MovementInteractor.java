@@ -51,6 +51,10 @@ public class MovementInteractor implements MovementInputBoundary {
         }
         else if (exploreDataAccessObject.checkForEnemy()){
             System.out.println("enemy"); //TODO: delete later
+
+            //Remove enemy from the room, so that it can't be encountered again
+            exploreDataAccessObject.removeEnemyFromRoom();
+
             // Generates a random enemy:
             Random randomizer = new Random();
             int floorLevel = exploreDataAccessObject.getFloorLevel();
@@ -69,7 +73,11 @@ public class MovementInteractor implements MovementInputBoundary {
         }
         else if (exploreDataAccessObject.checkForItem()){
             System.out.println("item"); //TODO: delete later
-            //TODO: Generate item for output data
+
+            //Remove item from the room, so that it can't be found again if you re-enter the room
+            exploreDataAccessObject.removeItemFromRoom();
+
+            //Generates a random item
             Random r = new Random();
             int randomItem = r.nextInt(100);
             if (randomItem < 40){

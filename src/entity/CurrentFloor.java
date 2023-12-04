@@ -62,6 +62,14 @@ public class CurrentFloor implements Floor{
         return directions;
     }
 
+    public void removeEnemyFromRoom(){
+        map.get(currentRoom).setHasEnemy(false);
+    }
+
+    public void removeItemFromRoom(){
+        map.get(currentRoom).setHasItem(false);
+    }
+
     public ArrayList<Room> getMap() { //Exclusively needed for testing
         return map;
     }

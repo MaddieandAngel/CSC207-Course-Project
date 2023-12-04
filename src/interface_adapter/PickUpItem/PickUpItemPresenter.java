@@ -7,9 +7,12 @@ import interface_adapter.DropToPickPackage.DropToPickPackageViewModel;
 import interface_adapter.UseItems.UseItemState;
 import interface_adapter.UseItems.UseItemsViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.explore.ExploreButtonVisibility;
+import interface_adapter.explore.ExploreState;
 import interface_adapter.explore.ExploreViewModel;
 import use_case.PickUpItem.PickUpItemOutputBoundary;
 import use_case.PickUpItem.PickUpItemOutputData;
+import use_case.movement.MovementOutputData;
 
 import javax.swing.*;
 
@@ -29,7 +32,7 @@ public class PickUpItemPresenter implements PickUpItemOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData) {
+    public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData, MovementOutputData movementOutputData) {
         JOptionPane.showMessageDialog(null, "Successfully picked the item");
 
         Bag bag = pickUpItemOutputData.getBag();
@@ -44,7 +47,9 @@ public class PickUpItemPresenter implements PickUpItemOutputBoundary {
         useItemsViewModel.setState(useItemState);
         useItemsViewModel.firePropertyChanged();
 
-
+        ExploreState exploreState = exploreViewModel.getState();
+        exploreViewModel.setState(ExploreButtonVisibility.setButtonVisibility(exploreState, movementOutputData));
+        exploreViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView(exploreViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

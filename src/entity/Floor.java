@@ -11,6 +11,8 @@ public interface Floor {
     boolean checkForItem();
     boolean checkForStairs();
     String getDirections();
+    void removeEnemyFromRoom();
+    void removeItemFromRoom();
 
     ArrayList<Room> getMap(); //Exclusively needed for testing
 }
