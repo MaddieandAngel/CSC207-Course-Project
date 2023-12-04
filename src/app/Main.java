@@ -26,7 +26,9 @@ import use_case.PickUpItem.PickUpItemDataAccessInterface;
 import view.*;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import view.in_battle.AttackSelectionView;
 import view.in_battle.BattleResultView;
+import view.in_battle.ItemSelectionView;
 import view.in_battle.TurnSelectView;
 
 import javax.swing.*;
@@ -115,6 +117,12 @@ public class Main {
         BattleResultView battleResultView = BattleResultUseCaseFactory.create(viewManagerModel, battleResultViewModel,
                 turnSelectViewModel, gameOverViewModel, winBattleViewModel, inBattleDataAccessObject);
         views.add(battleResultView, battleResultView.viewName);
+        AttackSelectionView attackSelectionView = AttackSelectionUseCaseFactory.create(viewManagerModel, attackSelectViewModel,
+                battleResultViewModel, turnSelectViewModel, inBattleDataAccessObject, inBattleDataAccessObject);
+        views.add(attackSelectionView, attackSelectionView.viewName);
+        ItemSelectionView itemSelectionView = ItemSelectionUseCaseFactory.create(battleResultViewModel, viewManagerModel,
+                inBattleDataAccessObject, turnSelectViewModel, inBattleDataAccessObject, itemSelectViewModel);
+        views.add(itemSelectionView, itemSelectionView.viewName);
 
         viewManagerModel.setActiveView(titleScreenView.viewName);
         viewManagerModel.firePropertyChanged();

@@ -43,14 +43,17 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         attackSelectViewModel.addPropertyChangeListener(this);
 
         String[] playerHand = attackSelectViewModel.getState().getHand();
-        int handSize = playerHand.length;
+        int handSize = 0;
+        if (playerHand != null) {
+            handSize = playerHand.length;
+        }
 
         JPanel cardButtons = new JPanel();
         // Creating the button for the first card
         if (handSize >= 1) {
             card1 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard1Image()));
         } else {
-            card1 = new JButton();
+            card1 = new JButton("No Card");
             card1.setEnabled(false);
         }
         cardButtons.add(card1);
@@ -59,7 +62,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         if (handSize >= 2) {
             card2 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard2Image()));
         } else {
-            card2 = new JButton();
+            card2 = new JButton("No Card");
             card2.setEnabled(false);
         }
         cardButtons.add(card2);
@@ -68,7 +71,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         if (handSize >= 3) {
             card3 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard3Image()));
         } else {
-            card3 = new JButton();
+            card3 = new JButton("No Card");
             card3.setEnabled(false);
         }
         cardButtons.add(card3);
@@ -77,7 +80,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         if (handSize >= 4) {
             card4 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard4Image()));
         } else {
-            card4 = new JButton();
+            card4 = new JButton("No Card");
             card4.setEnabled(false);
         }
         cardButtons.add(card4);
@@ -86,7 +89,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         if (handSize == 5) {
             card5 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard5Image()));
         } else {
-            card5 = new JButton();
+            card5 = new JButton("No Card");
             card5.setEnabled(false);
         }
         cardButtons.add(card5);
