@@ -11,8 +11,11 @@ public class DefendButtonOutputData {
     private char enemyCardSuit;
     private String enemyCardImage;
     private String enemyName;
+    private int enemyCardValueInt;
 
-    public DefendButtonOutputData(int playerCurrentHealth, int playerMaxHealth, int playerLevel, String enemyAction, boolean revivePotionUsed, int damageToPlayer, String enemyCardValue, char enemyCardSuit, String enemyCardImage, String enemyName){
+    public DefendButtonOutputData(int playerCurrentHealth, int playerMaxHealth, int playerLevel, String enemyAction,
+                                  boolean revivePotionUsed, int damageToPlayer, String enemyCardValue, char enemyCardSuit,
+                                  String enemyCardImage, String enemyName, int enemyCardValueInt){
 
         this.playerCurrentHealth = playerCurrentHealth;
         this.playerMaxHealth = playerMaxHealth;
@@ -24,6 +27,7 @@ public class DefendButtonOutputData {
         this.enemyCardSuit = enemyCardSuit;
         this.enemyCardImage = enemyCardImage;
         this.enemyName = enemyName;
+        this.enemyCardValueInt = enemyCardValueInt;
     }
 
     public int getPlayerCurrentHealth() {
@@ -62,5 +66,9 @@ public class DefendButtonOutputData {
     }
     public String getEnemyName() {
         return enemyName;
+    }
+
+    public int getEnemyCardValueInt() {
+        return enemyCardValueInt;
     }
 }
