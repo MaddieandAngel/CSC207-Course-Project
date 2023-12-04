@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class ItemSelectViewModel extends ViewModel {
 
-    private ItemSelectState state;
+    private ItemSelectState state = new ItemSelectState();
 
     public ItemSelectViewModel() { super("Item Select");}
 

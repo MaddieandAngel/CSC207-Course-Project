@@ -14,8 +14,7 @@ public class AttackSelectState {
 
     private String card5Image;
 
-    AttackSelectState() {
-    }
+    AttackSelectState() {}
 
     public String[] getHand() {
         return this.playerHand;

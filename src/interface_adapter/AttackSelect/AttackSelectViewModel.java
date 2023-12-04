@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class AttackSelectViewModel extends ViewModel {
 
-    private AttackSelectState state;
+    private AttackSelectState state = new AttackSelectState();
 
     public AttackSelectViewModel() {
         super("Attack Select");
