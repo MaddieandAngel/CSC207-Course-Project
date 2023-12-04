@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class TitleScreenViewModel extends ViewModel {
-    public static final String TITLE_LABEL = "Title";
+    public static final String TITLE_LABEL = "Wizard Hunter Adventure";
     public static final String PLAY_BUTTON_LABEL = "Play";
     public static final String INSTRUCTIONS_BUTTON_LABEL = "Instructions";
 
