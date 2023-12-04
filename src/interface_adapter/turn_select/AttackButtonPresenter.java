@@ -30,7 +30,7 @@ public class AttackButtonPresenter implements AttackButtonOutputBoundary {
         this.attackSelectViewModel.setState(attackSelectState);
         attackSelectViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView("Attack Select");
+        viewManagerModel.setActiveView(attackSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 
     }

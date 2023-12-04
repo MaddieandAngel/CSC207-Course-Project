@@ -27,7 +27,7 @@ public class ItemsButtonPresenter implements ItemsButtonOutputBoundary {
         this.itemSelectViewModel.setState(state);
         itemSelectViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView("Item Select");
+        viewManagerModel.setActiveView(itemSelectViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }
