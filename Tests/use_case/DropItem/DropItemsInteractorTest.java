@@ -17,6 +17,7 @@ import use_case.DropItem.DropItemDataAccessInterface;
 import use_case.DropItem.DropItemOutputBoundary;
 import use_case.EnemyBehaviour.EnemyBehaviour;
 import use_case.EnemyBehaviour.EnemyBehaviourInterface;
+import use_case.movement.MovementOutputData;
 
 import java.io.IOException;
 import java.util.Random;
@@ -133,9 +134,10 @@ public class DropItemsInteractorTest {
             }
 
             @Override
-            public void prepareExploreView() {
+            public void prepareExploreView(MovementOutputData movementOutputData) {
 
             }
+
         };
         };
     }

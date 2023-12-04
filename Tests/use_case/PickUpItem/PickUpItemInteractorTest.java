@@ -19,6 +19,7 @@ import use_case.EnemyBehaviour.EnemyBehaviourInterface;
 import use_case.PickUpItem.PickUpItemDataAccessInterface;
 import use_case.PickUpItem.PickUpItemOutputBoundary;
 import use_case.PickUpItem.PickUpItemOutputData;
+import use_case.movement.MovementOutputData;
 
 import java.io.IOException;
 import java.util.Random;
@@ -43,6 +44,7 @@ public class PickUpItemInteractorTest {
     int playerMaxHealth;
     Bag bag;
     Item item;
+    MovementOutputData movementOutputData;
     @BeforeEach
     void setUp() throws IOException {
         Random random = new Random();
@@ -102,15 +104,17 @@ public class PickUpItemInteractorTest {
             item = new healingPotion45();
         }
         else{item = new revivePotion();}
-
+        MovementOutputData movementOutputData = new MovementOutputData("s", true);
         bag = player.getBag();
     }
     @Test
     void PickUpItemsInteractor(){
         PickUpItemDataAccessInterface pickUpItemDataAccessObject = new PickUpItemDataAccessObject();
+
         PickUpItemOutputBoundary pickUpItemOutputBoundary = new PickUpItemOutputBoundary() {
+
             @Override
-            public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData) {
+            public void prepareSuccessView(PickUpItemOutputData pickUpItemOutputData, MovementOutputData movementOutputData) {
                 if (item instanceof healingPotion10){
                     pickUpItemDataAccessObject.addItem(bag, item);
                     Assertions.assertEquals(inBattleDataAccessObject.getPlayer().getBag().numOfHeal10(), numberOfHeal10+1);
@@ -137,9 +141,11 @@ public class PickUpItemInteractorTest {
             }
 
             @Override
-            public void back() {
+            public void back(MovementOutputData movementOutputData) {
 
             }
+
+
         };
     }
 }
