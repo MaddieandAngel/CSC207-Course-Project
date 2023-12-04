@@ -37,7 +37,8 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         //Set background colours
         Color bg = Color.getHSBColor(0, 0, 0.1F);
         this.setBackground(bg);
-        buttons.setBackground(bg);
+        playAgain.setBackground(bg);
+        returnToTitle.setBackground(bg);
         Border buttonBorders = BorderFactory.createLineBorder(Color.white, 3);
         playAgain.setBorder(buttonBorders);
         returnToTitle.setBorder(buttonBorders);
