@@ -21,7 +21,8 @@ public class NextFloorInteractor implements NextFloorInputBoundary {
         int columns = randomizer.nextInt(4,7);
         int rows = randomizer.nextInt(4, 7);
         String directions = stairsDataAccessObject.MoveToNextFloor(columns, rows);
-        MovementOutputData movementOutputData = new MovementOutputData(directions);
+        boolean searchable = !(stairsDataAccessObject.getHasBeenSearched());
+        MovementOutputData movementOutputData = new MovementOutputData(directions, searchable);
 
         nextFloorPresenter.prepareStartingRoomView(movementOutputData);
     }

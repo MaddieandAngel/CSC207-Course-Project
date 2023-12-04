@@ -38,7 +38,8 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
 
     @Override
     public void execute() {
-        MovementOutputData movementOutputData = new MovementOutputData(exploreDataAccessObject.getDirections());
+        exploreDataAccessObject.setHasBeenSearched();
+
         Random r = new Random();
         int random = r.nextInt(100);
         if (random <= 50){
