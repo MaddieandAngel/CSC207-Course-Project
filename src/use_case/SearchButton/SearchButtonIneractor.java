@@ -54,6 +54,12 @@ public class SearchButtonIneractor implements SearchButtonInputBoundary{
             inBattleDataAccessObject.setEnemy(enemy);
             try {
                 enemyBehaviour.enemyDrawInitialHand(inBattleDataAccessObject.getEnemy());
+                // Will draw 5 cards for the player when the battle starts
+                for (int i = 0; i < 5; i++) {
+                    apiAccessObject.DrawCard("player");
+                }
+                System.out.println(apiAccessObject.GetCardsInPile("enemyHand").length == 5);
+                System.out.println(apiAccessObject.GetCardsInPile("player").length == 4);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -21,7 +21,7 @@ public class DrawButtonInteractor implements DrawButtonInputBoundary{
 
         // Player will draw card if their hand is < 5
         int playerHandLength = 0;
-        if (drawButtonDataAccessObject.getAPI().GetCardsInPile("player") == null) {
+        if (drawButtonDataAccessObject.getAPI().GetCardsInPile("player") != null) {
             playerHandLength = drawButtonDataAccessObject.getAPI().GetCardsInPile("player").length;
         }
         String playerCardCode = "";

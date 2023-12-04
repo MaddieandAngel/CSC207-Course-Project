@@ -23,15 +23,15 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     private final BackButtonController backButtonController;
 
-    private final JButton card1;
+    private JButton card1;
 
-    private final JButton card2;
+    private JButton card2;
 
-    private final JButton card3;
+    private JButton card3;
 
-    private final JButton card4;
+    private JButton card4;
 
-    private final JButton card5;
+    private JButton card5;
 
     private final JButton back;
 
@@ -51,7 +51,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         JPanel cardButtons = new JPanel();
         // Creating the button for the first card
         if (handSize >= 1) {
-            card1 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard1Image()));
+            card1 = new JButton(attackSelectViewModel.getState().getCard1Image());
         } else {
             card1 = new JButton("No Card");
             card1.setEnabled(false);
@@ -60,7 +60,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the second card
         if (handSize >= 2) {
-            card2 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard2Image()));
+            card2 = new JButton(attackSelectViewModel.getState().getCard2Image());
         } else {
             card2 = new JButton("No Card");
             card2.setEnabled(false);
@@ -69,7 +69,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the third card
         if (handSize >= 3) {
-            card3 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard3Image()));
+            card3 = new JButton(attackSelectViewModel.getState().getCard3Image());
         } else {
             card3 = new JButton("No Card");
             card3.setEnabled(false);
@@ -78,7 +78,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the fourth card
         if (handSize >= 4) {
-            card4 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard4Image()));
+            card4 = new JButton(attackSelectViewModel.getState().getCard4Image());
         } else {
             card4 = new JButton("No Card");
             card4.setEnabled(false);
@@ -87,7 +87,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
         // Creating the button for the fifth card
         if (handSize == 5) {
-            card5 = new JButton(new ImageIcon(attackSelectViewModel.getState().getCard5Image()));
+            card5 = new JButton(attackSelectViewModel.getState().getCard5Image());
         } else {
             card5 = new JButton("No Card");
             card5.setEnabled(false);
@@ -118,8 +118,18 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
         back.setBorder(buttonBorders);
 
         Color text = Color.getHSBColor(0, 0, 0.9F);
+        card1.setForeground(text);
+        card2.setForeground(text);
+        card3.setForeground(text);
+        card4.setForeground(text);
+        card5.setForeground(text);
         back.setForeground(text);
 
+        card1.setFont(new Font("Verdana", Font.PLAIN, 18));
+        card2.setFont(new Font("Verdana", Font.PLAIN, 18));
+        card3.setFont(new Font("Verdana", Font.PLAIN, 18));
+        card4.setFont(new Font("Verdana", Font.PLAIN, 18));
+        card5.setFont(new Font("Verdana", Font.PLAIN, 18));
         back.setFont(new Font("Verdana", Font.PLAIN, 18));
 
         this.add(cardButtons);
@@ -132,7 +142,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card1)) {
                             try {
-                                cardButtonController.execute(playerHand[0]);
+                                cardButtonController.execute(attackSelectViewModel.getState().getCard1Image());
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -148,7 +158,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card2)) {
                             try {
-                                cardButtonController.execute(playerHand[1]);
+                                cardButtonController.execute(attackSelectViewModel.getState().getCard2Image());
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -164,7 +174,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card3)) {
                             try {
-                                cardButtonController.execute(playerHand[2]);
+                                cardButtonController.execute(attackSelectViewModel.getState().getCard3Image());
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -180,7 +190,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card4)) {
                             try {
-                                cardButtonController.execute(playerHand[3]);
+                                cardButtonController.execute(attackSelectViewModel.getState().getCard4Image());
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -196,7 +206,7 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(card5)) {
                             try {
-                                cardButtonController.execute(playerHand[4]);
+                                cardButtonController.execute(attackSelectViewModel.getState().getCard5Image());
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -221,7 +231,40 @@ public class AttackSelectionView extends JPanel implements ActionListener, Prope
 
     @Override
     public void propertyChange(PropertyChangeEvent e) {
-        // Don't think anything needs to be implemented here
+        if (attackSelectViewModel.getState().getHas1Card()) {
+            card1.setText(attackSelectViewModel.getState().getCard1Image());
+        } else {
+            card1.setText("No Card");
+        }
+        card1.setEnabled(attackSelectViewModel.getState().getHas1Card());
+
+        if (attackSelectViewModel.getState().getHas2Cards()) {
+            card2.setText(attackSelectViewModel.getState().getCard2Image());
+        } else {
+            card2.setText("No Card");
+        }
+        card2.setEnabled(attackSelectViewModel.getState().getHas2Cards());
+
+        if (attackSelectViewModel.getState().getHas3Cards()) {
+            card3.setText(attackSelectViewModel.getState().getCard3Image());
+        } else {
+            card3.setText("No Card");
+        }
+        card3.setEnabled(attackSelectViewModel.getState().getHas3Cards());
+
+        if (attackSelectViewModel.getState().getHas4Cards()) {
+            card4.setText(attackSelectViewModel.getState().getCard4Image());
+        } else {
+            card4.setText("No Card");
+        }
+        card4.setEnabled(attackSelectViewModel.getState().getHas4Cards());
+
+        if (attackSelectViewModel.getState().getHas5Cards()) {
+            card5.setText(attackSelectViewModel.getState().getCard5Image());
+        } else {
+            card5.setText("No Card");
+        }
+        card5.setEnabled(attackSelectViewModel.getState().getHas5Cards());
     }
 
     @Override
